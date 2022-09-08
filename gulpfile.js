@@ -13,7 +13,6 @@ const { src, dest, series, parallel, watch } = gulp;
 const sass = gulpSass(dartSass);
 const sync = browserSync.create();
 
-// Tasks
 function scss() {
     return src('./src/scss/styles.scss')
         .pipe(sass())
@@ -39,7 +38,6 @@ function clear() {
     return deleteSync('dist/**');
 }
 
-// Add watchers here
 function serve() {
     watch('./src/views/**/**.html', series(html)).on('change', sync.reload);
     watch('./src/scss/**.scss', series(scss)).on('change', sync.reload);
@@ -47,7 +45,6 @@ function serve() {
 }
 
 export default async function watchNode() {
-    // Start browser
     sync.init({
         proxy: {
             target: 'localhost:3020',
@@ -60,12 +57,10 @@ export default async function watchNode() {
     scss();
     script();
 
-    // Start nodemon
     nodemon({
         ext: 'js',
         script: './dist/index.js',
     }).on('start', function () {
-        // run watchers
         serve();
     });
 }
