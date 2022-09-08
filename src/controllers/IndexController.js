@@ -1,5 +1,8 @@
+import path from 'path';
+
 export default class IndexController {
     execute(req, res) {
-        res.sendFile(`${__dirname}/views/index.html`);
+        let pagePath = path.join(global.__dirname, 'views', 'index.html');
+        res.sendFile(pagePath);
     }
 }

@@ -1,19 +1,20 @@
 import express from 'express';
+import path from 'path';
 
 class App {
-    constructor(port) {
+    constructor() {
         this.app = express();
+    }
+
+    listen(port){
         this.app.listen(port);
-        this.router = express.Router();
     }
 
-    sendGetRequest(path, controller) {
-       this.app.get(`${path}`, controller.execute.bind(controller));
-    }
-
-    RenderPage(path, controller) {
-        this.router.get(`${path}`, controller.execute.bind(controller));
-        this.app.use(`${path}`, this.router);
+    useRoute(router) {
+       this.app.use(router);
+       
+       let stylePath = path.join(global.__dirname, 'css');
+       this.app.use('/css', express.static(stylePath));
     }
 }
 

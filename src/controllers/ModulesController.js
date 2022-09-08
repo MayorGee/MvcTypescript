@@ -1,5 +1,8 @@
+import path from 'path';
+
 export default class ModulesController {
     execute(req, res) {
-        res.sendFile(`${__dirname}/views/modules.html`);
+        let pagePath = path.join(global.__dirname, 'views', 'modules.html');
+        res.sendFile(pagePath);
     }
 }

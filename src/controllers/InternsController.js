@@ -1,6 +1,8 @@
-export default class InternsController {
+import path from 'path';
 
+export default class InternsController {
     execute(req, res) {
-        res.sendFile(`${__dirname}/views/interns.html`);
+        let pagePath = path.join(global.__dirname, 'views', 'interns.html');
+        res.sendFile(pagePath);
     }
 }

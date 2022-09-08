@@ -1,6 +1,8 @@
-export default class TasksController {
+import path from 'path';
 
+export default class TasksController {
     execute(req, res) {
-        res.sendFile(`${__dirname}/views/tasks.html`);
+        let pagePath = path.join(global.__dirname, 'views', 'tasks.html');
+        res.sendFile(pagePath);
     }
 }

@@ -14,7 +14,7 @@ const sass = gulpSass(dartSass);
 const sync = browserSync.create();
 
 function scss() {
-    return src('./src/scss/styles.scss')
+    return src('./src/scss/*.scss')
         .pipe(sass())
         .pipe(
             autoprefixer({
@@ -22,7 +22,7 @@ function scss() {
             }),
         )
         .pipe(csso())
-        .pipe(concat('style.css'))
+        .pipe(concat('styles.css'))
         .pipe(dest('./dist/css'));
 }
 

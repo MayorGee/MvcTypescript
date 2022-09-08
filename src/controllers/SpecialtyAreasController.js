@@ -1,6 +1,8 @@
-export default class SpecialtyAreasController {
+import path from 'path';
 
+export default class SpecialtyAreasController {
     execute(req, res) {
-        res.sendFile(`${__dirname}/views/specialty-areas.html`);
+        let pagePath = path.join(global.__dirname, 'views', 'specialty-areas.html');
+        res.sendFile(pagePath);
     }
 }
