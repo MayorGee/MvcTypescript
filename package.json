@@ -1,0 +1,35 @@
+{
+    "name": "mvc",
+    "version": "1.0.0",
+    "description": "Mvc project JS/TS",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "serve": "gulp"
+    },
+    "keywords": [
+        "mvc"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.1",
+        "http-proxy-middleware": "^2.0.6"
+    },
+    "devDependencies": {
+        "browser-sync": "^2.27.10",
+        "del": "^7.0.0",
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^8.0.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-csso": "^4.0.1",
+        "gulp-file-include": "^2.3.0",
+        "gulp-htmlmin": "^5.0.1",
+        "gulp-nodemon": "^2.5.0",
+        "gulp-sass": "^5.1.0",
+        "node-sass": "^7.0.1",
+        "nodemon": "^2.0.19",
+        "sass": "^1.54.7"
+    }
+}
