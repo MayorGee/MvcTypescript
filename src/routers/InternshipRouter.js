@@ -9,16 +9,15 @@ const internshipsController = new InternshipsController();
 export default class InternshipRouter {
     constructor() {
         this.router = express.Router();
+        this.setRouter();
     }
 
-    setRoutes() {
+    setRouter() {
         this.router.get('/internship', internshipController.execute.bind(internshipController));
         this.router.get('/internships', internshipsController.execute.bind(internshipsController));
     }
 
-    getRoutes() {
-        this.setRoutes();
-        
+    getRouter() {
         return this.router;
     }
 }

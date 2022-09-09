@@ -9,16 +9,15 @@ const tasksController = new TasksController();
 export default class TaskRouter {
     constructor() {
         this.router = express.Router();
+        this.setRouter();
     }
 
-    setRoutes() {
+    setRouter() {
         this.router.get('/task', taskController.execute.bind(taskController));
         this.router.get('/tasks', tasksController.execute.bind(tasksController));
     }
 
-    getRoutes() {
-        this.setRoutes();
-        
+    getRouter() {
         return this.router;
     }
 }

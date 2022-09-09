@@ -9,16 +9,15 @@ const specialtyAreasController = new SpecialtyAreasController();
 export default class SpecialtyAreaRouter {
     constructor() {
         this.router = express.Router();
+        this.setRouter();
     }
 
-    setRoutes() {
+    setRouter() {
         this.router.get('/specialty-area', specialtyAreaController.execute.bind(specialtyAreaController));
         this.router.get('/specialty-areas', specialtyAreasController.execute.bind(specialtyAreasController));
     }
 
-    getRoutes() {
-        this.setRoutes();
-        
+    getRouter() {      
         return this.router;
     }
 }

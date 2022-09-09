@@ -9,16 +9,15 @@ const modulesController = new ModulesController();
 export default class ModuleRouter {
     constructor() {
         this.router = express.Router();
+        this.setRouter();
     }
 
-    setRoutes() {
+    setRouter() {
         this.router.get('/module', moduleController.execute.bind(moduleController));
         this.router.get('/modules', modulesController.execute.bind(modulesController));
     }
 
-    getRoutes() {
-        this.setRoutes();
-    
+    getRouter() {
         return this.router;
     }
 }

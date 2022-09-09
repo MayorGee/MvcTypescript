@@ -14,13 +14,12 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 global.__dirname = dirname(__filename);
 
-const staticFiles = ['css', 'images', 'icons'];
 
-const app = new App(staticFiles);
+const app = new App('dist');
 
 const PORT = 3020;
 
-const ROUTERS = [
+const routers = [
     IndexRouter,
     InternRouter,
     InternshipRouter,
@@ -30,10 +29,10 @@ const ROUTERS = [
     TaskRouter
 ];
 
-ROUTERS.forEach(Router => {
+routers.forEach(Router => {
     const router = new Router();
 
-    app.initRouter(router.getRoutes());
+    app.initRouter(router.getRouter());
 })
 
 app.listen(PORT);

@@ -9,16 +9,15 @@ const internsController = new InternsController();
 export default class InternRouter {
     constructor() {
         this.router = express.Router();
+        this.setRouter();
     }
 
-    setRoutes() {
+    setRouter() {
         this.router.get('/intern', internController.execute.bind(internController));
         this.router.get('/interns', internsController.execute.bind(internsController));
     }
 
-    getRoutes() {
-        this.setRoutes();
-        
+    getRouter() {     
         return this.router;
     }
 

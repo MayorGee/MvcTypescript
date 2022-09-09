@@ -7,15 +7,14 @@ const indexController = new IndexController();
 export default class IndexRouter {
     constructor() {
         this.router = express.Router();
+        this.setRouter();
     }
 
-    setRoutes() {
+    setRouter() {
         this.router.get('/', indexController.execute.bind(indexController));
     }
 
-    getRoutes() {
-        this.setRoutes();
-
+    getRouter() {
         return this.router;
     }
 }

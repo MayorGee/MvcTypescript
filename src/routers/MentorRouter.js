@@ -9,16 +9,15 @@ const mentorsController = new MentorsController();
 export default class MentorRouter {
     constructor() {
         this.router = express.Router();
+        this.setRouter();
     }
 
-    setRoutes() {
+    setRouter() {
         this.router.get('/mentor', mentorController.execute.bind(mentorController));
         this.router.get('/mentors', mentorsController.execute.bind(mentorsController));
     }
 
-    getRoutes() {
-        this.setRoutes();
-        
+    getRouter() {
         return this.router;
     }
 }
