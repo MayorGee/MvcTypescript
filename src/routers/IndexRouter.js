@@ -5,13 +5,17 @@ import IndexController from '../controllers/IndexController.js';
 const indexController = new IndexController();
 
 export default class IndexRouter {
-    constructor(){
+    constructor() {
         this.router = express.Router();
     }
 
-    initRoute(){
+    setRoutes() {
         this.router.get('/', indexController.execute.bind(indexController));
-        
+    }
+
+    getRoutes() {
+        this.setRoutes();
+
         return this.router;
     }
 }

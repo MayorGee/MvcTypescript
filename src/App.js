@@ -2,19 +2,21 @@ import express from 'express';
 import path from 'path';
 
 class App {
-    constructor() {
+    constructor(staticFiles) {
         this.app = express();
+
+        staticFiles.forEach(file => {
+            const staticFile = path.join(global.__dirname, file);
+            this.app.use(`/${file}`, express.static(staticFile));
+        }); 
     }
 
     listen(port){
         this.app.listen(port);
     }
 
-    useRoute(router) {
+    initRouter(router) {
        this.app.use(router);
-       
-       let stylePath = path.join(global.__dirname, 'css');
-       this.app.use('/css', express.static(stylePath));
     }
 }
 

@@ -11,9 +11,13 @@ export default class InternshipRouter {
         this.router = express.Router();
     }
 
-    initRoutes() {
+    setRoutes() {
         this.router.get('/internship', internshipController.execute.bind(internshipController));
         this.router.get('/internships', internshipsController.execute.bind(internshipsController));
+    }
+
+    getRoutes() {
+        this.setRoutes();
         
         return this.router;
     }

@@ -11,10 +11,14 @@ export default class ModuleRouter {
         this.router = express.Router();
     }
 
-    initRoutes() {
+    setRoutes() {
         this.router.get('/module', moduleController.execute.bind(moduleController));
         this.router.get('/modules', modulesController.execute.bind(modulesController));
+    }
 
+    getRoutes() {
+        this.setRoutes();
+    
         return this.router;
     }
 }

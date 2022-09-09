@@ -8,7 +8,7 @@ import concat from 'gulp-concat';
 import browserSync from 'browser-sync';
 import { deleteSync } from 'del';
 
-const { src, dest, series, parallel, watch } = gulp;
+const { src, dest, series, watch } = gulp;
 
 const sass = gulpSass(dartSass);
 const sync = browserSync.create();
@@ -30,6 +30,14 @@ function html() {
     return src('src/views/**/*.html').pipe(dest('dist/views'));
 }
 
+function images() {
+    src('src/images/*.+(png|svg|jpg|webp)').pipe(dest('dist/images'))
+}
+
+function icons() {
+    src('src/icons/*.+(png|svg|jpg|webp)').pipe(dest('dist/icons'))
+}
+
 function script() {
     return src('./src/**/*.js').pipe(dest('dist/'));
 }
@@ -42,6 +50,8 @@ function serve() {
     watch('./src/views/**/**.html', series(html)).on('change', sync.reload);
     watch('./src/scss/**.scss', series(scss)).on('change', sync.reload);
     watch('./src/**/**.js', series(script)).on('change', sync.reload);
+    watch('src/icons/*.+(png|svg)', series(icons)).on('change', sync.reload);
+    watch('src/images/*.+(png|svg)', series(images)).on('change', sync.reload);
 }
 
 export default async function watchNode() {
@@ -55,6 +65,8 @@ export default async function watchNode() {
     clear();
     html();
     scss();
+    images();
+    icons();
     script();
 
     nodemon({

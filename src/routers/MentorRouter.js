@@ -11,10 +11,14 @@ export default class MentorRouter {
         this.router = express.Router();
     }
 
-    initRoutes() {
+    setRoutes() {
         this.router.get('/mentor', mentorController.execute.bind(mentorController));
         this.router.get('/mentors', mentorsController.execute.bind(mentorsController));
+    }
 
+    getRoutes() {
+        this.setRoutes();
+        
         return this.router;
     }
 }

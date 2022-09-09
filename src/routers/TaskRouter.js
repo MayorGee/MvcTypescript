@@ -11,10 +11,14 @@ export default class TaskRouter {
         this.router = express.Router();
     }
 
-    initRoutes() {
+    setRoutes() {
         this.router.get('/task', taskController.execute.bind(taskController));
         this.router.get('/tasks', tasksController.execute.bind(tasksController));
+    }
 
+    getRoutes() {
+        this.setRoutes();
+        
         return this.router;
     }
 }

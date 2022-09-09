@@ -11,10 +11,14 @@ export default class SpecialtyAreaRouter {
         this.router = express.Router();
     }
 
-    initRoutes() {
+    setRoutes() {
         this.router.get('/specialty-area', specialtyAreaController.execute.bind(specialtyAreaController));
         this.router.get('/specialty-areas', specialtyAreasController.execute.bind(specialtyAreasController));
-    
+    }
+
+    getRoutes() {
+        this.setRoutes();
+        
         return this.router;
     }
 }
