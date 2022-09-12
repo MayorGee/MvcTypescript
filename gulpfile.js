@@ -56,7 +56,7 @@ function serve() {
 export default async function watchNode() {
     sync.init({
         proxy: {
-            target: 'localhost:3020',
+            target: 'localhost:3333',
         },
         open: false,
     });
@@ -68,10 +68,12 @@ export default async function watchNode() {
     icons();
     script();
 
-    nodemon({
-        ext: 'js',
-        script: './dist/index.js',
-    }).on('start', function () {
-        serve();
-    });
+    setTimeout(() => {
+        nodemon({
+            ext: 'js',
+            script: './dist/index.js',
+        }).on('start', function () {
+            serve();
+        });
+    }, 1000)
 }

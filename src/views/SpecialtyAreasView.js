@@ -1,7 +1,10 @@
-export default class SpecialtyAreasView {
+import AbstractView from './AbstractView.js';
+
+export default class SpecialtyAreasView extends AbstractView{
     constructor() {
+        super();
+        
         this.template = 'specialty-area';
-        this.entityName = 'specialty-area'
         this.specialtyAreas = [
             {
                 id: 1,
@@ -18,13 +21,5 @@ export default class SpecialtyAreasView {
 
     getSpecialtyAreas() {
         return this.specialtyAreas;
-    }
-
-    getTemplate() {
-        return this.template;
-    }
-
-    getEntityName() {
-        return this.entityName;
     }
 }

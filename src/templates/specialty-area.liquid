@@ -1,32 +1,22 @@
 {% layout './index-layout.liquid', title: 'Specialty Areas Page' %}
     {% assign specialtyAreas = this.getSpecialtyAreas %}
-    {% assign blockName = this.getEntityName %}
 
     {% block content %}
-        <!-- <p class="{{ blockName | append: '__info'}}">
-            At the time of this writing, there are {{ specialtyAreas.length }} stacks in this program, they include:
-        </p>
-        <ol class="{{ blockName }}">
-            {% for specialtyArea in specialtyAreas %}
-                <li class="{{ blockName | append: '__item'}}">
-                    <p  class="{{ blockName | append: '__title'}}"> 
-                        {{ specialtyArea.title }}:
-                    </p>
-                    <p  class="{{ blockName | append: '__desc'}}">
-                        {{ specialtyArea.desc }}
-                    </p>
-                </li>
-            {% else  %}
-            <p class="catch-statement">Specialty Areas will appear here when they are available...</p>
-            {% endfor %}
-        </ol> -->
-
-        <!-- Not sure if this is what exercise 5 meant -->
-        {{ specialtyAreas }} 
-
-        <!---
-        But I think it is important to have this intermediate phase
-        where the data received is arranged properly before sending it to the layout block
-        to ensure that both ends remain reusable
-        -->
+        <div class="specialty-area">
+            <p class="specialty-area__info">
+                At the time of this writing, there are {{ specialtyAreas.length }} stacks in this program, they include:
+            </p>
+            <ol class="specialty-area-list">
+                {% for specialtyArea in specialtyAreas %}
+                    <li class="specialty-area__item">
+                        <p  class="specialty-area__title"> 
+                            {{ specialtyArea.title }}:
+                        </p>
+                        <p  class="specialty-area__desc">
+                            {{ specialtyArea.desc }}
+                        </p>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
     {% endblock %}

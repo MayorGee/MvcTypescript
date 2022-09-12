@@ -1,27 +1,24 @@
 {% layout './index-layout.liquid', title: 'Tasks Page' %}
     {% assign tasks = this.getTasks %}
-    {% assign blockName = this.getEntityName %}
 
     {% block content %}
-        <ol class="{{ blockName }}">
+        <ol class="task-list">
             {% for task in tasks %}
                 {% assign hint = task.hint%}
-                <li class="{{ blockName | append: '__item'}}">
+                <li class="task-list__item">
                     {{ task.title }}:
-                    <p class="{{ blockName | append: '__desc'}}">
+                    <p class="task-list__desc">
                         {{ task.desc }}.
                             {% if hint %}
-                                <p class="{{ blockName | append: '__hint'}}">
+                                <p class="task-list__hint">
                                     Hint: {{ hint }}
                                 </p> 
                             {% endif %}
                     </p>
-                    <p class="{{ blockName | append: '__difficulty'}}">
+                    <p class="task-list__difficulty">
                         Difficulty: {{ task.difficulty }},
                     </p>
                 </li>
-            {% else  %}
-            <p class="catch-statement">Tasks will appear here when they are available...</p>
             {% endfor %}
         </ol>
     {% endblock %}

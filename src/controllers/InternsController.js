@@ -4,8 +4,6 @@ export default class InternsController {
     execute(req, res) {
         const internsView = new InternsView();
 
-        const internTemplate = internsView.getTemplate();
-        
-        res.render(internTemplate, { 'this': internsView});
+        res.render(internsView.getTemplate(), { 'this': internsView});
     }
 }

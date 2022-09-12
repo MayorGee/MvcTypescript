@@ -1,7 +1,10 @@
-export default class TasksView {
+import AbstractView from './AbstractView.js';
+
+export default class TasksView extends AbstractView {
     constructor() {
+        super();
+        
         this.template = 'task';
-        this.entityName = 'task'
         this.tasks = [
             {
                 id: 1,
@@ -34,13 +37,5 @@ export default class TasksView {
 
     getTasks() {
         return this.tasks;
-    }
-
-    getTemplate() {
-        return this.template;
-    }
-
-    getEntityName() {
-        return this.entityName;
     }
 }

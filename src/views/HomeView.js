@@ -1,7 +1,10 @@
-export default class HomeView {
+import AbstractView from './AbstractView.js';
+
+export default class HomeView extends AbstractView {
     constructor() {
+        super();
+        
         this.template = 'home';
-        this.entityName = 'home';
         this.sections = [
             {
                 id: 1,
@@ -28,13 +31,5 @@ export default class HomeView {
 
     getSections() {
         return this.sections;
-    }
-
-    getTemplate() {
-        return this.template;
-    }
-
-    getEntityName() {
-        return this.entityName;
     }
 }

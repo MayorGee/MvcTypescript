@@ -1,7 +1,10 @@
-export default class MentorsView {
+import AbstractView from './AbstractView.js';
+
+export default class MentorsView extends AbstractView {
     constructor() {
+        super();
+
         this.template = 'mentor';
-        this.entityName = 'mentor'
         this.mentors = [
             {
                 id: 1,
@@ -20,7 +23,7 @@ export default class MentorsView {
             },
             {
                 id: 4,
-                title: 'Dima',
+                name: 'Dima',
                 stack: 'QA',
             }
         ];
@@ -28,13 +31,5 @@ export default class MentorsView {
 
     getMentors() {
         return this.mentors;
-    }
-
-    getTemplate() {
-        return this.template;
-    }
-
-    getEntityName() {
-        return this.entityName;
     }
 }

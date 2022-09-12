@@ -1,15 +1,12 @@
 {% layout './index-layout.liquid', title: 'Mentors Page' %}
     {% assign mentors = this.getMentors %}
-    {% assign blockName = this.getEntityName %}
 
     {% block content %}
-        <ul class="{{ blockName }}">
+        <ul class="mentors-list">
             {% for mentor in mentors %}
-                <li class="{{ blockName | append: '__item'}}" >
+                <li class="mentors-list__item">
                     The mentor for {{ mentor.stack }} is {{ mentor.name }}
                 </li>
-            {% else  %}
-            <p class="catch-statement">Mentors will appear here when they are available...</p>
             {% endfor %}
         </ul>
     {% endblock %}

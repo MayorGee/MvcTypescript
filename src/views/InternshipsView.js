@@ -1,7 +1,10 @@
-export default class InternshipsView {
+import AbstractView from './AbstractView.js';
+
+export default class InternshipsView extends AbstractView {
     constructor() {
+        super();
+        
         this.template = 'internship';
-        this.entityName = 'internship'
         this.internships = [
             {
                 id: 1,
@@ -32,13 +35,5 @@ export default class InternshipsView {
 
     getInternships() {
         return this.internships;
-    }
-
-    getTemplate() {
-        return this.template;
-    }
-
-    getEntityName() {
-        return this.entityName;
     }
 }

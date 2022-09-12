@@ -1,20 +1,14 @@
-import express from 'express';
-
 import HomeController from '../controllers/HomeController.js';
+import AbstractRouter from './AbstractRouter.js';
 
 const homeController = new HomeController();
 
-export default class HomeRouter {
+export default class HomeRouter extends AbstractRouter{
     constructor() {
-        this.router = express.Router();
-        this.setRouter();
+        super();
     }
 
     setRouter() {
         this.router.get('/', homeController.execute.bind(homeController));
-    }
-
-    getRouter() {
-        return this.router;
     }
 }

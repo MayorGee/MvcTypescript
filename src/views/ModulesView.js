@@ -1,7 +1,10 @@
-export default class ModulesView {
+import AbstractView from './AbstractView.js';
+
+export default class ModulesView extends AbstractView {
     constructor() {
+        super();
+        
         this.template = 'module';
-        this.entityName = 'module'
         this.modules = [
             {
                 id: 1,
@@ -50,13 +53,5 @@ export default class ModulesView {
 
     getModules() {
         return this.modules;
-    }
-
-    getTemplate() {
-        return this.template;
-    }
-
-    getEntityName() {
-        return this.entityName;
     }
 }
