@@ -7,9 +7,9 @@ export default class HomeRouter extends AbstractRouter {
     constructor() {
         super();
 
-        this.pairsOfRoutesAndControllers = [
-            ['/', homeController]
-        ];
+        this.routes = {
+            '/': homeController
+        }
 
         this.setRouter();
     }

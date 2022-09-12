@@ -10,10 +10,10 @@ export default class MentorRouter extends AbstractRouter {
     constructor() {
         super();
 
-        this.pairsOfRoutesAndControllers = [
-            ['/mentor', mentorController],
-            ['/mentors', mentorsController]
-        ];
+        this.routes = {
+            '/mentor': mentorController,
+            '/mentors': mentorsController
+        };
 
         this.setRouter();
     }

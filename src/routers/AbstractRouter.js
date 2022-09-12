@@ -5,14 +5,15 @@ export default class AbstractRouter {
         this.router = express.Router();
         this.setRouter();
     }
+    
+    routes = {};
 
     setRouter() {
-        this.pairsOfRoutesAndControllers?.forEach((pair) => {
-            const route = pair[0];
-            const controller = pair[1];
-
+        Object.entries(this.routes)?.forEach(entry => {
+            const [route, controller] = entry;
+            
             this.router.get(route, controller.execute.bind(controller));
-        })
+        });
     }
 
     getRouter() {

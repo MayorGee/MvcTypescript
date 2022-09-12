@@ -10,10 +10,10 @@ export default class InternRouter  extends AbstractRouter {
     constructor() {
         super();
 
-        this.pairsOfRoutesAndControllers = [
-            ['/intern', internController],
-            ['/interns', internsController]
-        ];
+        this.routes = {
+            '/intern': internController,
+            '/interns': internsController
+        };
 
         this.setRouter();
     }

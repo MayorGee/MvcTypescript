@@ -1,6 +1,6 @@
 import AbstractView from './AbstractView.js';
 
-export default class SpecialtyAreasView extends AbstractView{
+export default class SpecialtyAreasView extends AbstractView {
     constructor() {
         super();
         

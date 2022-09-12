@@ -10,10 +10,10 @@ export default class TaskRouter extends AbstractRouter {
     constructor() {
         super();
 
-        this.pairsOfRoutesAndControllers = [
-            ['/task', taskController],
-            ['/tasks', tasksController]
-        ];
+        this.routes = {
+            '/task': taskController,
+            '/tasks': tasksController
+        };
 
         this.setRouter();
     }

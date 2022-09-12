@@ -2,13 +2,13 @@
     {% assign internships = this.getInternships %}
 
     {% block content %}
-    <div class="internships">
-        <ul class="internships-list">
-            {% for internship in internships %}
-                <li class="internships-list__item">
-                    The Internship Program in the year {{ internship.year }} started at {{ internship.startDate }} and ended at {{ internship.endDate }}
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+        <div class="internships">
+            <ul class="internships-list">
+                {% for internship in internships %}
+                    <li class="internships-list__item">
+                        The Internship Program in the year {{ internship.year }} started at {{ internship.startDate }} and ended at {{ internship.endDate }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     {% endblock %}

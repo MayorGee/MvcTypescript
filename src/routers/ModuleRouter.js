@@ -10,10 +10,10 @@ export default class ModuleRouter extends AbstractRouter {
     constructor() {
         super();
 
-        this.pairsOfRoutesAndControllers = [
-            ['/module', moduleController],
-            ['/modules', modulesController]
-        ];
+        this.routes = {
+            '/module': moduleController,
+            '/modules': modulesController
+        };
 
         this.setRouter();
     }
