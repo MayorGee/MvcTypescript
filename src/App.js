@@ -6,7 +6,6 @@ import path from 'path';
 class App {
     constructor(dist) {
         this.app = express();
-
         this.app.use(express.static(dist));
     }
 

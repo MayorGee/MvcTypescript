@@ -9,10 +9,12 @@ const specialtyAreasController = new SpecialtyAreasController();
 export default class SpecialtyAreaRouter extends AbstractRouter {
     constructor() {
         super();
-    }
 
-    setRouter() {
-        this.router.get('/specialty-area', specialtyAreaController.execute.bind(specialtyAreaController));
-        this.router.get('/specialty-areas', specialtyAreasController.execute.bind(specialtyAreasController));
+        this.pairsOfRoutesAndControllers = [
+            ['/specialty-area', specialtyAreaController],
+            ['/specialty-areas', specialtyAreasController]
+        ];
+
+        this.setRouter();
     }
 }

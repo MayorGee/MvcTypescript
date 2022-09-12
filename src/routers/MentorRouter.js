@@ -9,10 +9,12 @@ const mentorsController = new MentorsController();
 export default class MentorRouter extends AbstractRouter {
     constructor() {
         super();
-    }
 
-    setRouter() {
-        this.router.get('/mentor', mentorController.execute.bind(mentorController));
-        this.router.get('/mentors', mentorsController.execute.bind(mentorsController));
+        this.pairsOfRoutesAndControllers = [
+            ['/mentor', mentorController],
+            ['/mentors', mentorsController]
+        ];
+
+        this.setRouter();
     }
 }

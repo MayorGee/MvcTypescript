@@ -4,7 +4,7 @@ export default class SpecialtyAreasView extends AbstractView{
     constructor() {
         super();
         
-        this.template = 'specialty-area';
+        this.template = 'specialty-areas';
         this.specialtyAreas = [
             {
                 id: 1,

@@ -4,7 +4,7 @@ export default class TasksView extends AbstractView {
     constructor() {
         super();
         
-        this.template = 'task';
+        this.template = 'tasks';
         this.tasks = [
             {
                 id: 1,

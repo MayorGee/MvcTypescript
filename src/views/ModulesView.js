@@ -4,7 +4,7 @@ export default class ModulesView extends AbstractView {
     constructor() {
         super();
         
-        this.template = 'module';
+        this.template = 'modules';
         this.modules = [
             {
                 id: 1,

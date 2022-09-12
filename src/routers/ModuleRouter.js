@@ -6,13 +6,15 @@ import ModulesController from '../controllers/ModulesController.js';
 const moduleController = new ModuleController();
 const modulesController = new ModulesController();
 
-export default class ModuleRouter extends AbstractRouter{
+export default class ModuleRouter extends AbstractRouter {
     constructor() {
         super();
-    }
 
-    setRouter() {
-        this.router.get('/module', moduleController.execute.bind(moduleController));
-        this.router.get('/modules', modulesController.execute.bind(modulesController));
+        this.pairsOfRoutesAndControllers = [
+            ['/module', moduleController],
+            ['/modules', modulesController]
+        ];
+
+        this.setRouter();
     }
 }

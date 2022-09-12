@@ -1,0 +1,14 @@
+{% layout './index-layout.liquid', title: 'Mentors Page' %}
+    {% assign mentors = this.getMentors %}
+
+    {% block content %}
+        <div class="mentors">
+            <ul class="mentors-list">
+                {% for mentor in mentors %}
+                    <li class="mentors-list__item">
+                        The mentor for {{ mentor.stack }} is {{ mentor.name }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endblock %}
