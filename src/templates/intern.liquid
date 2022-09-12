@@ -1,0 +1,23 @@
+{% layout './index-layout.liquid', title: 'Intern Page' %}
+    {% assign interns = this.getInterns %}
+    {% assign blockName = this.getEntityName %}
+
+    {% block content %}
+        <ol class="{{ blockName }}">
+            {% for intern in interns %}
+                <li class="{{ blockName | append: '__item'}}" >
+                    <a href="" class="{{ blockName | append: '__link'}}">
+                        {{ intern.name | capitalize }} is {{ intern.age }} years old, and 
+                            {% if intern.gender == "Male" %}
+                                he
+                            {% else %}
+                                she
+                            {% endif %}
+                        is enrolled for {{ intern.area }}
+                    </a>
+                </li>
+            {% else  %}
+            <p class="catch-statement">Interns will appear here when they are available...</p>
+            {% endfor %}
+        </ol>
+    {% endblock %}

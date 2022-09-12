@@ -1,8 +1,11 @@
-import path from 'path';
+import InternsView from '../views/InternsView.js';
 
 export default class InternsController {
     execute(req, res) {
-        const pagePath = path.join(global.__dirname, 'views', 'interns.html');
-        res.sendFile(pagePath);
+        const internsView = new InternsView();
+
+        const internTemplate = internsView.getTemplate();
+        
+        res.render(internTemplate, { 'this': internsView});
     }
 }

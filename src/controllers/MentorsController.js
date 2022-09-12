@@ -1,8 +1,11 @@
-import path from 'path';
+import MentorsView from '../views/MentorsView.js';
 
 export default class MentorsController {
     execute(req, res) {
-        const pagePath = path.join(global.__dirname, 'views', 'mentors.html');
-        res.sendFile(pagePath);
+        const mentorsView = new MentorsView();
+
+        const mentorTemplate = mentorsView.getTemplate();
+        
+        res.render(mentorTemplate, { 'this': mentorsView});
     }
 }

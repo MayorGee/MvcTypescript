@@ -1,0 +1,26 @@
+{% layout './index-layout.liquid', title: 'Modules Page' %}
+    {% assign modules = this.getModules %}
+    {% assign blockName = this.getEntityName %}
+
+    {% block content %}
+        <ol class="{{ blockName }}">
+            {% for module in modules %}
+                <li class="{{ blockName | append: '__item'}}">
+                    <p  class="{{ blockName | append: '__title'}}">
+                        The Module {{ module.title }} lasted for {{ module.days }} 
+                            {% if module.days == 1 %}
+                                day
+                            {% else %}
+                                days
+                            {% endif %} 
+                        and it involves:
+                    </p>
+                    <p  class="{{ blockName | append: '__desc'}}">
+                        {{ module.desc }}
+                    </p>
+                </li>
+            {% else  %}
+            <p class="catch-statement">Modules will appear here when they are available...</p>
+            {% endfor %}
+        </ol>
+    {% endblock %}

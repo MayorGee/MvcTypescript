@@ -1,0 +1,13 @@
+.interns-list{
+    padding: 3rem;
+
+    &__item { 
+        list-style-type: none;
+        margin-bottom: 1rem;
+    }
+
+    &__link {
+        color: black;
+        text-decoration: none;
+    }
+}

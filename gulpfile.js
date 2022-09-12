@@ -14,7 +14,7 @@ const sass = gulpSass(dartSass);
 const sync = browserSync.create();
 
 function scss() {
-    return src('./src/scss/*.scss')
+    return src('./src/scss/styles.scss')
         .pipe(sass())
         .pipe(
             autoprefixer({
@@ -22,12 +22,11 @@ function scss() {
             }),
         )
         .pipe(csso())
-        .pipe(concat('styles.css'))
         .pipe(dest('./dist/css'));
 }
 
-function html() {
-    return src('src/views/**/*.html').pipe(dest('dist/views'));
+function liquid() {
+    return src('src/templates/**/*.liquid').pipe(dest('dist/templates'));
 }
 
 function images() {
@@ -47,7 +46,7 @@ function clear() {
 }
 
 function serve() {
-    watch('./src/views/**/**.html', series(html)).on('change', sync.reload);
+    watch('./src/views/**/**.liquid', series(liquid)).on('change', sync.reload);
     watch('./src/scss/**.scss', series(scss)).on('change', sync.reload);
     watch('./src/**/**.js', series(script)).on('change', sync.reload);
     watch('src/icons/*.+(png|svg)', series(icons)).on('change', sync.reload);
@@ -63,7 +62,7 @@ export default async function watchNode() {
     });
 
     clear();
-    html();
+    liquid();
     scss();
     images();
     icons();

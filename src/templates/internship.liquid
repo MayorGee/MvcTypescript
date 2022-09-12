@@ -1,0 +1,15 @@
+{% layout './index-layout.liquid', title: 'Internship Page' %}
+    {% assign internships = this.getInternships %}
+    {% assign blockName = this.getEntityName %}
+
+    {% block content %}
+        <ul class="{{ blockName }}">
+            {% for internship in internships %}
+                <li class="{{ blockName | append: '__item'}}" >
+                    The Internship Program in the year {{ internship.year }} started at {{ internship.startDate }} and ended at {{ internship.endDate }}
+                </li>
+            {% else  %}
+            <p class="catch-statement">Internship Programs will appear here when they are available...</p>
+            {% endfor %}
+        </ul>
+    {% endblock %}

@@ -1,0 +1,15 @@
+{% layout './index-layout.liquid', title: 'Home Page' %}
+    {% assign sections = this.getSections %}
+    {% assign entityName = this.getEntityName %}
+
+    {% block content %}
+        {% for section in sections %}
+            <section class="{{ "section " | append: entityName }}" >
+                <header class="{{ entityName | append: "__header" }}">{{ section.title }}</header>
+                <p class="{{ entityName | append: "__description" }}">{{ section.desc }}</p>
+                <button class="{{ entityName | append: "__button" }}">Read more...</button>
+            </section>
+            {% else  %}
+            <p class="catch-statement">sections will appear here when they are available...</p>
+        {% endfor %}
+    {% endblock %}
