@@ -1,8 +1,9 @@
-import path from 'path';
+import SpecialtyAreasView from '../views/SpecialtyAreasView.js';
 
 export default class SpecialtyAreasController {
     execute(req, res) {
-        const pagePath = path.join(global.__dirname, 'views', 'specialty-areas.html');
-        res.sendFile(pagePath);
+        const specialtyAreasView = new SpecialtyAreasView();
+
+        res.render(specialtyAreasView.getTemplate(), { 'this': specialtyAreasView});
     }
 }

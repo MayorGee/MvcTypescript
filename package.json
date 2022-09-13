@@ -28,6 +28,7 @@
         "gulp-htmlmin": "^5.0.1",
         "gulp-nodemon": "^2.5.0",
         "gulp-sass": "^5.1.0",
+        "liquidjs": "^9.42.0",
         "node-sass": "^7.0.1",
         "nodemon": "^2.0.19",
         "sass": "^1.54.9"

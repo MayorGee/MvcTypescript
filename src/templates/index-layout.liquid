@@ -7,14 +7,17 @@
     
     <link href="../css/styles.css" type="text/css" rel="stylesheet" />
     
-    <title>Dashboard</title>
+    <title>{{ title }}</title>
 </head>
 <body>
-    <div class="home">
-        <header class="home__header">Home Page!</header>
-        <main class="home__main">
-            Home
+    <div class="page-container"> 
+        <header class="header">Header</header>
+        <main class="main">
+            {% block content %}
+            
+            {% endblock %}
         </main>
+        <footer class="footer">Footer</footer>
     <div>
 </body>
 </html>

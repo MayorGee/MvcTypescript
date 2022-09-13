@@ -1,4 +1,4 @@
-import express from 'express';
+import AbstractRouter from './AbstractRouter.js';
 
 import InternController from '../controllers/InternController.js';
 import InternsController from '../controllers/InternsController.js';
@@ -6,19 +6,23 @@ import InternsController from '../controllers/InternsController.js';
 const internController = new InternController();
 const internsController = new InternsController();
 
-export default class InternRouter {
+export default class InternRouter  extends AbstractRouter {
     constructor() {
-        this.router = express.Router();
+        super();
+
+        this.routes = [
+            {
+                path: '/intern',
+                controller: internController
+            },
+            {
+                path: '/interns',
+                controller: internsController
+            }
+        ];
+
         this.setRouter();
     }
-
-    setRouter() {
-        this.router.get('/intern', internController.execute.bind(internController));
-        this.router.get('/interns', internsController.execute.bind(internsController));
-    }
-
-    getRouter() {     
-        return this.router;
-    }
+    
 
 }

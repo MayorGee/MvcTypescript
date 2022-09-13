@@ -1,4 +1,4 @@
-import express from 'express';
+import AbstractRouter from './AbstractRouter.js';
 
 import ModuleController from '../controllers/ModuleController.js';
 import ModulesController from '../controllers/ModulesController.js';
@@ -6,18 +6,21 @@ import ModulesController from '../controllers/ModulesController.js';
 const moduleController = new ModuleController();
 const modulesController = new ModulesController();
 
-export default class ModuleRouter {
+export default class ModuleRouter extends AbstractRouter {
     constructor() {
-        this.router = express.Router();
+        super();
+
+        this.routes = [
+            {
+                path: '/module',
+                controller: moduleController
+            },
+            {
+                path: '/modules',
+                controller: modulesController
+            }
+        ];
+
         this.setRouter();
-    }
-
-    setRouter() {
-        this.router.get('/module', moduleController.execute.bind(moduleController));
-        this.router.get('/modules', modulesController.execute.bind(modulesController));
-    }
-
-    getRouter() {
-        return this.router;
     }
 }

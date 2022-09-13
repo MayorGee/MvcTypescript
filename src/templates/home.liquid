@@ -1,0 +1,18 @@
+{% layout './index-layout.liquid', title: 'Home Page' %}
+    {% assign sections = this.getSections %}
+    
+    {% block content %}
+        {% for section in sections %}
+            <section class="home" >
+                <header class="home__header">
+                    {{ section.title }}
+                </header>
+                <p class="home__description">
+                    {{ section.desc }}
+                </p>
+                <button class="home__button">
+                    Read more...
+                </button>
+            </section>
+        {% endfor %}
+    {% endblock %}

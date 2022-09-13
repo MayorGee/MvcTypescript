@@ -1,0 +1,26 @@
+{% layout './index-layout.liquid', title: 'Tasks Page' %}
+    {% assign tasks = this.getTasks %}
+
+    {% block content %}
+        <div class="tasks">
+            <ol class="tasks-list">
+                {% for task in tasks %}
+                    {% assign hint = task.hint%}
+                    <li class="tasks-list__item">
+                        {{ task.title }}:
+                        <p class="tasks-list__desc">
+                            {{ task.desc }}.
+                                {% if hint %}
+                                    <p class="tasks-list__hint">
+                                        Hint: {{ hint }}
+                                    </p> 
+                                {% endif %}
+                        </p>
+                        <p class="tasks-list__difficulty">
+                            Difficulty: {{ task.difficulty }},
+                        </p>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+    {% endblock %}

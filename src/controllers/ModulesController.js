@@ -1,8 +1,9 @@
-import path from 'path';
+import ModulesView from '../views/ModulesView.js';
 
 export default class ModulesController {
     execute(req, res) {
-        const pagePath = path.join(global.__dirname, 'views', 'modules.html');
-        res.sendFile(pagePath);
+        const modulesView = new ModulesView();
+
+        res.render(modulesView.getTemplate(), { 'this': modulesView});
     }
 }
