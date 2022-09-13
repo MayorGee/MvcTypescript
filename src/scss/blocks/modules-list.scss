@@ -1,0 +1,13 @@
+.modules-list {
+    &__item {
+        width: 80%;
+        margin:  2rem auto;
+    }
+
+    &__title {
+        margin-bottom: 1rem;
+
+        font-size: 2rem;
+        font-weight: bold;
+    }
+}

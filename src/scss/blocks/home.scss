@@ -1,0 +1,17 @@
+.home {
+    &__header {
+        color: white;
+        text-align: center;
+
+        background-color: black;
+    }
+
+    &__button {
+        color: white;
+
+        background-color: black;
+
+        border: none;
+        border-radius: 1.3rem;
+    }
+}
