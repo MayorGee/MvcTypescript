@@ -6,11 +6,12 @@ export default class AbstractRouter {
         this.setRouter();
     }
     
-    routes = {};
+    routes = [];
 
     setRouter() {
-        Object.entries(this.routes)?.forEach(entry => {
-            const [route, controller] = entry;
+        this.routes?.forEach(routePair => {
+            const route = routePair.path;
+            const controller = routePair.controller;
             
             this.router.get(route, controller.execute.bind(controller));
         });

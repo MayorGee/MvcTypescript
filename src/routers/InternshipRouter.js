@@ -10,10 +10,16 @@ export default class InternshipRouter extends AbstractRouter {
     constructor() {
         super();
 
-        this.routes = {
-            '/internship': internshipController,
-            '/internships': internshipsController
-        };
+        this.routes = [
+            {
+                path: '/internship',
+                controller: internshipController
+            },
+            {
+                path: '/internships',
+                controller: internshipsController
+            }
+        ];
 
         this.setRouter();
     }

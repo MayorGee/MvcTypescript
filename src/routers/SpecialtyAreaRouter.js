@@ -10,10 +10,16 @@ export default class SpecialtyAreaRouter extends AbstractRouter {
     constructor() {
         super();
 
-        this.routes = {
-            '/specialty-area': specialtyAreaController,
-            '/specialty-areas': specialtyAreasController
-        };
+        this.routes = [
+            {
+                path: '/specialty-area',
+                controller: specialtyAreaController
+            },
+            {
+                path: '/specialty-areas',
+                controller: specialtyAreasController
+            }
+        ];
 
         this.setRouter();
     }
