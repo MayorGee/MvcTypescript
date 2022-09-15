@@ -5,20 +5,19 @@
         <div class="tasks">
             <ol class="tasks-list">
                 {% for task in tasks %}
-                    {% assign hint = task.hint%}
                     <li class="tasks-list__item">
-                        {{ task.title }}:
+                        Task on  
+                        <span class="tasks-list__module">
+                            {{ task.Task }}:
+                        </span>
+                        under 
+                        <span class="tasks-list__end">
+                            {{ task.Title }}:
+                        </span>
+
                         <p class="tasks-list__desc">
-                            {{ task.desc }}.
-                                {% if hint %}
-                                    <p class="tasks-list__hint">
-                                        Hint: {{ hint }}
-                                    </p> 
-                                {% endif %}
-                        </p>
-                        <p class="tasks-list__difficulty">
-                            Difficulty: {{ task.difficulty }},
-                        </p>
+                            {{ task.Description }}.
+                       </p>
                     </li>
                 {% endfor %}
             </ol>

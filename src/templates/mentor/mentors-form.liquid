@@ -1,0 +1,82 @@
+{% layout '../index-layout.liquid', title: 'Intern Update Form' %}
+
+    {% block content %}
+    <form 
+        action="/mentors-form" 
+        method="post"
+        class="form"
+    >
+    <p class="form__info">Fill in  the following to update Mentors Table</p>
+
+        <div>
+            <label for="mentor_first_name" class="form__label">
+                First Name:
+            </label>
+            <br />
+            <input 
+                type="text" 
+                id="mentor_first_name" 
+                name="firstName"
+                class="form__input"
+            />
+        </div>
+      
+        <div>
+            <label for="mentor_last_name" class="form__label">
+                Last Name:
+            </label>
+            <br />
+            <input 
+                type="text" 
+                id="mentor_last_name" 
+                name="lastName"
+                class="form__input"
+            />
+        </div>
+
+        <div>
+            <label for="mentor_specialty-area-id" class="form__label">
+                Specialty Area ID:
+            </label>
+            <br />
+            <input 
+                type="number" 
+                id="mentor_specialty-area-id" 
+                name="specialtyAreaId"
+                class="form__input" 
+            />
+        </div>
+      
+        <div>
+            <label for="mentor_email" class="form__label">
+                Email:
+            </label>
+            <br />
+            <input 
+                type="email" 
+                id="mentor_email" 
+                name="email"
+                class="form__input" 
+            />
+        </div>
+        
+        <div>
+            <label for="mentor_phone" class="form__label">
+                Phone No:
+            </label>
+            <br />
+            <input 
+                type="tel" 
+                id="mentor_phone" 
+                name="phone" 
+                class="form__input"
+            />
+        </div>
+                
+        <div>
+            <button type="submit" class="form__button">
+                Update Table
+            </button>
+        </div>
+    </form>
+    {% endblock %}

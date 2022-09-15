@@ -5,21 +5,14 @@ export default class SpecialtyAreasView extends AbstractView {
         super();
         
         this.template = 'specialty-areas';
-        this.specialtyAreas = [
-            {
-                id: 1,
-                title: 'Frontend',
-                desc: 'Proin posuere arcu at est pharetra, eu vehicula purus rhoncus. Suspendisse luctus ex libero, fringilla ullamcorper mi porttitor vitae. Pellentesque a sagittis massa, ut porta leo. Aliquam sed nunc ac quam posuere pretium in at nulla. Integer id dolor et massa pharetra luctus. Nunc tempus augue eu massa ullamcorper suscipit'
-            },
-            {
-                id: 2,
-                title: 'Backend',
-                desc: 'Proin posuere arcu at est pharetra, eu vehicula purus rhoncus. Suspendisse luctus ex libero, fringilla ullamcorper mi porttitor vitae. Pellentesque a sagittis massa, ut porta leo. Aliquam sed nunc ac quam posuere pretium in at nulla. Integer id dolor et massa pharetra luctus. Nunc tempus augue eu massa ullamcorper suscipit'
-            }
-        ];
+        this.specialtyAreas = [];
     }
 
     getSpecialtyAreas() {
         return this.specialtyAreas;
+    }
+
+    setSpecialtyAreas(specialtyAreas) {
+        this.specialtyAreas = specialtyAreas;
     }
 }

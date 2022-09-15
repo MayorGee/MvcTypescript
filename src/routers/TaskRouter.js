@@ -1,7 +1,7 @@
 import AbstractRouter from './AbstractRouter.js';
 
-import TaskController from '../controllers/TaskController.js';
-import TasksController from '../controllers/TasksController.js';
+import TaskController from '../controllers/Task/TaskController.js';
+import TasksController from '../controllers/Task/TasksController.js';
 
 const taskController = new TaskController();
 const tasksController = new TasksController();
@@ -13,11 +13,18 @@ export default class TaskRouter extends AbstractRouter {
         this.routes = [
             {
                 path: '/task',
-                controller: taskController
+                controller: taskController,
+                method: 'GET'
             },
             {
                 path: '/tasks',
-                controller: tasksController
+                controller: tasksController,
+                method: 'GET'
+            },
+            {
+                path: '/tasks',
+                controller: tasksController,
+                method: 'POST'
             }
         ];
 

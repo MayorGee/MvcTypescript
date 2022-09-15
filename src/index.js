@@ -8,7 +8,6 @@ import ModuleRouter from './routers/ModuleRouter.js';
 import SpecialtyAreaRouter from './routers/SpecialtyAreaRouter.js';
 import TaskRouter from './routers/TaskRouter.js';
 
-
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -29,12 +28,7 @@ const routers = [
     TaskRouter
 ];
 
+app.initBodyParser();
 app.initLiquid();
-
-routers.forEach(Router => {
-    const router = new Router();
-
-    app.initRouter(router.getRouter());
-})
-
+app.initRouters(routers);
 app.listen(PORT);

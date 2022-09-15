@@ -9,12 +9,12 @@
             <ol class="specialty-area-list">
                 {% for specialtyArea in specialtyAreas %}
                     <li class="specialty-area__item">
-                        <p  class="specialty-area__title"> 
-                            {{ specialtyArea.title }}:
-                        </p>
-                        <p  class="specialty-area__desc">
-                            {{ specialtyArea.desc }}
-                        </p>
+                        <span  class="specialty-area__title"> 
+                            {{ specialtyArea.Title }},  
+                        </span>
+                        <span  class="specialty-area__desc">
+                            Class size: {{ specialtyArea.Class_Size }}
+                        </span>
                     </li>
                 {% endfor %}
             </ol>

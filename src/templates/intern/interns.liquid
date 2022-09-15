@@ -1,4 +1,4 @@
-{% layout './index-layout.liquid', title: 'Intern Page' %}
+{% layout '../index-layout.liquid', title: 'Intern Page' %}
     {% assign interns = this.getInterns %}
 
     {% block content %}
@@ -7,13 +7,13 @@
                 {% for intern in interns %}
                     <li class="interns-list__item">
                         <a href="" class="interns-list__link">
-                            {{ intern.name | capitalize }} is {{ intern.age }} years old, and 
-                                {% if intern.gender == "Male" %}
+                            {{ intern.Last_Name | capitalize }} {{ intern.First_Name | capitalize }} is {{ intern.Age }} years old, and 
+                                {% if intern.Gender == "Male" %}
                                     he
                                 {% else %}
                                     she
                                 {% endif %}
-                            is enrolled for {{ intern.area }}
+                            is enrolled for {{ intern.Title }}
                         </a>
                     </li>
                 {% endfor %}

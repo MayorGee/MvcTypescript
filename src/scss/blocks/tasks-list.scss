@@ -1,5 +1,9 @@
 .tasks-list {
-    &__hint {
+    &__module {
+        font-weight: bold;
+    }
+
+    &__end {
         color: brown;
     }
 }

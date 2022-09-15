@@ -9,11 +9,16 @@ export default class AbstractRouter {
     routes = [];
 
     setRouter() {
-        this.routes?.forEach(routePair => {
-            const route = routePair.path;
-            const controller = routePair.controller;
-            
-            this.router.get(route, controller.execute.bind(controller));
+        this.routes?.forEach(routeSet => {
+            const route = routeSet.path;
+            const controller = routeSet.controller;
+            const method = routeSet.method;
+
+            if (method === 'GET') {
+                this.router.get(route, controller.execute.bind(controller));
+            } else if (method === 'POST') {
+                this.router.post(route, controller.execute.bind(controller));
+            }           
         });
     }
 

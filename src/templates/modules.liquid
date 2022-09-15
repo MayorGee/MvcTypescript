@@ -5,18 +5,7 @@
         <ol class="modules-list">
             {% for module in modules %}
                 <li class="modules-list__item">
-                    <p  class="modules-list__title">
-                        The Module {{ module.title }} lasted for {{ module.days }} 
-                            {% if module.days == 1 %}
-                                day
-                            {% else %}
-                                days
-                            {% endif %} 
-                        and it involves:
-                    </p>
-                    <p class="modules-list__desc">
-                        {{ module.desc }}
-                    </p>
+                    {{ module.Task }}
                 </li>
             {% endfor %}
         </ol>

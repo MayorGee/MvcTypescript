@@ -10,7 +10,8 @@ export default class HomeRouter extends AbstractRouter {
         this.routes = [ 
             {
                 path: '/',
-                controller: homeController
+                controller: homeController,
+                method: 'GET'
             }         
         ];
 
