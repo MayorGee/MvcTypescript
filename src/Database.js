@@ -23,6 +23,6 @@ export default class Database {
     static async runQuery(query) {
         const connection = Database.getConnection();
 
-        return await connection.awaitQuery(query);
+        return connection.awaitQuery(query);
     }
 }

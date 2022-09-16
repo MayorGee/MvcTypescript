@@ -1,15 +1,19 @@
 import ModulesView from '../../views/ModulesView.js';
-import AbstractController from '../AbstractController.js';
+import Database from '../../Database.js';
 
-export default class ModulesController extends AbstractController {
-    constructor() {
-        super();
+const modulesView = new ModulesView();
 
-        this.view = new ModulesView();
-        this.query = `SELECT * FROM Module`;
+export default class ModulesController {
+    async execute(req, res) {
+        
+        const modules = await Database.runQuery(`SELECT * FROM Module`);      
+
+        this.setModules(modules);
+
+        res.render(modulesView.getTemplate(), { 'this': modulesView });
     }
-
-    async setData(modules) {
-        this.view.setModules(modules);
+    
+    async setModules(modules) {
+        modulesView.setModules(modules);
     }
 }

@@ -1,15 +1,20 @@
 import SpecialtyAreasView from '../../views/SpecialtyAreasView.js';
+import Database from '../../Database.js';
 import AbstractController from '../AbstractController.js';
 
+const specialtyAreasView = new SpecialtyAreasView();
+
 export default class SpecialtyAreasController extends AbstractController {
-    constructor() {
-        super();
+    async execute(req, res) {
+        
+        const specialtyAreas = await Database.runQuery(`SELECT * FROM Specialty_Area`);      
 
-        this.view = new SpecialtyAreasView();
-        this.query = `SELECT * FROM Specialty_Area`;
+        this.setSpecialtyAreas(specialtyAreas);
+
+        this.renderPage(res, specialtyAreasView);
     }
-
-    async setData(specialtyAreas) {
-        this.view.setSpecialtyAreas(specialtyAreas);
+    
+    async setSpecialtyAreas(specialtyAreas) {
+        specialtyAreasView.setSpecialtyAreas(specialtyAreas);
     }
 }

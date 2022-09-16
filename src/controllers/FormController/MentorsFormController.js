@@ -1,5 +1,5 @@
 import MentorsFormView from '../../views/MentorsFormView.js';
-import Database from '../../database.js';
+import Database from '../../Database.js';
 import AbstractFormController from './AbstractFormController.js';
 
 export default class MentorsFormController  extends AbstractFormController {

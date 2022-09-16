@@ -4,7 +4,7 @@ export default class MentorsView extends AbstractView {
     constructor() {
         super();
 
-        this.template = 'mentors';
+        this.template = './mentor/mentors';
         this.mentors = [];
     }
 

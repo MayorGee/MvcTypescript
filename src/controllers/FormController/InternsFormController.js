@@ -1,5 +1,5 @@
 import InternsFormView from '../../views/InternsFormView.js';
-import Database from '../../database.js';
+import Database from '../../Database.js';
 import AbstractFormController from './AbstractFormController.js';
 
 export default class InternsFormController extends AbstractFormController {

@@ -4,7 +4,7 @@ export default class InternsView extends AbstractView {
     constructor() {
         super();
 
-        this.template = 'interns';
+        this.template = './intern/interns';
         this.interns = [];
     }
 
