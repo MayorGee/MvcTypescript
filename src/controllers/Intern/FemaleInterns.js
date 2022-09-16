@@ -2,11 +2,11 @@ import InternsView from '../../views/InternsView.js';
 import Database from '../../Database.js';
 import AbstractController from '../AbstractController.js';
 
-const internsView = new InternsView();
+
 
 export default class FemaleInternsController extends AbstractController {
-
     async execute(req, res) {
+        const internsView = new InternsView();
         
         const interns = await Database.runQuery(
             `SELECT * FROM Intern
@@ -17,12 +17,8 @@ export default class FemaleInternsController extends AbstractController {
             WHERE Gender = "Female"`
         );      
 
-        this.setInterns(interns);
+        internsView.setInterns(interns);
 
         this.renderPage(res, internsView);
-    }
-    
-    async setInterns(interns) {
-        internsView.setInterns(interns);
     }
 }

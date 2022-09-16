@@ -2,11 +2,9 @@ import MentorsView from '../../views/MentorsView.js';
 import Database from '../../Database.js';
 import AbstractController from '../AbstractController.js';
 
-const mentorsView = new MentorsView();
-
 export default class MentorsController extends AbstractController {
-
     async execute(req, res) {
+        const mentorsView = new MentorsView();
         
         const mentors = await Database.runQuery(
             `SELECT * FROM Mentor
@@ -14,12 +12,8 @@ export default class MentorsController extends AbstractController {
             ON Mentor.Specialty_Area_Id = Specialty_Area.Id`
         );      
 
-        this.setMentors(mentors);
+        mentorsView.setMentors(mentors);
 
         this.renderPage(res, mentorsView);
-    }
-    
-    async setMentors(mentors) {
-        mentorsView.setMentors(mentors);
     }
 }

@@ -10,7 +10,6 @@ export default class AbstractRouter {
 
     setRouter() {
         this.routes?.forEach(({ path, controller, method }) => {
-
             if (method === 'GET') {
                 this.router.get(path, controller.execute.bind(controller));
             } else if (method === 'POST') {

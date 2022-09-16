@@ -1,8 +1,8 @@
 import InternsFormView from '../../views/InternsFormView.js';
 import Database from '../../Database.js';
-import AbstractFormController from './AbstractFormController.js';
+import AbstractController from '../AbstractController.js';
 
-export default class InternsFormController extends AbstractFormController {
+export default class InternsFormController extends AbstractController {
     handleGet(res) {
         const internsFormView = new InternsFormView();
 
@@ -41,5 +41,4 @@ export default class InternsFormController extends AbstractFormController {
 
         res.redirect('/interns');
     }
-
 }

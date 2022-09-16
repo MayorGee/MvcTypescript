@@ -1,8 +1,8 @@
 import MentorsFormView from '../../views/MentorsFormView.js';
 import Database from '../../Database.js';
-import AbstractFormController from './AbstractFormController.js';
+import AbstractController from '../AbstractController.js';
 
-export default class MentorsFormController  extends AbstractFormController {
+export default class MentorsFormController  extends AbstractController {
     handleGet(res) {
         const mentorsFormView = new MentorsFormView();
 
@@ -37,5 +37,4 @@ export default class MentorsFormController  extends AbstractFormController {
 
         res.redirect('/mentors');
     }
-
 }
