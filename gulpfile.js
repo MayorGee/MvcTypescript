@@ -4,7 +4,6 @@ import gulpSass from 'gulp-sass';
 import dartSass from 'sass';
 import csso from 'gulp-csso';
 import autoprefixer from 'gulp-autoprefixer';
-import concat from 'gulp-concat';
 import browserSync from 'browser-sync';
 import { deleteSync } from 'del';
 

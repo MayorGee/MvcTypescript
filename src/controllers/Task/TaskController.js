@@ -1,7 +1,26 @@
-export default class TaskController {
-    text = 'This is controller for a task';
+import TaskView from '../../views/task/TaskView.js';
+import TaskResource from '../../models/resource/TaskResource.js';
 
-    execute(req, res) {
-        res.send(`Hello, ${this.text}`);
+export default class TaskController {
+    async execute(req, res) {
+        const taskView = new TaskView();
+        const taskResource = new TaskResource();
+        const id = req.query.id;
+
+        if (!id) {
+            res.redirect('/tasks')
+
+            return;
+        }
+
+        const taskRes = await taskResource.getTaskById(id);
+        const task = taskRes[0];
+
+        taskView.setTask(task);
+
+        res.send(`
+            Task Id: ${task.Id} <br/>
+            Task Description: ${task.Description} <br/>
+        `);
     }
 }

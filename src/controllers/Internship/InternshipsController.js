@@ -1,14 +1,13 @@
-import InternshipsView from '../../views/InternshipsView.js';
-import Database from '../../Database.js';
+import InternshipResource from '../../models/resource/InternshipResource.js';
+import InternshipsView from '../../views/internship/InternshipsView.js';
 import AbstractController from '../AbstractController.js';
-
-const internshipsView  = new InternshipsView();
 
 export default class InternshipsController extends AbstractController {    
     async execute(req, res) {
+        const internshipsView  = new InternshipsView();
+        const internshipResource = new InternshipResource();
         
-        const internships = await Database.runQuery(`SELECT * FROM Internship`);      
-
+        const internships = await internshipResource.getInternships();
         this.setInternships(internships);
 
         this.renderPage(res, internshipsView);

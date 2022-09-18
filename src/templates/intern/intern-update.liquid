@@ -1,18 +1,20 @@
 {% layout '../index-layout.liquid', title: 'Intern Update Form' %}
+    {% assign intern = this.getIntern %}
 
     {% block content %}
     <form 
-        action="/mentors-form" 
+        action="/intern-update"
         method="post"
         class="form"
+        key= {{ intern.Id }}
     >
     <p class="form__info">
-        Fill in  the following to update Mentors Table
+        Fill in  the following to update Intern with selected Id
     </p>
 
         <div>
             <label 
-                for="mentor_first_name" 
+                for="intern_first_name" 
                 class="form__label"
             >
                 First Name:
@@ -20,15 +22,16 @@
             <br />
             <input 
                 type="text" 
-                id="mentor_first_name" 
+                id="intern_first_name" 
                 name="firstName"
                 class="form__input"
+                value={{ intern.First_Name }}
             />
         </div>
       
         <div>
             <label 
-                for="mentor_last_name" 
+                for="intern_last_name" 
                 class="form__label"
             >
                 Last Name:
@@ -36,15 +39,50 @@
             <br />
             <input 
                 type="text" 
-                id="mentor_last_name" 
+                id="intern_last_name" 
                 name="lastName"
                 class="form__input"
+                value = {{ intern.Last_Name }}
             />
         </div>
 
         <div>
             <label 
-                for="mentor_specialty-area-id" 
+                for="intern_internship-id" 
+                class="form__label"
+            >
+                Internship ID:
+            </label>
+            <br />
+            <input 
+                type="number" 
+                id="intern_internship-id" 
+                name="internshipId"
+                class="form__input"
+                value= {{ intern.Internship_Id }}
+            />
+        </div>
+
+        <div>
+            <label 
+                for="intern_age" 
+                class="form__label"
+            >
+                Age:
+            </label>
+            <br />
+            <input 
+                type="number" 
+                id="intern_age" 
+                name="age"
+                class="form__input" 
+                value= {{ intern.Age }}
+            />
+         </div>
+
+         <div>
+            <label 
+                for="intern_specialty-area-id" 
                 class="form__label"
             >
                 Specialty Area ID:
@@ -52,15 +90,16 @@
             <br />
             <input 
                 type="number" 
-                id="mentor_specialty-area-id" 
+                id="intern_specialty-area-id" 
                 name="specialtyAreaId"
-                class="form__input" 
+                class="form__input"
+                value= {{ intern.Specialty_Area_Id }}
             />
         </div>
       
         <div>
             <label 
-                for="mentor_email" 
+                for="intern_email" 
                 class="form__label"
             >
                 Email:
@@ -68,15 +107,16 @@
             <br />
             <input 
                 type="email" 
-                id="mentor_email" 
+                id="intern_email" 
                 name="email"
                 class="form__input" 
+                value= {{ intern.Email }}
             />
         </div>
         
         <div>
             <label 
-                for="mentor_phone" 
+                for="intern_phone" 
                 class="form__label"
             >
                 Phone No:
@@ -84,9 +124,10 @@
             <br />
             <input 
                 type="tel" 
-                id="mentor_phone" 
+                id="intern_phone" 
                 name="phone" 
                 class="form__input"
+                value = {{ intern.Phone_No }}
             />
         </div>
                 
@@ -95,7 +136,7 @@
                 type="submit" 
                 class="form__button"
             >
-                Update Table
+                Update Intern
             </button>
         </div>
     </form>

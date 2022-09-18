@@ -1,16 +1,13 @@
-import MentorsView from '../../views/MentorsView.js';
-import Database from '../../Database.js';
+import MentorResource from '../../models/resource/MentorResource.js';
+import MentorsView from '../../views/mentor/MentorsView.js';
 import AbstractController from '../AbstractController.js';
 
 export default class MentorsController extends AbstractController {
     async execute(req, res) {
         const mentorsView = new MentorsView();
+        const mentorResource = new MentorResource();
         
-        const mentors = await Database.runQuery(
-            `SELECT * FROM Mentor
-            JOIN Specialty_Area
-            ON Mentor.Specialty_Area_Id = Specialty_Area.Id`
-        );      
+        const mentors = await mentorResource.getMentors();      
 
         mentorsView.setMentors(mentors);
 

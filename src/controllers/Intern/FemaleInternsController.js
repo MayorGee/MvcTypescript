@@ -1,18 +1,16 @@
-import InternResource from '../../models/resource/InternResource.js';
 import InternsView from '../../views/intern/InternsView.js';
+import InternResource from '../../models/resource/InternResource.js';
 import AbstractController from '../AbstractController.js';
 
-
-export default class InternsController extends AbstractController {
+export default class FemaleInternsController extends AbstractController {
     async execute(req, res) {
         const internsView = new InternsView();
         const internResource = new InternResource();
         
-        const interns = await internResource.getInterns();     
+        const femaleInterns = await internResource.getFemaleInterns();
 
-        internsView.setInterns(interns);
+        internsView.setInterns(femaleInterns);
 
         this.renderPage(res, internsView);
     }
 }
-

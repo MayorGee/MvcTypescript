@@ -2,15 +2,17 @@ import AbstractRouter from './AbstractRouter.js';
 
 import InternController from '../controllers/Intern/InternController.js';
 import InternsController from '../controllers/Intern/InternsController.js';
-import MaleInternsController from '../controllers/Intern/MaleInterns.js';
-import FemaleInternsController from '../controllers/Intern/FemaleInterns.js';
-import InternsFormController from '../controllers/FormController/InternsFormController.js';
+import MaleInternsController from '../controllers/Intern/MaleInternsController.js';
+import FemaleInternsController from '../controllers/Intern/FemaleInternsController.js';
+import InternInsertController from '../controllers/FormController/InternInsertController.js';
+import InternsUpdateController from '../controllers/FormController/InternsUpdateController.js';
 
 const internController = new InternController();
 const internsController = new InternsController();
 const maleInternsController = new MaleInternsController();
 const femaleInternsController = new FemaleInternsController();
-const internsFormController = new InternsFormController();
+const internInsertController = new InternInsertController();
+const internsUpdateController = new  InternsUpdateController();
 
 export default class InternRouter  extends AbstractRouter {
     constructor() {
@@ -28,11 +30,6 @@ export default class InternRouter  extends AbstractRouter {
                 method: 'GET'
             },
             {
-                path: '/interns-form',
-                controller: internsFormController,
-                method: 'POST'
-            },
-            {
                 path: '/male-interns',
                 controller: maleInternsController,
                 method: 'GET'
@@ -43,9 +40,24 @@ export default class InternRouter  extends AbstractRouter {
                 method: 'GET'
             },
             {
-                path: '/interns-form',
-                controller: internsFormController,
+                path: '/intern-insert',
+                controller: internInsertController,
+                method: 'POST'
+            },
+            {
+                path: '/intern-insert',
+                controller: internInsertController,
                 method: 'GET'
+            },
+            {
+                path: '/intern-update',
+                controller: internsUpdateController,
+                method: 'GET'
+            },
+            {
+                path: '/intern-update',
+                controller: internsUpdateController,
+                method: 'POST'
             }
         ];
 

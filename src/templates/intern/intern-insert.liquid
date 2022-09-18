@@ -1,0 +1,134 @@
+{% layout '../index-layout.liquid', title: 'Intern Insert Form' %}
+
+    {% block content %}
+    <form 
+        action="/intern-insert"
+        method="post"
+        class="form"
+    >
+    <p class="form__info">
+        Fill in  the following to insert Intern to Table
+    </p>
+
+        <div>
+            <label 
+                for="intern_first_name" 
+                class="form__label"
+            >
+                First Name:
+            </label>
+            <br />
+            <input 
+                type="text" 
+                id="intern_first_name" 
+                name="firstName"
+                class="form__input"
+            />
+        </div>
+      
+        <div>
+            <label 
+                for="intern_last_name" 
+                class="form__label"
+            >
+                Last Name:
+            </label>
+            <br />
+            <input 
+                type="text" 
+                id="intern_last_name" 
+                name="lastName"
+                class="form__input"
+            />
+        </div>
+
+        <div>
+            <label 
+                for="intern_internship-id" 
+                class="form__label"
+            >
+                Internship ID:
+            </label>
+            <br />
+            <input 
+                type="number" 
+                id="intern_internship-id" 
+                name="internshipId"
+                class="form__input" 
+            />
+        </div>
+
+        <div>
+            <label 
+                for="intern_age" 
+                class="form__label"
+            >
+                Age:
+            </label>
+            <br />
+            <input 
+                type="number" 
+                id="intern_age" 
+                name="age"
+                class="form__input" 
+            />
+         </div>
+
+         <div>
+            <label 
+                for="intern_specialty-area-id" 
+                class="form__label"
+            >
+                Specialty Area ID:
+            </label>
+            <br />
+            <input 
+                type="number" 
+                id="intern_specialty-area-id" 
+                name="specialtyAreaId"
+                class="form__input" 
+            />
+        </div>
+      
+        <div>
+            <label 
+                for="intern_email" 
+                class="form__label"
+            >
+                Email:
+            </label>
+            <br />
+            <input 
+                type="email" 
+                id="intern_email" 
+                name="email"
+                class="form__input" 
+            />
+        </div>
+        
+        <div>
+            <label 
+                for="intern_phone" 
+                class="form__label"
+            >
+                Phone No:
+            </label>
+            <br />
+            <input 
+                type="tel" 
+                id="intern_phone" 
+                name="phone" 
+                class="form__input"
+            />
+        </div>
+                
+        <div>
+            <button 
+                type="submit" 
+                class="form__button"
+            >
+                Insert Intern
+            </button>
+        </div>
+    </form>
+    {% endblock %}

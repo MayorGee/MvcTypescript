@@ -1,19 +1,14 @@
-import TasksView from '../../views/TasksView.js';
-import Database from '../../Database.js';
+import TaskResource from '../../models/resource/TaskResource.js';
+import TasksView from '../../views/task/TasksView.js';
 import AbstractController from '../AbstractController.js';
 
 
 export default class TasksController extends AbstractController {
     async execute(req, res) {
+        const taskResource = new TaskResource();
         const tasksView = new TasksView(); 
         
-        const tasks = await Database.runQuery(
-            `SELECT * FROM Tasks
-            JOIN Specialty_Area
-            ON Tasks.Specialty_Area_Id = Specialty_Area.Id
-            JOIN Module
-            ON Tasks.MOdule_Id = Module.Id`
-        );      
+        const tasks = await taskResource.getTasks();    
 
         tasksView.setTasks(tasks);
 

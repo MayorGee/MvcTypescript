@@ -1,7 +1,7 @@
 export default class AbstractController {
     async execute(req, res) {
         if(req.method === 'GET') {
-            this.handleGet(res);
+            this.handleGet(req, res);
         } else if (req.method === 'POST') {
             this.handlePost(req, res);
         }

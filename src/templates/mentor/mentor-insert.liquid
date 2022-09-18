@@ -1,18 +1,18 @@
-{% layout '../index-layout.liquid', title: 'Intern Update Form' %}
+{% layout '../index-layout.liquid', title: 'Intern Insert Form' %}
 
     {% block content %}
     <form 
-        action="/interns-form"
+        action="/mentor-insert" 
         method="post"
         class="form"
     >
     <p class="form__info">
-        Fill in  the following to update Interns Table
+        Fill in  the following to update Mentors Table
     </p>
 
         <div>
             <label 
-                for="intern_first_name" 
+                for="mentor_first_name" 
                 class="form__label"
             >
                 First Name:
@@ -20,7 +20,7 @@
             <br />
             <input 
                 type="text" 
-                id="intern_first_name" 
+                id="mentor_first_name" 
                 name="firstName"
                 class="form__input"
             />
@@ -28,7 +28,7 @@
       
         <div>
             <label 
-                for="intern_last_name" 
+                for="mentor_last_name" 
                 class="form__label"
             >
                 Last Name:
@@ -36,7 +36,7 @@
             <br />
             <input 
                 type="text" 
-                id="intern_last_name" 
+                id="mentor_last_name" 
                 name="lastName"
                 class="form__input"
             />
@@ -44,39 +44,7 @@
 
         <div>
             <label 
-                for="intern_internship-id" 
-                class="form__label"
-            >
-                Internship ID:
-            </label>
-            <br />
-            <input 
-                type="number" 
-                id="intern_internship-id" 
-                name="internshipId"
-                class="form__input" 
-            />
-        </div>
-
-        <div>
-            <label 
-                for="intern_age" 
-                class="form__label"
-            >
-                Age:
-            </label>
-            <br />
-            <input 
-                type="number" 
-                id="intern_age" 
-                name="age"
-                class="form__input" 
-            />
-         </div>
-
-         <div>
-            <label 
-                for="intern_specialty-area-id" 
+                for="mentor_specialty-area-id" 
                 class="form__label"
             >
                 Specialty Area ID:
@@ -84,7 +52,7 @@
             <br />
             <input 
                 type="number" 
-                id="intern_specialty-area-id" 
+                id="mentor_specialty-area-id" 
                 name="specialtyAreaId"
                 class="form__input" 
             />
@@ -92,7 +60,7 @@
       
         <div>
             <label 
-                for="intern_email" 
+                for="mentor_email" 
                 class="form__label"
             >
                 Email:
@@ -100,7 +68,7 @@
             <br />
             <input 
                 type="email" 
-                id="intern_email" 
+                id="mentor_email" 
                 name="email"
                 class="form__input" 
             />
@@ -108,7 +76,7 @@
         
         <div>
             <label 
-                for="intern_phone" 
+                for="mentor_phone" 
                 class="form__label"
             >
                 Phone No:
@@ -116,7 +84,7 @@
             <br />
             <input 
                 type="tel" 
-                id="intern_phone" 
+                id="mentor_phone" 
                 name="phone" 
                 class="form__input"
             />
@@ -127,7 +95,7 @@
                 type="submit" 
                 class="form__button"
             >
-                Update Table
+                Insert Mentor
             </button>
         </div>
     </form>
