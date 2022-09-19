@@ -51,7 +51,7 @@
 
 ## Navigation In Project
 
-  To make navigation easier, let's talk briefly about the design pattern used: [MVC(Model-View-Controller)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
+  To make navigation easier, let's talk briefly about the design pattern used: **MVC**[(Model-View-Controller)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 
   **Model** - Contains the so-called. "business logic" - processing and verification of data, access to databases, represents the internal structure of the system. The model should not directly interact with the user.
 
@@ -63,12 +63,12 @@
   ## Index.js
   The is the entry point into the project, it is located at the root level of the project. It contains the following:
 
-  1. An instance of the _App Class_ which is used to interact with the express package and some init methods for other packages imported into the App class
+  1. An instance of the **_App Class_** which is used to interact with the express package and some init methods for other packages imported into the App class
 
   2. An array of routers for each entity to be sent to the App class for initialization: `app.initRouters(routers)`
 
   ## Database.js
-  House to the _Database Class_. The Database is where the mysql-await package was imported and also connection is created here with the data gotten from the .env file
+  House to the **_Database Class_**. The Database is where the mysql-await package was imported and also connection is created here with the data gotten from the .env file
 
   ## App.js
   House to the _App class_. The App class is used as a reference to the express package and also used to to initilize the Routers, Liquidjs, BodyParser and also to initiate listening at the given port.
