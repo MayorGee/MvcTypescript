@@ -16,7 +16,7 @@ export default class AbstractController {
     }
     
     async isIdInvalid(id) {
-        return (/\d+/.test(id) || id) ?? true;
+        return (/\d+/.test(id) || id) ? false : true;
     }
 
     async handleIdError(id, res) {
