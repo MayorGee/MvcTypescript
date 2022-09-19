@@ -1,4 +1,6 @@
-export default class TaskView {
+import AbstractView from '../AbstractView.js';
+
+export default class TaskView extends AbstractView {
     task = null;
 
     setTask(task) {
@@ -7,5 +9,9 @@ export default class TaskView {
     
     getTask() {
         return this.task;
+    }
+
+    setTemplate(template) {
+        this.template = template;
     }
 }

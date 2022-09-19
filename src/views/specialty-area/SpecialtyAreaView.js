@@ -1,4 +1,6 @@
-export default class SpecialtyAreaView {
+import AbstractView from '../AbstractView.js';
+
+export default class SpecialtyAreaView extends AbstractView {
     specialtyArea = null;
 
     setSpecialtyArea(specialtyArea) {
@@ -7,5 +9,9 @@ export default class SpecialtyAreaView {
     
     getSpecialtyArea() {
         return this.specialtyArea;
+    }
+
+    setTemplate(template) {
+        this.template = template;
     }
 }

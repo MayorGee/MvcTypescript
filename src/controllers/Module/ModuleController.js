@@ -6,21 +6,17 @@ export default class ModuleController extends AbstractController {
     async execute(req, res) {
         const moduleView = new ModuleView();
         const moduleResource = new ModuleResource();
-        const id = req.query.id;
+        const moduleId = req.query.id;
 
-        const idIsValid = this.validateId(id, res);
-
-        if(!idIsValid) {
-            return;
+        if (this.isIdInvalid(moduleId)) {
+            return this.handleIdError(moduleId, res);
         }
 
-        const module = await moduleResource.getModuleById(id);
+        const module = await moduleResource.getModuleById(moduleId);
 
         moduleView.setModule(module);
+        moduleView.setTemplate('module');
 
-        res.send(`
-            Module Id: ${module.Id} <br/>
-            Module Task: ${module.Task} <br/>
-        `);
+        this.renderPage(res, moduleView);
     }
 }

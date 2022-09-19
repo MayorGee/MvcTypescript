@@ -1,4 +1,4 @@
-import UpdateMentorView from '../../views/mentor/UpdateMentorView.js';
+import MentorView from '../../views/mentor/MentorView.js';
 import MentorResource from '../../models/resource/MentorResource.js';
 import AbstractController from '../AbstractController.js';
 
@@ -10,20 +10,19 @@ export default class UpdateMentorController extends AbstractController {
     }
     
     async handleGet(req, res) {
-        const updateMentorView = new UpdateMentorView();
+        const mentorView = new MentorView();
         const mentorId = req.query.id;
 
-        const idIsValid = await this.validateId(mentorId, res);
-
-        if(!idIsValid) {
-            return;
+        if (this.isIdInvalid(mentorId)) {
+            return this.handleIdError(mentorId, res);
         }
 
         const mentor =  await this.resource.getMentorById(mentorId);
         
-        updateMentorView.setMentor(mentor);
+        mentorView.setMentor(mentor);
+        mentorView.setTemplate('./mentor/update-mentor');
 
-        this.renderPage(res, updateMentorView);
+        this.renderPage(res, mentorView);
    }
 
     async handlePost(req, res) {

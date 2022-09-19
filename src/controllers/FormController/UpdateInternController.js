@@ -1,4 +1,4 @@
-import UpdateInternView from '../../views/intern/UpdateInternView.js';
+import InternView from '../../views/intern/InternView.js';
 import InternResource from '../../models/resource/InternResource.js';
 import AbstractController from '../AbstractController.js';
 
@@ -10,21 +10,20 @@ export default class UpdateInternController extends AbstractController {
     }
 
     async handleGet(req, res) {
-        const updateInternView = new UpdateInternView();
+        const internView = new InternView();
 
         const internId = req.query.id;
 
-        const idIsValid = await this.validateId(internId, res);
-
-        if(!idIsValid) {
-            return;
+        if (this.isIdInvalid(internId)) {
+            return this.handleIdError(internId, res);
         }
 
         const intern =  await this.resource.getInternById(internId);
 
-        updateInternView.setIntern(intern);
+        internView.setIntern(intern);
+        internView.setTemplate('./intern/update-intern');
 
-        this.renderPage(res, updateInternView);
+        this.renderPage(res, internView);
    }
 
     async handlePost(req, res) {

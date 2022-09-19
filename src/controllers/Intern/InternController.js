@@ -6,17 +6,16 @@ export default class InternController extends AbstractController{
     async execute(req, res) {
         const internView = new InternView();
         const internResource = new InternResource();
-        const id = req.query.id;
+        const internId = req.query.id;
 
-        const idIsValid = await this.validateId(id, res);
-
-        if(!idIsValid) {
-            return;
+        if (this.isIdInvalid(internId)) {
+            return this.handleIdError(internId, res);
         }
 
-        const intern = await internResource.getInternById(id);
+        const intern = await internResource.getInternById(internId);
 
         internView.setIntern(intern);
+        internView.setTemplate('./intern/intern');
 
         this.renderPage(res, internView);
     }

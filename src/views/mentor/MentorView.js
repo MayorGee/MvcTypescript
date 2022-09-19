@@ -1,19 +1,18 @@
-import AbstractView from "../AbstractView.js";
+import AbstractView from '../AbstractView.js';
 
 export default class MentorView extends AbstractView {
     mentor = null;
-    
-    constructor() {
-        super();
-
-        this.template = './mentor/mentor';
-    }
+    template = null;
 
     setMentor(mentor) {
         this.mentor = mentor;
     }
-    
+
     getMentor() {
         return this.mentor;
+    }
+
+    setTemplate(template) {
+        this.template = template;
     }
 }

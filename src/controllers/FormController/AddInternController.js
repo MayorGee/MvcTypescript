@@ -1,12 +1,12 @@
-import AddInternView from '../../views/intern/AddInternView.js';
+import InternView from '../../views/intern/InternView.js';
 import InternResource from '../../models/resource/InternResource.js';
 import AbstractController from '../AbstractController.js';
 
 export default class AddInternController extends AbstractController {
     handleGet(req, res) {
-        const addInternView = new AddInternView();
+        const internView = new InternView();
 
-        this.renderPage(res, addInternView);
+        this.renderPage(res, internView);
    }
 
     async handlePost(req, res) {

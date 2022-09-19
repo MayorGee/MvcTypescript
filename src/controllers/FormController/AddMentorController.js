@@ -1,12 +1,12 @@
-import AddMentorView from '../../views/mentor/AddMentorView.js';
+import MentorView from '../../views/mentor/MentorView.js';
 import MentorResource from '../../models/resource/MentorResource.js';
 import AbstractController from '../AbstractController.js';
 
 export default class AddMentorController extends AbstractController {
     handleGet(req, res) {
-        const addMentorView = new AddMentorView();
+        const mentorView = new MentorView();
 
-        this.renderPage(res, addMentorView);
+        this.renderPage(res, mentorView);
    }
 
     async handlePost(req, res) {

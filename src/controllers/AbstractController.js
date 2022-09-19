@@ -1,6 +1,6 @@
 export default class AbstractController {
     async execute(req, res) {
-        if(req.method === 'GET') {
+        if (req.method === 'GET') {
             this.handleGet(req, res);
         } else if (req.method === 'POST') {
             this.handlePost(req, res);
@@ -15,15 +15,13 @@ export default class AbstractController {
         res.render(viewClass.getTemplate(), { 'this': viewClass });
     }
     
-    async validateId(id, res) {
-        if(!id) {
-            res.status(500).send('No id entered');
-            return false;
-        }else if (!(/\d+/.test(id))) {
-            res.status(500).send('Invalid id entered');
-            return false;
-        }else {
-            return true;
-        }   
+    async isIdInvalid(id) {
+        return (/\d+/.test(id) || id) ?? true;
+    }
+
+    async handleIdError(id, res) {
+        const errorText = id ? 'Invalid id entered' : 'No id entered';
+        
+        res.status(500).send(errorText);
     }
 }

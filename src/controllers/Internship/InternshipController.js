@@ -6,21 +6,17 @@ export default class InternshipController extends AbstractController{
     async execute(req, res) {
         const internshipView = new InternshipView();
         const internshipResource = new InternshipResource();
-        const id = req.query.id;
+        const internshipId = req.query.id;
 
-        const idIsValid = this.validateId(id, res);
-
-        if(!idIsValid) {
-            return;
+        if (this.isIdInvalid(internshipId)) {
+            return this.handleIdError(internshipId, res);
         }
 
-        const internship = await internshipResource.getInternshipById(id);
+        const internship = await internshipResource.getInternshipById(internshipId);
 
         internshipView.setInternship(internship);
+        internshipView.setTemplate('internship');
 
-        res.send(`
-            Internship Title: ${internship.Title} <br />
-            Internship Year: ${internship.Internship_Year} <br />
-        `);
+        this.renderPage(res, internshipView);
     }
 }

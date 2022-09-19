@@ -6,21 +6,17 @@ export default class TaskController extends AbstractController{
     async execute(req, res) {
         const taskView = new TaskView();
         const taskResource = new TaskResource();
-        const id = req.query.id;
+        const taskId = req.query.id;
 
-        const idIsValid = this.validateId(id, res);
-
-        if(!idIsValid) {
-            return;
+        if (this.isIdInvalid(taskId)) {
+            return this.handleIdError(taskId, res);
         }
 
-        const task = await taskResource.getTaskById(id);
+        const task = await taskResource.getTaskById(taskId);
 
         taskView.setTask(task);
+        taskView.setTemplate('task');
 
-        res.send(`
-            Task Id: ${task.Id} <br/>
-            Task Description: ${task.Description} <br/>
-        `);
+        this.renderPage(res, taskView);
     }
 }
