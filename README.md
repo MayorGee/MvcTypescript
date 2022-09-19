@@ -41,72 +41,71 @@
   
   1. Clone project to an empty folder
   2. Create a .env file in the root directory of the project
-  3. Copy the content of the `.env.sample` file to your .env file and fill in your database details.
+  3. Copy the content of the `.env.sample` file to your .env file 
+  4. You will need to fill in the following details: 
+
+    * DB_USER 
+    * DB_PASSWORD 
+    * DB_NAME 
 
 
 ## Navigation In Project
 
-  To make navigation easier, let's talk briefly about the design pattern used: MVC (Model-View-Controller)
+  To make navigation easier, let's talk briefly about the design pattern used: [MVC(Model-View-Controller)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 
-  Model - Contains the so-called. "business logic" - processing and verification of data, access to databases, represents the internal structure of the system. The model should not directly interact with the user.
+  **Model** - Contains the so-called. "business logic" - processing and verification of data, access to databases, represents the internal structure of the system. The model should not directly interact with the user.
 
-  View - describes the appearance of the application.
+  **View** - describes the appearance of the application.
 
-  Controller - A link between the model and the view, receives data from the user, passes it to the model, receives the processed result and passes it to the view
+  **Controller** - A link between the model and the view, receives data from the user, passes it to the model, receives the processed result and passes it to the view
 
 
   ## Index.js
   The is the entry point into the project, it is located at the root level of the project. It contains the following:
 
-  1. An instance of the App Class which is used to interact with the express package and some init methods for other packages imported into the App class
+  1. An instance of the _App Class_ which is used to interact with the express package and some init methods for other packages imported into the App class
 
-  2. An array of routers for each entity to be sent to the App class for initialization (app.initRouters(routers))
+  2. An array of routers for each entity to be sent to the App class for initialization: `app.initRouters(routers)`
 
   ## Database.js
-  House to the Database class. The Database is where the mysql-await package was imported and also connection is created here with the data gotten from the .env file
+  House to the _Database Class_. The Database is where the mysql-await package was imported and also connection is created here with the data gotten from the .env file
 
   ## App.js
-  House to the App class. The App class is used as a reference to the express package and also used to to initilize the Routers, Liquidjs, BodyParser and also to initiate listening at the given port.
+  House to the _App class_. The App class is used as a reference to the express package and also used to to initilize the Routers, Liquidjs, BodyParser and also to initiate listening at the given port.
 
   ## gulpfile.js
   Using gulp packages and browser-sync, files are copied from the src folder to the dist page, scss is converted to css and the page is refreshed after every change
 
   ### Models
-  1. I have one folder for the resources of each entity, which contains all methods that each entity will use to send queries to the Database.
+  1. There is a folder for the resources of each entity, which contains all methods that each entity will use to send queries to the Database.
 
-  2. I have an Environment.js File which reads the database login details and getMethods to return each one upon call.  Just an extra level of security
+  2. There is an `Environment.js` File which reads the database login details and getMethods to return each one upon call.  Just an extra level of security
 
   ### views
-  1. AbstractView.js
-        This was used to prevent unnecessary duplications in code.
+  1. `AbstractView.js` - This was used to prevent unnecessary duplications in code.
 
-  2. For each entity, there is a pair of classes; one for a page with a single item of the entity and the other for multiple items of the entity (e.g InternView, InternsView)
+  2. For each entity, there is a pair of classes; one for a page with a single item of the entity and the other for multiple items of the entity (e.g `InternView`, `InternsView`)
 
-  These view files contain all the setMethods and getMethods needed by that entity anywhere in the project.
+  These view files contain all the _setMethods_ and _getMethods_ needed by that entity anywhere in the project.
 
-  3. HomeView.js
+  3. `HomeView.js`
   Since homepage has no entity, I made a separate view for that
 
   ### Controllers
-  1. AbstractController.js
-    
-  This was used to avoid unnecessary code duplication, it contains methods that are needed by all controllers so they all extend it so that they can have access to these methods (e.g execute() and renderPage())
+  1. `AbstractController.js` - This was used to avoid unnecessary code duplication, it contains methods that are needed by all controllers so they all [extend](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes/extends) it so that they can have access to these methods (e.g execute() and renderPage())
 
-  2. FormController
-
-  Contains two methods for each entity that will be updated with an HTML form;
+  2. `FormController` - Contains two methods for each entity that will be updated with an HTML form;
   
   - An AddEntityController to add a new item to the list of entities
   - An UpdateEntityController to edit an already existing item on the entity's table
 
   3. For each entity, there is a pair of controllers:
-    one for a single item of the entity and the other for multiple items of the entity e.g MentorController and MentorsControllers
+    one for a single item of the entity and the other for multiple items of the entity e.g `MentorController` and `MentorsControllers`
 
-  4. HomeController.js
-        Contains the controller for the home page
+  4. `HomeController.js` - Contains the controller for the home page
 
       
   ### routers
-  This is the part of the project where url paths are organized. The project contains a router class for each entity (e.g TaskRouter) and an AbstractRouter class
+  This is the part of the project where url paths are organized. The project contains a router class for each entity (e.g `TaskRouter`) and an `AbstractRouter` class
 
-  The AbstractRouter contains the setRouter and getRouter methods which are needed by all the other routers and is extended to each of the other routers. In the other router classes, url paths are grouped together with the controller responsible for them and which request method they should send.
+  The _AbstractRouter_ contains the `setRouter` and `getRouter` methods which are needed by all the other routers and is extended to each of the other routers. In the other router classes, url paths are grouped together with the controller responsible for them and which request method they should send.
