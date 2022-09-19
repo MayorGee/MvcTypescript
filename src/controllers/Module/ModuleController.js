@@ -1,26 +1,22 @@
 import ModuleView from '../../views/module/ModuleView.js';
 import ModuleResource from '../../models/resource/ModuleResource.js';
+import AbstractController from '../AbstractController.js';
 
-export default class ModuleController {
+export default class ModuleController extends AbstractController {
     async execute(req, res) {
         const moduleView = new ModuleView();
         const moduleResource = new ModuleResource();
-        const id = req.query.id;
+        const moduleId = req.query.id;
 
-        if (!id) {
-            res.redirect('/modules');
-
-            return;
+        if (this.isIdInvalid(moduleId)) {
+            return this.handleIdError(moduleId, res);
         }
 
-        const moduleRes = await moduleResource.getModuleById(id);
-        const module = moduleRes[0];
+        const module = await moduleResource.getModuleById(moduleId);
 
         moduleView.setModule(module);
+        moduleView.setTemplate('module');
 
-        res.send(`
-            Module Id: ${module.Id} <br/>
-            Module Task: ${module.Task} <br/>
-        `);
+        this.renderPage(res, moduleView);
     }
 }

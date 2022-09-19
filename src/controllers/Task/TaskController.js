@@ -1,26 +1,22 @@
 import TaskView from '../../views/task/TaskView.js';
 import TaskResource from '../../models/resource/TaskResource.js';
+import AbstractController from '../AbstractController.js';
 
-export default class TaskController {
+export default class TaskController extends AbstractController{
     async execute(req, res) {
         const taskView = new TaskView();
         const taskResource = new TaskResource();
-        const id = req.query.id;
+        const taskId = req.query.id;
 
-        if (!id) {
-            res.redirect('/tasks')
-
-            return;
+        if (this.isIdInvalid(taskId)) {
+            return this.handleIdError(taskId, res);
         }
 
-        const taskRes = await taskResource.getTaskById(id);
-        const task = taskRes[0];
+        const task = await taskResource.getTaskById(taskId);
 
         taskView.setTask(task);
+        taskView.setTemplate('task');
 
-        res.send(`
-            Task Id: ${task.Id} <br/>
-            Task Description: ${task.Description} <br/>
-        `);
+        this.renderPage(res, taskView);
     }
 }

@@ -1,12 +1,6 @@
 import Database from "../../Database.js";
 
 export default class SpecialtyAreaResource {
-    connection = null;
-
-    constructor() {
-        this.connection = Database.getConnection();
-    }
-
     async getSpecialtyAreas() {
         const specialtyAreas = await Database.runQuery(`SELECT * FROM Specialty_Area`);           
 
@@ -19,6 +13,6 @@ export default class SpecialtyAreaResource {
             WHERE Id = ${id}
         `);  
 
-        return specialtyArea;
+        return specialtyArea[0];
     }
 }

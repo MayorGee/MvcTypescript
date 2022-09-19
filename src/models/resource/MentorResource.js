@@ -1,12 +1,6 @@
 import Database from "../../Database.js";
 
 export default class MentorResource {
-    connection = null;
-
-    constructor() {
-        this.connection = Database.getConnection();
-    }
-
     async getMentors() {
         const mentors = await Database.runQuery(`
             SELECT * FROM Mentor
@@ -23,17 +17,17 @@ export default class MentorResource {
             WHERE Id = ${id}
         `);  
 
-        return mentor;
+        return mentor[0];
     }
 
-    async insertMentors(req) {
+    async addMentor(mentor) {
         const { 
             firstName,
             lastName,
             specialtyAreaId,
             email,
             phone
-        } = req.body;
+        } = mentor;
         
         await  Database.runQuery(`
             INSERT INTO Mentor (
@@ -65,8 +59,7 @@ export default class MentorResource {
 
         await Database.runQuery(`
             UPDATE Mentor
-            SET Id = '${id}',
-                First_Name = '${firstName}',
+            SET First_Name = '${firstName}',
                 Last_Name = '${lastName}',
                 Specialty_Area_Id = '${specialtyAreaId}',
                 Email = '${email}',

@@ -2,13 +2,13 @@ import AbstractRouter from './AbstractRouter.js';
 
 import MentorController from '../controllers/Mentor/MentorController.js';
 import MentorsController from '../controllers/Mentor/MentorsController.js';
-import MentorInsertController from '../controllers/FormController/MentorInsertController.js';
-import MentorsUpdateController from '../controllers/FormController/MentorsUpdateController.js';
+import AddMentorController from '../controllers/FormController/AddMentorController.js';
+import UpdateMentorController from '../controllers/FormController/UpdateMentorController.js';
 
 const mentorController = new MentorController();
 const mentorsController = new MentorsController();
-const mentorInsertController  = new MentorInsertController();
-const mentorsUpdateController = new MentorsUpdateController();
+const addMentorController  = new AddMentorController();
+const updateMentorController = new UpdateMentorController();
 
 export default class MentorRouter extends AbstractRouter {
     constructor() {
@@ -26,23 +26,23 @@ export default class MentorRouter extends AbstractRouter {
                 method: 'GET'
             },
             {
-                path: '/mentor-insert',
-                controller: mentorInsertController,
+                path: '/add-mentor',
+                controller: addMentorController,
                 method: 'GET'
             },
             {
-                path: '/mentor-insert',
-                controller: mentorInsertController,
+                path: '/add-mentor',
+                controller: addMentorController,
                 method: 'POST'
             },
             {
-                path: '/mentor-update',
-                controller: mentorsUpdateController,
+                path: '/update-mentor',
+                controller: updateMentorController,
                 method: 'GET'
             },
             {
-                path: '/mentor-update',
-                controller: mentorsUpdateController,
+                path: '/update-mentor',
+                controller: updateMentorController,
                 method: 'POST'
             }
         ];

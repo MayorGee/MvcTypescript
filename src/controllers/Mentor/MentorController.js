@@ -1,27 +1,23 @@
 import MentorView from '../../views/mentor/MentorView.js';
 import MentorResource from '../../models/resource/MentorResource.js';
+import AbstractController from '../AbstractController.js';
 
-export default class MentorController {
+export default class MentorController extends AbstractController{
     async execute(req, res) {
         const mentorView = new MentorView();
         const mentorResource = new MentorResource();
-        const id = req.query.id;
 
-        if (!id) {
-            res.redirect('/mentors');
+        const mentorId = req.query.id;
 
-            return;
+        if (this.isIdInvalid(mentorId)) {
+            return this.handleIdError(mentorId,res);
         }
 
-        const mentorRes = await mentorResource.getMentorById(id);
-        const mentor = mentorRes[0];
+        const mentor = await mentorResource.getMentorById(mentorId);
 
         mentorView.setMentor(mentor);
+        mentorView.setTemplate('./mentor/mentor');
 
-        res.send(`
-            Mentor Name: ${mentor.First_Name} <br/>
-            Mentor Email: ${mentor.Email} <br/>
-            Mentor Contact: ${mentor.Phone_No} <br/>
-        `);
+        this.renderPage(res, mentorView);
     }
 }

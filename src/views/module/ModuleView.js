@@ -1,4 +1,6 @@
-export default class ModuleView {
+import AbstractView from '../AbstractView.js';
+
+export default class ModuleView extends AbstractView {
     module = null;
 
     setModule(module) {
@@ -7,5 +9,9 @@ export default class ModuleView {
     
     getModule() {
         return this.module;
+    }
+
+    setTemplate(template) {
+        this.template = template;
     }
 }
