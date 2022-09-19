@@ -1,20 +1,20 @@
 import InternshipView from '../../views/internship/InternshipView.js';
 import InternshipResource from '../../models/resource/InternshipResource.js';
+import AbstractController from '../AbstractController.js';
 
-export default class InternshipController {
+export default class InternshipController extends AbstractController{
     async execute(req, res) {
         const internshipView = new InternshipView();
         const internshipResource = new InternshipResource();
         const id = req.query.id;
 
-        if (!id) {
-            res.redirect('/internships');
+        const idIsValid = this.validateId(id, res);
 
+        if(!idIsValid) {
             return;
         }
 
-        const internshipRes = await internshipResource.getInternshipById(id);
-        const internship = internshipRes[0];
+        const internship = await internshipResource.getInternshipById(id);
 
         internshipView.setInternship(internship);
 

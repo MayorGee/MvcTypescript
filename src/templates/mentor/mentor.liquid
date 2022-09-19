@@ -1,0 +1,10 @@
+{% layout '../index-layout.liquid', title: 'Mentor Page' %}
+    {% assign mentor = this.getMentor %}
+
+    {% block content %}
+        <div class="mentor">
+            <p class="mentor__detail">Mentor Name: {{ mentor.First_Name }} </p>
+            <p class="mentor__detail">Mentor Email: {{ mentor.Email }} </p>
+            <p class="mentor__detail">Mentor Contact {{ mentor.Phone_No }} </p>       
+        </div>
+    {% endblock %}

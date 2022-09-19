@@ -1,12 +1,6 @@
 import Database from "../../Database.js";
 
 export default class TaskResource {
-    connection = null;
-
-    constructor() {
-        this.connection = Database.getConnection();
-    }
-
     async getTasks() {
         const tasks = await Database.runQuery(`
             SELECT * FROM Tasks
@@ -25,6 +19,6 @@ export default class TaskResource {
             WHERE Id = ${id}
         `);  
 
-        return task;
+        return task[0];
     }
 }

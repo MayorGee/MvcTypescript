@@ -1,20 +1,20 @@
 import SpecialtyAreaView from '../../views/specialty-area/SpecialtyAreaView.js';
 import SpecialtyAreaResource from '../../models/resource/SpecialtyAreaResource.js';
+import AbstractController from '../AbstractController.js';
 
-export default class SpecialtyAreaController {
+export default class SpecialtyAreaController extends AbstractController{
     async execute(req, res) {
         const specialtyAreaView = new SpecialtyAreaView();
         const specialtyAreaResource = new SpecialtyAreaResource();
         const id = req.query.id;
 
-        if (!id) {
-            res.redirect('/specialty-areas');
+        const idIsValid = this.validateId(id, res);
 
+        if(!idIsValid) {
             return;
         }
 
-        const specialtyAreaRes = await specialtyAreaResource.getSpecialtyAreaById(id);
-        const specialtyArea = specialtyAreaRes[0];
+        const specialtyArea = await specialtyAreaResource.getSpecialtyAreaById(id);
 
         specialtyAreaView.setSpecialtyArea(specialtyArea);
 

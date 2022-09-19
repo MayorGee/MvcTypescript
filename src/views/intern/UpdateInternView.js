@@ -1,12 +1,12 @@
 import AbstractView from '../AbstractView.js';
 
-export default class InternUpdateView extends AbstractView {
+export default class UpdateInternView extends AbstractView {
     intern = null;
 
     constructor() {
         super();
         
-        this.template = './intern/intern-update';
+        this.template = './intern/update-intern';
     }
 
     setIntern(intern) {

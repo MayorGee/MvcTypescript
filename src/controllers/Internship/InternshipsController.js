@@ -8,12 +8,8 @@ export default class InternshipsController extends AbstractController {
         const internshipResource = new InternshipResource();
         
         const internships = await internshipResource.getInternships();
-        this.setInternships(internships);
+        internshipsView.setInternships(internships);
 
         this.renderPage(res, internshipsView);
-    }
-    
-    async setInternships(internships) {
-        internshipsView.setInternships(internships);
     }
 }

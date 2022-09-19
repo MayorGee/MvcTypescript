@@ -1,28 +1,23 @@
 import InternView from '../../views/intern/InternView.js';
 import InternResource from '../../models/resource/InternResource.js';
+import AbstractController from '../AbstractController.js';
 
-export default class InternController {
+export default class InternController extends AbstractController{
     async execute(req, res) {
         const internView = new InternView();
         const internResource = new InternResource();
         const id = req.query.id;
 
-        if (!id) {
-            res.redirect('/interns')
+        const idIsValid = await this.validateId(id, res);
 
+        if(!idIsValid) {
             return;
         }
 
-        const internRes = await internResource.getInternById(id);
-        const intern = internRes[0];
+        const intern = await internResource.getInternById(id);
 
         internView.setIntern(intern);
 
-        res.send(`
-            Intern Name: ${intern.First_Name} <br/>
-            Intern Email: ${intern.Email} <br/>
-            Intern Contact: ${intern.Phone_No} <br/>
-            Intern Age: ${intern.Age} <br/>
-        `);
+        this.renderPage(res, internView);
     }
 }

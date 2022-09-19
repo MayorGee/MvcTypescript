@@ -1,12 +1,12 @@
 import AbstractView from '../AbstractView.js';
 
-export default class MentorUpdateView extends AbstractView {
+export default class UpdateMentorView extends AbstractView {
     mentor = null;
 
     constructor() {
         super();
         
-        this.template = './mentor/mentor-update';
+        this.template = './mentor/update-mentor';
     }
 
     setMentor(mentor) {

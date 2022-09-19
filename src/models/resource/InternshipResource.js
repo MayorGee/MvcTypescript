@@ -1,12 +1,6 @@
 import Database from "../../Database.js";
 
 export default class InternshipResource {
-    connection = null;
-
-    constructor() {
-        this.connection = Database.getConnection();
-    }
-
     async getInternships() {
         const internships = await Database.runQuery(`SELECT * FROM Internship`);      
 
@@ -19,6 +13,6 @@ export default class InternshipResource {
             WHERE Id = ${id}
         `);
         
-        return internship;
+        return internship[0];
     }
 }

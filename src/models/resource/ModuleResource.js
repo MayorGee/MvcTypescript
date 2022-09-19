@@ -1,12 +1,6 @@
 import Database from "../../Database.js";
 
 export default class ModuleResource {
-    connection = null;
-
-    constructor() {
-        this.connection = Database.getConnection();
-    }
-
     async getModules() {
         const modules = await Database.runQuery(`SELECT * FROM Module`);      
 
@@ -19,6 +13,6 @@ export default class ModuleResource {
             WHERE Id = ${id}
         `);  
 
-        return module;
+        return module[0];
     }
 }

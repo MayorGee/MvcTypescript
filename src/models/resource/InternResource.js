@@ -1,12 +1,6 @@
 import Database from "../../Database.js";
 
 export default class InternResource {
-    connection = null;
-
-    constructor() {
-        this.connection = Database.getConnection();
-    }
-
     async getInterns() {
         const interns = await Database.runQuery(`
             SELECT * FROM Intern
@@ -25,18 +19,18 @@ export default class InternResource {
             WHERE Id = ${id}
         `);  
 
-        return intern;
+        return intern[0];
     }
 
     async getFemaleInterns() {
-        const femaleInterns = await Database.runQuery(
-            `SELECT * FROM Intern
+        const femaleInterns = await Database.runQuery(`
+            SELECT * FROM Intern
             JOIN Intern_Gender
             ON Intern.Id = Intern_Gender.Intern_Id
             JOIN Specialty_Area
             ON Intern.Specialty_Area_Id = Specialty_Area.Id
-            WHERE Gender = "Female"`
-        );  
+            WHERE Gender = "Female"
+        `);  
 
         return femaleInterns;
     }
@@ -54,7 +48,7 @@ export default class InternResource {
         return maleInterns;
     }
 
-    async insertInterns(req) {
+    async addIntern(req) {
         const { 
             firstName,
             lastName,
@@ -100,8 +94,7 @@ export default class InternResource {
 
         await Database.runQuery(`
             UPDATE Intern
-            SET Id = '${id}',
-                First_Name = '${firstName}',
+            SET First_Name = '${firstName}',
                 Last_Name = '${lastName}',
                 Internship_Id = '${internshipId}',
                 Age = '${age}',

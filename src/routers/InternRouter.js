@@ -4,15 +4,15 @@ import InternController from '../controllers/Intern/InternController.js';
 import InternsController from '../controllers/Intern/InternsController.js';
 import MaleInternsController from '../controllers/Intern/MaleInternsController.js';
 import FemaleInternsController from '../controllers/Intern/FemaleInternsController.js';
-import InternInsertController from '../controllers/FormController/InternInsertController.js';
-import InternsUpdateController from '../controllers/FormController/InternsUpdateController.js';
+import AddInternController from '../controllers/FormController/AddInternController.js';
+import UpdateInternController from '../controllers/FormController/UpdateInternController.js';
 
 const internController = new InternController();
 const internsController = new InternsController();
 const maleInternsController = new MaleInternsController();
 const femaleInternsController = new FemaleInternsController();
-const internInsertController = new InternInsertController();
-const internsUpdateController = new  InternsUpdateController();
+const addInternController = new AddInternController();
+const updateInternController = new UpdateInternController();
 
 export default class InternRouter  extends AbstractRouter {
     constructor() {
@@ -40,23 +40,23 @@ export default class InternRouter  extends AbstractRouter {
                 method: 'GET'
             },
             {
-                path: '/intern-insert',
-                controller: internInsertController,
+                path: '/add-intern',
+                controller: addInternController,
                 method: 'POST'
             },
             {
-                path: '/intern-insert',
-                controller: internInsertController,
+                path: '/add-intern',
+                controller: addInternController,
                 method: 'GET'
             },
             {
-                path: '/intern-update',
-                controller: internsUpdateController,
+                path: '/update-intern',
+                controller: updateInternController,
                 method: 'GET'
             },
             {
-                path: '/intern-update',
-                controller: internsUpdateController,
+                path: '/update-intern',
+                controller: updateInternController,
                 method: 'POST'
             }
         ];

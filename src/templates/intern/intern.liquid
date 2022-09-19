@@ -1,0 +1,11 @@
+{% layout '../index-layout.liquid', title: 'Intern Page' %}
+    {% assign intern = this.getIntern %}
+
+    {% block content %}
+        <div class="intern">
+            <p class="intern__detail">Intern Name: {{ intern.First_Name }} </p>
+            <p class="intern__detail">Intern Email: {{ intern.Email }} </p>
+            <p class="intern__detail">Intern Contact: {{ intern.Phone_No }} </p>
+            <p class="intern__detail">Intern Age: {{ intern.Age }} </p>             
+        </div>
+    {% endblock %}
