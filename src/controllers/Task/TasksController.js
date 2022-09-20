@@ -2,9 +2,8 @@ import TaskResource from '../../models/resource/TaskResource.js';
 import TasksView from '../../views/task/TasksView.js';
 import AbstractController from '../AbstractController.js';
 
-
 export default class TasksController extends AbstractController {
-    async execute(req, res) {
+    async handleGet(req, res) {
         const taskResource = new TaskResource();
         const tasksView = new TasksView(); 
         

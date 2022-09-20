@@ -5,13 +5,10 @@ export default class TaskView extends AbstractView {
 
     setTask(task) {
         this.task = task;
+        return this;
     }
     
     getTask() {
         return this.task;
-    }
-
-    setTemplate(template) {
-        this.template = template;
     }
 }

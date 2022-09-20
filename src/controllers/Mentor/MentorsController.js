@@ -3,7 +3,7 @@ import MentorsView from '../../views/mentor/MentorsView.js';
 import AbstractController from '../AbstractController.js';
 
 export default class MentorsController extends AbstractController {
-    async execute(req, res) {
+    async handleGet(req, res) {
         const mentorsView = new MentorsView();
         const mentorResource = new MentorResource();
         

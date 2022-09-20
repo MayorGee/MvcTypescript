@@ -3,25 +3,20 @@ import InternResource from '../../models/resource/InternResource.js';
 import AbstractController from '../AbstractController.js';
 
 export default class UpdateInternController extends AbstractController {
-    constructor() {
-        super();
-
-        this.resource = new InternResource();
-    }
-
     async handleGet(req, res) {
-        const internView = new InternView();
-
         const internId = req.query.id;
 
-        if (this.isIdInvalid(internId)) {
+        if (!this.isIdNumber(internId)) {
             return this.handleIdError(internId, res);
         }
 
-        const intern =  await this.resource.getInternById(internId);
+        const internResource = new InternResource();
+        const intern =  await internResource.getInternById(internId);
 
-        internView.setIntern(intern);
-        internView.setTemplate('./intern/update-intern');
+        const internView = new InternView();
+        internView
+            .setIntern(intern)
+            .setTemplate('./intern/update-intern');
 
         this.renderPage(res, internView);
    }

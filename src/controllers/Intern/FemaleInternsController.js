@@ -3,7 +3,7 @@ import InternResource from '../../models/resource/InternResource.js';
 import AbstractController from '../AbstractController.js';
 
 export default class FemaleInternsController extends AbstractController {
-    async execute(req, res) {
+    async handleGet(req, res) {
         const internsView = new InternsView();
         const internResource = new InternResource();
         

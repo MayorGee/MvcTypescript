@@ -5,13 +5,10 @@ export default class ModuleView extends AbstractView {
 
     setModule(module) {
         this.module = module;
+        return this;
     }
     
     getModule() {
         return this.module;
-    }
-
-    setTemplate(template) {
-        this.template = template;
     }
 }

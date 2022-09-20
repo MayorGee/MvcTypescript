@@ -15,13 +15,13 @@ export default class AbstractController {
         res.render(viewClass.getTemplate(), { 'this': viewClass });
     }
     
-    async isIdInvalid(id) {
-        return (/\d+/.test(id) || id) ? false : true;
+    isIdNumber(id) {
+        return (typeof id === 'number' && id > 0);   
     }
 
-    async handleIdError(id, res) {
-        const errorText = id ? 'Invalid id entered' : 'No id entered';
-        
+    handleIdError(id, res) {
+        let errorText = id ? 'Invalid id entered' : 'No Id entered';
+
         res.status(500).send(errorText);
     }
 }

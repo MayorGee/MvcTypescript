@@ -4,7 +4,7 @@ import AbstractController from '../AbstractController.js';
 
 
 export default class InternsController extends AbstractController {
-    async execute(req, res) {
+    async handleGet(req, res) {
         const internsView = new InternsView();
         const internResource = new InternResource();
         
