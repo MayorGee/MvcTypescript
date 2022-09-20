@@ -11,7 +11,7 @@ export default class DeleteMentorController extends AbstractController {
 
     async handleGet(req, res) {
         const mentorView = new MentorView();
-        const mentorId = req.query.id;
+        const mentorId = parseInt(req.query.id);
 
         if (!this.isIdNumber(mentorId)) {
             return this.handleIdError(mentorId, res);
@@ -27,8 +27,8 @@ export default class DeleteMentorController extends AbstractController {
     }
 
     async handlePost(req, res) {
-        await this.resource.deleteMentorById(req.body.id);
-     
+        await this.resource.deleteMentorById(parseInt(req.body.id));
+
         res.redirect('/mentors');
     }
 }

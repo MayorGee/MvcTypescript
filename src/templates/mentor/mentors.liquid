@@ -6,11 +6,11 @@
             <ul class="mentors-list">
                 {% for mentor in mentors %}
                     <li class="mentors-list__item">
-                        The mentor for {{ mentor.Title }} is {{ mentor.First_Name }}
-                        <span>
+                        {{ mentor.First_Name }} {{ mentor.Last_Name }} 
+                        <span class="delete-mentor">
                             <a 
                                 href="/delete-mentor?id={{ mentor.Id }}"
-                                class="delete-mentor">
+                                class="delete-mentor__link">
                                 <button class="delete-mentor__btn">Delete</button>
                             </a>
                         </span>

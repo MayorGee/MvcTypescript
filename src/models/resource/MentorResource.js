@@ -2,12 +2,7 @@ import Database from '../../Database.js';
 
 export default class MentorResource {
     async getMentors() {
-        const mentors = await Database.runQuery(`
-            SELECT * FROM Mentor
-            JOIN Specialty_Area
-            ON Mentor.Specialty_Area_Id = Specialty_Area.Id
-        `); 
-
+        const mentors = await Database.runQuery(`SELECT * FROM Mentor`); 
         return mentors;
     }
 

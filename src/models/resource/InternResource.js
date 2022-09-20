@@ -4,10 +4,6 @@ export default class InternResource {
     async getInterns() {
         const interns = await Database.runQuery(`
             SELECT * FROM Intern
-            JOIN Intern_Gender
-            ON Intern.Id = Intern_Gender.Intern_Id
-            JOIN Specialty_Area
-            ON Intern.Specialty_Area_Id = Specialty_Area.Id
         `);  
 
         return interns;

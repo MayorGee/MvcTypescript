@@ -98,6 +98,7 @@
   
   - An AddEntityController to add a new item to the list of entities
   - An UpdateEntityController to edit an already existing item on the entity's table
+  - A DeleteEntityController to delete an item from an entity using its id
 
   3. For each entity, there is a pair of controllers:
     one for a single item of the entity and the other for multiple items of the entity e.g `MentorController` and `MentorsControllers`
@@ -109,3 +110,6 @@
   This is the part of the project where url paths are organized. The project contains a router class for each entity (e.g `TaskRouter`) and an `AbstractRouter` class
 
   The _AbstractRouter_ contains the `setRouter` and `getRouter` methods which are needed by all the other routers and is extended to each of the other routers. In the other router classes, url paths are grouped together with the controller responsible for them and which request method they should send.
+
+  ### Templates
+  written in liquidjs, This is where the layout of each entity's page is designed. There is an index layout which contains the necessary meta data for an html document and is re used by all the pages 

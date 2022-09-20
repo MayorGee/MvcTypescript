@@ -27,7 +27,7 @@ export default class DeleteInternController extends AbstractController {
    }
 
     async handlePost(req, res) {
-        await this.resource.deleteInternById(req.body.id);
+        await this.resource.deleteInternById(parseInt(req.body.id));
      
         res.redirect('/interns');
     }

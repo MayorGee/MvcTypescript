@@ -10,6 +10,12 @@
             <p class="warning__message">
                 Are you sure you want to delete {{ intern.First_Name }} {{ intern.Last_Name }} from the database?
             </p>
+
+            <input 
+                class="no-display"
+                name="id"
+                value= {{ intern.Id }}
+            />
             
             <div class="warning__buttons">
                 <button 

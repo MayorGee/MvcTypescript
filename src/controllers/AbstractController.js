@@ -23,7 +23,5 @@ export default class AbstractController {
         let errorText = id ? 'Invalid id entered' : 'No Id entered';
 
         res.status(500).send(errorText);
-
-        console.log('D');
     }
 }

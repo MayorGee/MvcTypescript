@@ -6,14 +6,11 @@
             <ol class="interns-list">
                 {% for intern in interns %}
                     <li class="interns-list__item">
-                        <a href="" class="interns-list__link">
-                            {{ intern.Last_Name | capitalize }} {{ intern.First_Name | capitalize }} is {{ intern.Age }} years old, and 
-                                {% if intern.Gender == "Male" %}
-                                    he
-                                {% else %}
-                                    she
-                                {% endif %}
-                            is enrolled for {{ intern.Title }}
+                        <a 
+                            href="" 
+                            class="interns-list__link"
+                        >
+                            {{ intern.Last_Name | capitalize }} {{ intern.First_Name | capitalize }}, {{ intern.Age }} years old is enrolled for {{ intern.Title }}
                         </a>
                         <a 
                             href="/delete-intern?id={{ intern.Id }}"
