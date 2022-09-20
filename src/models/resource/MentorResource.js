@@ -1,4 +1,4 @@
-import Database from "../../Database.js";
+import Database from '../../Database.js';
 
 export default class MentorResource {
     async getMentors() {
@@ -66,7 +66,6 @@ export default class MentorResource {
                 Phone_No = '${phone}'
             WHERE Id = '${id}'            
         `);
-
     }
 
     async deleteMentorById(id) {

@@ -2,8 +2,8 @@ import TaskView from '../../views/task/TaskView.js';
 import TaskResource from '../../models/resource/TaskResource.js';
 import AbstractController from '../AbstractController.js';
 
-export default class TaskController extends AbstractController{
-    async execute(req, res) {
+export default class TaskController extends AbstractController {
+    async handleGet(req, res) {
         const taskId = req.query.id;
 
         if (!this.isIdNumber(taskId)) {

@@ -3,7 +3,7 @@ import ModulesView from '../../views/module/ModulesView.js';
 import AbstractController from '../AbstractController.js';
 
 export default class ModulesController extends AbstractController {
-    async execute(req, res) {
+    async handleGet(req, res) {
         const moduleResource = new ModuleResource();
         const modulesView = new ModulesView();
               

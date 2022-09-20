@@ -3,11 +3,11 @@ import InternshipsView from '../../views/internship/InternshipsView.js';
 import AbstractController from '../AbstractController.js';
 
 export default class InternshipsController extends AbstractController {    
-    async execute(req, res) {
-        const internshipsView  = new InternshipsView();
+    async handleGet(req, res) {
         const internshipResource = new InternshipResource();
-        
         const internships = await internshipResource.getInternships();
+        
+        const internshipsView  = new InternshipsView();
         internshipsView.setInternships(internships);
 
         this.renderPage(res, internshipsView);

@@ -1,9 +1,8 @@
-import Database from "../../Database.js";
+import Database from '../../Database.js';
 
 export default class InternshipResource {
     async getInternships() {
-        const internships = await Database.runQuery(`SELECT * FROM Internship`);      
-
+        const internships = await Database.runQuery(`SELECT * FROM Internship`);
         return internships;
     }
 

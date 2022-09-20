@@ -5,6 +5,7 @@ export default class MentorView extends AbstractView {
 
     setMentor(mentor) {
         this.mentor = mentor;
+        return this;
     }
 
     getMentor() {

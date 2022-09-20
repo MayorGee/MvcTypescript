@@ -15,20 +15,12 @@ export default class AbstractController {
         res.render(viewClass.getTemplate(), { 'this': viewClass });
     }
     
-    async isIdNumber(id) {
-        console.log(id);
-        return (typeof id === 'number');   
+    isIdNumber(id) {
+        return (typeof id === 'number' && id > 0);   
     }
 
-    async handleIdError(id, res) {
-        let errorText = 'Invalid id entered';
-        console.log('A');
-        if (!id) {
-            console.log('B');
-            errorText = 'No Id entered';
-        }
-
-        console.log('C');
+    handleIdError(id, res) {
+        let errorText = id ? 'Invalid id entered' : 'No Id entered';
 
         res.status(500).send(errorText);
 
