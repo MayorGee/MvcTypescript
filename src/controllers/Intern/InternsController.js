@@ -5,11 +5,10 @@ import AbstractController from '../AbstractController.js';
 
 export default class InternsController extends AbstractController {
     async handleGet(req, res) {
-        const internsView = new InternsView();
         const internResource = new InternResource();
-        
         const interns = await internResource.getInterns();     
 
+        const internsView = new InternsView();
         internsView.setInterns(interns);
 
         this.renderPage(res, internsView);

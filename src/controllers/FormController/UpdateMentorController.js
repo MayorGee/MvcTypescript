@@ -4,7 +4,6 @@ import AbstractController from '../AbstractController.js';
 
 export default class UpdateMentorController extends AbstractController {
     async handleGet(req, res) {
-
         const mentorId = req.query.id;
 
         if (!this.isIdNumber(mentorId)) {

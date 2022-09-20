@@ -2,7 +2,7 @@ import MentorView from '../../views/mentor/MentorView.js';
 import MentorResource from '../../models/resource/MentorResource.js';
 import AbstractController from '../AbstractController.js';
 
-export default class MentorController extends AbstractController{
+export default class MentorController extends AbstractController {
     async handleGet(req, res) {
         const mentorId = req.query.id;
 

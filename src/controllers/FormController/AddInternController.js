@@ -12,7 +12,6 @@ export default class AddInternController extends AbstractController {
 
     async handlePost(req, res) {
         const internResource = new InternResource();
-
         await internResource.addIntern(req);
         
         res.redirect('/interns');

@@ -4,11 +4,10 @@ import AbstractController from '../AbstractController.js';
 
 export default class MentorsController extends AbstractController {
     async handleGet(req, res) {
-        const mentorsView = new MentorsView();
         const mentorResource = new MentorResource();
-        
         const mentors = await mentorResource.getMentors();      
 
+        const mentorsView = new MentorsView();
         mentorsView.setMentors(mentors);
 
         this.renderPage(res, mentorsView);

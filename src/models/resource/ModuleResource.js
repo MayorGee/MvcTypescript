@@ -2,8 +2,7 @@ import Database from '../../Database.js';
 
 export default class ModuleResource {
     async getModules() {
-        const modules = await Database.runQuery(`SELECT * FROM Module`);      
-
+        const modules = await Database.runQuery(`SELECT * FROM Module`);
         return modules;
     }
 

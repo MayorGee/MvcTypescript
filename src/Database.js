@@ -16,7 +16,6 @@ export default class Database {
         })
 
         this.connection.connect();
-
         return this.connection;
     }
 

@@ -1,12 +1,12 @@
 import express from 'express';
 
 export default class AbstractRouter {
+    routes = [];
+    
     constructor() {
         this.router = express.Router();
         this.setRouter();
     }
-    
-    routes = [];
 
     setRouter() {
         this.routes?.forEach(({ path, controller, method }) => {

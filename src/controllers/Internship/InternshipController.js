@@ -2,7 +2,7 @@ import InternshipView from '../../views/internship/InternshipView.js';
 import InternshipResource from '../../models/resource/InternshipResource.js';
 import AbstractController from '../AbstractController.js';
 
-export default class InternshipController extends AbstractController{
+export default class InternshipController extends AbstractController {
     async handleGet(req, res) {
         const internshipId = req.query.id;
 

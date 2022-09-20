@@ -12,7 +12,6 @@ export default class AddMentorController extends AbstractController {
 
     async handlePost(req, res) {
         const mentorResource = new MentorResource();
-
         await mentorResource.addMentor(req.body);
 
         res.redirect('/mentors');

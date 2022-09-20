@@ -4,11 +4,10 @@ import AbstractController from '../AbstractController.js';
 
 export default class FemaleInternsController extends AbstractController {
     async handleGet(req, res) {
-        const internsView = new InternsView();
         const internResource = new InternResource();
-        
         const femaleInterns = await internResource.getFemaleInterns();
 
+        const internsView = new InternsView();
         internsView.setInterns(femaleInterns);
 
         this.renderPage(res, internsView);

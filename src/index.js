@@ -14,7 +14,6 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 global.__dirname = dirname(__filename);
 
-
 const app = new App('dist');
 const PORT = 3333;
 

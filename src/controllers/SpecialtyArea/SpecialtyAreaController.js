@@ -2,7 +2,7 @@ import SpecialtyAreaView from '../../views/specialty-area/SpecialtyAreaView.js';
 import SpecialtyAreaResource from '../../models/resource/SpecialtyAreaResource.js';
 import AbstractController from '../AbstractController.js';
 
-export default class SpecialtyAreaController extends AbstractController{
+export default class SpecialtyAreaController extends AbstractController {
     async handleGet(req, res) {
         const specialtyAreaId = req.query.id;
 

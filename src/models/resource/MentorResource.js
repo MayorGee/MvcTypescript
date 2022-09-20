@@ -66,6 +66,5 @@ export default class MentorResource {
                 Phone_No = '${phone}'
             WHERE Id = '${id}'            
         `);
-
     }
 }

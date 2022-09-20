@@ -2,9 +2,8 @@ import InternView from '../../views/intern/InternView.js';
 import InternResource from '../../models/resource/InternResource.js';
 import AbstractController from '../AbstractController.js';
 
-export default class InternController extends AbstractController{
+export default class InternController extends AbstractController {
     async handleGet(req, res) {
-
         const internId = req.query.id;
 
         if (!this.isIdNumber(internId)) {
