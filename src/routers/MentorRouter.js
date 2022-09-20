@@ -4,11 +4,13 @@ import MentorController from '../controllers/Mentor/MentorController.js';
 import MentorsController from '../controllers/Mentor/MentorsController.js';
 import AddMentorController from '../controllers/FormController/AddMentorController.js';
 import UpdateMentorController from '../controllers/FormController/UpdateMentorController.js';
+import DeleteMentorController from '../controllers/FormController/DeleteMentorController.js';
 
 const mentorController = new MentorController();
 const mentorsController = new MentorsController();
 const addMentorController  = new AddMentorController();
 const updateMentorController = new UpdateMentorController();
+const deleteMentorController = new DeleteMentorController();
 
 export default class MentorRouter extends AbstractRouter {
     constructor() {
@@ -43,6 +45,16 @@ export default class MentorRouter extends AbstractRouter {
             {
                 path: '/update-mentor',
                 controller: updateMentorController,
+                method: 'POST'
+            },
+            {
+                path: '/delete-mentor',
+                controller: deleteMentorController,
+                method: 'GET'
+            },
+            {
+                path: '/delete-mentor',
+                controller: deleteMentorController,
                 method: 'POST'
             }
         ];

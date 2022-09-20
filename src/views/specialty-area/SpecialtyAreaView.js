@@ -10,8 +10,4 @@ export default class SpecialtyAreaView extends AbstractView {
     getSpecialtyArea() {
         return this.specialtyArea;
     }
-
-    setTemplate(template) {
-        this.template = template;
-    }
 }

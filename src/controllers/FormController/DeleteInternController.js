@@ -2,7 +2,7 @@ import InternView from '../../views/intern/InternView.js';
 import InternResource from '../../models/resource/InternResource.js';
 import AbstractController from '../AbstractController.js';
 
-export default class UpdateInternController extends AbstractController {
+export default class DeleteInternController extends AbstractController {
     constructor() {
         super();
 
@@ -10,7 +10,7 @@ export default class UpdateInternController extends AbstractController {
     }
 
     async handleGet(req, res) {
-        const internId = req.query.id;
+        const internId = parseInt(req.query.id);
 
         if (!this.isIdNumber(internId)) {
             return this.handleIdError(internId, res);
@@ -21,13 +21,13 @@ export default class UpdateInternController extends AbstractController {
         const internView = new InternView();
         internView
             .setIntern(intern)
-            .setTemplate('./intern/update-intern');
+            .setTemplate('./intern/delete-intern');
 
         this.renderPage(res, internView);
    }
 
     async handlePost(req, res) {
-        await this.resource.updateInternById(req.body);
+        await this.resource.deleteInternById(req.body.id);
      
         res.redirect('/interns');
     }

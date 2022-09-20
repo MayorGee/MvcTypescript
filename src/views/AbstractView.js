@@ -4,4 +4,8 @@ export default class AbstractView {
     getTemplate() {
         return this.template;
     }
+
+    setTemplate(template) {
+        this.template = template;
+    }
 }

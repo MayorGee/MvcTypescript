@@ -7,6 +7,13 @@
                 {% for mentor in mentors %}
                     <li class="mentors-list__item">
                         The mentor for {{ mentor.Title }} is {{ mentor.First_Name }}
+                        <span>
+                            <a 
+                                href="/delete-mentor?id={{ mentor.Id }}"
+                                class="delete-mentor">
+                                <button class="delete-mentor__btn">Delete</button>
+                            </a>
+                        </span>
                     </li>
                 {% endfor %}
             </ul>

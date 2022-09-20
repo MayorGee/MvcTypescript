@@ -6,6 +6,7 @@ import MaleInternsController from '../controllers/Intern/MaleInternsController.j
 import FemaleInternsController from '../controllers/Intern/FemaleInternsController.js';
 import AddInternController from '../controllers/FormController/AddInternController.js';
 import UpdateInternController from '../controllers/FormController/UpdateInternController.js';
+import DeleteInternController from '../controllers/FormController/DeleteInternController.js';
 
 const internController = new InternController();
 const internsController = new InternsController();
@@ -13,6 +14,7 @@ const maleInternsController = new MaleInternsController();
 const femaleInternsController = new FemaleInternsController();
 const addInternController = new AddInternController();
 const updateInternController = new UpdateInternController();
+const deleteInternController = new DeleteInternController();
 
 export default class InternRouter  extends AbstractRouter {
     constructor() {
@@ -57,6 +59,16 @@ export default class InternRouter  extends AbstractRouter {
             {
                 path: '/update-intern',
                 controller: updateInternController,
+                method: 'POST'
+            },
+            {
+                path: '/delete-intern',
+                controller: deleteInternController,
+                method: 'GET'
+            },
+            {
+                path: '/delete-intern',
+                controller: deleteInternController,
                 method: 'POST'
             }
         ];

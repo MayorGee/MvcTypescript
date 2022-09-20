@@ -15,6 +15,12 @@
                                 {% endif %}
                             is enrolled for {{ intern.Title }}
                         </a>
+                        <a 
+                            href="/delete-intern?id={{ intern.Id }}"
+                            class="delete-intern"
+                        >
+                            <button class="delete-intern__btn">Delete</button>
+                        </a>
                     </li>
                 {% endfor %}
             </ol>

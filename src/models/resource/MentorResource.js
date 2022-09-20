@@ -68,4 +68,11 @@ export default class MentorResource {
         `);
 
     }
+
+    async deleteMentorById(id) {
+        await Database.runQuery(`
+            DELETE FROM Mentor
+            WHERE Id = '${id}'
+    `);
+    }
 }

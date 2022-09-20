@@ -4,18 +4,20 @@ import AbstractController from '../AbstractController.js';
 
 export default class ModuleController extends AbstractController {
     async execute(req, res) {
-        const moduleView = new ModuleView();
-        const moduleResource = new ModuleResource();
         const moduleId = req.query.id;
 
-        if (this.isIdInvalid(moduleId)) {
+        if (!this.isIdNumber(moduleId)) {
             return this.handleIdError(moduleId, res);
         }
 
+        const moduleView = new ModuleView();
+        const moduleResource = new ModuleResource();
+
         const module = await moduleResource.getModuleById(moduleId);
 
-        moduleView.setModule(module);
-        moduleView.setTemplate('module');
+        moduleView
+            .setModule(module)
+            .setTemplate('module');
 
         this.renderPage(res, moduleView);
     }

@@ -2,7 +2,6 @@ import AbstractView from "../AbstractView.js";
 
 export default class InternView extends AbstractView {
     intern = null;
-    template = null;
     
     setIntern(intern) {
         this.intern = intern;
@@ -10,9 +9,5 @@ export default class InternView extends AbstractView {
     
     getIntern() {
         return this.intern;
-    }
-
-    setTemplate(template) {
-        this.template = template;
     }
 }

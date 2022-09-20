@@ -71,7 +71,7 @@
   House to the **_Database Class_**. The Database is where the mysql-await package was imported and also connection is created here with the data gotten from the .env file
 
   ## App.js
-  House to the _App class_. The App class is used as a reference to the express package and also used to to initilize the Routers, Liquidjs, BodyParser and also to initiate listening at the given port.
+  House to the **_App class_**. The App class is used as a reference to the express package and also used to to initilize the Routers, Liquidjs, BodyParser and also to initiate listening at the given port.
 
   ## gulpfile.js
   Using gulp packages and browser-sync, files are copied from the src folder to the dist page, scss is converted to css and the page is refreshed after every change

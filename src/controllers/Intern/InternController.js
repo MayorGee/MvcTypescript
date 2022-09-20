@@ -4,18 +4,21 @@ import AbstractController from '../AbstractController.js';
 
 export default class InternController extends AbstractController{
     async execute(req, res) {
-        const internView = new InternView();
-        const internResource = new InternResource();
+
         const internId = req.query.id;
 
-        if (this.isIdInvalid(internId)) {
+        if (!this.isIdNumber(internId)) {
             return this.handleIdError(internId, res);
         }
 
+        const internView = new InternView();
+        const internResource = new InternResource();
+        
         const intern = await internResource.getInternById(internId);
 
-        internView.setIntern(intern);
-        internView.setTemplate('./intern/intern');
+        internView
+            .setIntern(intern)
+            .setTemplate('./intern/intern');
 
         this.renderPage(res, internView);
     }

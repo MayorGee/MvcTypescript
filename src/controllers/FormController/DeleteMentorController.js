@@ -2,13 +2,13 @@ import MentorView from '../../views/mentor/MentorView.js';
 import MentorResource from '../../models/resource/MentorResource.js';
 import AbstractController from '../AbstractController.js';
 
-export default class UpdateMentorController extends AbstractController {
+export default class DeleteMentorController extends AbstractController {
     constructor() {
         super();
 
         this.resource = new MentorResource();
     }
-    
+
     async handleGet(req, res) {
         const mentorView = new MentorView();
         const mentorId = req.query.id;
@@ -20,15 +20,15 @@ export default class UpdateMentorController extends AbstractController {
         const mentor =  await this.resource.getMentorById(mentorId);
         
         mentorView
-            .setMentor(mentor)
-            .setTemplate('./mentor/update-mentor');
+            .setMentor(mentor)         
+            .setTemplate('./mentor/delete-mentor');
 
         this.renderPage(res, mentorView);
     }
 
     async handlePost(req, res) {
-        await this.resource.updateMentorById(req.body);
-        
+        await this.resource.deleteMentorById(req.body.id);
+     
         res.redirect('/mentors');
     }
 }

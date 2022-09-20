@@ -1,0 +1,29 @@
+{% layout '../index-layout.liquid', title: 'Mentor Delete Form' %}
+    {% assign mentor = this.getMentor %}
+
+    {% block content %}
+        <form 
+            action="/delete-mentor"
+            method="post"
+            class="warning"
+        >
+        <p class="warning__message">
+            Are you sure you want to delete {{ mentor.First_Name }} {{ mentor.Last_Name }} from the database?
+        </p>
+
+        <div class="warning__buttons">
+            <button 
+                type="submit"
+                class="warning__proceed-btn"
+            >
+                Proceed
+            </button>
+            <button 
+                href="/mentors"
+                class="warning__exit-btn"
+            >
+                Back
+            </button>
+        </div> 
+            </div>
+    {% endblock %}

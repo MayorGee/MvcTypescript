@@ -104,4 +104,11 @@ export default class InternResource {
             WHERE Id = '${id}'            
         `);
     }
+
+    async deleteInternById(id) {
+        await Database.runQuery(`
+            DELETE FROM Intern
+            WHERE Id = '${id}'
+        `);
+    }
 }

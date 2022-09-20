@@ -4,18 +4,20 @@ import AbstractController from '../AbstractController.js';
 
 export default class SpecialtyAreaController extends AbstractController{
     async execute(req, res) {
-        const specialtyAreaView = new SpecialtyAreaView();
-        const specialtyAreaResource = new SpecialtyAreaResource();
         const specialtyAreaId = req.query.id;
 
-        if (this.isIdInvalid(specialtyAreaId)) {
+        if (!this.isIdNumber(specialtyAreaId)) {
             return this.handleIdError(specialtyAreaId, res);
         }
 
-        const specialtyArea = await specialtyAreaResource.getSpecialtyAreaById(specialtyAreaId);
 
-        specialtyAreaView.setSpecialtyArea(specialtyArea);
-        specialtyAreaView.setTemplate('specialty-area');
+        const specialtyAreaResource = new SpecialtyAreaResource();   
+        const specialtyArea = await specialtyAreaResource.getSpecialtyAreaById(specialtyAreaId);
+        
+        const specialtyAreaView = new SpecialtyAreaView();
+        specialtyAreaView
+            .setSpecialtyArea(specialtyArea)
+            .setTemplate('specialty-area');
 
         this.renderPage(res, specialtyAreaView);
     }
