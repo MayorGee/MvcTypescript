@@ -2,19 +2,19 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default class Environment {
-    getDatabaseHost() {
+    static getDatabaseHost() {
         return process.env.DB_HOST;
     }
 
-    getDatabaseUser() {
+    static getDatabaseUser() {
         return process.env.DB_USER;
     }
 
-    getDatabasePassword() {
+    static getDatabasePassword() {
         return process.env.DB_PASSWORD;
     }
 
-    getDatabaseName() {
+    static getDatabaseName() {
         return process.env.DB_NAME;
     }
 }

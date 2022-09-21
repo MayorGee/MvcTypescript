@@ -5,17 +5,15 @@ export default class Database {
     static connection = null;
 
     static getConnection() {
-        const environment = new Environment();
-
         if (this.connection) {
             return this.connection;
         }
 
         this.connection = mysql.createConnection({
-            host: environment.getDatabaseHost(),
-            user: environment.getDatabaseUser(),
-            password: environment.getDatabasePassword(),
-            database: environment.getDatabaseName()
+            host: Environment.getDatabaseHost(),
+            user: Environment.getDatabaseUser(),
+            password: Environment.getDatabasePassword(),
+            database: Environment.getDatabaseName()
         })
 
         this.connection.connect();
