@@ -1,4 +1,5 @@
 import express from 'express';
+import expressSession from 'express-session';
 import { Liquid } from 'liquidjs';
 import bodyParser from 'body-parser';
 import path from 'path';
@@ -34,5 +35,16 @@ export default class  App {
     initBodyParser() {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: true }));
+    }
+
+    initSession() {
+        this.app.use(session({
+            secret: 'keyboard cat',
+            resave: false,
+            saveUninitialized: true,
+            cookie: {
+                maxAge: 6000
+            }
+        }))
     }
 }

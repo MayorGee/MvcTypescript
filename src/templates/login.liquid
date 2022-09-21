@@ -1,0 +1,35 @@
+{% layout './index-layout.liquid', title: 'Login' %}
+
+    {% block content %}
+        <form
+            action="/login"
+            method="post"
+            class="login-form"
+        >
+            <div class="login-form__item">
+                <input
+                    type="email"
+                    name="userEmail"
+                    class="login-form__input"
+                    placeholder="Email"
+                />
+            </div>
+
+            <div class="login-form__item">
+                <input
+                    type="password"
+                    name="userPassword"
+                    class="login-form__input"
+                    placeholder="Password"
+                />
+            </div>
+
+            <button 
+                type="submit"
+                class="login-form__btn"
+            >
+                Login
+            </button>
+        </form>
+    {% endblock %}
+        
