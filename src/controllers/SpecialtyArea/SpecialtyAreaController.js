@@ -4,7 +4,7 @@ import AbstractController from '../AbstractController.js';
 
 export default class SpecialtyAreaController extends AbstractController {
     async handleGet(req, res) {
-        const specialtyAreaId = req.query.id;
+        const specialtyAreaId = parseInt(req.query.id);
 
         if (!this.isIdNumber(specialtyAreaId)) {
             return this.handleIdError(specialtyAreaId, res);

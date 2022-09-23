@@ -1,0 +1,14 @@
+{% layout './index-layout.liquid', title: 'Internship Page' %}
+    {% assign internships = this.getInternships %}
+
+    {% block content %}
+        <div class="internships">
+            <ul class="internships-list">
+                {% for internship in internships %}
+                    <li class="internships-list__item">
+                        The Internship Program for  the year {{ internship.Internship_year }} started at {{ internship.Start_Date }} and ended at {{ internship.End_Date }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endblock %}

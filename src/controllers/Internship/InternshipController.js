@@ -4,7 +4,7 @@ import AbstractController from '../AbstractController.js';
 
 export default class InternshipController extends AbstractController {
     async handleGet(req, res) {
-        const internshipId = req.query.id;
+        const internshipId = parseInt(req.query.id);
 
         if (!this.isIdNumber(internshipId)) {
             return this.handleIdError(internshipId, res);

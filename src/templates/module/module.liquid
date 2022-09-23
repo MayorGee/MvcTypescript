@@ -1,0 +1,9 @@
+{% layout './index-layout.liquid', title: 'Module Page' %}
+    {% assign module = this.getModule %}
+
+    {% block content %}
+        <div class="module">
+            <p class="module__id">Module Id: {{ module.Id }} </p>
+            <p class="module__task">Module Task: {{ module.Task }} </p>
+        </div>
+    {% endblock %}

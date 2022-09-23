@@ -4,7 +4,7 @@ import AbstractController from '../AbstractController.js';
 
 export default class TaskController extends AbstractController {
     async handleGet(req, res) {
-        const taskId = req.query.id;
+        const taskId = parseInt(req.query.id);
 
         if (!this.isIdNumber(taskId)) {
             return this.handleIdError(taskId, res);
