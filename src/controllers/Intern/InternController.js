@@ -4,7 +4,7 @@ import AbstractController from '../AbstractController.js';
 
 export default class InternController extends AbstractController {
     async handleGet(req, res) {
-        const internId = req.query.id;
+        const internId = parseInt(req.query.id);
 
         if (!this.isIdNumber(internId)) {
             return this.handleIdError(internId, res);

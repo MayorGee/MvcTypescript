@@ -4,7 +4,7 @@ import AbstractController from '../AbstractController.js';
 
 export default class MentorController extends AbstractController {
     async handleGet(req, res) {
-        const mentorId = req.query.id;
+        const mentorId = parseInt(req.query.id);
 
         if (!this.isIdNumber(mentorId)) {
             return this.handleIdError(mentorId,res);

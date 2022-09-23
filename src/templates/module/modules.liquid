@@ -1,0 +1,12 @@
+{% layout './index-layout.liquid', title: 'Modules Page' %}
+    {% assign modules = this.getModules %}
+
+    {% block content %}
+        <ol class="modules-list">
+            {% for module in modules %}
+                <li class="modules-list__item">
+                    {{ module.Task }}
+                </li>
+            {% endfor %}
+        </ol>
+    {% endblock %}

@@ -1,0 +1,22 @@
+{% layout './index-layout.liquid', title: 'Specialty Areas Page' %}
+    {% assign specialtyAreas = this.getSpecialtyAreas %}
+
+    {% block content %}
+        <div class="specialty-area">
+            <p class="specialty-area__info">
+                At the time of this writing, there are {{ specialtyAreas.length }} stacks in this program, they include:
+            </p>
+            <ol class="specialty-area-list">
+                {% for specialtyArea in specialtyAreas %}
+                    <li class="specialty-area__item">
+                        <span  class="specialty-area__title"> 
+                            {{ specialtyArea.Title }},  
+                        </span>
+                        <span  class="specialty-area__desc">
+                            Class size: {{ specialtyArea.Class_Size }}
+                        </span>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+    {% endblock %}

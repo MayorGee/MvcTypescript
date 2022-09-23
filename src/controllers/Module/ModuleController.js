@@ -4,7 +4,7 @@ import AbstractController from '../AbstractController.js';
 
 export default class ModuleController extends AbstractController {
     async handleGet(req, res) {
-        const moduleId = req.query.id;
+        const moduleId = parseInt(req.query.id);
 
         if (!this.isIdNumber(moduleId)) {
             return this.handleIdError(moduleId, res);
