@@ -1,5 +1,5 @@
 import express from 'express';
-import expressSession from 'express-session';
+import session from 'express-session';
 import { Liquid } from 'liquidjs';
 import bodyParser from 'body-parser';
 import path from 'path';
@@ -43,8 +43,11 @@ export default class  App {
             resave: false,
             saveUninitialized: true,
             cookie: {
-                maxAge: 6000
+                maxAge: 60000
             }
+
+            // don't use secure true for local server because secure true will make sure that it doesn't work on non https sites
+        
         }))
     }
 }

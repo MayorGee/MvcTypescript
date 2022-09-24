@@ -2,12 +2,12 @@
 
     {% block content %}
         <form 
-            action="/add-intern"
+            action="/sign-up-intern"
             method="post"
             class="form"
         >
         <p class="form__info">
-            Fill in  the following to insert Intern to Table
+            Fill in  the following to Register as Intern
         </p>
 
             <div class="form__item">
@@ -111,6 +111,22 @@
                     for="intern_phone" 
                     class="form__label"
                 >
+                    Password:
+                </label>
+                <br />
+                <input 
+                    type="password" 
+                    id="intern_password" 
+                    name="password" 
+                    class="form__input"
+                />
+            </div>
+
+            <div class="form__item">
+                <label 
+                    for="intern_phone" 
+                    class="form__label"
+                >
                     Phone No:
                 </label>
                 <br />
@@ -127,7 +143,7 @@
                     type="submit" 
                     class="form__button"
                 >
-                    Insert Intern
+                    Sign Up
                 </button>
             </div>
         </form>

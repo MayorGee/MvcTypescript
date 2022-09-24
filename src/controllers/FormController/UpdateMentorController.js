@@ -4,6 +4,10 @@ import AbstractController from '../AbstractController.js';
 
 export default class UpdateMentorController extends AbstractController {
     async handleGet(req, res) {
+        if(!this.isRoleAdmin(req)) {
+            return this.redirectToHome(res);
+        }
+        
         const mentorId = parseInt(req.query.id);
 
         if (!this.isIdNumber(mentorId)) {

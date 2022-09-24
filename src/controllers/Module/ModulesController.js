@@ -4,11 +4,17 @@ import AbstractController from '../AbstractController.js';
 
 export default class ModulesController extends AbstractController {
     async handleGet() {
+        if(!this.isRoleAdmin(req)) {
+            return this.redirectToHome(res);
+        }
+        
         const moduleResource = new ModuleResource();
         const modules = await moduleResource.getModules();
 
         const modulesView = new ModulesView();
-        modulesView.setModules(modules);
+        modulesView
+            .setModules(modules)
+            .setTemplate('./module/modules');
 
         this.renderPage(modulesView.getTemplate(), { 'this': modulesView });
     }

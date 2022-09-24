@@ -14,5 +14,6 @@ export default class TasksView extends AbstractView {
 
     setTasks(tasks) {
         this.tasks = tasks;
+        return this;
     }
 }

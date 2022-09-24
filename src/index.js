@@ -7,8 +7,7 @@ import MentorRouter from './routers/MentorRouter.js';
 import ModuleRouter from './routers/ModuleRouter.js';
 import SpecialtyAreaRouter from './routers/SpecialtyAreaRouter.js';
 import TaskRouter from './routers/TaskRouter.js';
-import LoginRouter from './routers/LoginRouter.js';
-import SignUpRouter from './routers/SignUpRouter.js';
+import PersonalAccountRouter from './routers/PersonalAccountRouter.js';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -27,11 +26,10 @@ const routers = [
     ModuleRouter,
     SpecialtyAreaRouter,
     TaskRouter,
-    LoginRouter,
-    SignUpRouter
+    PersonalAccountRouter
 ];
 
-// app.initSession();
+app.initSession();
 app.initBodyParser();
 app.initLiquid();
 app.initRouters(routers);

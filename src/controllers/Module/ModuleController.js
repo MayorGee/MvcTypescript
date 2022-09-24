@@ -4,6 +4,10 @@ import AbstractController from '../AbstractController.js';
 
 export default class ModuleController extends AbstractController {
     async handleGet(req, res) {
+        if(!this.isRoleAdmin(req)) {
+            return this.redirectToHome(res);
+        }
+
         const moduleId = parseInt(req.query.id);
 
         if (!this.isIdNumber(moduleId)) {
@@ -16,7 +20,7 @@ export default class ModuleController extends AbstractController {
         const moduleView = new ModuleView();
         moduleView
             .setModule(module)
-            .setTemplate('module');
+            .setTemplate('./module/module');
 
         this.renderPage(res, moduleView);
     }

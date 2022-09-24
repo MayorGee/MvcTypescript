@@ -14,5 +14,6 @@ export default class ModulesView extends AbstractView {
 
     setModules(modules) {
         this.modules = modules;
+        return this;
     }
 }

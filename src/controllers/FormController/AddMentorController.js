@@ -3,7 +3,11 @@ import MentorResource from '../../models/resource/MentorResource.js';
 import AbstractController from '../AbstractController.js';
 
 export default class AddMentorController extends AbstractController {
-    handleGet(req, res) {
+    async handleGet(req, res) {
+        if(!this.isRoleAdmin(req)) {
+            return this.redirectToHome(res);
+        }
+
         const mentorView = new MentorView();
         mentorView.setTemplate('./mentor/add-mentor');
 

@@ -4,6 +4,10 @@ import AbstractController from '../AbstractController.js';
 
 export default class InternshipController extends AbstractController {
     async handleGet(req, res) {
+        if(!this.isRoleAdmin(req)) {
+            return this.redirectToHome(res);
+        }
+
         const internshipId = parseInt(req.query.id);
 
         if (!this.isIdNumber(internshipId)) {
@@ -16,7 +20,7 @@ export default class InternshipController extends AbstractController {
         const internshipView = new InternshipView();
         internshipView
             .setInternship(internship)
-            .setTemplate('internship');
+            .setTemplate('./internship/internship');
 
         this.renderPage(res, internshipView);
     }

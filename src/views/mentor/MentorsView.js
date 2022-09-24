@@ -14,5 +14,6 @@ export default class MentorsView extends AbstractView {
 
     setMentors(mentors) {
         this.mentors = mentors;
+        return this;
     }
 }

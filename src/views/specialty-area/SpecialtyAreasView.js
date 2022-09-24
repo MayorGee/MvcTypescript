@@ -14,5 +14,6 @@ export default class SpecialtyAreasView extends AbstractView {
 
     setSpecialtyAreas(specialtyAreas) {
         this.specialtyAreas = specialtyAreas;
+        return this;
     }
 }

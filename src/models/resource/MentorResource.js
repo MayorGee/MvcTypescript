@@ -15,6 +15,14 @@ export default class MentorResource {
         return mentor[0];
     }
 
+    async getMentorByEmail(email) {
+        const mentor = await Database.runQuery(`
+            SELECT * FROM Mentor
+            WHERE Email = '${email}'
+        `);  
+        return mentor[0];
+    }
+
     async addMentor(mentor) {
         const { 
             firstName,

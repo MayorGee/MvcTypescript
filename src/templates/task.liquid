@@ -1,9 +1,0 @@
-{% layout './index-layout.liquid', title: 'Task Page' %}
-    {% assign task = this.getTask %}
-
-    {% block content %}
-        <div class="task">
-            <p class="task__id">Task Id: {{ task.Id }}  </p>
-            <p class="task__desc">Task Description: {{ task.Description }} </p>
-        </div>
-    {% endblock %}

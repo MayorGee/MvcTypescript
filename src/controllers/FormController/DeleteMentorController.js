@@ -10,7 +10,10 @@ export default class DeleteMentorController extends AbstractController {
     }
 
     async handleGet(req, res) {
-        const mentorView = new MentorView();
+        if(!this.isRoleAdmin(req)) {
+            return this.redirectToHome(res);
+        }
+
         const mentorId = parseInt(req.query.id);
 
         if (!this.isIdNumber(mentorId)) {
@@ -19,6 +22,7 @@ export default class DeleteMentorController extends AbstractController {
 
         const mentor =  await this.resource.getMentorById(mentorId);
         
+        const mentorView = new MentorView();
         mentorView
             .setMentor(mentor)         
             .setTemplate('./mentor/delete-mentor');

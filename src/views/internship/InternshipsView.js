@@ -14,5 +14,6 @@ export default class InternshipsView extends AbstractView {
 
     setInternships(internships) {
         this.internships = internships;
+        return this;
     }
 }

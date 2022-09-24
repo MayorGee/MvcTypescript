@@ -4,6 +4,10 @@ import AbstractController from '../AbstractController.js';
 
 export default class TaskController extends AbstractController {
     async handleGet(req, res) {
+        if(!this.isRoleAdmin(req)) {
+            return this.redirectToHome(res);
+        }
+        
         const taskId = parseInt(req.query.id);
 
         if (!this.isIdNumber(taskId)) {
@@ -16,7 +20,7 @@ export default class TaskController extends AbstractController {
         const taskView = new TaskView();
         taskView
             .setTask(task)
-            .setTemplate('task');
+            .setTemplate('./task/task');
 
         this.renderPage(res, taskView);
     }

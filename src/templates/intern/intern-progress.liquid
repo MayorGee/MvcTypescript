@@ -1,0 +1,20 @@
+{% layout '../index-layout.liquid', title: 'Intern Progress' %}
+    {% assign progress = this.getInternProgress %}
+
+    {% block content %}
+        <div class="intern-progress">               
+            <p class="intern-progress__module">
+                Current Module: {{ progress.currentModule }}
+            </p>
+            <p class="intern-progress__performance"> Performance: 
+                    {% if progress.perfomance == 1 %}
+                        You are doing well
+                    {% else %}
+                        You can do better
+                    {% endif %}
+            </p>
+            <p class="intern-progress__rater"> 
+                Rated By: {{ progress.mentorName | | capitalize }}
+            </p>
+        </div>
+    {% endblock %}

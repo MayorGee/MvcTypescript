@@ -7,6 +7,21 @@ export default class AbstractController {
         }
     }
 
+    isInternLoggedIn(req) {
+        return req.session.internId;
+    }
+
+    isRoleAdmin(req) {
+        return req.session.role === 'Admin';
+    }
+
+    redirectToLogin(res) {
+        return res.status(401).redirect('/login');
+    }
+
+    redirectToHome(res) {
+        return res.status(401).redirect('/');
+    }
     handleGet() { }
 
     handlePost() { }

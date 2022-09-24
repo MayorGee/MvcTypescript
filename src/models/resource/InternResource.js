@@ -44,17 +44,8 @@ export default class InternResource {
         return maleInterns;
     }
 
-    async addIntern(req) {
-        const { 
-            firstName,
-            lastName,
-            internshipId,
-            age,
-            specialtyAreaId,
-            email,
-            phone
-        } = req.body;
-                
+    async addIntern(firstName, lastName, internshipId, age, specialtyAreaId, email, password, phone) {
+               
         await Database.runQuery(`
             INSERT INTO Intern (
                 First_Name,
@@ -62,7 +53,8 @@ export default class InternResource {
                 Internship_Id, 
                 Age, 
                 Specialty_Area_Id, 
-                Email, 
+                Email,
+                Password, 
                 Phone_No
             ) VALUES ( 
                 '${firstName}', 
@@ -71,6 +63,7 @@ export default class InternResource {
                 '${age}', 
                 '${specialtyAreaId}', 
                 '${email}', 
+                '${password}',
                 '${phone}'
             )
         `);
@@ -106,5 +99,32 @@ export default class InternResource {
             DELETE FROM Intern
             WHERE Id = '${id}'
         `);
+    }
+
+    async getInternByEmail(email) {
+        const intern = await Database.runQuery(`
+            SELECT * FROM Intern
+            WHERE Email = '${email}'
+        `);  
+        return intern[0];
+    }
+
+    async getInternProgressById(id) {
+        const internProgress = await Database.runQuery(`
+            SELECT 
+                Intern_Progress.Current_Module As currentModule,
+                Intern_Progress.Doing_Well As performance,
+                Intern_Progress.Intern_Id, 
+                Intern_Progress.Mentor_Id, 
+                Mentor.Id,
+                Mentor.First_Name AS mentorName
+            FROM Intern
+            JOIN Intern_Progress
+            ON Intern.Id = Intern_Progress.Intern_Id
+            JOIN Mentor
+            ON Intern_Progress.Mentor_Id = Mentor.Id
+            WHERE Intern.Id = '${id}'
+        `);  
+        return internProgress[0]; 
     }
 }

@@ -1,0 +1,33 @@
+{% layout './index-layout.liquid', title: 'Personal Account Page' %}
+    {% assign intern = this.getIntern %}
+
+    {% block content %}
+        <div class="intern-home">
+            <p class="intern-home__row">
+                <a 
+                    href="/intern-info?id={{ intern.Id }}"
+                    class="intern-home__link"
+                >
+                    My Info
+                </a>
+            </p>
+            
+            <p class="intern-home__row">
+                <a 
+                    href="/intern-progress?id={{ intern.Id }}"  
+                    class="intern-home__link"
+                >
+                    My progress   
+                </a> 
+            </p>
+
+            <p class="intern-home__row">
+                <a 
+                    href="/logout?id={{ intern.Id }}"  
+                    class="intern-home__logout"
+                >
+                   Logout   
+                </a> 
+            </p>     
+        </div>
+    {% endblock %}

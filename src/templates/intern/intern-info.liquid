@@ -1,4 +1,4 @@
-{% layout '../index-layout.liquid', title: 'Intern Update Form' %}
+{% layout '../index-layout.liquid', title: 'Intern Info' %}
     {% assign intern = this.getIntern %}
 
     {% block content %}
@@ -8,7 +8,7 @@
             class="form"
         >
         <p class="form__info">
-            Fill in  the following to update Intern with selected Id
+            It is possible to edit details on this form
         </p>
 
 
@@ -23,7 +23,7 @@
         </div>
 
 
-            <div>
+            <div class="form__entity">
                 <label 
                     for="intern_first_name" 
                     class="form__label"
@@ -36,11 +36,11 @@
                     id="intern_first_name" 
                     name="firstName"
                     class="form__input"
-                    value={{ intern.First_Name }}
+                    value={{ intern.First_Name | capitalize }}
                 />
             </div>
         
-            <div>
+            <div class="form__entity">
                 <label 
                     for="intern_last_name" 
                     class="form__label"
@@ -53,11 +53,11 @@
                     id="intern_last_name" 
                     name="lastName"
                     class="form__input"
-                    value = {{ intern.Last_Name }}
+                    value = {{ intern.Last_Name | capitalize }}
                 />
             </div>
 
-            <div>
+            <div class="form__entity">
                 <label 
                     for="intern_internship-id" 
                     class="form__label"
@@ -74,7 +74,7 @@
                 />
             </div>
 
-            <div>
+            <div class="form__entity">
                 <label 
                     for="intern_age" 
                     class="form__label"
@@ -91,7 +91,7 @@
                 />
              </div>
 
-             <div>
+             <div class="form__entity">
                 <label 
                     for="intern_specialty-area-id" 
                     class="form__label"
@@ -108,7 +108,7 @@
                 />
             </div>
         
-            <div>
+            <div class="form__entity">
                 <label 
                     for="intern_email" 
                     class="form__label"
@@ -125,7 +125,7 @@
                 />
             </div>
 
-            <div>
+            <div class="form__entity">
                 <label 
                     for="intern_phone" 
                     class="form__label"
@@ -142,7 +142,7 @@
                 />
             </div>
 
-            <div>
+            <div class="form__entity">
                 <button 
                     type="submit" 
                     class="form__button"

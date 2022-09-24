@@ -4,11 +4,17 @@ import AbstractController from '../AbstractController.js';
 
 export default class SpecialtyAreasController extends AbstractController {
     async handleGet(req, res) {
+        if(!this.isRoleAdmin(req)) {
+            return this.redirectToHome(res);
+        }
+        
         const specialtyAreaResource = new SpecialtyAreaResource();
         const specialtyAreas = await  specialtyAreaResource.getSpecialtyAreas();
 
         const specialtyAreasView = new SpecialtyAreasView();
-        specialtyAreasView.setSpecialtyAreas(specialtyAreas);
+        specialtyAreasView
+            .setSpecialtyAreas(specialtyAreas)
+            .setTemplate('./specialty-area/specialty-areas');
 
         this.renderPage(res, specialtyAreasView);
     }

@@ -4,6 +4,10 @@ import AbstractController from '../AbstractController.js';
 
 export default class FemaleInternsController extends AbstractController {
     async handleGet(req, res) {
+        if(!this.isRoleAdmin(req)) {
+            return this.redirectToHome(res);
+        }
+
         const internResource = new InternResource();
         const femaleInterns = await internResource.getFemaleInterns();
 
