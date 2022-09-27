@@ -8,7 +8,7 @@ export default class InternAccountController extends AbstractController {
         const internLoggedIn = this.isInternLoggedIn(req);
 
         if(!internLoggedIn) {
-            return this.redirect({res: res, page: '/intern-login', errorMessage: 'You are not logged in' });
+            return this.redirect({ res, page: '/intern-login', errorMessage: 'You are not logged in' });
         }
 
         const internId = req.session.internId;

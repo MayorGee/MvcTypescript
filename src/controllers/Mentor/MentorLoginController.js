@@ -24,7 +24,7 @@ export default class MentorLoginController extends AbstractController {
         const passwordIsCorrect = await mentorResource.isMentorPasswordCorrect(mentorEmail, mentorPassword);
         
         if (!passwordIsCorrect) {
-            return this.redirect({res: res, page: '/mentor-login', errorCode: 400, errorMessage: 'Incorrect Password' });
+            return this.redirect({ res, page: '/mentor-login', errorCode: 400, errorMessage: 'Incorrect Password' });
         }
         
         req.session.mentorId = registeredMentor.Id;

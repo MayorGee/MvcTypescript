@@ -5,8 +5,7 @@ import AbstractController from '../AbstractController.js';
 export default class InternController extends AbstractController {
     async handleGet(req, res) {
         if(!this.isRoleMentor(req)) {
-            '/intern-login'
-            return this.redirect(res, '/');
+            return this.redirect({ res, page: '/' });
         }
 
         const internId = req.query.id;

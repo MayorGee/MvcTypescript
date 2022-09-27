@@ -25,12 +25,21 @@ export default class AbstractController {
         return req.session.role === 'Mentor';
     }
 
-    async redirect({res, page, responseCode = 401, errorMessage = 'You are not a Mentor' }) {
-        alert(`${errorMessage}`);
+    async redirect({ 
+        res,
+        page, 
+        responseCode = 401,
+        errorMessage = 'You are not a Mentor' 
+    }) {
+        alert(errorMessage);
         
         setTimeout(() => {
             return res.status(responseCode).redirect(page)
         }, 3000); 
+    }
+
+    async redirectToHome(res) {
+        return res.status(401).redirect('/');
     }
 
     sendError(res, errorCode, errorMessage) {

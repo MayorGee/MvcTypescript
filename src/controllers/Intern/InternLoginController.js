@@ -20,7 +20,7 @@ export default class InternLoginController extends AbstractController {
         const registeredIntern = await internResource.getInternByEmail(internEmail);
         
         if (!registeredIntern) {
-            return this.redirect({res: res, page: '/intern-sign-up',errorCode: 400, errorMessage: 'You are not registered' });
+            return this.redirect({ res, page: '/intern-sign-up',errorCode: 400, errorMessage: 'You are not registered' });
         }
 
         const passwordIsCorrect = await bcrypt.compare(internPassword, registeredIntern.Password);

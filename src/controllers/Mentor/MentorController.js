@@ -5,7 +5,7 @@ import AbstractController from '../AbstractController.js';
 export default class MentorController extends AbstractController {
     async handleGet(req, res) {
         if(!this.isRoleMentor(req)) {
-            return this.redirect({res: res, page: '/' });
+            return this.redirect({ res, page: '/' });
         }
 
         const mentorId = req.query.id;
