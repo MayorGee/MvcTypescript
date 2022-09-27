@@ -77,4 +77,39 @@ export default class MentorResource {
             WHERE Id = '${id}'
     `);
     }
+
+    async isMentorPasswordCorrect(email, password) {
+        const legitMentor = await Database.runQuery(`
+            SELECT * FROM Mentor
+            WHERE Email = '${email}' 
+            AND Password = '${password}'
+       `);  
+
+    return !!legitMentor[0];
+    }
+
+    async getMentorStudents(id) {
+        const students = await Database.runQuery(`
+        SELECT Intern.First_Name, Intern.Last_Name 
+        FROM Mentor    
+        JOIN Specialty_Area
+        ON Specialty_Area.Id = Mentor.Specialty_Area_Id
+        JOIN Intern    
+        ON Intern.Specialty_Area_Id = Specialty_Area.Id    
+        WHERE Mentor.Id = '${id}'
+    `);  
+
+        return students;
+    }
+
+    async getMentorSpecialty(id) {
+        const specialty = await Database.runQuery(`
+        SELECT Title  FROM Mentor    
+        JOIN Specialty_Area
+        ON Specialty_Area.Id = Mentor.Specialty_Area_Id    
+        WHERE Mentor.Id = '${id}'
+    `);  
+
+        return specialty[0].Title;
+    }
 }

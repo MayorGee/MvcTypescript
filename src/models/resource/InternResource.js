@@ -44,7 +44,7 @@ export default class InternResource {
         return maleInterns;
     }
 
-    async addIntern(firstName, lastName, internshipId, age, specialtyAreaId, email, password, phone) {
+    async addIntern({ firstName, lastName, internshipId, age, specialtyAreaId, email, password, phone }) {
                
         await Database.runQuery(`
             INSERT INTO Intern (

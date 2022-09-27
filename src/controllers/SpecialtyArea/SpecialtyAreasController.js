@@ -4,8 +4,8 @@ import AbstractController from '../AbstractController.js';
 
 export default class SpecialtyAreasController extends AbstractController {
     async handleGet(req, res) {
-        if(!this.isRoleAdmin(req)) {
-            return this.redirectToHome(res);
+        if(!this.isRoleMentor(req)) {
+            return this.redirect({res: res, page: '/' });
         }
         
         const specialtyAreaResource = new SpecialtyAreaResource();

@@ -1,15 +1,15 @@
-{% layout './index-layout.liquid', title: 'Login' %}
+{% layout './index-layout.liquid', title: 'Intern Login' %}
 
     {% block content %}
         <form
-            action="/login"
+            action="/intern-login"
             method="post"
             class="login-form"
         >
             <div class="login-form__item">
                 <input
                     type="email"
-                    name="userEmail"
+                    name="internEmail"
                     class="login-form__input"
                     placeholder="Email"
                 />
@@ -18,7 +18,7 @@
             <div class="login-form__item">
                 <input
                     type="password"
-                    name="userPassword"
+                    name="internPassword"
                     class="login-form__input"
                     placeholder="Password"
                 />

@@ -10,13 +10,13 @@ export default class DeleteInternController extends AbstractController {
     }
 
     async handleGet(req, res) {
-        if(!this.isRoleAdmin(req)) {
-            return this.redirectToHome(res);
+        if(!this.isRoleMentor(req)) {
+            return this.redirect({res: res, page: '/'});
         }
 
-        const internId = parseInt(req.query.id);
+        const internId = req.query.id;
 
-        if (!this.isIdNumber(internId)) {
+        if (!this.isNumber(internId)) {
             return this.handleIdError(internId, res);
         }
 

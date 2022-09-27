@@ -1,0 +1,38 @@
+{% layout './index-layout.liquid', title: 'Mentor Account' %}
+    {% assign mentor = this.getMentor %}
+    {% assign areaOfSpecialty = this.getMentorSpecialty %}
+
+    {% block content %}
+        <div class="mentor-home">
+
+            <p class="mentor-home__row">
+                First Name: {{ mentor.First_Name }}
+            </p>
+
+            <p class="mentor-home__row">
+                Last Name: {{ mentor.Last_Name }}
+            </p>
+
+            <p class="mentor-home__row">
+                Area of Specialty: {{ areaOfSpecialty }}
+            </p>
+
+            <p class="mentor-home__row">
+                <a 
+                    href="/mentor-students?id={{ mentor.Id }}"
+                    class="mentor-home__link"
+                >
+                    My Students
+                </a>
+            </p>
+            
+            <p class="mentor-home__row">
+                <button 
+                    href="/mentor-logout"  
+                    class="mentor-home__logout"
+                >
+                   Logout   
+                </button> 
+            </p>     
+        </div>
+    {% endblock %}

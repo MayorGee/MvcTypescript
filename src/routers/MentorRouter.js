@@ -5,12 +5,21 @@ import MentorsController from '../controllers/Mentor/MentorsController.js';
 import AddMentorController from '../controllers/FormController/AddMentorController.js';
 import UpdateMentorController from '../controllers/FormController/UpdateMentorController.js';
 import DeleteMentorController from '../controllers/FormController/DeleteMentorController.js';
+import MentorLoginController from '../controllers/Mentor/MentorLoginController.js';
+import MentorAccountController from '../controllers/Mentor/MentorAccountController.js';
+import MentorLogoutController from '../controllers/Mentor/MentorLogoutController.js';
+import MentorStudentsController from '../controllers/Mentor/MentorStudentsController.js';
 
 const mentorController = new MentorController();
 const mentorsController = new MentorsController();
 const addMentorController  = new AddMentorController();
 const updateMentorController = new UpdateMentorController();
 const deleteMentorController = new DeleteMentorController();
+const mentorLoginController = new MentorLoginController();
+const mentorAccountController = new MentorAccountController();
+const mentorLogoutController = new MentorLogoutController();
+const mentorStudentsController =  new MentorStudentsController();
+
 
 export default class MentorRouter extends AbstractRouter {
     constructor() {
@@ -36,6 +45,36 @@ export default class MentorRouter extends AbstractRouter {
                 path: '/add-mentor',
                 controller: addMentorController,
                 method: 'POST'
+            },
+            {
+                path: '/mentor-login',
+                controller: mentorLoginController,
+                method: 'GET'
+            },
+            {
+                path: '/mentor-students',
+                controller: mentorStudentsController,
+                method: 'GET'
+            },
+            {
+                path: '/mentor-login',
+                controller: mentorLoginController,
+                method: 'POST'
+            },
+            {
+                path: '/mentor-account',
+                controller: mentorAccountController,
+                method: 'GET'
+            },
+            {
+                path: '/mentor-account',
+                controller: mentorAccountController,
+                method: 'POST'
+            },
+            {
+                path: '/mentor-logout',
+                controller: mentorLogoutController,
+                method: 'GET'
             },
             {
                 path: '/update-mentor',

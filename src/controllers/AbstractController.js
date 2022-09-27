@@ -1,3 +1,5 @@
+import alert from 'alert';
+
 export default class AbstractController {
     async execute(req, res) {
         if (req.method === 'GET') {
@@ -7,36 +9,46 @@ export default class AbstractController {
         }
     }
 
+    handleGet() { }
+
+    handlePost() { }
+
     isInternLoggedIn(req) {
         return req.session.internId;
     }
 
-    isRoleAdmin(req) {
-        return req.session.role === 'Admin';
+    isMentorLoggedIn(req) {
+        return req.session.mentorId;
     }
 
-    redirectToLogin(res) {
-        return res.status(401).redirect('/login');
+    isRoleMentor(req) {
+        return req.session.role === 'Mentor';
     }
 
-    redirectToHome(res) {
-        return res.status(401).redirect('/');
+    async redirect({res, page, responseCode = 401, errorMessage = 'You are not a Mentor' }) {
+        alert(`${errorMessage}`);
+        
+        setTimeout(() => {
+            return res.status(responseCode).redirect(page)
+        }, 3000); 
     }
-    handleGet() { }
 
-    handlePost() { }
+    sendError(res, errorCode, errorMessage) {
+        return res.status(errorCode).send(errorMessage)
+    }
     
     renderPage(res, viewClass) {
         res.render(viewClass.getTemplate(), { 'this': viewClass });
     }
     
-    isIdNumber(id) {
-        return (typeof id === 'number' && id > 0);   
+    isNumber(n) {
+        const num = parseInt(n);
+        return (typeof num === 'number' && num > 0);    
     }
 
     handleIdError(id, res) {
         let errorText = id ? 'Invalid id entered' : 'No Id entered';
 
-        res.status(500).send(errorText);
+        this.sendError(res, 500, errorText);
     }
 }

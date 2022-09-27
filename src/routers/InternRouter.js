@@ -4,23 +4,25 @@ import InternController from '../controllers/Intern/InternController.js';
 import InternsController from '../controllers/Intern/InternsController.js';
 import MaleInternsController from '../controllers/Intern/MaleInternsController.js';
 import FemaleInternsController from '../controllers/Intern/FemaleInternsController.js';
-import SignUpInternController from '../controllers/Intern/SignUpInternController.js';
-import InfoController from '../controllers/Intern/InfoController.js';
+import InternSignUpController from '../controllers/Intern/InternSignUpController.js';
+import InternInfoController from '../controllers/Intern/InternInfoController.js';
 import DeleteInternController from '../controllers/FormController/DeleteInternController.js';
-import LoginController from '../controllers/Intern/LoginController.js';
-import LogoutController from '../controllers/Intern/LogoutController.js';
-import InternProgressController from '../controllers/Intern/Progress.js';
+import InternLoginController from '../controllers/Intern/InternLoginController.js';
+import InternLogoutController from '../controllers/Intern/InternLogoutController.js';
+import InternProgressController from '../controllers/Intern/InternProgressController.js';
+import InternAccountController from '../controllers/Intern/InternAccountController.js';
 
 const internController = new InternController();
 const internsController = new InternsController();
 const maleInternsController = new MaleInternsController();
 const femaleInternsController = new FemaleInternsController();
-const signUpInternController = new SignUpInternController();
-const infoController = new InfoController();
+const internSignUpInternController = new InternSignUpController();
+const internInfoController = new InternInfoController();
 const deleteInternController = new DeleteInternController();
-const loginController = new LoginController();
-const logoutController = new LogoutController();
+const internLoginController = new InternLoginController();
+const internLogoutController = new InternLogoutController();
 const internProgressController = new InternProgressController();
+const internAccountController = new InternAccountController();
 
 export default class InternRouter  extends AbstractRouter {
     constructor() {
@@ -48,38 +50,48 @@ export default class InternRouter  extends AbstractRouter {
                 method: 'GET'
             },
             {
-                path: '/sign-up-intern',
-                controller: signUpInternController,
+                path: '/intern-sign-up',
+                controller: internSignUpInternController,
                 method: 'POST'
             },
             {
-                path: '/sign-up-intern',
-                controller: signUpInternController,
+                path: '/intern-sign-up',
+                controller: internSignUpInternController,
                 method: 'GET'
             },
             {
-                path: '/login',
-                controller: loginController,
+                path: '/intern-login',
+                controller: internLoginController,
                 method: 'POST'
             },
             {
-                path: '/login',
-                controller: loginController,
+                path: '/intern-login',
+                controller: internLoginController,
                 method: 'GET'
             },
             {
-                path: '/logout',
-                controller: logoutController,
+                path: '/intern-account',
+                controller: internAccountController,
+                method: 'GET'
+            },
+            {
+                path: '/intern-account',
+                controller: internAccountController,
+                method: 'POST'
+            },
+            {
+                path: '/intern-logout',
+                controller: internLogoutController,
                 method: 'GET'
             },
             {
                 path: '/intern-info',
-                controller: infoController,
+                controller: internInfoController,
                 method: 'GET'
             },
             {
                 path: '/intern-info',
-                controller: infoController,
+                controller: internInfoController,
                 method: 'POST'
             },
             {

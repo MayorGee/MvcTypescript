@@ -1,0 +1,37 @@
+{% layout './index-layout.liquid', title: 'Mentor Login' %}
+
+    {% block content %}
+        <form
+            action="/mentor-login"
+            method="post"
+            class="login-form"
+        >
+
+        <p class="attention">ONLY FOR AUTHORIZED MENTORS!</p>
+            <div class="login-form__item">
+                <input
+                    type="email"
+                    name="mentorEmail"
+                    class="login-form__input"
+                    placeholder="Email"
+                />
+            </div>
+
+            <div class="login-form__item">
+                <input
+                    type="password"
+                    name="mentorPassword"
+                    class="login-form__input"
+                    placeholder="Password"
+                />
+            </div>
+
+            <button 
+                type="submit"
+                class="login-form__btn"
+            >
+                Login
+            </button>
+        </form>
+    {% endblock %}
+        

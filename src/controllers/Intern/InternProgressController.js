@@ -7,7 +7,7 @@ export default class InternProgressController extends AbstractController {
         const internLoggedIn = this.isInternLoggedIn(req);
 
         if(!internLoggedIn) {
-            return this.redirectToLogin(res);
+            return this.redirect({res: res, page: '/intern-login', errorCode: 400, errorMessage: 'You are not logged in' });
         }      
 
         const internId = req.session.internId;

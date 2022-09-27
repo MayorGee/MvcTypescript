@@ -4,13 +4,13 @@ import AbstractController from '../AbstractController.js';
 
 export default class ModuleController extends AbstractController {
     async handleGet(req, res) {
-        if(!this.isRoleAdmin(req)) {
-            return this.redirectToHome(res);
+        if(!this.isRoleMentor(req)) {
+            return this.redirect({res: res, page: '/' });
         }
 
-        const moduleId = parseInt(req.query.id);
+        const moduleId = req.query.id;
 
-        if (!this.isIdNumber(moduleId)) {
+        if (!this.isNumber(moduleId)) {
             return this.handleIdError(moduleId, res);
         }
 
