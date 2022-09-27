@@ -38,10 +38,6 @@ export default class AbstractController {
         }, 3000); 
     }
 
-    async redirectToHome(res) {
-        return res.status(401).redirect('/');
-    }
-
     sendError(res, errorCode, errorMessage) {
         return res.status(errorCode).send(errorMessage)
     }
