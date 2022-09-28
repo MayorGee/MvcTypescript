@@ -2,9 +2,9 @@ import AbstractRouter from './AbstractRouter.js';
 
 import MentorController from '../controllers/Mentor/MentorController.js';
 import MentorsController from '../controllers/Mentor/MentorsController.js';
-import AddMentorController from '../controllers/FormController/AddMentorController.js';
-import UpdateMentorController from '../controllers/FormController/UpdateMentorController.js';
-import DeleteMentorController from '../controllers/FormController/DeleteMentorController.js';
+import AddMentorController from '../controllers/Mentor/AddMentorController.js';
+import UpdateMentorController from '../controllers/Mentor/UpdateMentorController.js';
+import DeleteMentorController from '../controllers/Mentor/DeleteMentorController.js';
 import MentorLoginController from '../controllers/Mentor/MentorLoginController.js';
 import MentorAccountController from '../controllers/Mentor/MentorAccountController.js';
 import MentorLogoutController from '../controllers/Mentor/MentorLogoutController.js';

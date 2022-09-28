@@ -5,7 +5,7 @@ import AbstractController from '../AbstractController.js';
 export default class ModulesController extends AbstractController {
     async handleGet() {
         if(!this.isRoleMentor(req)) {
-            return this.redirect(res, '/');
+            return this.redirectToHome(res);
         }
         
         const moduleResource = new ModuleResource();

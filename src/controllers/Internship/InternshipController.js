@@ -5,7 +5,7 @@ import AbstractController from '../AbstractController.js';
 export default class InternshipController extends AbstractController {
     async handleGet(req, res) {
         if(!this.isRoleMentor(req)) {
-            return this.redirect({ res, page: '/' });
+            return this.redirectToHome(res);
         }
 
         const internshipId = req.query.id;

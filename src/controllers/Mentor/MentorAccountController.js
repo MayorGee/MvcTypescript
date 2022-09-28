@@ -8,7 +8,11 @@ export default class MentorAccountController extends AbstractController {
         const mentorLoggedIn = this.isMentorLoggedIn(req);
 
         if(!mentorLoggedIn) {
-            return this.redirect({ res, page: '/mentor-login', errorMessage: 'You are not logged in (as mentor)' });
+            return this.redirect({ 
+                res, 
+                page: '/mentor-login', 
+                errorMessage: 'You are not logged in (as mentor)' 
+            });
         }
 
         const mentorId = req.session.mentorId;

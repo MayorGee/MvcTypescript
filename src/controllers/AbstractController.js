@@ -29,13 +29,21 @@ export default class AbstractController {
         res,
         page, 
         responseCode = 401,
-        errorMessage = 'You are not a Mentor' 
+        errorMessage = 'You are not logged in (as intern)' 
     }) {
         alert(errorMessage);
         
         setTimeout(() => {
             return res.status(responseCode).redirect(page)
         }, 3000); 
+    }
+
+    redirectToHome(res) {
+        alert('You are not a mentor');
+        
+        setTimeout(() => {
+            return res.status(401).redirect('/');
+        }, 3000);
     }
 
     sendError(res, errorCode, errorMessage) {

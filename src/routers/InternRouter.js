@@ -6,7 +6,7 @@ import MaleInternsController from '../controllers/Intern/MaleInternsController.j
 import FemaleInternsController from '../controllers/Intern/FemaleInternsController.js';
 import InternSignUpController from '../controllers/Intern/InternSignUpController.js';
 import InternInfoController from '../controllers/Intern/InternInfoController.js';
-import DeleteInternController from '../controllers/FormController/DeleteInternController.js';
+import DeleteInternController from '../controllers/Intern/DeleteInternController.js';
 import InternLoginController from '../controllers/Intern/InternLoginController.js';
 import InternLogoutController from '../controllers/Intern/InternLogoutController.js';
 import InternProgressController from '../controllers/Intern/InternProgressController.js';

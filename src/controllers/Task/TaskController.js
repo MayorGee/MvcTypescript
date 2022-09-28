@@ -5,7 +5,7 @@ import AbstractController from '../AbstractController.js';
 export default class TaskController extends AbstractController {
     async handleGet(req, res) {
         if(!this.isRoleMentor(req)) {
-            return this.redirect({ res, page: '/' });
+            return this.redirectToHome(res);
         }
         
         const taskId = req.query.id;
