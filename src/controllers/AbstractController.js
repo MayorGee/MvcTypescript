@@ -33,17 +33,22 @@ export default class AbstractController {
     }) {
         alert(errorMessage);
         
-        setTimeout(() => {
-            return res.status(responseCode).redirect(page)
-        }, 3000); 
+        await this.sendStatusAndRedirect(res, responseCode, page);
     }
 
-    redirectToHome(res) {
+    async redirectToHome(res) {
         alert('You are not a mentor');
-        
-        setTimeout(() => {
-            return res.status(401).redirect('/');
-        }, 3000);
+
+        await this.sendStatusAndRedirect(res, 401, '/');
+    }    
+    
+    delay (duration) {
+        return new Promise(resolve => setTimeout(resolve, duration));
+    }
+  
+    async sendStatusAndRedirect() {
+        await this.delay(3000);
+        return res.status(responseCode).redirect(page) 
     }
 
     sendError(res, errorCode, errorMessage) {
