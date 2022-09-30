@@ -42,11 +42,11 @@ export default class MentorResource extends AbstractResource {
                 Phone_No
             )
             VALUES (
-                '${this.excapeHtml(firstName)}',
-                '${this.excapeHtml(lastName)}',
-                '${this.excapeHtml(specialtyAreaId)}',
-                '${this.excapeHtml(email)}',
-                '${this.excapeHtml(phone)}'
+                '${this.escapeHtml(firstName)}',
+                '${this.escapeHtml(lastName)}',
+                '${this.escapeHtml(specialtyAreaId)}',
+                '${this.escapeHtml(email)}',
+                '${this.escapeHtml(phone)}'
             )
         `);
     }
@@ -63,11 +63,11 @@ export default class MentorResource extends AbstractResource {
 
         await Database.runQuery(`
             UPDATE Mentor
-            SET First_Name = '${this.excapeHtml(firstName)}',
-                Last_Name = '${this.excapeHtml(lastName)}',
-                Specialty_Area_Id = '${this.excapeHtml(specialtyAreaId)}',
-                Email = '${this.excapeHtml(email)}',
-                Phone_No = '${this.excapeHtml(phone)}'
+            SET First_Name = '${this.escapeHtml(firstName)}',
+                Last_Name = '${this.escapeHtml(lastName)}',
+                Specialty_Area_Id = '${this.escapeHtml(specialtyAreaId)}',
+                Email = '${this.escapeHtml(email)}',
+                Phone_No = '${this.escapeHtml(phone)}'
             WHERE Id = '${id}'            
         `);
     }

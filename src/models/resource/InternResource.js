@@ -57,14 +57,14 @@ export default class InternResource extends AbstractResource {
                 Password, 
                 Phone_No
             ) VALUES ( 
-                '${this.excapeHtml(firstName)}', 
-                '${this.excapeHtml(lastName)}', 
-                '${this.excapeHtml(internshipId)}', 
-                '${this.excapeHtml(age)}', 
-                '${this.excapeHtml(specialtyAreaId)}', 
-                '${this.excapeHtml(email)}', 
-                '${this.excapeHtml(password)}',
-                '${this.excapeHtml(phone)}'
+                '${this.escapeHtml(firstName)}', 
+                '${this.escapeHtml(lastName)}', 
+                '${this.escapeHtml(internshipId)}', 
+                '${this.escapeHtml(age)}', 
+                '${this.escapeHtml(specialtyAreaId)}', 
+                '${this.escapeHtml(email)}', 
+                '${this.escapeHtml(password)}',
+                '${this.escapeHtml(phone)}'
             )
         `);
     }
@@ -83,13 +83,13 @@ export default class InternResource extends AbstractResource {
 
         await Database.runQuery(`
             UPDATE Intern
-            SET First_Name = '${this.excapeHtml(firstName)}',
-                Last_Name = '${this.excapeHtml(lastName)}',
-                Internship_Id = '${this.excapeHtml(internshipId)}',
-                Age = '${this.excapeHtml(age)}',
-                Specialty_Area_Id = '${this.excapeHtml(specialtyAreaId)}',
-                Email = '${this.excapeHtml(email)}',
-                Phone_No = '${this.excapeHtml(phone)}'
+            SET First_Name = '${this.escapeHtml(firstName)}',
+                Last_Name = '${this.escapeHtml(lastName)}',
+                Internship_Id = '${this.escapeHtml(internshipId)}',
+                Age = '${this.escapeHtml(age)}',
+                Specialty_Area_Id = '${this.escapeHtml(specialtyAreaId)}',
+                Email = '${this.escapeHtml(email)}',
+                Phone_No = '${this.escapeHtml(phone)}'
             WHERE Id = '${id}'            
         `);
     }

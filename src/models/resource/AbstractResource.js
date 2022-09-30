@@ -11,30 +11,25 @@ export default class AbstractResource {
         return unsafe.replace( /[&"'<>]/g, char => lookup[char] );
     }
 
-    async escapeHtmlFromQueryData(queryData) {
-        if(typeof queryData === 'string') {
-            if(queryData.length > 1) {
-                await this.escapeHtmlForMultipleDataSet(queryData);
-            } else {
-                await this.escapeHtmlForSingleDataSet(queryData);
-            }
-        } else {
+    escapeHtmlFromQueryData(queryData) {
+        if(typeof queryData !== 'string') {
             return queryData;
         }
-
+            
+        this.escapeHtmlFromDataSet(queryData);
     }
 
-    escapeHtmlForSingleDataSet(queryData) {
-        for(let property  in queryData) {
-            queryData[property] = this.escapeHtml(queryData[property]);
-        }
+    escapeHtmlFromDataSet(queryData) {
+        const escapedDataSet = queryData.map(obj => {
+            const newDataSet = {};
 
-        return queryData;
-    }
+            for(let key  in obj) {
+                newDataSet[key] = this.escapeHtml(obj[key]);
+            }
 
-    async escapeHtmlForMultipleDataSet(queryData) {
-        await queryData.forEach(dataSet => dataSet = this.escapeHtmlForSingleDataSet(dataSet));
+            return newDataSet;
+        });
     
-        return queryData;
+        return escapedDataSet;
     }
 }
