@@ -1,9 +1,10 @@
 import Database from '../../Database.js';
+import AbstractResource from './AbstractResource.js';
 
-export default class SpecialtyAreaResource {
+export default class SpecialtyAreaResource extends AbstractResource {
     async getSpecialtyAreas() {
         const specialtyAreas = await Database.runQuery(`SELECT * FROM Specialty_Area`);
-        return specialtyAreas;
+        return this.escapeHtmlFromQueryData(specialtyAreas);
     }
 
     async getSpecialtyAreaById(id) {
@@ -12,6 +13,6 @@ export default class SpecialtyAreaResource {
             WHERE Id = ${id}
         `);  
 
-        return specialtyArea[0];
+        return this.escapeHtmlFromQueryData(specialtyArea[0]);
     }
 }

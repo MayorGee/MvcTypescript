@@ -11,7 +11,7 @@ export default class AddMentorController extends AbstractController {
         const mentorView = new MentorView();
         mentorView.setTemplate('./mentor/add-mentor');
 
-        this.renderPage(res, mentorView);
+        this.renderPage(req, res, mentorView);
    }
 
     async handlePost(req, res) {

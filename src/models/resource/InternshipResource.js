@@ -1,9 +1,10 @@
 import Database from '../../Database.js';
+import AbstractResource from './AbstractResource.js';
 
-export default class InternshipResource {
+export default class InternshipResource extends AbstractResource {
     async getInternships() {
         const internships = await Database.runQuery(`SELECT * FROM Internship`);
-        return internships;
+        return this.escapeHtmlFromQueryData(internships);
     }
 
     async getInternshipById(id) {
@@ -12,6 +13,6 @@ export default class InternshipResource {
             WHERE Id = ${id}
         `);
         
-        return internship[0];
+        return this.escapeHtmlFromQueryData(internship[0]);
     }
 }

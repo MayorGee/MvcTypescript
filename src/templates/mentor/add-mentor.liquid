@@ -5,9 +5,15 @@
             method="post"
             class="form"
         >
-        <p class="form__info">
-            Fill in  the following to update Mentors Table
-        </p>
+            <p class="form__info">
+                Fill in  the following to update Mentors Table
+            </p>
+
+            <input
+                type="hidden"
+                name="csrfToken"
+                value={{ csrfToken }}
+            />
     
             <div class="form__item">
                 <label 

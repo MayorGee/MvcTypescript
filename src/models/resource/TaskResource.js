@@ -1,6 +1,7 @@
 import Database from '../../Database.js';
+import AbstractResource from './AbstractResource.js';
 
-export default class TaskResource {
+export default class TaskResource extends AbstractResource {
     async getTasks() {
         const tasks = await Database.runQuery(`
             SELECT * FROM Tasks
@@ -10,7 +11,7 @@ export default class TaskResource {
             ON Tasks.MOdule_Id = Module.Id
         `);
 
-        return tasks;
+        return this.escapeHtmlFromQueryData(tasks);
     }
 
     async getTaskById(id) {
@@ -19,6 +20,6 @@ export default class TaskResource {
             WHERE Id = ${id}
         `);  
 
-        return task[0];
+        return this.escapeHtmlFromQueryData(task[0]);
     }
 }

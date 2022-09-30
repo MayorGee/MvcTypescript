@@ -22,7 +22,7 @@ export default class UpdateMentorController extends AbstractController {
             .setMentor(mentor)
             .setTemplate('./mentor/update-mentor');
 
-        this.renderPage(res, mentorView);
+        this.renderPage(req, res, mentorView);
     }
 
     async handlePost(req, res) {

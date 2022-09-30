@@ -1,9 +1,10 @@
 import Database from '../../Database.js';
+import AbstractResource from './AbstractResource.js';
 
-export default class MentorResource {
+export default class MentorResource extends AbstractResource {
     async getMentors() {
         const mentors = await Database.runQuery(`SELECT * FROM Mentor`); 
-        return mentors;
+        return this.escapeHtmlFromQueryData(mentors);
     }
 
     async getMentorById(id) {
@@ -12,7 +13,7 @@ export default class MentorResource {
             WHERE Id = ${id}
         `);  
 
-        return mentor[0];
+        return this.escapeHtmlFromQueryData(mentor[0]);
     }
 
     async getMentorByEmail(email) {
@@ -20,7 +21,7 @@ export default class MentorResource {
             SELECT * FROM Mentor
             WHERE Email = '${email}'
         `);  
-        return mentor[0];
+        return this.escapeHtmlFromQueryData(mentor[0]);
     }
 
     async addMentor(mentor) {
@@ -41,11 +42,11 @@ export default class MentorResource {
                 Phone_No
             )
             VALUES (
-                '${firstName}',
-                '${lastName}',
-                '${specialtyAreaId}',
-                '${email}',
-                '${phone}'
+                '${this.excapeHtml(firstName)}',
+                '${this.excapeHtml(lastName)}',
+                '${this.excapeHtml(specialtyAreaId)}',
+                '${this.excapeHtml(email)}',
+                '${this.excapeHtml(phone)}'
             )
         `);
     }
@@ -62,11 +63,11 @@ export default class MentorResource {
 
         await Database.runQuery(`
             UPDATE Mentor
-            SET First_Name = '${firstName}',
-                Last_Name = '${lastName}',
-                Specialty_Area_Id = '${specialtyAreaId}',
-                Email = '${email}',
-                Phone_No = '${phone}'
+            SET First_Name = '${this.excapeHtml(firstName)}',
+                Last_Name = '${this.excapeHtml(lastName)}',
+                Specialty_Area_Id = '${this.excapeHtml(specialtyAreaId)}',
+                Email = '${this.excapeHtml(email)}',
+                Phone_No = '${this.excapeHtml(phone)}'
             WHERE Id = '${id}'            
         `);
     }
@@ -99,7 +100,7 @@ export default class MentorResource {
             WHERE Mentor.Id = '${id}'
         `);  
 
-        return students;
+        return this.escapeHtmlFromQueryData(students);
     }
 
     async getMentorSpecialty(id) {
@@ -110,6 +111,6 @@ export default class MentorResource {
             WHERE Mentor.Id = '${id}'
         `);  
 
-        return specialty[0].Title;
+        return this.escapeHtml(specialty[0]);
     }
 }

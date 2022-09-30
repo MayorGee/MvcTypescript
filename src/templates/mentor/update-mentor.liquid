@@ -8,19 +8,28 @@
             method="post"
             class="form"
         >
-        <p class="form__info">
-            Fill in  the following to update Mentor with selected Id
-        </p>
+            <p class="form__info">
+                Fill in  the following to update Mentor with selected Id
+            </p>
 
-        <div class="no-display">
             <input 
-                type="number" 
+                type="hidden" 
                 id="mentor_id" 
                 name="id"
                 class="form__input"
                 value={{ mentor.Id }}
             />
-        </div>
+            <input
+                type="hidden"
+                name="csrfToken"
+                value={{ csrfToken }}
+            />
+
+            <input
+                type="hidden"
+                name="csrfToken"
+                value={{ csrfToken }}
+            />
 
             <div class="form__item">
                 <label 

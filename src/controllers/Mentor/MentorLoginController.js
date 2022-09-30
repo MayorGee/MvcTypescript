@@ -8,7 +8,7 @@ export default class MentorLoginController extends AbstractController {
         const mentorView = new MentorView();
         mentorView.setTemplate('./mentor/mentor-login');
 
-        this.renderPage(res, mentorView);
+        this.renderPage(req, res, mentorView);
     }
 
     async handlePost(req, res) {

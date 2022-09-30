@@ -6,6 +6,12 @@
             method="post"
             class="login-form"
         >
+            <input
+                type="hidden"
+                name="csrfToken"
+                value={{ csrfToken }}
+            />
+
             <div class="login-form__item">
                 <input
                     type="email"

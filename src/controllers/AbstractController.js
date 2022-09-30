@@ -1,10 +1,17 @@
 import alert from 'alert';
+import { randomBytes } from 'crypto';
 
 export default class AbstractController {
     async execute(req, res) {
         if (req.method === 'GET') {
+            this.setCsrfToken(req);
+
             this.handleGet(req, res);
         } else if (req.method === 'POST') {
+            if(!this.isCsrfTokenValid(req)) {
+                return this.redirectToHome(res, 500, 'There was a problem getting your Csrf Token');
+            }
+
             this.handlePost(req, res);
         }
     }
@@ -36,27 +43,25 @@ export default class AbstractController {
         await this.sendStatusAndRedirect(res, responseCode, page);
     }
 
-    async redirectToHome(res) {
-        alert('You are not a mentor');
+    async redirectToHome(res, responseCode, errorMessage) {
+        alert(errorMessage ?? 'You are not a mentor');
 
-        await this.sendStatusAndRedirect(res, 401, '/');
-    }    
-    
-    delay (duration) {
-        return new Promise(resolve => setTimeout(resolve, duration));
-    }
-  
-    async sendStatusAndRedirect() {
-        await this.delay(3000);
-        return res.status(responseCode).redirect(page) 
+        await this.sendStatusAndRedirawait
+        return res.status(responseCode).redirect('/'); 
     }
 
     sendError(res, errorCode, errorMessage) {
         return res.status(errorCode).send(errorMessage)
     }
     
-    renderPage(res, viewClass) {
-        res.render(viewClass.getTemplate(), { 'this': viewClass });
+    renderPage(req, res, viewClass) {
+        res.render(
+            viewClass.getTemplate(), 
+            { 
+                'this': viewClass,
+                csrfToken: req.session.csrfToken 
+            }
+        );
     }
     
     isNumber(n) {
@@ -68,5 +73,15 @@ export default class AbstractController {
         let errorText = id ? 'Invalid id entered' : 'No Id entered';
 
         this.sendError(res, 500, errorText);
+    }
+
+    setCsrfToken(req) {
+        if(!(req.session.csrfToken)) {
+            req.session.csrfToken = randomBytes(50).toString('hex');
+        }
+    }
+
+    isCsrfTokenValid(req) {
+        return (req.session.csrfToken && req.session.csrfToken === req.body.csrfToken);
     }
 }

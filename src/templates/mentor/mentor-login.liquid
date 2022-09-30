@@ -7,7 +7,14 @@
             class="login-form"
         >
 
-        <p class="attention">ONLY FOR AUTHORIZED MENTORS!</p>
+            <p class="attention">ONLY FOR AUTHORIZED MENTORS!</p>
+            
+            <input
+                type="hidden"
+                name="csrfToken"
+                value={{ csrfToken }}
+            />
+
             <div class="login-form__item">
                 <input
                     type="email"

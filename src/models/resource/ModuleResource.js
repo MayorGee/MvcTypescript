@@ -1,9 +1,10 @@
 import Database from '../../Database.js';
+import AbstractResource from './AbstractResource.js';
 
-export default class ModuleResource {
+export default class ModuleResource extends AbstractResource {
     async getModules() {
         const modules = await Database.runQuery(`SELECT * FROM Module`);
-        return modules;
+        return this.escapeHtmlFromQueryData(modules);
     }
 
     async getModuleById(id) {
@@ -12,6 +13,6 @@ export default class ModuleResource {
             WHERE Id = ${id}
         `);  
 
-        return module[0];
+        return this.escapeHtmlFromQueryData(module[0]);
     }
 }

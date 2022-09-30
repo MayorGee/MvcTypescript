@@ -9,7 +9,7 @@ export default class InternSignUpController extends AbstractController {
         const internView = new InternView();
         internView.setTemplate('./intern/intern-sign-up');
 
-        this.renderPage(res, internView);
+        this.renderPage(req, res, internView);
    }
 
     async handlePost(req, res) {

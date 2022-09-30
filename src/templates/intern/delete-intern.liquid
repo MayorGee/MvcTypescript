@@ -12,9 +12,15 @@
             </p>
 
             <input 
-                class="no-display"
+                type="hidden"
                 name="id"
                 value= {{ intern.Id }}
+            />
+
+            <input
+                type="hidden"
+                name="csrfToken"
+                value={{ csrfToken }}
             />
             
             <div class="warning__buttons">

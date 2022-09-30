@@ -27,7 +27,7 @@ export default class DeleteInternController extends AbstractController {
             .setIntern(intern)
             .setTemplate('./intern/delete-intern');
 
-        this.renderPage(res, internView);
+        this.renderPage(res, internView, req.session.csrfToken);
    }
 
     async handlePost(req, res) {

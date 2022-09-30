@@ -6,9 +6,15 @@
             method="post"
             class="form"
         >
-        <p class="form__info">
-            Fill in  the following to Register as Intern
-        </p>
+            <p class="form__info">
+                Fill in  the following to Register as Intern
+            </p>
+
+            <input
+                type="hidden"
+                name="csrfToken"
+                value={{ csrfToken }}
+            />
 
             <div class="form__item">
                 <label 

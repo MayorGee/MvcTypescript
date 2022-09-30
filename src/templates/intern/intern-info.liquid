@@ -11,16 +11,19 @@
             It is possible to edit details on this form
         </p>
 
-
-        <div class="no-display">
             <input 
-                type="number" 
+                type="hidden" 
                 id="intern_id" 
                 name="id"
                 class="form__input"
                 value={{ intern.Id }}
             />
-        </div>
+            <input
+                type="hidden"
+                name="csrfToken"
+                value={{ csrfToken }}
+            />
+
 
 
             <div class="form__entity">

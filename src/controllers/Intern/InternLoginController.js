@@ -10,7 +10,7 @@ export default class InternLoginController extends AbstractController {
         const internView = new InternView();
         internView.setTemplate('./intern/intern-login');
 
-        this.renderPage(res, internView);
+        this.renderPage(req, res, internView);
     }
 
     async handlePost(req, res) {

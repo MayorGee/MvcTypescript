@@ -19,7 +19,7 @@ export default class InternInfoController extends AbstractController {
             .setIntern(intern)
             .setTemplate('./intern/intern-info');
 
-        this.renderPage(res, internView);
+        this.renderPage(req, res, internView);
    }
 
     async handlePost(req, res) {

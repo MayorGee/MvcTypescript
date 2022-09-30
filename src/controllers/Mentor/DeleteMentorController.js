@@ -27,7 +27,7 @@ export default class DeleteMentorController extends AbstractController {
             .setMentor(mentor)         
             .setTemplate('./mentor/delete-mentor');
 
-        this.renderPage(res, mentorView);
+        this.renderPage(req, res, mentorView);
     }
 
     async handlePost(req, res) {

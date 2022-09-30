@@ -44,10 +44,7 @@ export default class  App {
             saveUninitialized: true,
             cookie: {
                 maxAge: 60000
-            }
-
-            // don't use secure true for local server because secure true will make sure that it doesn't work on non https sites
-        
+            }        
         }))
     }
 }

@@ -1,12 +1,13 @@
 import Database from '../../Database.js';
+import AbstractResource from './AbstractResource.js';
 
-export default class InternResource {
+export default class InternResource extends AbstractResource {
     async getInterns() {
         const interns = await Database.runQuery(`
             SELECT * FROM Intern
         `);  
 
-        return interns;
+        return this.escapeHtmlFromQueryData(interns);
     }
 
     async getInternById(id) {
@@ -15,7 +16,7 @@ export default class InternResource {
             WHERE Id = ${id}
         `);  
 
-        return intern[0];
+        return this.escapeHtmlFromQueryData(intern[0]);
     }
 
     async getFemaleInterns() {
@@ -28,7 +29,7 @@ export default class InternResource {
             WHERE Gender = "Female"
         `);  
 
-        return femaleInterns;
+        return this.escapeHtmlFromQueryData(femaleInterns);
     }
 
     async getMaleInterns() {
@@ -41,11 +42,10 @@ export default class InternResource {
             WHERE Gender = "Male"
         `);  
 
-        return maleInterns;
+        return this.escapeHtmlFromQueryData(maleInterns);
     }
 
     async addIntern({ firstName, lastName, internshipId, age, specialtyAreaId, email, password, phone }) {
-               
         await Database.runQuery(`
             INSERT INTO Intern (
                 First_Name,
@@ -57,14 +57,14 @@ export default class InternResource {
                 Password, 
                 Phone_No
             ) VALUES ( 
-                '${firstName}', 
-                '${lastName}', 
-                '${internshipId}', 
-                '${age}', 
-                '${specialtyAreaId}', 
-                '${email}', 
-                '${password}',
-                '${phone}'
+                '${this.excapeHtml(firstName)}', 
+                '${this.excapeHtml(lastName)}', 
+                '${this.excapeHtml(internshipId)}', 
+                '${this.excapeHtml(age)}', 
+                '${this.excapeHtml(specialtyAreaId)}', 
+                '${this.excapeHtml(email)}', 
+                '${this.excapeHtml(password)}',
+                '${this.excapeHtml(phone)}'
             )
         `);
     }
@@ -83,13 +83,13 @@ export default class InternResource {
 
         await Database.runQuery(`
             UPDATE Intern
-            SET First_Name = '${firstName}',
-                Last_Name = '${lastName}',
-                Internship_Id = '${internshipId}',
-                Age = '${age}',
-                Specialty_Area_Id = '${specialtyAreaId}',
-                Email = '${email}',
-                Phone_No = '${phone}'
+            SET First_Name = '${this.excapeHtml(firstName)}',
+                Last_Name = '${this.excapeHtml(lastName)}',
+                Internship_Id = '${this.excapeHtml(internshipId)}',
+                Age = '${this.excapeHtml(age)}',
+                Specialty_Area_Id = '${this.excapeHtml(specialtyAreaId)}',
+                Email = '${this.excapeHtml(email)}',
+                Phone_No = '${this.excapeHtml(phone)}'
             WHERE Id = '${id}'            
         `);
     }
@@ -106,7 +106,7 @@ export default class InternResource {
             SELECT * FROM Intern
             WHERE Email = '${email}'
         `);  
-        return intern[0];
+        return this.escapeHtmlFromQueryData(intern[0]);
     }
 
     async getInternProgressById(id) {
@@ -125,6 +125,6 @@ export default class InternResource {
             ON Intern_Progress.Mentor_Id = Mentor.Id
             WHERE Intern.Id = '${id}'
         `);  
-        return internProgress[0]; 
+        return this.escapeHtmlFromQueryData(internProgress[0]); 
     }
 }
