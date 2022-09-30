@@ -37,9 +37,4 @@ export default class AbstractResource {
     
         return queryData;
     }
-
-
-
-
-
 }

@@ -46,7 +46,6 @@ export default class AbstractController {
     async redirectToHome(res, responseCode, errorMessage) {
         alert(errorMessage ?? 'You are not a mentor');
 
-        await this.sendStatusAndRedirawait
         return res.status(responseCode).redirect('/'); 
     }
 
