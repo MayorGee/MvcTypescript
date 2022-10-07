@@ -10,10 +10,10 @@
                             href="" 
                             class="interns-list__description"
                         >
-                            {{ intern.Last_Name | capitalize }} {{ intern.First_Name | capitalize }}, {{ intern.Age }} years old
+                            {{ intern.lastName | capitalize }} {{ intern.firstName | capitalize }}, {{ intern.Age }} years old
                         </p>
                         <a 
-                            href="/delete-intern?id={{ intern.Id }}"
+                            href="/delete-intern?id={{ intern.id }}"
                             class="delete-intern"
                         >
                             <button class="delete-intern__btn">Delete</button>

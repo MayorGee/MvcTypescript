@@ -8,13 +8,13 @@
             class="warning"
         >
             <p class="warning__message">
-                Are you sure you want to delete {{ mentor.First_Name }} {{ mentor.Last_Name }} from the database?
+                Are you sure you want to delete {{ mentor.firstName }} {{ mentor.lastName }} from the database?
             </p>
         
             <input 
                 type="hidden"
                 name="id"
-                value= {{ mentor.Id }}
+                value= {{ mentor.id }}
             />
         
             <div class="warning__buttons">
