@@ -1,7 +1,7 @@
 import { DbSpecialtyArea, SpecialtyArea } from "../abstracts/entities/SpecialtyArea";
 
 export default class SpecialtyAreaConverter {
-    static convertDbSpecialtyArea({ 
+    public static convertDbSpecialtyArea({ 
         Id, 
         Title, 
         Class_Size 
@@ -13,7 +13,7 @@ export default class SpecialtyAreaConverter {
         }
     }
 
-    static convertDbSpecialtyAreas(dbSpecialtyAreas: DbSpecialtyArea[]): SpecialtyArea[] {
+    public static convertDbSpecialtyAreas(dbSpecialtyAreas: DbSpecialtyArea[]): SpecialtyArea[] {
         return dbSpecialtyAreas.map(this.convertDbSpecialtyArea);
     }
 }

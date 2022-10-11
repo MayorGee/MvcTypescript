@@ -5,10 +5,10 @@ import TaskConverter from '../../converters/TaskConverter.js';
 import TaskView from '../../views/task/TaskView.js';
 
 import { IController } from '../../abstracts/Common.js';
-import { DbTask } from '../../abstracts/entities/Task.js';
+import { DbTask, ITaskResource } from '../../abstracts/entities/Task.js';
 
 export default class TaskController extends AbstractController implements IController {
-    async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: any, res: any, next: any) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
@@ -19,7 +19,7 @@ export default class TaskController extends AbstractController implements IContr
             return this.handleIdError(taskId, res);
         }
 
-        const taskResource = new TaskResource();
+        const taskResource: ITaskResource = new TaskResource();
         const task: DbTask = await taskResource.getTaskById(taskId);
 
         const taskView = new TaskView();

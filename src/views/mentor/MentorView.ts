@@ -1,39 +1,39 @@
 import AbstractView from '../AbstractView.js';
 
-import { Mentor } from '../../abstracts/entities/Mentor.js';
-import { SpecialtyArea } from '../../abstracts/entities/SpecialtyArea.js';
+import { Mentor, MentorSpecialty } from '../../abstracts/entities/Mentor.js';
 import { Intern } from '../../abstracts/entities/Intern.js';
+import { IView } from '../../abstracts/Common.js';
 
-export default class MentorView extends AbstractView {
-    mentor: Mentor | null = null;
-    specialty: string | null = null;
-    interns: Intern[] = [];
-    template: string = './mentor/mentor';
+export default class MentorView extends AbstractView implements IView  {
+    private mentor: Mentor | null = null;
+    private specialty: MentorSpecialty | null = null;
+    private interns: Intern[] = [];
+    public template: string = './mentor/mentor';
 
-    setMentor(mentor: Mentor) {
+    public setMentor(mentor: Mentor): this {
         this.mentor = mentor;
         return this;
     }
 
-    getMentor(): Mentor| null {
+    public getMentor(): Mentor| null {
         return this.mentor;
     }
     
-    setMentorSpecialty(specialty: string) {
+    public setMentorSpecialty(specialty: MentorSpecialty): this {
         this.specialty = specialty;
         return this;
     }
 
-    getMentorSpecialty(): string | null {
+    public getMentorSpecialty(): MentorSpecialty | null {
         return this.specialty;
     }
 
-    setMentorInterns(interns: Intern[]) {
+    public setMentorInterns(interns: Intern[]): this {
         this.interns = interns;
         return this;
     }
 
-    getMentorIterns(): Intern[] {
+    public getMentorIterns(): Intern[] {
         return this.interns;
     }
 }

@@ -1,10 +1,10 @@
 import Database from '../../Database.js';
 import AbstractResource from './AbstractResource.js';
 
-import { DbIntern, Intern } from '../../abstracts/entities/Intern.js';
+import { DbGenderedIntern, DbIntern, DbInternProgress, IInternResource, Intern } from '../../abstracts/entities/Intern.js';
 
-export default class InternResource extends AbstractResource {
-    async getInterns(): Promise<DbIntern[]> {
+export default class InternResource extends AbstractResource implements IInternResource{
+    public async getInterns(): Promise<DbIntern[]> {
         const interns = await Database.runQuery(`
             SELECT * FROM Intern
         `);  
@@ -12,7 +12,7 @@ export default class InternResource extends AbstractResource {
         return this.escapeHtmlFromQueryData(interns);
     }
 
-    async getInternById(id: number): Promise<DbIntern> {
+    public async getInternById(id: number): Promise<DbIntern> {
         const intern = await Database.runQuery(`
             SELECT * FROM Intern
             WHERE Id = ${id}
@@ -21,9 +21,20 @@ export default class InternResource extends AbstractResource {
         return this.escapeHtmlFromQueryData(intern[0]);
     }
 
-    async getFemaleInterns() {
+    public async getFemaleInterns(): Promise<DbGenderedIntern[]> {
         const femaleInterns = await Database.runQuery(`
-            SELECT * FROM Intern
+            SELECT 
+                Intern.Id, 
+                First_Name,
+                Last_Name,
+                Internship_Id,
+                Age,
+                Specialty_Area_Id,
+                Email,
+                Phone_No,
+                Password, 
+                Gender
+            FROM Intern
             JOIN Intern_Gender
             ON Intern.Id = Intern_Gender.Intern_Id
             JOIN Specialty_Area
@@ -34,9 +45,20 @@ export default class InternResource extends AbstractResource {
         return this.escapeHtmlFromQueryData(femaleInterns);
     }
 
-    async getMaleInterns() {
+    public async getMaleInterns(): Promise<DbGenderedIntern[]> {
         const maleInterns = await Database.runQuery(`
-            SELECT * FROM Intern
+            SELECT 
+                Intern.Id, 
+                First_Name,
+                Last_Name,
+                Internship_Id,
+                Age,
+                Specialty_Area_Id,
+                Email,
+                Phone_No,
+                Password, 
+                Gender 
+            FROM Intern
             JOIN Intern_Gender
             ON Intern.Id = Intern_Gender.Intern_Id
             JOIN Specialty_Area
@@ -47,7 +69,7 @@ export default class InternResource extends AbstractResource {
         return this.escapeHtmlFromQueryData(maleInterns);
     }
 
-    async addIntern({ firstName, lastName, internshipId, age, specialtyAreaId, email, password, phone }: Intern) {
+    public async addIntern({ firstName, lastName, internshipId, age, specialtyAreaId, email, password, phone }: Intern) {
         await Database.runQuery(`
             INSERT INTO Intern (
                 First_Name,
@@ -71,7 +93,7 @@ export default class InternResource extends AbstractResource {
         `);
     }
 
-    async updateInternById(intern: Intern) {
+    public async updateInternById(intern: Intern) {
         const {
             id,
             firstName,
@@ -96,14 +118,14 @@ export default class InternResource extends AbstractResource {
         `);
     }
 
-    async deleteInternById(id: number) {
+    public async deleteInternById(id: number) {
         await Database.runQuery(`
             DELETE FROM Intern
             WHERE Id = '${id}'
         `);
     }
 
-    async getInternByEmail(email: string) {
+    public async getInternByEmail(email: string): Promise<DbIntern> {
         const intern = await Database.runQuery(`
             SELECT * FROM Intern
             WHERE Email = '${email}'
@@ -111,7 +133,7 @@ export default class InternResource extends AbstractResource {
         return this.escapeHtmlFromQueryData(intern[0]);
     }
 
-    async getInternProgressById(id: number) {
+    public async getInternProgressById(id: number): Promise<DbInternProgress> {
         const internProgress = await Database.runQuery(`
             SELECT 
                 Intern_Progress.Current_Module As currentModule,

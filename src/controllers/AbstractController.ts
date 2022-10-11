@@ -2,12 +2,10 @@
 import alert from 'alert';
 import { randomBytes } from 'crypto';
 
-import { IController, IStringIndex, RequestMethod } from '../abstracts/Common.js';
+import { IController, ErrorResponse, RequestMethod } from '../abstracts/Common.js';
 
 export default abstract class AbstractController implements IController {
-    resource: any;
-
-    execute(req: any, res: any, next: any) {
+    public execute(req: any, res: any, next: any) {
         const reqestMethod = req.method.toLowerCase();
 
         if (reqestMethod === RequestMethod.get) {
@@ -25,52 +23,48 @@ export default abstract class AbstractController implements IController {
         }
     }
 
-    abstract handleGet(req: any, res: any, next: any): void
+    protected abstract handleGet(req: any, res: any, next: any): void
 
-    handlePost(req: any, res: any, next: any) { }
+    protected handlePost(req: any, res: any, next: any) { }
 
-    isInternLoggedIn(req: any): boolean {
+    protected isInternLoggedIn(req: any): boolean {
         return !!req.session.internId;
     }
 
-    isMentorLoggedIn(req: any) {
-        return req.session.mentorId;
+    protected isMentorLoggedIn(req: any): boolean {
+        return !!req.session.mentorId;
     }
 
-    isRoleMentor(req: any) {
+    protected isRoleMentor(req: any) {
         return req.session.role === 'Mentor';
     }
 
-    redirect({ 
+    protected redirect({ 
         res,
         page, 
         responseCode = 401,
         errorMessage = 'You are not logged in (as intern)' 
-    }: IStringIndex ) {
+    }: ErrorResponse ) {
         alert(errorMessage);
         
-        this.sendStatusAndRedirect(res, responseCode, page);
+        return this.sendStatusAndRedirect(res, responseCode, page);
     }
 
-    sendStatusAndRedirect(res: any, responseCode: number, page: string) {
+    protected sendStatusAndRedirect(res: any, responseCode: number, page: string) {
         return res.status(responseCode).redirect(page); 
     }
 
-    async redirectToHome(res: any, responseCode?: number, errorMessage?: string) {
-        alert(errorMessage ?? 'You are not a mentor');
+    protected redirectToHome(res: any, responseCode: number = 501, errorMessage: string = 'You are not a mentor') {
+        alert(errorMessage);
 
-        if (responseCode) {
-            return res.status(responseCode).redirect('/'); 
-        }
-        
-        return res.status(501).redirect('/'); 
+        return this.sendStatusAndRedirect(res, responseCode, '/');
     }
 
-    sendError(res: any, errorCode: number, errorMessage: string) {
+    protected sendError(res: any, errorCode: number, errorMessage: string) {
         return res.status(errorCode).send(errorMessage)
     }
     
-    renderPage(req: any, res: any, viewClass: any) {
+    protected renderPage(req: any, res: any, viewClass: any) {
         res.render(
             viewClass.getTemplate(), 
             { 
@@ -80,28 +74,23 @@ export default abstract class AbstractController implements IController {
         );
     }
     
-    isNumber(n: number | string): boolean {
-
-        if (typeof n === 'string') {
-            return false;
-        }
-        
-        return (n > 0);    
+    protected isNumber(n: number | string): boolean {
+        return typeof n !== 'string' && n > 0;
     }
 
-    handleIdError(id: number, res: any) {
+    protected handleIdError(id: number, res: any) {
         let errorText = id ? 'Invalid id entered' : 'No Id entered';
 
         this.sendError(res, 500, errorText);
     }
 
-    setCsrfToken(req: any) {
+    protected setCsrfToken(req: any) {
         if(!(req.session.csrfToken)) {
             req.session.csrfToken = randomBytes(50).toString('hex');
         }
     }
 
-    isCsrfTokenValid(req: any) {
+    protected isCsrfTokenValid(req: any) {
         return (req.session.csrfToken && req.session.csrfToken === req.body.csrfToken);
     }
 }

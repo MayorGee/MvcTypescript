@@ -11,3 +11,8 @@ export interface Task {
     specialtyAreaId: number,
     moduleId: number
 }
+
+export interface ITaskResource {
+    getTasks:() =>  Promise<DbTask[]>,
+    getTaskById: (id: number) => Promise<DbTask>
+}

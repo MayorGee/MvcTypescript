@@ -1,7 +1,7 @@
-import { DbMentor, Mentor } from "../abstracts/entities/Mentor";
+import { DbMentor, DbMentorSpecialty, Mentor, MentorSpecialty } from "../abstracts/entities/Mentor";
 
 export default class MentorConverter {
-    static convertDbMentor({
+    public static convertDbMentor({
         Id,
         First_Name,
         Last_Name,
@@ -19,7 +19,15 @@ export default class MentorConverter {
         }
     }
 
-    static convertDbMentors(dbMentors: DbMentor[]): Mentor[] {
+    public static convertDbMentors(dbMentors: DbMentor[]): Mentor[] {
         return dbMentors.map(this.convertDbMentor);
+    }
+
+    public static convertDbMentorSpecialty({
+        Title
+    }: DbMentorSpecialty): MentorSpecialty {
+        return {
+            title: Title
+        }
     }
 }

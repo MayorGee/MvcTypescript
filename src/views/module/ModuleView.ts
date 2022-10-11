@@ -1,17 +1,18 @@
 import AbstractView from '../AbstractView.js';
 
 import { Module } from '../../abstracts/entities/Module.js';
+import { IView } from '../../abstracts/Common.js';
 
-export default class ModuleView extends AbstractView {
-    module: Module | null = null;
-    template: string = './module/module';
+export default class ModuleView extends AbstractView implements IView {
+    private module: Module | null = null;
+    public template = './module/module';
 
-    setModule(module: Module) {
+    public setModule(module: Module): this {
         this.module = module;
         return this;
     }
     
-    getModule(): Module | null {
+    public getModule(): Module | null {
         return this.module;
     }
 }

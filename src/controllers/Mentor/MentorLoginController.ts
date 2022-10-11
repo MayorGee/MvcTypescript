@@ -4,18 +4,19 @@ import MentorView from '../../views/mentor/MentorView.js';
 import MentorResource from '../../models/resource/MentorResource.js'; 
 
 import { IController } from '../../abstracts/Common.js';
+import { IMentorResource } from '../../abstracts/entities/Mentor.js';
 
 export default class MentorLoginController extends AbstractController implements IController {
-    async handleGet(req: any, res: any, next: any) {
+    protected handleGet(req: any, res: any, next: any) {
         const mentorView = new MentorView();
         mentorView.setTemplate('./mentor/mentor-login');
 
         this.renderPage(req, res, mentorView);
     }
 
-    async handlePost(req: any, res: any, next: any) {
+    protected async handlePost(req: any, res: any, next: any) {
         const { mentorEmail, mentorPassword } = req.body;
-        const mentorResource = new MentorResource();
+        const mentorResource: IMentorResource = new MentorResource();
 
         const registeredMentor = await mentorResource.getMentorByEmail(mentorEmail);
         

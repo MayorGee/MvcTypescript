@@ -1,16 +1,16 @@
 import express from 'express';
-import { IRoute, RequestMethod } from '../abstracts/Common.js';
+import { Route, IRouter, RequestMethod } from '../abstracts/Common.js';
 
-export default class AbstractRouter {
-    routes: IRoute[] = [];
-    router: any;  // :(
+export default class AbstractRouter implements IRouter {
+    protected routes: Route[] = [];
+    protected router: any;  // change!!!
     
     constructor() {
         this.router = express.Router();
         this.setRouter();
     }
 
-    setRouter() {
+    public setRouter() {
         this.routes.forEach(({ route, controller, requestMethod }) => {
             if (requestMethod === RequestMethod.get) {
                 this.router.get(route, controller.execute.bind(controller));
@@ -20,7 +20,7 @@ export default class AbstractRouter {
         });
     }
 
-    getRouter() {
+    public getRouter() {
         return this.router;
     }
 }

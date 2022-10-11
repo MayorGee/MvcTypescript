@@ -13,3 +13,8 @@ export interface Internship {
     endDate: Date,
     title: string
 }
+
+export interface IInternshipResource {
+    getInternships: () => Promise<DbInternship[]>,
+    getInternshipById: (id: number) => Promise<DbInternship>
+}

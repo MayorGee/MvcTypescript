@@ -3,19 +3,19 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default class Environment {
-    static getDatabaseHost() {
+    public static getDatabaseHost(): string | undefined {
         return process.env.DB_HOST;
     }
 
-    static getDatabaseUser() {
+    public static getDatabaseUser(): string | undefined {
         return process.env.DB_USER;
     }
 
-    static getDatabasePassword() {
+    public static getDatabasePassword(): string | undefined {
         return process.env.DB_PASSWORD;
     }
 
-    static getDatabaseName() {
+    public static getDatabaseName(): string | undefined {
         return process.env.DB_NAME;
     }
 }

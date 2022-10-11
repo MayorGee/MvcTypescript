@@ -5,15 +5,15 @@ import ModulesView from '../../views/module/ModulesView.js';
 import ModuleConverter from '../../converters/ModuleConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
-import { DbModule } from '../../abstracts/entities/Module.js';
+import { DbModule, IModuleResource } from '../../abstracts/entities/Module.js';
 
 export default class ModulesController extends AbstractController implements IController {
-    async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: any, res: any, next: any) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
         
-        const moduleResource = new ModuleResource();
+        const moduleResource: IModuleResource = new ModuleResource();
         const modules: DbModule[] = await moduleResource.getModules();
 
         const modulesView = new ModulesView();

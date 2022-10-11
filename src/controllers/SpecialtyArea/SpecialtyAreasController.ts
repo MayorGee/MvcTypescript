@@ -5,15 +5,15 @@ import SpecialtyAreaConverter from '../../converters/SpecialtyAreaConverter.js';
 import SpecialtyAreasView from '../../views/specialty-area/SpecialtyAreasView.js';
 
 import { IController } from '../../abstracts/Common.js';
-import { DbSpecialtyArea } from '../../abstracts/entities/SpecialtyArea.js';
+import { DbSpecialtyArea, ISpecialtyAreaResource } from '../../abstracts/entities/SpecialtyArea.js';
 
 export default class SpecialtyAreasController extends AbstractController implements IController {
-    async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: any, res: any, next: any) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
         
-        const specialtyAreaResource = new SpecialtyAreaResource();
+        const specialtyAreaResource: ISpecialtyAreaResource = new SpecialtyAreaResource();
         const specialtyAreas: DbSpecialtyArea[] = await  specialtyAreaResource.getSpecialtyAreas();
 
         const specialtyAreasView = new SpecialtyAreasView();

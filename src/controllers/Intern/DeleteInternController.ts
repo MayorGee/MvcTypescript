@@ -5,15 +5,18 @@ import InternResource from '../../models/resource/InternResource.js';
 import InternConverter from '../../converters/InternConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
+import { IInternResource } from '../../abstracts/entities/Intern.js';
 
 export default class DeleteInternController extends AbstractController implements IController {
+    private resource: IInternResource;
+
     constructor() {
         super();
 
         this.resource = new InternResource();
     }
 
-    async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: any, res: any, next: any) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
@@ -36,8 +39,8 @@ export default class DeleteInternController extends AbstractController implement
         this.renderPage(req, res, internView);
    }
 
-    async handlePost(req: any, res: any) {
-        await this.resource.deleteInternById(parseInt(req.body.id));
+   protected  handlePost(req: any, res: any) {
+        this.resource.deleteInternById(parseInt(req.body.id));
      
         res.redirect('/interns');
     }

@@ -4,12 +4,11 @@ import MentorView from '../../views/mentor/MentorView.js';
 import MentorResource from '../../models/resource/MentorResource.js';
 
 import { IController } from '../../abstracts/Common.js';
-import { DbMentor } from '../../abstracts/entities/Mentor.js';
+import { DbMentor, DbMentorSpecialty, IMentorResource } from '../../abstracts/entities/Mentor.js';
 import MentorConverter from '../../converters/MentorConverter.js';
-import { DbSpecialtyArea } from '../../abstracts/entities/SpecialtyArea.js';
 
 export default class MentorAccountController extends AbstractController implements IController {
-    async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: any, res: any, next: any) {
         const mentorLoggedIn: boolean = this.isMentorLoggedIn(req);
 
         if(!mentorLoggedIn) {
@@ -21,14 +20,17 @@ export default class MentorAccountController extends AbstractController implemen
         }
 
         const mentorId: number = req.session.mentorId;
-        const mentorResource = new MentorResource();
+        const mentorResource: IMentorResource = new MentorResource();
+        
         const mentor: DbMentor = await mentorResource.getMentorById(mentorId);
-        const mentorSpecialty: string = await mentorResource.getMentorSpecialty(mentorId);
+        const mentorSpecialty: DbMentorSpecialty = await mentorResource.getMentorSpecialty(mentorId);
 
         const mentorView = new MentorView();
         mentorView
             .setTemplate('./mentor/mentor-account')
-            .setMentorSpecialty(mentorSpecialty)
+            .setMentorSpecialty(
+                MentorConverter.convertDbMentorSpecialty(mentorSpecialty)
+            )
             .setMentor(
                 MentorConverter.convertDbMentor(mentor)
             );

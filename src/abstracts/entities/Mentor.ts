@@ -1,3 +1,5 @@
+import { DbIntern } from "./Intern"
+
 export interface DbMentor {
     Id: number,
     First_Name: string,
@@ -14,4 +16,24 @@ export interface Mentor {
     specialtyAreaId: number,
     email: string,
     phone: number
+}
+
+export interface DbMentorSpecialty {
+    Title: string
+}
+
+export interface MentorSpecialty {
+    title: string
+}
+
+export interface IMentorResource {
+    getMentors: () => Promise<DbMentor[]>,
+    getMentorById: (id: number) => Promise<DbMentor>,
+    getMentorByEmail: (email: string) => Promise<DbMentor>,
+    addMentor: (mentor: Mentor) => void,
+    updateMentorById: (mentor: Mentor) => void,
+    deleteMentorById: (id: number) => void,
+    isMentorPasswordCorrect: (email: string, password: string) => Promise<boolean>,
+    getMentorInterns: (id: number) => Promise<DbIntern[]>,
+    getMentorSpecialty: (id: number) => Promise<DbMentorSpecialty>
 }

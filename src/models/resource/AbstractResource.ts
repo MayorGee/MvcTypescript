@@ -1,7 +1,7 @@
-import { IStringIndex } from "../../abstracts/Common";
+import { IResource, IObjectStringIndex } from "../../abstracts/Common";
 
-export default class AbstractResource {
-    escapeHtml(unsafe: string): string {
+export default class AbstractResource implements IResource{
+    public escapeHtml(unsafe: string): string {
         return unsafe.replace(/[&<>'"]/g, char => ({
                 '&': '&amp;',
                 '<': '&lt;',
@@ -12,7 +12,7 @@ export default class AbstractResource {
         );
     }
 
-    escapeHtmlFromQueryData(queryData: any): any {
+    public escapeHtmlFromQueryData(queryData: any): any {
         if(typeof queryData !== 'string') {
             return queryData;
         }
@@ -20,9 +20,9 @@ export default class AbstractResource {
         this.escapeHtmlFromDataSet(queryData);
     }
 
-    escapeHtmlFromDataSet(queryData: any): any {
-        const escapedDataSet = queryData.map((dataSet: IStringIndex) => {
-            const newDataSet: IStringIndex = {};
+    public escapeHtmlFromDataSet(queryData: any): any {
+        const escapedDataSet = queryData.map((dataSet: IObjectStringIndex) => {
+            const newDataSet: IObjectStringIndex = {};
 
             for(let key in dataSet) {
                 newDataSet[key] = this.escapeHtml(dataSet[key]);

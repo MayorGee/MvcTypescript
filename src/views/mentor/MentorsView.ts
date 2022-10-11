@@ -1,16 +1,17 @@
 import AbstractView from '../AbstractView.js';
 
 import { Mentor } from '../../abstracts/entities/Mentor.js';
+import { IView } from '../../abstracts/Common.js';
 
-export default class MentorsView extends AbstractView {
-    mentors: Mentor[] = [];
-    template: string = './mentor/mentors';
+export default class MentorsView extends AbstractView implements IView {
+    private mentors: Mentor[] = [];
+    public template = './mentor/mentors';
 
-    getMentors(): Mentor[] {
+    public getMentors(): Mentor[] {
         return this.mentors;
     }
 
-    setMentors(mentors: Mentor[]) {
+    public setMentors(mentors: Mentor[]): this {
         this.mentors = mentors;
         return this;
     }

@@ -4,16 +4,16 @@ import InternshipResource from '../../models/resource/InternshipResource.js';
 import InternshipsView from '../../views/internship/InternshipsView.js';
 
 import { IController } from '../../abstracts/Common.js';
-import { DbInternship } from '../../abstracts/entities/Internship.js';
+import { DbInternship, IInternshipResource } from '../../abstracts/entities/Internship.js';
 import InternshipConverter from '../../converters/InternshipConverter.js';
 
 export default class InternshipsController extends AbstractController implements IController {    
-    async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: any, res: any, next: any) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
         
-        const internshipResource = new InternshipResource();
+        const internshipResource: IInternshipResource = new InternshipResource();
         const internships: DbInternship[] = await internshipResource.getInternships();
         
         const internshipsView  = new InternshipsView();

@@ -1,17 +1,18 @@
 import AbstractView from '../AbstractView.js';
 
 import { Task } from '../../abstracts/entities/Task.js';
+import { IView } from '../../abstracts/Common.js';
 
-export default class TaskView extends AbstractView {
-    task: Task | null = null;
-    template = './task/task';
+export default class TaskView extends AbstractView implements IView {
+    private task: Task | null = null;
+    public template = './task/task';
 
-    setTask(task: Task) {
+    public setTask(task: Task): this {
         this.task = task;
         return this;
     }
     
-    getTask(): Task | null {
+    public getTask(): Task | null {
         return this.task;
     }
 }

@@ -1,12 +1,13 @@
 import AbstractView from '../AbstractView.js';
 
 import { SpecialtyArea } from '../../abstracts/entities/SpecialtyArea.js';
+import { IView } from '../../abstracts/Common.js';
 
-export default class SpecialtyAreaView extends AbstractView {
+export default class SpecialtyAreaView extends AbstractView implements IView {
     specialtyArea: SpecialtyArea | null = null;
-    template: string = './specialty-area/specialty-area';
+    template = './specialty-area/specialty-area';
 
-    setSpecialtyArea(specialtyArea: SpecialtyArea) {
+    setSpecialtyArea(specialtyArea: SpecialtyArea): this {
         this.specialtyArea = specialtyArea;
         return this;
     }

@@ -5,7 +5,7 @@ import Environment from './models/Environment.js';
 export default class Database {
     private static connection: any = null;
 
-    static getConnection(): any {
+    public static getConnection(): any {
         if (this.connection) {
             return this.connection;
         }
@@ -21,7 +21,7 @@ export default class Database {
         return this.connection;
     }
 
-    static async runQuery(query: string) {
+    public static async runQuery(query: string) {
         const connection = Database.getConnection();
 
         return connection.awaitQuery(query);

@@ -5,9 +5,10 @@ import InternResource from '../../models/resource/InternResource.js';
 import InternConverter from '../../converters/InternConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
+import { IInternResource, DbIntern } from '../../abstracts/entities/Intern.js';
 
 export default class InternAccountController extends AbstractController implements IController {
-    async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: any, res: any, next: any) {
         const internLoggedIn = this.isInternLoggedIn(req);
 
         if(!internLoggedIn) {
@@ -15,8 +16,8 @@ export default class InternAccountController extends AbstractController implemen
         }
 
         const internId: number = req.session.internId;
-        const internResource = new InternResource();
-        const intern = await internResource.getInternById(internId);
+        const internResource: IInternResource = new InternResource();
+        const intern: DbIntern = await internResource.getInternById(internId);
 
         const internView = new InternView();
         internView

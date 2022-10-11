@@ -1,27 +1,28 @@
 import AbstractView from '../AbstractView.js';
 
-import { Intern } from '../../abstracts/entities/Intern.js';
+import { Intern, InternProgress } from '../../abstracts/entities/Intern.js';
+import { IView } from '../../abstracts/Common.js';
 
-export default class InternView extends AbstractView {
-    intern: Intern | null = null;
-    internProgress = null; 
-    template: string = './intern/intern';
+export default class InternView extends AbstractView implements IView {
+    private intern: Intern | null = null;
+    private internProgress: InternProgress | null = null; 
+    public template = './intern/intern';
 
-    setIntern(intern: Intern) {
+    public setIntern(intern: Intern): this {
         this.intern = intern;
         return this;
     }
     
-    getIntern() {
+    public getIntern(): Intern | null {
         return this.intern;
     }
 
-    setInternProgress(internProgress: any) {
+    public setInternProgress(internProgress: InternProgress): this {
         this.internProgress = internProgress;
         return this;
     }
 
-    getInternProgress() {
+    public getInternProgress(): InternProgress | null {
         return this.internProgress;
     }
 }

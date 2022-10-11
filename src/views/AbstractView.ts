@@ -1,11 +1,13 @@
-export default class AbstractView {
-    template: string = '';
+import { IView } from "../abstracts/Common";
 
-    getTemplate(): string {
+export default class AbstractView implements IView {
+    protected template = '';
+
+    public getTemplate(): string {
         return this.template;
     }
 
-    setTemplate(template: string) {
+    public setTemplate(template: string): this {
         this.template = template;
         return this;
     }

@@ -6,19 +6,20 @@ import bodyParser from 'body-parser';
 import path from 'path';
 
 export default class  App {
-    app: any;
+    private app: any;
+
     constructor(dist: string) {
         this.app = express();
         this.app.use(express.static(dist));
     }
 
-    listen(port: number){
+    public listen(port: number){
         this.app.listen(port, () => {
             console.log(`Server is listening on port: ${port}`);
         });
     }
 
-    initRouters(routers: any) {   
+    public initRouters(routers: any) {   
         routers.forEach((Router: new () => any) => {
             const router = new Router();
         
@@ -26,7 +27,7 @@ export default class  App {
         });     
     }
 
-    initLiquid(){
+    public initLiquid(){
         const engine = new Liquid();
         
         this.app.engine('liquid', engine.express()); 
@@ -34,14 +35,14 @@ export default class  App {
         this.app.set('view engine', 'liquid');
     }
 
-    initBodyParser() {
+    public initBodyParser() {
         // @ts-ignore
         this.app.use(bodyParser.json());
         // @ts-ignore
         this.app.use(bodyParser.urlencoded({ extended: true }));
     }
 
-    initSession() {
+    public initSession() {
         this.app.use(session({
             secret: 'keyboard cat',
             resave: false,

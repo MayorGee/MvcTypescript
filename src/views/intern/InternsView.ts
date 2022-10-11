@@ -1,16 +1,17 @@
 import AbstractView from '../AbstractView.js';
 
 import { Intern } from '../../abstracts/entities/Intern.js';
+import { IView } from '../../abstracts/Common.js';
 
-export default class InternsView extends AbstractView {  
-    interns: Intern[] = [];
-    template: string = './intern/interns';
+export default class InternsView extends AbstractView implements IView {  
+    private interns: Intern[] = [];
+    public template = './intern/interns';
     
-    getInterns(): Intern[] {
+    public getInterns(): Intern[] {
         return this.interns;
     }
 
-    setInterns(interns: Intern[]) {
+    public setInterns(interns: Intern[]) {
         this.interns = interns;
     }
 }

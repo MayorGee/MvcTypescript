@@ -4,9 +4,11 @@ import MentorView from '../../views/mentor/MentorView.js';
 import MentorResource from '../../models/resource/MentorResource.js';
 
 import { IController } from '../../abstracts/Common.js';
+import InternConverter from '../../converters/InternConverter.js';
+import { IMentorResource } from '../../abstracts/entities/Mentor.js';
 
 export default class MentorStudentsController extends AbstractController implements IController {
-    async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: any, res: any, next: any) {
         const mentorLoggedIn: boolean = this.isMentorLoggedIn(req);
 
         if(!mentorLoggedIn) {
@@ -19,12 +21,14 @@ export default class MentorStudentsController extends AbstractController impleme
 
         const mentorId: number = req.session.mentorId;
 
-        const mentorResource = new MentorResource();
+        const mentorResource: IMentorResource = new MentorResource();
         const mentorInterns = await mentorResource.getMentorInterns(mentorId);
 
         const mentorView = new MentorView();
         mentorView
-            .setMentorInterns(mentorInterns)
+            .setMentorInterns(
+                InternConverter.convertDbInterns(mentorInterns)
+            )
             .setTemplate('./mentor/mentor-students');
 
         this.renderPage(req, res, mentorView);

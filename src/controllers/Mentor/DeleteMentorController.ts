@@ -5,16 +5,12 @@ import MentorResource from '../../models/resource/MentorResource.js';
 import MentorConverter from '../../converters/MentorConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
-import { DbMentor } from '../../abstracts/entities/Mentor.js';
+import { DbMentor, IMentorResource } from '../../abstracts/entities/Mentor.js';
 
 export default class DeleteMentorController extends AbstractController implements IController {
-    constructor() {
-        super();
+    private resource: IMentorResource = new MentorResource();
 
-        this.resource = new MentorResource();
-    }
-
-    async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: any, res: any, next: any) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
@@ -37,8 +33,8 @@ export default class DeleteMentorController extends AbstractController implement
         this.renderPage(req, res, mentorView);
     }
 
-    async handlePost(req: any, res: any, next: any) {
-        await this.resource.deleteMentorById(parseInt(req.body.id));
+    protected handlePost(req: any, res: any, next: any) {
+        this.resource.deleteMentorById(parseInt(req.body.id));
 
         res.redirect('/mentors');
     }

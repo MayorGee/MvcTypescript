@@ -8,18 +8,20 @@ import InternResource from '../../models/resource/InternResource.js';
 import { IController } from '../../abstracts/Common.js';
 
 export default class InternLoginController extends AbstractController implements IController {
-    handleGet(req: any, res: any, next: any) {
+    private resource = new InternResource();
+
+    protected handleGet(req: any, res: any, next: any) {
         const internView = new InternView();
         internView.setTemplate('./intern/intern-login');
 
         this.renderPage(req, res, internView);
     }
 
-    async handlePost(req: any, res: any, next: any) {
+    protected async handlePost(req: any, res: any, next: any) {
         const { internEmail, internPassword } = req.body;
-        const internResource = new InternResource();
+        
 
-        const registeredIntern = await internResource.getInternByEmail(internEmail);
+        const registeredIntern = await this.resource.getInternByEmail(internEmail);
         
         if (!registeredIntern) {
             return this.redirect({ 

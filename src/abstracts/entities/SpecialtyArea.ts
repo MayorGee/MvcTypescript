@@ -9,3 +9,8 @@ export interface SpecialtyArea {
     title: string,
     classSize: number
 }
+
+export interface ISpecialtyAreaResource {
+    getSpecialtyAreas: () => Promise<DbSpecialtyArea[]>,
+    getSpecialtyAreaById: (id: number) => Promise<DbSpecialtyArea>
+}

@@ -1,5 +1,5 @@
-import HomeController from '../controllers/HomeController.js';
 import AbstractRouter from './AbstractRouter.js';
+import HomeController from '../controllers/HomeController.js';
 
 const homeController = new HomeController();
 

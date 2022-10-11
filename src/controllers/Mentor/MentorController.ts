@@ -5,10 +5,10 @@ import MentorResource from '../../models/resource/MentorResource.js';
 import MentorConverter from '../../converters/MentorConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
-import { DbMentor } from '../../abstracts/entities/Mentor.js';
+import { DbMentor, IMentorResource } from '../../abstracts/entities/Mentor.js';
 
 export default class MentorController extends AbstractController implements IController {
-    async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: any, res: any, next: any) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
@@ -19,7 +19,7 @@ export default class MentorController extends AbstractController implements ICon
             return this.handleIdError(mentorId,res);
         }
 
-        const mentorResource = new MentorResource();
+        const mentorResource: IMentorResource = new MentorResource();
         const mentor: DbMentor = await mentorResource.getMentorById(mentorId);
 
         const mentorView = new MentorView();

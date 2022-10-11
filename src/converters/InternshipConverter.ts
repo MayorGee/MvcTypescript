@@ -1,7 +1,7 @@
 import { DbInternship, Internship } from "../abstracts/entities/Internship";
 
 export default class InternshipConverter {
-    static convertDbInternship({
+    public static convertDbInternship({
         Id,
         Internship_Year,
         Start_Date,
@@ -17,7 +17,7 @@ export default class InternshipConverter {
         }
     }
 
-    static convertDbInternships(dbInternship: DbInternship[]): Internship[] {
+    public static convertDbInternships(dbInternship: DbInternship[]): Internship[] {
         return dbInternship.map(this.convertDbInternship);
     }
 }

@@ -1,7 +1,7 @@
 import { DbTask, Task } from "../abstracts/entities/Task";
 
 export default class TaskConverter {
-    static convertDbTask({
+    public static convertDbTask({
         Id,
         Description,
         Specialty_Area_Id,
@@ -15,7 +15,7 @@ export default class TaskConverter {
         }
     }
 
-    static convertDbTasks(dbTasks: DbTask[]): Task[] {
+    public static convertDbTasks(dbTasks: DbTask[]): Task[] {
         return dbTasks.map(this.convertDbTask);
     }
 }

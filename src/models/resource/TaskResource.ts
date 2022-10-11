@@ -1,10 +1,10 @@
 import Database from '../../Database.js';
 import AbstractResource from './AbstractResource.js';
 
-import { DbTask } from '../../abstracts/entities/Task.js';
+import { DbTask, ITaskResource } from '../../abstracts/entities/Task.js';
 
-export default class TaskResource extends AbstractResource {
-    async getTasks(): Promise<DbTask[]> {
+export default class TaskResource extends AbstractResource implements ITaskResource {
+    public async getTasks(): Promise<DbTask[]> {
         const tasks = await Database.runQuery(`
             SELECT * FROM Tasks
             JOIN Specialty_Area
@@ -16,7 +16,7 @@ export default class TaskResource extends AbstractResource {
         return this.escapeHtmlFromQueryData(tasks);
     }
 
-    async getTaskById(id: number): Promise<DbTask> {
+    public async getTaskById(id: number): Promise<DbTask> {
         const task = await Database.runQuery(`
             SELECT * FROM Tasks
             WHERE Id = ${id}

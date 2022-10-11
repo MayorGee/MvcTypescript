@@ -5,10 +5,10 @@ import SpecialtyAreaView from '../../views/specialty-area/SpecialtyAreaView.js';
 import SpecialtyAreaConverter from '../../converters/SpecialtyAreaConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
-import { DbSpecialtyArea } from '../../abstracts/entities/SpecialtyArea.js';
+import { DbSpecialtyArea, ISpecialtyAreaResource } from '../../abstracts/entities/SpecialtyArea.js';
 
 export default class SpecialtyAreaController extends AbstractController implements IController {
-    async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: any, res: any, next: any) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
@@ -19,7 +19,7 @@ export default class SpecialtyAreaController extends AbstractController implemen
             return this.handleIdError(specialtyAreaId, res);
         }
 
-        const specialtyAreaResource = new SpecialtyAreaResource();
+        const specialtyAreaResource: ISpecialtyAreaResource = new SpecialtyAreaResource();
         const specialtyArea: DbSpecialtyArea = await specialtyAreaResource.getSpecialtyAreaById(specialtyAreaId);
 
         const specialtyAreaView = new SpecialtyAreaView();
