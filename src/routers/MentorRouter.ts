@@ -10,7 +10,7 @@ import MentorAccountController from '../controllers/Mentor/MentorAccountControll
 import MentorLogoutController from '../controllers/Mentor/MentorLogoutController.js';
 import MentorStudentsController from '../controllers/Mentor/MentorStudentsController.js';
 
-import { RequestMethod } from '../abstracts/Common.js';
+import { IRouter, RequestMethod } from '../abstracts/Common.js';
 
 const mentorController = new MentorController();
 const mentorsController = new MentorsController();
@@ -23,7 +23,7 @@ const mentorLogoutController = new MentorLogoutController();
 const mentorStudentsController =  new MentorStudentsController();
 
 
-export default class MentorRouter extends AbstractRouter {
+export default class MentorRouter extends AbstractRouter implements IRouter {
     constructor() {
         super();
 

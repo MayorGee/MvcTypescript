@@ -3,7 +3,7 @@ import { Route, IRouter, RequestMethod } from '../abstracts/Common.js';
 
 export default class AbstractRouter implements IRouter {
     protected routes: Route[] = [];
-    protected router: any;  // change!!!
+    protected router: any; 
     
     constructor() {
         this.router = express.Router();

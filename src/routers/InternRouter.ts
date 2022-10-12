@@ -12,7 +12,7 @@ import InternLogoutController from '../controllers/Intern/InternLogoutController
 import InternProgressController from '../controllers/Intern/InternProgressController.js';
 import InternAccountController from '../controllers/Intern/InternAccountController.js';
 
-import { RequestMethod } from '../abstracts/Common.js';
+import { IRouter, RequestMethod } from '../abstracts/Common.js';
 
 const internController = new InternController();
 const internsController = new InternsController();
@@ -26,7 +26,7 @@ const internLogoutController = new InternLogoutController();
 const internProgressController = new InternProgressController();
 const internAccountController = new InternAccountController();
 
-export default class InternRouter  extends AbstractRouter {
+export default class InternRouter  extends AbstractRouter implements IRouter {
     constructor() {
         super();
 

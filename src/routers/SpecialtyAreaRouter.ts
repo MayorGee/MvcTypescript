@@ -3,12 +3,12 @@ import AbstractRouter from './AbstractRouter.js';
 import SpecialtyAreaController from '../controllers/SpecialtyArea/SpecialtyAreaController.js';
 import SpecialtyAreasController from '../controllers/SpecialtyArea/SpecialtyAreasController.js';
 
-import { RequestMethod } from '../abstracts/Common.js';
+import { IRouter, RequestMethod } from '../abstracts/Common.js';
 
 const specialtyAreaController = new SpecialtyAreaController();
 const specialtyAreasController = new SpecialtyAreasController();
 
-export default class SpecialtyAreaRouter extends AbstractRouter {
+export default class SpecialtyAreaRouter extends AbstractRouter implements IRouter {
     constructor() {
         super();
 

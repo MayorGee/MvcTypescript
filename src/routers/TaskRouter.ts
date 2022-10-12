@@ -3,12 +3,12 @@ import AbstractRouter from './AbstractRouter.js';
 import TaskController from '../controllers/Task/TaskController.js';
 import TasksController from '../controllers/Task/TasksController.js';
 
-import { RequestMethod } from '../abstracts/Common.js';
+import { IRouter, RequestMethod } from '../abstracts/Common.js';
 
 const taskController = new TaskController();
 const tasksController = new TasksController();
 
-export default class TaskRouter extends AbstractRouter {
+export default class TaskRouter extends AbstractRouter implements IRouter {
     constructor() {
         super();
 

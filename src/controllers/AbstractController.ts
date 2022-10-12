@@ -5,7 +5,7 @@ import { randomBytes } from 'crypto';
 import { IController, ErrorResponse, RequestMethod } from '../abstracts/Common.js';
 
 export default abstract class AbstractController implements IController {
-    public execute(req: any, res: any, next: any) {
+    public execute(req: any, res: any, next: any): void {
         const reqestMethod = req.method.toLowerCase();
 
         if (reqestMethod === RequestMethod.get) {
@@ -25,7 +25,7 @@ export default abstract class AbstractController implements IController {
 
     protected abstract handleGet(req: any, res: any, next: any): void
 
-    protected handlePost(req: any, res: any, next: any) { }
+    protected handlePost(req: any, res: any, next: any): void { }
 
     protected isInternLoggedIn(req: any): boolean {
         return !!req.session.internId;
@@ -35,7 +35,7 @@ export default abstract class AbstractController implements IController {
         return !!req.session.mentorId;
     }
 
-    protected isRoleMentor(req: any) {
+    protected isRoleMentor(req: any): boolean {
         return req.session.role === 'Mentor';
     }
 
@@ -64,7 +64,7 @@ export default abstract class AbstractController implements IController {
         return res.status(errorCode).send(errorMessage)
     }
     
-    protected renderPage(req: any, res: any, viewClass: any) {
+    protected renderPage(req: any, res: any, viewClass: any): void {
         res.render(
             viewClass.getTemplate(), 
             { 
@@ -78,19 +78,19 @@ export default abstract class AbstractController implements IController {
         return typeof n !== 'string' && n > 0;
     }
 
-    protected handleIdError(id: number, res: any) {
+    protected handleIdError(id: number, res: any): void {
         let errorText = id ? 'Invalid id entered' : 'No Id entered';
 
         this.sendError(res, 500, errorText);
     }
 
-    protected setCsrfToken(req: any) {
+    protected setCsrfToken(req: any): void {
         if(!(req.session.csrfToken)) {
             req.session.csrfToken = randomBytes(50).toString('hex');
         }
     }
 
-    protected isCsrfTokenValid(req: any) {
+    protected isCsrfTokenValid(req: any): boolean {
         return (req.session.csrfToken && req.session.csrfToken === req.body.csrfToken);
     }
 }

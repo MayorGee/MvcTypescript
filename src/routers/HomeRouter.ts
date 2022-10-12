@@ -3,9 +3,9 @@ import HomeController from '../controllers/HomeController.js';
 
 const homeController = new HomeController();
 
-import { RequestMethod } from '../abstracts/Common.js';
+import { IRouter, RequestMethod } from '../abstracts/Common.js';
 
-export default class HomeRouter extends AbstractRouter {
+export default class HomeRouter extends AbstractRouter implements IRouter {
     constructor() {
         super();
 
