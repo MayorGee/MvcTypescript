@@ -39,8 +39,8 @@ export default class DeleteInternController extends AbstractController implement
         this.renderPage(req, res, internView);
     }
 
-    protected  handlePost(req: any, res: any) {
-        this.resource.deleteInternById(parseInt(req.body.id));
+    protected async handlePost(req: any, res: any) {
+        await this.resource.deleteInternById(parseInt(req.body.id));
      
         res.redirect('/interns');
     }
