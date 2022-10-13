@@ -5,7 +5,7 @@ import { randomBytes } from 'crypto';
 import { IController, ErrorResponse, RequestMethod } from '../abstracts/Common.js';
 
 export default abstract class AbstractController implements IController {
-    public execute(req: any, res: any, next: any): void {
+    public execute(req: any, res: any, next: any) {
         const reqestMethod = req.method.toLowerCase();
 
         if (reqestMethod === RequestMethod.get) {
@@ -54,7 +54,7 @@ export default abstract class AbstractController implements IController {
         return res.status(responseCode).redirect(page); 
     }
 
-    protected redirectToHome(res: any, responseCode: number = 501, errorMessage: string = 'You are not a mentor') {
+    protected redirectToHome(res: any, responseCode: number = 501, errorMessage: string = 'You are not a mentor'): any {
         alert(errorMessage);
 
         return this.sendStatusAndRedirect(res, responseCode, '/');
@@ -64,7 +64,7 @@ export default abstract class AbstractController implements IController {
         return res.status(errorCode).send(errorMessage)
     }
     
-    protected renderPage(req: any, res: any, viewClass: any): void {
+    protected renderPage(req: any, res: any, viewClass: any) {
         res.render(
             viewClass.getTemplate(), 
             { 
@@ -78,13 +78,13 @@ export default abstract class AbstractController implements IController {
         return typeof n !== 'string' && n > 0;
     }
 
-    protected handleIdError(id: number, res: any): void {
+    protected handleIdError(id: number, res: any) {
         let errorText = id ? 'Invalid id entered' : 'No Id entered';
 
         this.sendError(res, 500, errorText);
     }
 
-    protected setCsrfToken(req: any): void {
+    protected setCsrfToken(req: any) {
         if(!(req.session.csrfToken)) {
             req.session.csrfToken = randomBytes(50).toString('hex');
         }
