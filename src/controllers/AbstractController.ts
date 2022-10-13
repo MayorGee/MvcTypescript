@@ -50,7 +50,7 @@ export default abstract class AbstractController implements IController {
         return this.sendStatusAndRedirect(res, responseCode, page);
     }
 
-    protected sendStatusAndRedirect(res: any, responseCode: number, page: string) {
+    protected sendStatusAndRedirect(res: any, responseCode: number, page: string): any {
         return res.status(responseCode).redirect(page); 
     }
 
@@ -60,7 +60,7 @@ export default abstract class AbstractController implements IController {
         return this.sendStatusAndRedirect(res, responseCode, '/');
     }
 
-    protected sendError(res: any, errorCode: number, errorMessage: string) {
+    protected sendError(res: any, errorCode: number, errorMessage: string): any {
         return res.status(errorCode).send(errorMessage)
     }
     
