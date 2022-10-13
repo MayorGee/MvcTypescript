@@ -32,8 +32,8 @@ export default class UpdateMentorController extends AbstractController implement
         this.renderPage(req, res, mentorView);
     }
 
-    protected handlePost(req: any, res: any, next: any) {
-        this.resource.updateMentorById(req.body);
+    protected async handlePost(req: any, res: any, next: any) {
+        await this.resource.updateMentorById(req.body);
         
         res.redirect('/mentors');
     }

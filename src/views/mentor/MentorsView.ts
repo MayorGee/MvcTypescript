@@ -5,7 +5,7 @@ import { IView } from '../../abstracts/Common.js';
 
 export default class MentorsView extends AbstractView implements IView {
     private mentors: Mentor[] = [];
-    public template = './mentor/mentors';
+    protected template = './mentor/mentors';
 
     public getMentors(): Mentor[] {
         return this.mentors;

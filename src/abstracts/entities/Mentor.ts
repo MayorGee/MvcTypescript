@@ -30,9 +30,9 @@ export interface IMentorResource {
     getMentors: () => Promise<DbMentor[]>,
     getMentorById: (id: number) => Promise<DbMentor>,
     getMentorByEmail: (email: string) => Promise<DbMentor>,
-    addMentor: (mentor: Mentor) => void,
-    updateMentorById: (mentor: Mentor) => void,
-    deleteMentorById: (id: number) => void,
+    addMentor: (mentor: Mentor) => Promise<void>,
+    updateMentorById: (mentor: Mentor) => Promise<void>,
+    deleteMentorById: (id: number) => Promise<void>,
     isMentorPasswordCorrect: (email: string, password: string) => Promise<boolean>,
     getMentorInterns: (id: number) => Promise<DbIntern[]>,
     getMentorSpecialty: (id: number) => Promise<DbMentorSpecialty>

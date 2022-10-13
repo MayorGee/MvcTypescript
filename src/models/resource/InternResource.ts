@@ -1,7 +1,7 @@
 import Database from '../../Database.js';
 import AbstractResource from './AbstractResource.js';
 
-import { DbGenderedIntern, DbIntern, DbInternProgress, IInternResource, Intern } from '../../abstracts/entities/Intern.js';
+import { DbIntern, DbInternProgress, IInternResource, Intern } from '../../abstracts/entities/Intern.js';
 
 export default class InternResource extends AbstractResource implements IInternResource{
     public async getInterns(): Promise<DbIntern[]> {
@@ -21,7 +21,7 @@ export default class InternResource extends AbstractResource implements IInternR
         return this.escapeHtmlFromQueryData(intern[0]);
     }
 
-    public async getFemaleInterns(): Promise<DbGenderedIntern[]> {
+    public async getFemaleInterns(): Promise<DbIntern[]> {
         const femaleInterns = await Database.runQuery(`
             SELECT 
                 Intern.Id, 
@@ -45,7 +45,7 @@ export default class InternResource extends AbstractResource implements IInternR
         return this.escapeHtmlFromQueryData(femaleInterns);
     }
 
-    public async getMaleInterns(): Promise<DbGenderedIntern[]> {
+    public async getMaleInterns(): Promise<DbIntern[]> {
         const maleInterns = await Database.runQuery(`
             SELECT 
                 Intern.Id, 

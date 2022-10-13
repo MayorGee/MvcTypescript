@@ -7,11 +7,8 @@ export interface DbIntern {
     Specialty_Area_Id: number,
     Email: string,
     Phone_No: number,
-    Password: string
-}
-
-export interface DbGenderedIntern extends DbIntern {
-    Gender: string
+    Password: string,
+    Gender?: string
 }
 
 export interface Intern {
@@ -24,10 +21,7 @@ export interface Intern {
     email: string,
     phone: number
     password: string,
-}
-
-export interface GenderedIntern extends Intern {
-    gender: string
+    gender?: string
 }
 
 export interface DbInternProgress {
@@ -51,11 +45,11 @@ export interface InternProgress {
 export interface IInternResource {
     getInterns: () => Promise<DbIntern[]>,
     getInternById: (id: number) => Promise<DbIntern>,
-    getFemaleInterns: () => Promise<DbGenderedIntern[]>,
-    getMaleInterns: () => Promise<DbGenderedIntern[]>,
-    addIntern: ({ firstName, lastName, internshipId, age, specialtyAreaId, email, password, phone }: Intern) => void,
-    updateInternById: (intern: Intern) => void,
-    deleteInternById: (id: number) => void,
+    getFemaleInterns: () => Promise<DbIntern[]>,
+    getMaleInterns: () => Promise<DbIntern[]>,
+    addIntern: ({ firstName, lastName, internshipId, age, specialtyAreaId, email, password, phone }: Intern) => Promise<void>,
+    updateInternById: (intern: Intern) => Promise<void>,
+    deleteInternById: (id: number) => Promise<void>,
     getInternByEmail: (email: string) => Promise<DbIntern>,
     getInternProgressById: (id: number) => Promise<DbInternProgress>
 }

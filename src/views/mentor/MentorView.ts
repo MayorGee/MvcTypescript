@@ -8,7 +8,7 @@ export default class MentorView extends AbstractView implements IView  {
     private mentor: Mentor | null = null;
     private specialty: MentorSpecialty | null = null;
     private interns: Intern[] = [];
-    public template: string = './mentor/mentor';
+    protected template: string = './mentor/mentor';
 
     public setMentor(mentor: Mentor): this {
         this.mentor = mentor;

@@ -18,7 +18,7 @@ export interface Route {
     requestMethod: RequestMethod
 }
 
-export interface IObjectStringIndex {
+export interface ObjectStringIndex {
     [key: string]: any
 }
 

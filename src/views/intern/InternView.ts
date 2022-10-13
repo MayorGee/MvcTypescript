@@ -6,7 +6,7 @@ import { IView } from '../../abstracts/Common.js';
 export default class InternView extends AbstractView implements IView {
     private intern: Intern | null = null;
     private internProgress: InternProgress | null = null; 
-    public template = './intern/intern';
+    protected template = './intern/intern';
 
     public setIntern(intern: Intern): this {
         this.intern = intern;

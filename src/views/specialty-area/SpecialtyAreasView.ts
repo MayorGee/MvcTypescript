@@ -5,7 +5,7 @@ import { IView } from '../../abstracts/Common.js';
 
 export default class SpecialtyAreasView extends AbstractView implements IView {
     private specialtyAreas: SpecialtyArea[] = [];
-    public template = './specialty-area/specialty-areas';
+    protected template = './specialty-area/specialty-areas';
 
     public getSpecialtyAreas(): SpecialtyArea[] | null {
         return this.specialtyAreas;

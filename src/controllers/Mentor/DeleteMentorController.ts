@@ -33,8 +33,8 @@ export default class DeleteMentorController extends AbstractController implement
         this.renderPage(req, res, mentorView);
     }
 
-    protected handlePost(req: any, res: any, next: any) {
-        this.resource.deleteMentorById(parseInt(req.body.id));
+    protected async handlePost(req: any, res: any, next: any) {
+        await this.resource.deleteMentorById(parseInt(req.body.id));
 
         res.redirect('/mentors');
     }

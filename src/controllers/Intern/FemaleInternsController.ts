@@ -5,7 +5,7 @@ import InternResource from '../../models/resource/InternResource.js';
 import InternConverter from '../../converters/InternConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
-import { IInternResource } from '../../abstracts/entities/Intern.js';
+import { IInternResource, DbIntern } from '../../abstracts/entities/Intern.js';
 
 export default class FemaleInternsController extends AbstractController implements IController {
     protected async handleGet(req: any, res: any, next: any) {
@@ -14,11 +14,11 @@ export default class FemaleInternsController extends AbstractController implemen
         }
 
         const internResource: IInternResource = new InternResource();
-        const femaleInterns = await internResource.getFemaleInterns();
+        const femaleInterns: DbIntern[] = await internResource.getFemaleInterns();
 
         const internsView = new InternsView();
         internsView.setInterns(
-            InternConverter.convertDbGenderedInterns(femaleInterns)
+            InternConverter.convertDbInterns(femaleInterns)
         );
 
         this.renderPage(req, res, internsView);

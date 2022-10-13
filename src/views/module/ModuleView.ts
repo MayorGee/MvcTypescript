@@ -5,7 +5,7 @@ import { IView } from '../../abstracts/Common.js';
 
 export default class ModuleView extends AbstractView implements IView {
     private module: Module | null = null;
-    public template = './module/module';
+    protected template = './module/module';
 
     public setModule(module: Module): this {
         this.module = module;

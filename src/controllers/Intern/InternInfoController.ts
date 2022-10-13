@@ -28,10 +28,10 @@ export default class InternInfoController extends AbstractController {
             .setTemplate('./intern/intern-info');
 
         this.renderPage(req, res, internView);
-   }
+    }
 
-    protected handlePost(req: any, res: any, next: any) {
-        this.resource.updateInternById(req.body);
+    protected async handlePost(req: any, res: any, next: any): Promise<void> {
+        await this.resource.updateInternById(req.body);
      
         res.redirect('/interns');
     }

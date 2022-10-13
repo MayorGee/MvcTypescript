@@ -5,7 +5,7 @@ import { IView } from '../../abstracts/Common.js';
 
 export default class TasksView extends AbstractView implements IView {
     private tasks: Task[] = [];
-    public template = './task/tasks';
+    protected template = './task/tasks';
 
     public getTasks(): Task[] {
         return this.tasks;

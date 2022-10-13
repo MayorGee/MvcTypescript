@@ -5,7 +5,7 @@ import { IView } from '../../abstracts/Common.js';
 
 export default class InternshipsView extends AbstractView implements IView {
     private internships: Internship[]  = [];
-    public template = './internship/internships';
+    protected template = './internship/internships';
     
     getInternships(): Internship[]  {
         return this.internships;

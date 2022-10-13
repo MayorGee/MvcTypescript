@@ -1,4 +1,4 @@
-import { IResource, IObjectStringIndex } from "../../abstracts/Common";
+import { IResource, ObjectStringIndex } from "../../abstracts/Common";
 
 export default class AbstractResource implements IResource{
     public escapeHtml(unsafe: string): string {
@@ -21,8 +21,8 @@ export default class AbstractResource implements IResource{
     }
 
     public escapeHtmlFromDataSet(queryData: any): any {
-        const escapedDataSet = queryData.map((dataSet: IObjectStringIndex) => {
-            const newDataSet: IObjectStringIndex = {};
+        const escapedDataSet = queryData.map((dataSet: ObjectStringIndex) => {
+            const newDataSet: ObjectStringIndex = {};
 
             for(let key in dataSet) {
                 newDataSet[key] = this.escapeHtml(dataSet[key]);
