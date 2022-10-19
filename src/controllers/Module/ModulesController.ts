@@ -6,9 +6,10 @@ import ModuleConverter from '../../converters/ModuleConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
 import { DbModule, IModuleResource } from '../../abstracts/entities/Module.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class ModulesController extends AbstractController implements IController {
-    protected async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }

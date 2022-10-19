@@ -6,6 +6,7 @@ import InternConverter from '../../converters/InternConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
 import { IInternResource } from '../../abstracts/entities/Intern.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class DeleteInternController extends AbstractController implements IController {
     private resource: IInternResource;
@@ -16,17 +17,17 @@ export default class DeleteInternController extends AbstractController implement
         this.resource = new InternResource();
     }
 
-    protected async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
-
-        const internId: number = req.query.id;
+        
+        const internId = req.query.id;
 
         if (!this.isNumber(internId)) {
             return this.handleIdError(internId, res);
         }
-
+        
         const intern =  await this.resource.getInternById(internId);
 
         const internView = new InternView();
@@ -39,7 +40,7 @@ export default class DeleteInternController extends AbstractController implement
         this.renderPage(req, res, internView);
     }
 
-    protected async handlePost(req: any, res: any) {
+    protected async handlePost(req: Request, res: Response) {
         await this.resource.deleteInternById(parseInt(req.body.id));
      
         res.redirect('/interns');

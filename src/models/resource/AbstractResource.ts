@@ -1,4 +1,4 @@
-import { IResource, ObjectStringIndex } from "../../abstracts/Common";
+import { IResource, QueryResponseData } from "../../abstracts/Common";
 
 export default class AbstractResource implements IResource{
     public escapeHtml(unsafe: string): string {
@@ -12,23 +12,21 @@ export default class AbstractResource implements IResource{
         );
     }
 
-    public escapeHtmlFromQueryData(queryData: any): any {
-        if(typeof queryData !== 'string') {
-            return queryData;
+    // I tried using 'queryData: T extends QueryResponseData' here but it keeps asking me for a '?' and I couldn't understand where to place it
+  
+    public escapeHtmlFromSingleDataSet<T>(queryData: any): T {
+        for(let key in queryData) {
+            if(typeof queryData[key] === 'string') {
+                queryData[key] = this.escapeHtml(queryData[key]);
+            }
         }
-            
-        this.escapeHtmlFromDataSet(queryData);
+
+        return queryData;
     }
 
-    public escapeHtmlFromDataSet(queryData: any): any {
-        const escapedDataSet = queryData.map((dataSet: ObjectStringIndex) => {
-            const newDataSet: ObjectStringIndex = {};
-
-            for(let key in dataSet) {
-                newDataSet[key] = this.escapeHtml(dataSet[key]);
-            }
-
-            return newDataSet;
+    public escapeHtmlFromDataSet<T>(queryData : T[]): T[] {
+        const escapedDataSet: T[] = queryData.map((dataSet:  T) => {
+            return this.escapeHtmlFromSingleDataSet(dataSet);
         });
     
         return escapedDataSet;

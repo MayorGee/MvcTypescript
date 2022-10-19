@@ -5,9 +5,10 @@ import MentorResource from '../../models/resource/MentorResource.js';
 
 import { IController } from '../../abstracts/Common.js';
 import { IMentorResource } from '../../abstracts/entities/Mentor.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class AddMentorController extends AbstractController implements IController {
-    protected handleGet(req: any, res: any, next: any) {
+    protected handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
@@ -18,7 +19,7 @@ export default class AddMentorController extends AbstractController implements I
         this.renderPage(req, res, mentorView);
    }
 
-   protected async handlePost(req: any, res: any, next: any) {
+   protected async handlePost(req: Request, res: Response, next: NextFunction) {
         const mentorResource: IMentorResource = new MentorResource();
         await mentorResource.addMentor(req.body);
 

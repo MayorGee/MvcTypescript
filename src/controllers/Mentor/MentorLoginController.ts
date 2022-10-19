@@ -5,16 +5,17 @@ import MentorResource from '../../models/resource/MentorResource.js';
 
 import { IController } from '../../abstracts/Common.js';
 import { IMentorResource } from '../../abstracts/entities/Mentor.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class MentorLoginController extends AbstractController implements IController {
-    protected handleGet(req: any, res: any, next: any) {
+    protected handleGet(req: Request, res: Response, next: NextFunction) {
         const mentorView = new MentorView();
         mentorView.setTemplate('./mentor/mentor-login');
 
         this.renderPage(req, res, mentorView);
     }
 
-    protected async handlePost(req: any, res: any, next: any) {
+    protected async handlePost(req: Request, res: Response, next: NextFunction) {
         const { mentorEmail, mentorPassword } = req.body;
         const mentorResource: IMentorResource = new MentorResource();
 

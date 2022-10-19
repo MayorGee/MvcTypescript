@@ -1,12 +1,12 @@
-import express from 'express';
+import express, { Express } from 'express';
 import session from 'express-session';
-// @ts-ignore
 import { Liquid } from 'liquidjs';
 import bodyParser from 'body-parser';
 import path from 'path';
+import { IRouter } from './abstracts/Common';
 
 export default class  App {
-    private app: any;
+    private app: Express;
 
     constructor(dist: string) {
         this.app = express();
@@ -19,11 +19,9 @@ export default class  App {
         });
     }
 
-    public initRouters(routers: any) {   
-        routers.forEach((Router: new () => any) => {
-            const router = new Router();
-        
-            this.app.use(router.getRouter());
+    public initRouters(routers: IRouter[]) {   
+        routers.forEach((Router: IRouter) => {       
+            this.app.use(Router.getRouter());
         });     
     }
 
@@ -36,9 +34,7 @@ export default class  App {
     }
 
     public initBodyParser() {
-        // @ts-ignore
         this.app.use(bodyParser.json());
-        // @ts-ignore
         this.app.use(bodyParser.urlencoded({ extended: true }));
     }
 

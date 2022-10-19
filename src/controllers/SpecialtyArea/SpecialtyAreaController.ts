@@ -6,14 +6,15 @@ import SpecialtyAreaConverter from '../../converters/SpecialtyAreaConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
 import { DbSpecialtyArea, ISpecialtyAreaResource } from '../../abstracts/entities/SpecialtyArea.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class SpecialtyAreaController extends AbstractController implements IController {
-    protected async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
         
-        const specialtyAreaId: number = req.query.id;
+        const specialtyAreaId = req.query.id;
 
         if (!this.isNumber(specialtyAreaId)) {
             return this.handleIdError(specialtyAreaId, res);

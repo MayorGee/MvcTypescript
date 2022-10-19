@@ -1,15 +1,17 @@
+import { NextFunction, Request, Response, Router } from "express";
+
 export enum RequestMethod {
     get = 'get',
     post = 'post'
 }
 
 export interface IController {
-    execute: (req: any, res: any, next: any) => void
+    execute: (req: Request, res: Response, next: NextFunction) => void
 }
 
 export interface IRouter {
     setRouter: () => void;
-    getRouter: () => any;
+    getRouter: () => Router;
 }
 
 export interface Route {
@@ -18,12 +20,12 @@ export interface Route {
     requestMethod: RequestMethod
 }
 
-export interface ObjectStringIndex {
-    [key: string]: any
+export interface QueryResponseData {
+    [key: string]: string | number | Date
 }
 
 export interface ErrorResponse {
-    res: object,
+    res: Response,
     page: string, 
     responseCode?: number,
     errorMessage?: string 
@@ -31,8 +33,8 @@ export interface ErrorResponse {
 
 export interface IResource {
     escapeHtml: (unsafe: string) => string,
-    escapeHtmlFromQueryData: (queryData: any) => any,
-    escapeHtmlFromDataSet: (queryData: any) => any 
+    escapeHtmlFromSingleDataSet: <T>(queryData: any) => T,
+    escapeHtmlFromDataSet: <T>(queryData: Array<T>) => Array<T>
 }
 
 export interface IView {

@@ -5,24 +5,24 @@ import { DbIntern, DbInternProgress, IInternResource, Intern } from '../../abstr
 
 export default class InternResource extends AbstractResource implements IInternResource{
     public async getInterns(): Promise<DbIntern[]> {
-        const interns = await Database.runQuery(`
+        const interns = await Database.runQuery<DbIntern[]>(`
             SELECT * FROM Intern
         `);  
 
-        return this.escapeHtmlFromQueryData(interns);
+        return this.escapeHtmlFromDataSet(interns);
     }
 
     public async getInternById(id: number): Promise<DbIntern> {
-        const intern = await Database.runQuery(`
+        const intern = await Database.runQuery<DbIntern[]>(`
             SELECT * FROM Intern
             WHERE Id = ${id}
         `);  
 
-        return this.escapeHtmlFromQueryData(intern[0]);
+        return this.escapeHtmlFromSingleDataSet(intern[0]);
     }
 
     public async getFemaleInterns(): Promise<DbIntern[]> {
-        const femaleInterns = await Database.runQuery(`
+        const femaleInterns = await Database.runQuery<DbIntern[]>(`
             SELECT 
                 Intern.Id, 
                 First_Name,
@@ -42,11 +42,11 @@ export default class InternResource extends AbstractResource implements IInternR
             WHERE Gender = "Female"
         `);  
 
-        return this.escapeHtmlFromQueryData(femaleInterns);
+        return this.escapeHtmlFromDataSet(femaleInterns);
     }
 
     public async getMaleInterns(): Promise<DbIntern[]> {
-        const maleInterns = await Database.runQuery(`
+        const maleInterns = await Database.runQuery<DbIntern[]>(`
             SELECT 
                 Intern.Id, 
                 First_Name,
@@ -66,11 +66,11 @@ export default class InternResource extends AbstractResource implements IInternR
             WHERE Gender = "Male"
         `);  
 
-        return this.escapeHtmlFromQueryData(maleInterns);
+        return this.escapeHtmlFromDataSet(maleInterns);
     }
 
     public async addIntern({ firstName, lastName, internshipId, age, specialtyAreaId, email, password, phone }: Intern) {
-        await Database.runQuery(`
+        await Database.runQuery<Intern>(`
             INSERT INTO Intern (
                 First_Name,
                 Last_Name, 
@@ -105,7 +105,7 @@ export default class InternResource extends AbstractResource implements IInternR
             phone
         } = intern;
 
-        await Database.runQuery(`
+        await Database.runQuery<Intern>(`
             UPDATE Intern
             SET First_Name = '${this.escapeHtml(firstName)}',
                 Last_Name = '${this.escapeHtml(lastName)}',
@@ -126,15 +126,15 @@ export default class InternResource extends AbstractResource implements IInternR
     }
 
     public async getInternByEmail(email: string): Promise<DbIntern> {
-        const intern = await Database.runQuery(`
+        const intern = await Database.runQuery<DbIntern[]>(`
             SELECT * FROM Intern
             WHERE Email = '${email}'
         `);  
-        return this.escapeHtmlFromQueryData(intern[0]);
+        return this.escapeHtmlFromSingleDataSet(intern[0]);
     }
 
     public async getInternProgressById(id: number): Promise<DbInternProgress> {
-        const internProgress = await Database.runQuery(`
+        const internProgress = await Database.runQuery<DbInternProgress[]>(`
             SELECT 
                 Intern_Progress.Current_Module As currentModule,
                 Intern_Progress.Doing_Well As performance,
@@ -149,6 +149,6 @@ export default class InternResource extends AbstractResource implements IInternR
             ON Intern_Progress.Mentor_Id = Mentor.Id
             WHERE Intern.Id = '${id}'
         `);  
-        return this.escapeHtmlFromQueryData(internProgress[0]); 
+        return this.escapeHtmlFromSingleDataSet(internProgress[0]); 
     }
 }

@@ -6,11 +6,12 @@ import InternResource from '../../models/resource/InternResource.js';
 import { IController } from '../../abstracts/Common.js';
 import { DbInternProgress } from '../../abstracts/entities/Intern.js';
 import InternConverter from '../../converters/InternConverter.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class InternProgressController extends AbstractController implements IController {
     private resource = new InternResource();
     
-    protected async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: Request, res: Response, next: NextFunction) {
         const internLoggedIn = this.isInternLoggedIn(req);
 
         if(!internLoggedIn) {
@@ -21,8 +22,7 @@ export default class InternProgressController extends AbstractController impleme
             });
         }      
 
-        const internId: number = req.session.internId;
-
+        const internId = req.session.internId as number;
         
         const internProgress: DbInternProgress =  await this.resource.getInternProgressById(internId);
 

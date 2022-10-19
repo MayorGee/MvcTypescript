@@ -6,25 +6,25 @@ import { DbIntern } from '../../abstracts/entities/Intern.js';
 
 export default class MentorResource extends AbstractResource implements IMentorResource {
     public async getMentors(): Promise<DbMentor[]> {
-        const mentors = await Database.runQuery(`SELECT * FROM Mentor`); 
-        return this.escapeHtmlFromQueryData(mentors);
+        const mentors = await Database.runQuery<DbMentor[]>(`SELECT * FROM Mentor`); 
+        return this.escapeHtmlFromDataSet(mentors);
     }
 
     public async getMentorById(id: number): Promise<DbMentor> {
-        const mentor = await Database.runQuery(`
+        const mentor = await Database.runQuery<DbMentor[]>(`
             SELECT * FROM Mentor
             WHERE Id = ${id}
         `);  
 
-        return this.escapeHtmlFromQueryData(mentor[0]);
+        return this.escapeHtmlFromSingleDataSet(mentor[0]);
     }
 
     public async getMentorByEmail(email: string): Promise<DbMentor> {
-        const mentor = await Database.runQuery(`
+        const mentor = await Database.runQuery<DbMentor[]>(`
             SELECT * FROM Mentor
             WHERE Email = '${email}'
         `);  
-        return this.escapeHtmlFromQueryData(mentor[0]);
+        return this.escapeHtmlFromSingleDataSet(mentor[0]);
     }
 
     public async addMentor(mentor: Mentor) {
@@ -83,7 +83,7 @@ export default class MentorResource extends AbstractResource implements IMentorR
     }
 
     public async isMentorPasswordCorrect(email: string, password: string): Promise<boolean> {
-        const legitMentor = await Database.runQuery(`
+        const legitMentor = await Database.runQuery<DbMentor[]>(`
             SELECT * FROM Mentor
             WHERE Email = '${email}' 
             AND Password = '${password}'
@@ -93,7 +93,7 @@ export default class MentorResource extends AbstractResource implements IMentorR
     }
 
     public async getMentorInterns(id: number): Promise<DbIntern[]> {
-        const interns = await Database.runQuery(`
+        const interns = await Database.runQuery<DbIntern[]>(`
             SELECT 
                 Intern.Id, 
                 Intern.First_Name,
@@ -112,17 +112,17 @@ export default class MentorResource extends AbstractResource implements IMentorR
             WHERE Mentor.Id = '${id}'
         `);  
 
-        return this.escapeHtmlFromQueryData(interns);
+        return this.escapeHtmlFromDataSet(interns);
     }
 
     public async getMentorSpecialty(id: number): Promise<DbMentorSpecialty> {
-        const specialty = await Database.runQuery(`
+        const specialty = await Database.runQuery<DbMentorSpecialty[]>(`
             SELECT Title  FROM Mentor    
             JOIN Specialty_Area
             ON Specialty_Area.Id = Mentor.Specialty_Area_Id    
             WHERE Mentor.Id = '${id}'
         `);  
 
-        return this.escapeHtmlFromQueryData(specialty[0]);
+        return this.escapeHtmlFromSingleDataSet(specialty[0]);
     }
 }

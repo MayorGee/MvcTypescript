@@ -6,16 +6,17 @@ import MentorConverter from '../../converters/MentorConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
 import { DbMentor, IMentorResource } from '../../abstracts/entities/Mentor.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class DeleteMentorController extends AbstractController implements IController {
     private resource: IMentorResource = new MentorResource();
 
-    protected async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
 
-        const mentorId: number = req.query.id;
+        const mentorId = req.query.id;
 
         if (!this.isNumber(mentorId)) {
             return this.handleIdError(mentorId, res);
@@ -33,7 +34,7 @@ export default class DeleteMentorController extends AbstractController implement
         this.renderPage(req, res, mentorView);
     }
 
-    protected async handlePost(req: any, res: any, next: any) {
+    protected async handlePost(req: Request, res: Response, next: NextFunction) {
         await this.resource.deleteMentorById(parseInt(req.body.id));
 
         res.redirect('/mentors');

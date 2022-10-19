@@ -6,9 +6,10 @@ import InternshipsView from '../../views/internship/InternshipsView.js';
 import { IController } from '../../abstracts/Common.js';
 import { DbInternship, IInternshipResource } from '../../abstracts/entities/Internship.js';
 import InternshipConverter from '../../converters/InternshipConverter.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class InternshipsController extends AbstractController implements IController {    
-    protected async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }

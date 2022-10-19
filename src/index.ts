@@ -11,7 +11,6 @@ import TaskRouter from './routers/TaskRouter.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-// @ts-ignore
 const __filename = fileURLToPath(import.meta.url);
 global.__dirname = dirname(__filename);
 
@@ -19,13 +18,13 @@ const app = new App('dist');
 const PORT = 3333;
 
 const routers = [
-    HomeRouter,
-    InternRouter,
-    InternshipRouter,
-    MentorRouter,
-    ModuleRouter,
-    SpecialtyAreaRouter,
-    TaskRouter
+    new HomeRouter(),
+    new InternRouter(),
+    new InternshipRouter(),
+    new MentorRouter(),
+    new ModuleRouter(),
+    new SpecialtyAreaRouter(),
+    new TaskRouter()
 ];
 
 app.initSession();

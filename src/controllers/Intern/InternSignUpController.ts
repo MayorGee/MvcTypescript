@@ -7,16 +7,17 @@ import InternResource from '../../models/resource/InternResource.js';
 
 import { IController } from '../../abstracts/Common.js';
 import { IInternResource } from '../../abstracts/entities/Intern.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class InternSignUpController extends AbstractController implements IController {
-    protected handleGet(req: any, res: any, next: any) {
+    protected handleGet(req: Request, res: Response, next: NextFunction) {
         const internView = new InternView();
         internView.setTemplate('./intern/intern-sign-up');
 
         this.renderPage(req, res, internView);
     }
 
-    protected async handlePost(req: any, res: any, next: any) {
+    protected async handlePost(req: Request, res: Response, next: NextFunction) {
         const internResource: IInternResource = new InternResource();
 
         const internDetails = req.body;

@@ -6,17 +6,18 @@ import MentorConverter from '../../converters/MentorConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
 import { DbMentor, IMentorResource } from '../../abstracts/entities/Mentor.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class MentorController extends AbstractController implements IController {
-    protected async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
 
-        const mentorId: number = req.query.id;
+        const mentorId = req.query.id;
 
         if (!this.isNumber(mentorId)) {
-            return this.handleIdError(mentorId,res);
+            return this.handleIdError(mentorId, res);
         }
 
         const mentorResource: IMentorResource = new MentorResource();

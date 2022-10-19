@@ -6,14 +6,15 @@ import TaskView from '../../views/task/TaskView.js';
 
 import { IController } from '../../abstracts/Common.js';
 import { DbTask, ITaskResource } from '../../abstracts/entities/Task.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class TaskController extends AbstractController implements IController {
-    protected async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
         
-        const taskId: number = req.query.id;
+        const taskId = req.query.id;
 
         if (!this.isNumber(taskId)) {
             return this.handleIdError(taskId, res);

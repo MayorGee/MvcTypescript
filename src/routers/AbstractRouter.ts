@@ -1,9 +1,9 @@
-import express from 'express';
+import express, { Router } from 'express';
 import { Route, IRouter, RequestMethod } from '../abstracts/Common.js';
 
 export default class AbstractRouter implements IRouter {
     protected routes: Route[] = [];
-    protected router: any; 
+    protected router: Router; 
     
     constructor() {
         this.router = express.Router();

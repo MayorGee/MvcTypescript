@@ -6,16 +6,17 @@ import { DbSpecialtyArea, ISpecialtyAreaResource } from '../../abstracts/entitie
 
 export default class SpecialtyAreaResource extends AbstractResource implements ISpecialtyAreaResource {
     public async getSpecialtyAreas(): Promise<DbSpecialtyArea[]> {
-        const specialtyAreas = await Database.runQuery(`SELECT * FROM Specialty_Area`);
-        return this.escapeHtmlFromQueryData(specialtyAreas);
+        const specialtyAreas = await Database.runQuery<DbSpecialtyArea[]>(`SELECT * FROM Specialty_Area`);
+        
+        return this.escapeHtmlFromDataSet(specialtyAreas);
     }
 
     public async getSpecialtyAreaById(id: number): Promise<DbSpecialtyArea> {
-        const specialtyArea = await Database.runQuery(`
+        const specialtyArea = await Database.runQuery<DbSpecialtyArea[]>(`
             SELECT * FROM Specialty_Area
             WHERE Id = ${id}
         `);  
 
-        return this.escapeHtmlFromQueryData(specialtyArea[0]);
+        return this.escapeHtmlFromSingleDataSet(specialtyArea[0]);
     }
 }

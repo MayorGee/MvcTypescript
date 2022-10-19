@@ -6,14 +6,15 @@ import InternshipConverter from '../../converters/InternshipConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
 import { DbInternship, IInternshipResource } from '../../abstracts/entities/Internship.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class InternshipController extends AbstractController implements IController {
-    protected async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
 
-        const internshipId: number = req.query.id;
+        const internshipId = req.query.id ;
 
         if (!this.isNumber(internshipId)) {
             return this.handleIdError(internshipId, res);

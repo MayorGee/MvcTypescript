@@ -6,9 +6,10 @@ import InternConverter from '../../converters/InternConverter.js';
 
 import { IController } from '../../abstracts/Common.js';
 import { DbIntern, IInternResource } from '../../abstracts/entities/Intern.js';
+import { Response, Request } from 'express';
 
 export default class InternsController extends AbstractController implements IController {
-    protected async handleGet(req: any, res: any) {
+    protected async handleGet(req: Request, res: Response) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }

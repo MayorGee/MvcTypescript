@@ -6,9 +6,10 @@ import MentorResource from '../../models/resource/MentorResource.js';
 import { IController } from '../../abstracts/Common.js';
 import InternConverter from '../../converters/InternConverter.js';
 import { IMentorResource } from '../../abstracts/entities/Mentor.js';
+import { NextFunction, Request, Response } from 'express';
 
 export default class MentorStudentsController extends AbstractController implements IController {
-    protected async handleGet(req: any, res: any, next: any) {
+    protected async handleGet(req: Request, res: Response, next: NextFunction) {
         const mentorLoggedIn: boolean = this.isMentorLoggedIn(req);
 
         if(!mentorLoggedIn) {
@@ -19,7 +20,7 @@ export default class MentorStudentsController extends AbstractController impleme
             });
         }      
 
-        const mentorId: number = req.session.mentorId;
+        const mentorId: number  = req.session.mentorId as number;
 
         const mentorResource: IMentorResource = new MentorResource();
         const mentorInterns = await mentorResource.getMentorInterns(mentorId);
