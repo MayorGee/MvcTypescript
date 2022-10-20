@@ -5,7 +5,7 @@ import AbstractController from '../AbstractController.js';
 import InternView from '../../views/intern/InternView.js';
 import InternResource from '../../models/resource/InternResource.js';
 
-import { IController } from '../../abstracts/Common.js';
+import { IController, Role } from '../../abstracts/Common.js';
 import { NextFunction, Request, Response } from 'express';
 
 export default class InternLoginController extends AbstractController implements IController {
@@ -44,7 +44,7 @@ export default class InternLoginController extends AbstractController implements
         }
         
         req.session.internId = registeredIntern.Id;
-        req.session.role = 'Intern';
+        req.session.role = Role.intern;
 
         res.redirect('/intern-account');
     }

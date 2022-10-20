@@ -13,7 +13,7 @@ export default class TaskResource extends AbstractResource implements ITaskResou
             ON Tasks.Module_Id = Module.Id
         `);
 
-        return this.escapeHtmlFromDataSet(tasks);
+        return this.escapeHtmlFromDataSet<DbTask>(tasks);
     }
 
     public async getTaskById(id: number): Promise<DbTask> {
@@ -22,6 +22,6 @@ export default class TaskResource extends AbstractResource implements ITaskResou
             WHERE Id = ${id}
         `);  
 
-        return this.escapeHtmlFromSingleDataSet(task[0]);
+        return this.escapeHtmlFromSingleDataSet<DbTask>(task[0]);
     }
 }

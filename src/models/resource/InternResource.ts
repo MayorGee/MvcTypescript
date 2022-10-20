@@ -9,7 +9,7 @@ export default class InternResource extends AbstractResource implements IInternR
             SELECT * FROM Intern
         `);  
 
-        return this.escapeHtmlFromDataSet(interns);
+        return this.escapeHtmlFromDataSet<DbIntern>(interns);
     }
 
     public async getInternById(id: number): Promise<DbIntern> {
@@ -18,7 +18,7 @@ export default class InternResource extends AbstractResource implements IInternR
             WHERE Id = ${id}
         `);  
 
-        return this.escapeHtmlFromSingleDataSet(intern[0]);
+        return this.escapeHtmlFromSingleDataSet<DbIntern>(intern[0]);
     }
 
     public async getFemaleInterns(): Promise<DbIntern[]> {
@@ -66,7 +66,7 @@ export default class InternResource extends AbstractResource implements IInternR
             WHERE Gender = "Male"
         `);  
 
-        return this.escapeHtmlFromDataSet(maleInterns);
+        return this.escapeHtmlFromDataSet<DbIntern>(maleInterns);
     }
 
     public async addIntern({ firstName, lastName, internshipId, age, specialtyAreaId, email, password, phone }: Intern) {
@@ -130,7 +130,7 @@ export default class InternResource extends AbstractResource implements IInternR
             SELECT * FROM Intern
             WHERE Email = '${email}'
         `);  
-        return this.escapeHtmlFromSingleDataSet(intern[0]);
+        return this.escapeHtmlFromSingleDataSet<DbIntern>(intern[0]);
     }
 
     public async getInternProgressById(id: number): Promise<DbInternProgress> {
@@ -149,6 +149,6 @@ export default class InternResource extends AbstractResource implements IInternR
             ON Intern_Progress.Mentor_Id = Mentor.Id
             WHERE Intern.Id = '${id}'
         `);  
-        return this.escapeHtmlFromSingleDataSet(internProgress[0]); 
+        return this.escapeHtmlFromSingleDataSet<DbInternProgress>(internProgress[0]); 
     }
 }

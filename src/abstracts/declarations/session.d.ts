@@ -6,6 +6,5 @@ declare module 'express-session' {
        mentorId: number,
        role: string,
        csrfToken: string
-       destroy: () => void
     }
 }

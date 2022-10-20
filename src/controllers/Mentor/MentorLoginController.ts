@@ -3,7 +3,7 @@ import AbstractController from '../AbstractController.js';
 import MentorView from '../../views/mentor/MentorView.js';
 import MentorResource from '../../models/resource/MentorResource.js'; 
 
-import { IController } from '../../abstracts/Common.js';
+import { IController, Role } from '../../abstracts/Common.js';
 import { IMentorResource } from '../../abstracts/entities/Mentor.js';
 import { NextFunction, Request, Response } from 'express';
 
@@ -37,7 +37,7 @@ export default class MentorLoginController extends AbstractController implements
         }
         
         req.session.mentorId = registeredMentor.Id;
-        req.session.role = 'Mentor';
+        req.session.role = Role.mentor;
 
         res.redirect('/mentor-account');
     }

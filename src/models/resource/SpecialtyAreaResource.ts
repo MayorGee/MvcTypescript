@@ -8,7 +8,7 @@ export default class SpecialtyAreaResource extends AbstractResource implements I
     public async getSpecialtyAreas(): Promise<DbSpecialtyArea[]> {
         const specialtyAreas = await Database.runQuery<DbSpecialtyArea[]>(`SELECT * FROM Specialty_Area`);
         
-        return this.escapeHtmlFromDataSet(specialtyAreas);
+        return this.escapeHtmlFromDataSet<DbSpecialtyArea>(specialtyAreas);
     }
 
     public async getSpecialtyAreaById(id: number): Promise<DbSpecialtyArea> {
@@ -17,6 +17,6 @@ export default class SpecialtyAreaResource extends AbstractResource implements I
             WHERE Id = ${id}
         `);  
 
-        return this.escapeHtmlFromSingleDataSet(specialtyArea[0]);
+        return this.escapeHtmlFromSingleDataSet<DbSpecialtyArea>(specialtyArea[0]);
     }
 }

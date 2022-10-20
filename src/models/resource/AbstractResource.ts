@@ -1,4 +1,4 @@
-import { IResource, QueryResponseData } from "../../abstracts/Common";
+import { IResource } from "../../abstracts/Common";
 
 export default class AbstractResource implements IResource{
     public escapeHtml(unsafe: string): string {
@@ -11,12 +11,11 @@ export default class AbstractResource implements IResource{
               }[char] || char)
         );
     }
-
-    // I tried using 'queryData: T extends QueryResponseData' here but it keeps asking me for a '?' and I couldn't understand where to place it
   
-    public escapeHtmlFromSingleDataSet<T>(queryData: any): T {
+    public escapeHtmlFromSingleDataSet<T>(queryData: T): T {
         for(let key in queryData) {
             if(typeof queryData[key] === 'string') {
+                // @ts-ignore
                 queryData[key] = this.escapeHtml(queryData[key]);
             }
         }

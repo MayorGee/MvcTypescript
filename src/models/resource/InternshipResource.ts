@@ -7,7 +7,7 @@ import { IInternshipResource } from '../../abstracts/entities/Internship.js';
 export default class InternshipResource extends AbstractResource implements IInternshipResource{
     public async getInternships(): Promise<DbInternship[]> {
         const internships = await Database.runQuery<DbInternship[]>(`SELECT * FROM Internship`);
-        return this.escapeHtmlFromDataSet(internships);
+        return this.escapeHtmlFromDataSet<DbInternship>(internships);
     }
 
     public async getInternshipById(id: number): Promise<DbInternship> {
@@ -16,6 +16,6 @@ export default class InternshipResource extends AbstractResource implements IInt
             WHERE Id = ${id}
         `);
         
-        return this.escapeHtmlFromSingleDataSet(internship[0]);
+        return this.escapeHtmlFromSingleDataSet<DbInternship>(internship[0]);
     }
 }

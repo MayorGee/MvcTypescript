@@ -5,6 +5,11 @@ export enum RequestMethod {
     post = 'post'
 }
 
+export enum Role {
+    intern = 'Intern',
+    mentor = 'Mentor'
+}
+
 export interface IController {
     execute: (req: Request, res: Response, next: NextFunction) => void
 }
@@ -20,9 +25,10 @@ export interface Route {
     requestMethod: RequestMethod
 }
 
-export interface QueryResponseData {
-    [key: string]: string | number | Date
-}
+export type QueryDataType = string | number | Date;
+export type QueryPropertyType = any;
+
+export type QueryData = Record<QueryPropertyType,QueryDataType>
 
 export interface ErrorResponse {
     res: Response,
@@ -33,8 +39,8 @@ export interface ErrorResponse {
 
 export interface IResource {
     escapeHtml: (unsafe: string) => string,
-    escapeHtmlFromSingleDataSet: <T>(queryData: any) => T,
-    escapeHtmlFromDataSet: <T>(queryData: Array<T>) => Array<T>
+    escapeHtmlFromSingleDataSet: <T extends QueryData>(queryData: T) => T,
+    escapeHtmlFromDataSet: <T extends QueryData>(queryData: Array<T>) => Array<T>
 }
 
 export interface IView {

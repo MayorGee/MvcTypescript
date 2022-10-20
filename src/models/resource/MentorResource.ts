@@ -7,7 +7,7 @@ import { DbIntern } from '../../abstracts/entities/Intern.js';
 export default class MentorResource extends AbstractResource implements IMentorResource {
     public async getMentors(): Promise<DbMentor[]> {
         const mentors = await Database.runQuery<DbMentor[]>(`SELECT * FROM Mentor`); 
-        return this.escapeHtmlFromDataSet(mentors);
+        return this.escapeHtmlFromDataSet<DbMentor>(mentors);
     }
 
     public async getMentorById(id: number): Promise<DbMentor> {
@@ -16,7 +16,7 @@ export default class MentorResource extends AbstractResource implements IMentorR
             WHERE Id = ${id}
         `);  
 
-        return this.escapeHtmlFromSingleDataSet(mentor[0]);
+        return this.escapeHtmlFromSingleDataSet<DbMentor>(mentor[0]);
     }
 
     public async getMentorByEmail(email: string): Promise<DbMentor> {
@@ -24,7 +24,7 @@ export default class MentorResource extends AbstractResource implements IMentorR
             SELECT * FROM Mentor
             WHERE Email = '${email}'
         `);  
-        return this.escapeHtmlFromSingleDataSet(mentor[0]);
+        return this.escapeHtmlFromSingleDataSet<DbMentor>(mentor[0]);
     }
 
     public async addMentor(mentor: Mentor) {
@@ -112,7 +112,7 @@ export default class MentorResource extends AbstractResource implements IMentorR
             WHERE Mentor.Id = '${id}'
         `);  
 
-        return this.escapeHtmlFromDataSet(interns);
+        return this.escapeHtmlFromDataSet<DbIntern>(interns);
     }
 
     public async getMentorSpecialty(id: number): Promise<DbMentorSpecialty> {
@@ -123,6 +123,6 @@ export default class MentorResource extends AbstractResource implements IMentorR
             WHERE Mentor.Id = '${id}'
         `);  
 
-        return this.escapeHtmlFromSingleDataSet(specialty[0]);
+        return this.escapeHtmlFromSingleDataSet<DbMentorSpecialty>(specialty[0]);
     }
 }

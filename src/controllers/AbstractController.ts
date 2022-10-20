@@ -2,7 +2,7 @@ import alert from 'alert';
 import { randomBytes } from 'crypto';
 import { NextFunction, Request, Response } from 'express';
 
-import { IController, ErrorResponse, RequestMethod } from '../abstracts/Common.js';
+import { IController, ErrorResponse, RequestMethod, Role } from '../abstracts/Common.js';
 import AbstractView from '../views/AbstractView.js';
 
 export default abstract class AbstractController implements IController {
@@ -37,7 +37,7 @@ export default abstract class AbstractController implements IController {
     }
 
     protected isRoleMentor(req: Request): boolean {
-        return req.session.role === 'Mentor';
+        return req.session.role === Role.mentor;
     }
 
     protected redirect({ 
@@ -45,20 +45,20 @@ export default abstract class AbstractController implements IController {
         page, 
         responseCode = 401,
         errorMessage = 'You are not logged in (as intern)' 
-    }: ErrorResponse): Response {
+    }: ErrorResponse) {
         alert(errorMessage);
         
-        return this.sendStatusAndRedirect(res, responseCode, page);
+        this.sendStatusAndRedirect(res, responseCode, page);
     }
 
-    protected sendStatusAndRedirect(res: Response, responseCode: number, page: string): any {  // Response didn't work here too
-        return res.status(responseCode).redirect(page);
+    protected sendStatusAndRedirect(res: Response, responseCode: number, page: string) {  // Response didn't work here too
+        res.status(responseCode).redirect(page);
     }
 
-    protected redirectToHome(res: Response, responseCode: number = 501, errorMessage: string = 'You are not a mentor'): Response {
+    protected redirectToHome(res: Response, responseCode: number = 501, errorMessage: string = 'You are not a mentor') {
         alert(errorMessage);
 
-        return this.sendStatusAndRedirect(res, responseCode, '/');
+        this.sendStatusAndRedirect(res, responseCode, '/');
     }
 
     protected sendError(res: Response, errorCode: number, errorMessage: string): Response {
