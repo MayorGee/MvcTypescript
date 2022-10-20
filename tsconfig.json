@@ -102,7 +102,6 @@
   },
   "files": [
     "src/abstracts/declarations/session.d.ts",
-    "src/abstracts/declarations/express.d.ts",
     "src/abstracts/declarations/mysql.d.ts"
   ],
   "include": [
