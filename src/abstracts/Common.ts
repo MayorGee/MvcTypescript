@@ -2,7 +2,9 @@ import { NextFunction, Request, Response, Router } from "express";
 
 export enum RequestMethod {
     get = 'get',
-    post = 'post'
+    post = 'post',
+    put = 'put',
+    delete = 'delete'
 }
 
 export enum Role {
@@ -32,9 +34,14 @@ export type QueryData = Record<QueryPropertyType,QueryDataType>
 
 export interface ErrorResponse {
     res: Response,
-    page: string, 
-    responseCode?: number,
-    errorMessage?: string 
+    errorCode?: number,
+    errorMessage?: string
+}
+
+export interface ApiErrorResponse extends ErrorResponse {}
+
+export interface WebErrorResponse extends ErrorResponse {
+    page: string
 }
 
 export interface IResource {

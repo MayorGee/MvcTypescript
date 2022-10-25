@@ -92,7 +92,7 @@
   Since homepage has no entity, I made a separate view for that
 
   ### Controllers
-  1. `AbstractController.js` - This was used to avoid unnecessary code duplication, it contains methods that are needed by all controllers so they all [extend](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes/extends) it so that they can have access to these methods (e.g execute() and renderPage())
+  1. `Controller.js` - This was used to avoid unnecessary code duplication, it contains methods that are needed by all controllers so they all [extend](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes/extends) it so that they can have access to these methods (e.g execute() and renderPage())
 
   2. `FormController` - Contains two methods for each entity that will be updated with an HTML form;
   

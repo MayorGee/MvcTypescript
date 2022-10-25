@@ -7,6 +7,7 @@ export default class MentorConverter {
         Last_Name,
         Specialty_Area_Id,
         Email,
+        Password,
         Phone_No
     }: DbMentor): Mentor {
         return {
@@ -15,6 +16,7 @@ export default class MentorConverter {
             lastName: Last_Name,
             specialtyAreaId: Specialty_Area_Id,
             email: Email,
+            password: Password,
             phone: Phone_No
         }
     }

@@ -6,6 +6,7 @@ export interface DbMentor {
     Last_Name: string,
     Specialty_Area_Id: number,
     Email: string,
+    Password: string,
     Phone_No: number
 }
 
@@ -15,6 +16,7 @@ export interface Mentor {
     lastName: string,
     specialtyAreaId: number,
     email: string,
+    password: string,
     phone: number
 }
 
@@ -34,6 +36,6 @@ export interface IMentorResource {
     updateMentorById: (mentor: Mentor) => Promise<void>,
     deleteMentorById: (id: number) => Promise<void>,
     isMentorPasswordCorrect: (email: string, password: string) => Promise<boolean>,
-    getMentorInterns: (id: number) => Promise<DbIntern[]>,
+    getMentorStudents: (id: number) => Promise<DbIntern[]>,
     getMentorSpecialty: (id: number) => Promise<DbMentorSpecialty>
 }

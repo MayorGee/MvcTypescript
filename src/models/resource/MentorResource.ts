@@ -33,6 +33,7 @@ export default class MentorResource extends AbstractResource implements IMentorR
             lastName,
             specialtyAreaId,
             email,
+            password,
             phone
         } = mentor;
         
@@ -42,6 +43,7 @@ export default class MentorResource extends AbstractResource implements IMentorR
                 Last_Name,
                 Specialty_Area_Id,
                 Email,
+                Password,
                 Phone_No
             )
             VALUES (
@@ -49,6 +51,7 @@ export default class MentorResource extends AbstractResource implements IMentorR
                 '${this.escapeHtml(lastName)}',
                 '${this.escapeHtml(specialtyAreaId.toString())}',
                 '${this.escapeHtml(email)}',
+                '${this.escapeHtml(password)}',
                 '${this.escapeHtml(phone.toString())}'
             )
         `);
@@ -92,7 +95,7 @@ export default class MentorResource extends AbstractResource implements IMentorR
         return !!legitMentor[0];
     }
 
-    public async getMentorInterns(id: number): Promise<DbIntern[]> {
+    public async getMentorStudents(id: number): Promise<DbIntern[]> {
         const interns = await Database.runQuery<DbIntern[]>(`
             SELECT 
                 Intern.Id, 

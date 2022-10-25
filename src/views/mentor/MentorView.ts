@@ -28,12 +28,12 @@ export default class MentorView extends AbstractView implements IView  {
         return this.specialty;
     }
 
-    public setMentorInterns(interns: Intern[]): this {
+    public setMentorStudents(interns: Intern[]): this {
         this.interns = interns;
         return this;
     }
 
-    public getMentorIterns(): Intern[] {
+    public getMentorStudents(): Intern[] {
         return this.interns;
     }
 }

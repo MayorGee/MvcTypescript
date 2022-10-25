@@ -12,11 +12,18 @@ export default class AbstractRouter implements IRouter {
 
     public setRouter() {
         this.routes.forEach(({ route, controller, requestMethod }) => {
-            if (requestMethod === RequestMethod.get) {
-                this.router.get(route, controller.execute.bind(controller));
-            } else if (requestMethod === RequestMethod.post) {
-                this.router.post(route, controller.execute.bind(controller));
-            }           
+            switch (requestMethod) {
+                case RequestMethod.get:
+                    return this.router.get(route, controller.execute.bind(controller));
+                case RequestMethod.post:
+                    return this.router.post(route, controller.execute.bind(controller));
+                case RequestMethod.put:
+                    return this.router.put(route, controller.execute.bind(controller));
+                case RequestMethod.delete:
+                    return this.router.delete(route, controller.execute.bind(controller));;
+                default:
+                    return;           
+            }
         });
     }
 

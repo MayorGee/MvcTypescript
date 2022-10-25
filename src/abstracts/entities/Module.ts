@@ -10,5 +10,8 @@ export interface Module {
 
 export interface IModuleResource {
     getModules: () => Promise<DbModule[]>,
-    getModuleById: (id: number) => Promise<DbModule>
+    getModuleById: (id: number) => Promise<DbModule>,
+    addModule: ({ task }: Module) => Promise<void>,
+    deleteModuleById: (id: number) => Promise<void>,
+    updateModuleById: (module: Module) => Promise<void>
 }
