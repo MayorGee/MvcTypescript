@@ -1,5 +1,5 @@
 import Controller from '../Controller.js';
-import { ApiErrorResponse, IController, RequestMethod } from '../../abstracts/Common.js';
+import { ApiErrorResponse, IController, RequestMethod, SuccessResponse } from '../../abstracts/Common.js';
 
 import { NextFunction, Request, Response } from 'express';
 
@@ -36,7 +36,7 @@ export default class ApiController extends Controller implements IController {
     protected handleId(id: any): number | null {
         let preparedId: number | null = null;
 
-        if (typeof id === 'number' && Number.isInteger(id)) {
+        if (this.isNumber(id)) {
             preparedId = id;
         }
 
@@ -52,7 +52,7 @@ export default class ApiController extends Controller implements IController {
         errorCode = 500, 
         errorMessage = 'Server Error'
     }: ApiErrorResponse){
-        this.sendResponse(res, errorCode, errorMessage);
+        this.returnFailedResponse({ res, errorCode, errorMessage });
     }
 
     protected sendClientError({
@@ -60,10 +60,18 @@ export default class ApiController extends Controller implements IController {
         errorCode = 400, 
         errorMessage = 'Invalid Id Entered'
     }: ApiErrorResponse){
-        this.sendResponse(res, errorCode, errorMessage);
+        this.returnFailedResponse({ res, errorCode, errorMessage });
     }
 
-    protected parseToInt(str: string) {
-        return parseInt(str);
+    protected returnSuccessResponse({
+        res, 
+        code = 200, 
+        message = 'Success', 
+        data
+    }: SuccessResponse): Response  {
+        return res.status(code).json({
+            message: message,
+            data: data
+        })
     }
 }

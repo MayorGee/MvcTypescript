@@ -1,16 +1,16 @@
 import { Intern } from "../../abstracts/entities/Intern";
 
 export default class InternEntity {
-    private Id: number;
-    private First_Name: string;
-    private Last_Name: string;
-    private Internship_Id: number;
-    private Age: number;
-    private Specialty_Area_Id: number;
-    private Email: string;
-    private Phone_No: number;
-    private Password: string;
-    private Gender?: string;
+    private id: number;
+    private firstName: string;
+    private lastName: string;
+    private internshipId: number;
+    private age: number;
+    private specialtyAreaId: number;
+    private email: string;
+    private phone: number;
+    private password: string;
+    private gender?: string;
 
     constructor({
         id,
@@ -24,72 +24,72 @@ export default class InternEntity {
         password,
         gender
     }: Intern) {
-        this.Id = id;
-        this.First_Name = firstName;
-        this.Last_Name = lastName;
-        this.Internship_Id = internshipId;
-        this.Age = age;
-        this.Specialty_Area_Id = specialtyAreaId;
-        this.Email = email;
-        this.Phone_No = phone;
-        this.Password = password;
-        this.Gender = gender;
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.internshipId = internshipId;
+        this.age = age;
+        this.specialtyAreaId = specialtyAreaId;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.gender = gender;
     }
 
     public getId(): number {
-        return this.Id;
+        return this.id;
     }
 
     public getFirstName(): string {
-        return this.First_Name;
+        return this.firstName;
     }   
 
     public getLastName(): string {
-        return this.Last_Name;
+        return this.lastName;
     }
 
     public getInternshipId(): number {
-        return this.Internship_Id;
+        return this.internshipId;
     }
 
     public getAge(): number {
-        return this.Age;
+        return this.age;
     }
 
     public getSpecialtyAreaId(): number {
-        return this.Specialty_Area_Id;
+        return this.specialtyAreaId;
     }
 
     public getEmail(): string {
-        return this.Email;
+        return this.email;
     }
 
     public getPhoneNumber(): number {
-        return this.Phone_No;
+        return this.phone;
     }
 
     public getPassword(): string {
-        return this.Password;
+        return this.password;
     }
 
     public getGender(): string {
-        return this.Gender ?? '-';
+        return this.gender ?? '-';
     }
 
     public getInternSummary(): string {
         return `
-            ${this.First_Name}'s Info:
+            ${this.firstName}'s Info:
 
-            Identification - ${this.Id},
-            First name - ${this.First_Name},
-            Last Name - ${this.Last_Name},
-            Gender - ${this.Gender},
-            Age - ${this.Age},
-            Email - ${this.Email},
-            Contact Phone - ${this.Phone_No},
-            Internship Id - ${this.Internship_Id},
-            Id of Specialty Area - ${this.Specialty_Area_Id},
-            Password - ${this.First_Name}'s password has ${this.Password.length} characters
+            Identification - ${this.id},
+            First name - ${this.firstName},
+            Last Name - ${this.lastName},
+            Gender - ${this.gender},
+            Age - ${this.age},
+            Email - ${this.email},
+            Contact Phone - ${this.phone},
+            Internship Id - ${this.internshipId},
+            Id of Specialty Area - ${this.specialtyAreaId},
+            Password - ${this.firstName}'s password has ${this.password.length} characters
         `
     }
 } 

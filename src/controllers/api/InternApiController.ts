@@ -21,35 +21,47 @@ export default class InternApiController extends ApiController implements IContr
         const internId = this.handleId(req.params.id);
 
         if (!internId) {
-            return this.sendClientError({ res });
+            return this.sendClientError({ res, errorCode: 404, errorMessage: "Intern Not Found"});
         }   
                       
         const dbIntern: DbIntern = await this.resource.getInternById(internId);
 
         if (!dbIntern) {
-            return this.sendResponse(res, 404,'Intern Not Found in Database');
+            return this.returnFailedResponse({ 
+                res, 
+                errorCode: 404, 
+                errorMessage: 'Intern Not Found in Database'
+            });
         }
 
         const intern = InternConverter.convertDbIntern(dbIntern);
 
-        res.json({
-            data: intern
-        })
+        this.returnSuccessResponse({ res, data: intern});
+
     }
 
     protected async handleDelete(req: Request, res: Response, next: NextFunction) {
         const internId = this.handleId(req.params.id);
 
         if (!internId) {
-            return this.sendClientError({ res });
+            return this.sendClientError({ 
+                res, 
+                errorCode: 404,  
+                errorMessage: 'Intern Not Found' 
+            });
         }
         
         try {
             await this.resource.deleteInternById(internId);
-            res.status(200).send('Intern succesfully deleted');
+
+            this.returnSuccessResponse({ res, message: 'Intern succesfully delete'});
+
         } catch(error) {
             console.log(error);
-            this.sendServerError({ res });
+            this.sendServerError({ 
+                res, 
+                errorCode: 500 
+             });
         }
     }
 
@@ -57,18 +69,26 @@ export default class InternApiController extends ApiController implements IContr
         const internId = this.handleId(req.params.id);
 
         if (!internId) {
-            return this.sendClientError({ res });
+            return this.sendClientError({ 
+                res, 
+                errorCode: 404,  
+                errorMessage: 'Intern Not Found' 
+             });
         } 
         
         try {
-            const internToUpdate = req.body;
-            internToUpdate.id = internId;
+            req.body.id = internId;
 
-            await this.resource.updateInternById(internToUpdate);
-            res.status(200).send('Intern succesfully updated');
+            await this.resource.updateInternById(req.body);
+
+            this.returnSuccessResponse({ res, message: 'Intern succesfully updated'});
+            
         } catch(error) {
             console.log(error);
-            this.sendServerError({ res });
+            this.sendServerError({ 
+                res, 
+                errorCode: 500 
+             });
         }
     }
 }

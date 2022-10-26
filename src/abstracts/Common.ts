@@ -32,10 +32,22 @@ export type QueryPropertyType = any;
 
 export type QueryData = Record<QueryPropertyType,QueryDataType>
 
+export type ResponseDataType = any;
+export type ResponsePropertyType = string;
+
+export type ResponseData = Record<ResponsePropertyType,ResponseDataType>
+
 export interface ErrorResponse {
     res: Response,
-    errorCode?: number,
+    errorCode: number,
     errorMessage?: string
+}
+
+export interface SuccessResponse {
+    res: Response,
+    code?: number,
+    message?: string,
+    data?: ResponseData
 }
 
 export interface ApiErrorResponse extends ErrorResponse {}

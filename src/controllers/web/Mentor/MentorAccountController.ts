@@ -16,7 +16,8 @@ export default class MentorAccountController extends WebController implements IC
             return this.redirect({ 
                 res, 
                 page: '/mentor-login', 
-                errorMessage: 'You are not logged in (as mentor)' 
+                errorMessage: 'You are not logged in (as mentor)' ,
+                errorCode: 401
             });
         }
 

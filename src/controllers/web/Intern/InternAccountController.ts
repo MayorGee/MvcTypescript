@@ -13,7 +13,7 @@ export default class InternAccountController extends WebController implements IC
         const internLoggedIn = this.isInternLoggedIn(req);
 
         if(!internLoggedIn) {
-            return this.redirect({ res, page: '/intern-login' });
+            return this.redirect({ res, page: '/intern-login', errorCode: 401 });
         }
 
         const internId = req.session.internId as number;

@@ -21,38 +21,50 @@ export default class MentorApiController extends ApiController implements IContr
         const mentorId = this.handleId(req.params.id);
 
         if (!mentorId) {
-            return this.sendClientError({ res });
+            return this.sendClientError({ 
+                res,
+                errorCode: 404,
+                errorMessage: 'Mentor Not Found'
+         });
         } 
 
         const DbMentor: DbMentor = await this.resource.getMentorById(mentorId);
 
         if (!DbMentor) {
-            return res.json({
-                errorCode: 404,
-                message: 'Mentor Not Found'
-            })
+            return this.sendServerError({ 
+                res, 
+                errorCode: 404, 
+                errorMessage: 'Mentor Not Found'
+            });
         }
 
         const intern = MentorConverter.convertDbMentor(DbMentor);
 
-        res.json({
-            data: intern
-        })
+        this.returnSuccessResponse({ res, data: intern });
     }
 
     protected async handleDelete(req: Request, res: Response, next: NextFunction) {
         const mentorId = this.handleId(req.params.id);
 
         if (!mentorId) {
-            return this.sendClientError({ res });
+            return this.sendClientError({ 
+                res,
+                errorCode: 404,
+                errorMessage: 'Mentor Not Found'
+             });
         } 
         
         try {
             await this.resource.deleteMentorById(mentorId);
-            res.status(200).send('Mentor succesfully deleted');
+
+            this.returnSuccessResponse({ res, message: 'Mentor succesfully deleted'});
+
         } catch(error) {
             console.log(error);
-            this.sendServerError({ res });
+            this.sendServerError({ 
+                res, 
+                errorCode: 500
+             });
         }
     }
 
@@ -60,18 +72,26 @@ export default class MentorApiController extends ApiController implements IContr
         const mentorId = this.handleId(req.params.id);
 
         if (!mentorId) {
-            return this.sendClientError({ res });
+            return this.sendClientError({ 
+                res,
+                errorCode: 404,
+                errorMessage: 'Mentor Not Found'
+             });
         } 
         
         try {
-            const mentorToUpdate = req.body;
-            mentorToUpdate.id = mentorId;
+            req.body.id = mentorId;
 
-            await this.resource.updateMentorById(mentorToUpdate);
-            res.status(200).send('Mentor succesfully updated');
+            await this.resource.updateMentorById(req.body);
+
+            this.returnSuccessResponse({ res, message: 'Mentor succesfully updated'});
+
         } catch(error) {
             console.log(error);
-            this.sendServerError({ res });
+            this.sendServerError({ 
+                res, 
+                errorCode: 500, 
+             });
         }
     }
 }

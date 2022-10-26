@@ -25,7 +25,11 @@ export default class InternSignUpController extends WebController implements ICo
         const internAlreadyExist = await internResource.getInternByEmail(internDetails.email);
         
         if (internAlreadyExist) {
-            return this.sendResponse(res, 409, 'An account exists with this email account already');
+            return this.returnFailedResponse({
+                res, 
+                errorCode: 409, 
+                errorMessage: 'An account exists with this email account already'
+            });
         }
 
         internDetails.password  = await bcrypt.hash(internDetails.password, 12);

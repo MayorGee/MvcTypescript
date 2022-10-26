@@ -77,11 +77,6 @@ export default abstract class WebController extends Controller implements IContr
         return typeof variable !== 'string' && variable > 0;
     }
 
-    protected handleIdError(id: any, res: Response) {
-        let errorText = id ? 'Invalid id entered' : 'No Id entered';
-
-        this.sendResponse(res, 500, errorText);
-    }
 
     protected setCsrfToken(req: Request) {
         if(!(req.session.csrfToken)) {

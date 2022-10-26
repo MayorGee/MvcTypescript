@@ -18,9 +18,9 @@ export default class ModulesApiController  extends ApiController implements ICon
     
     protected async handleGet(req: Request, res: Response, next: NextFunction) {     
         const dbModules: DbModule[] = await this.resource.getModules();
-        const Modules = ModuleConverter.convertDbModules(dbModules);
+        const modules = ModuleConverter.convertDbModules(dbModules);
 
-        res.status(200).json(Modules);
+        this.returnSuccessResponse({ res, data: modules });
     }
 
     protected async handlePost(req: Request, res: Response, next: NextFunction) {        
@@ -29,11 +29,14 @@ export default class ModulesApiController  extends ApiController implements ICon
 
             await this.resource.addModule(newModule);
 
-            return this.sendResponse(res, 200,'Module succesfully added to Database');
-            
+            this.returnSuccessResponse({ res, message: 'Module succesfully added to Database'});
+
         } catch(error) {
             console.log(error);
-            this.sendServerError({ res });
+            this.sendServerError({ 
+                res,
+                errorCode: 500
+             });
         }
     }
 }

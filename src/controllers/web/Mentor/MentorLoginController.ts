@@ -22,7 +22,11 @@ export default class MentorLoginController extends WebController implements ICon
         const registeredMentor = await mentorResource.getMentorByEmail(mentorEmail);
         
         if (!registeredMentor) {
-            return this.sendResponse(res, 400, 'Haha, Get lost Intruder!');
+            return this.returnFailedResponse({
+                res, 
+                errorCode: 400, 
+                errorMessage: 'Haha, Get lost Intruder!'
+            });
         }
 
         const passwordIsCorrect = await mentorResource.isMentorPasswordCorrect(mentorEmail, mentorPassword);

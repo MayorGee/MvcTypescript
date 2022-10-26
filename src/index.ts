@@ -21,17 +21,14 @@ global.__dirname = dirname(__filename);
 const app = new App('dist');
 const PORT = 3333;
 
-const webRouters = [
+const Routers = [
     new HomeRouter(),
     new InternRouter(),
     new InternshipRouter(),
     new MentorRouter(),
     new ModuleRouter(),
     new SpecialtyAreaRouter(),
-    new TaskRouter()
-];
-
-const apiRouters = [
+    new TaskRouter(),
     new InternApiRouter(),
     new MentorApiRouter(),
     new ModuleApiRouter()    
@@ -40,6 +37,5 @@ const apiRouters = [
 app.initSession();
 app.initBodyParser();
 app.initLiquid();
-app.initRouters(webRouters);
-app.initRouters(apiRouters);
+app.initRouters(Routers);
 app.listen(PORT);

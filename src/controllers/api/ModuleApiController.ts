@@ -20,35 +20,50 @@ export default class ModuleController extends ApiController implements IControll
         const moduleId = this.handleId(req.params.id);
 
         if (!moduleId) {
-            return this.sendClientError({ res });
+            return this.sendClientError({ 
+                res,
+                errorCode: 404,
+                errorMessage: 'Module Not Found' 
+            });
         }            
         
         const dbModule: DbModule = await this.resource.getModuleById(moduleId);
 
         if (!dbModule) {
-            return this.sendResponse(res, 404,'Module Not Found in Database');
+            return this.returnFailedResponse({
+                res, 
+                errorCode: 404,
+                errorMessage: 'Module Not Found in Database'
+            });
         }
 
         const module = ModuleConverter.convertDbModule(dbModule);
 
-        res.json({
-            data: module
-        })
+        this.returnSuccessResponse({ res, data: module });
     }
 
     protected async handleDelete(req: Request, res: Response, next: NextFunction) {      
         const moduleId = this.handleId(req.params.id);
 
         if (!moduleId) {
-            return this.sendClientError({ res });
+            return this.sendClientError({ 
+                res,
+                errorCode: 404,
+                errorMessage: 'Module Not Found' 
+             });
         }  
         
         try {
             await this.resource.deleteModuleById(moduleId);
-            res.status(200).send('Module succesfully deleted');
+
+            this.returnSuccessResponse({ res, message: 'Module succesfully deleted'});
+
         } catch(error) {
             console.log(error);
-            this.sendServerError({ res });
+            this.sendServerError({ 
+                res,
+                errorCode: 500
+             });
         }
     }
 
@@ -56,18 +71,26 @@ export default class ModuleController extends ApiController implements IControll
         const moduleId = this.handleId(req.params.id);
 
         if (!moduleId) {
-            return this.sendClientError({ res });
+            return this.sendClientError({ 
+                res,
+                errorCode: 404,
+                errorMessage: 'Module Not Found' 
+             });
         }
         
         try {
-            const moduleToUpdate = req.body;
-            moduleToUpdate.id = moduleId;
+            req.body.id = moduleId;
 
-            await this.resource.updateModuleById(moduleToUpdate);
-            res.status(200).send('Module succesfully updated');
+            await this.resource.updateModuleById(req.body);
+
+            this.returnSuccessResponse({ res, message: 'Module succesfully updated'});
+
         } catch(error) {
             console.log(error);
-            this.sendServerError({ res });
+            this.sendServerError({ 
+                res,
+                errorCode: 500
+             });
         }
     }
 }

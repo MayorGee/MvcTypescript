@@ -20,7 +20,7 @@ export default class InternsApiController  extends ApiController implements ICon
         const dbInterns: DbIntern[] = await this.resource.getInterns();
         const interns = InternConverter.convertDbInterns(dbInterns);
 
-        res.status(200).json(interns);
+        this.returnSuccessResponse({ res, data: interns });
     }
 
     protected async handlePost(req: Request, res: Response, next: NextFunction) {
@@ -29,10 +29,14 @@ export default class InternsApiController  extends ApiController implements ICon
 
             await this.resource.addIntern(newIntern);
 
-            return this.sendResponse(res, 200,'Mentor succesfully added to Database');
+            return this.returnSuccessResponse({ res, message: 'Mentor succesfully added to Database'});
+
         } catch(error) {
             console.log(error);
-            this.sendServerError({ res });
+            this.sendServerError({ 
+                res,
+                errorCode: 500
+            });
         }
     }
 }
