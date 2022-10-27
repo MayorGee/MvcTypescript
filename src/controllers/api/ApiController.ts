@@ -17,7 +17,7 @@ export default class ApiController extends Controller implements IController {
             case RequestMethod.delete:
                 return this.handleDelete(req, res, next);
             default:
-                return this.sendServerError({ 
+                return this.returnFailedResponse({ 
                     res, 
                     errorCode:501, 
                     errorMessage :`${requestMethod} method type wasn't implemented`
@@ -45,22 +45,6 @@ export default class ApiController extends Controller implements IController {
         }
 
         return preparedId;
-    }
-
-    protected sendServerError({
-        res, 
-        errorCode = 500, 
-        errorMessage = 'Server Error'
-    }: ApiErrorResponse){
-        this.returnFailedResponse({ res, errorCode, errorMessage });
-    }
-
-    protected sendClientError({
-        res, 
-        errorCode = 400, 
-        errorMessage = 'Invalid Id Entered'
-    }: ApiErrorResponse){
-        this.returnFailedResponse({ res, errorCode, errorMessage });
     }
 
     protected returnSuccessResponse({

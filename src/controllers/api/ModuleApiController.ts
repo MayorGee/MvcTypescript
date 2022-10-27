@@ -20,11 +20,7 @@ export default class ModuleController extends ApiController implements IControll
         const moduleId = this.handleId(req.params.id);
 
         if (!moduleId) {
-            return this.sendClientError({ 
-                res,
-                errorCode: 404,
-                errorMessage: 'Module Not Found' 
-            });
+            return this.handleIdError(moduleId, res);
         }            
         
         const dbModule: DbModule = await this.resource.getModuleById(moduleId);
@@ -46,11 +42,7 @@ export default class ModuleController extends ApiController implements IControll
         const moduleId = this.handleId(req.params.id);
 
         if (!moduleId) {
-            return this.sendClientError({ 
-                res,
-                errorCode: 404,
-                errorMessage: 'Module Not Found' 
-             });
+            return this.handleIdError(moduleId, res);
         }  
         
         try {
@@ -60,10 +52,7 @@ export default class ModuleController extends ApiController implements IControll
 
         } catch(error) {
             console.log(error);
-            this.sendServerError({ 
-                res,
-                errorCode: 500
-             });
+            this.returnFailedResponse({ res });
         }
     }
 
@@ -71,11 +60,7 @@ export default class ModuleController extends ApiController implements IControll
         const moduleId = this.handleId(req.params.id);
 
         if (!moduleId) {
-            return this.sendClientError({ 
-                res,
-                errorCode: 404,
-                errorMessage: 'Module Not Found' 
-             });
+            return this.handleIdError(moduleId, res);
         }
         
         try {
@@ -87,10 +72,7 @@ export default class ModuleController extends ApiController implements IControll
 
         } catch(error) {
             console.log(error);
-            this.sendServerError({ 
-                res,
-                errorCode: 500
-             });
+            this.returnFailedResponse({ res });
         }
     }
 }

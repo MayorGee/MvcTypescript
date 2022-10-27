@@ -21,15 +21,15 @@ export default class InternApiController extends ApiController implements IContr
         const internId = this.handleId(req.params.id);
 
         if (!internId) {
-            return this.sendClientError({ res, errorCode: 404, errorMessage: "Intern Not Found"});
+            return this.handleIdError(internId, res);
         }   
                       
         const dbIntern: DbIntern = await this.resource.getInternById(internId);
 
         if (!dbIntern) {
-            return this.returnFailedResponse({ 
+            return this.returnFailedResponse({
                 res, 
-                errorCode: 404, 
+                errorCode: 404,
                 errorMessage: 'Intern Not Found in Database'
             });
         }
@@ -44,11 +44,7 @@ export default class InternApiController extends ApiController implements IContr
         const internId = this.handleId(req.params.id);
 
         if (!internId) {
-            return this.sendClientError({ 
-                res, 
-                errorCode: 404,  
-                errorMessage: 'Intern Not Found' 
-            });
+            return this.handleIdError(internId, res);
         }
         
         try {
@@ -58,10 +54,7 @@ export default class InternApiController extends ApiController implements IContr
 
         } catch(error) {
             console.log(error);
-            this.sendServerError({ 
-                res, 
-                errorCode: 500 
-             });
+            this.returnFailedResponse({ res });
         }
     }
 
@@ -69,11 +62,7 @@ export default class InternApiController extends ApiController implements IContr
         const internId = this.handleId(req.params.id);
 
         if (!internId) {
-            return this.sendClientError({ 
-                res, 
-                errorCode: 404,  
-                errorMessage: 'Intern Not Found' 
-             });
+            return this.handleIdError(internId, res);
         } 
         
         try {
@@ -85,10 +74,7 @@ export default class InternApiController extends ApiController implements IContr
             
         } catch(error) {
             console.log(error);
-            this.sendServerError({ 
-                res, 
-                errorCode: 500 
-             });
+            this.returnFailedResponse({ res });
         }
     }
 }

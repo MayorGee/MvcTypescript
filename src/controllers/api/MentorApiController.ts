@@ -21,37 +21,29 @@ export default class MentorApiController extends ApiController implements IContr
         const mentorId = this.handleId(req.params.id);
 
         if (!mentorId) {
-            return this.sendClientError({ 
-                res,
-                errorCode: 404,
-                errorMessage: 'Mentor Not Found'
-         });
+            return this.handleIdError(mentorId, res);
         } 
 
-        const DbMentor: DbMentor = await this.resource.getMentorById(mentorId);
+        const dbMentor: DbMentor = await this.resource.getMentorById(mentorId);
 
-        if (!DbMentor) {
-            return this.sendServerError({ 
+        if (!dbMentor) {
+            return this.returnFailedResponse({
                 res, 
-                errorCode: 404, 
-                errorMessage: 'Mentor Not Found'
+                errorCode: 404,
+                errorMessage: 'Mentor Not Found in Database'
             });
         }
 
-        const intern = MentorConverter.convertDbMentor(DbMentor);
+        const mentor = MentorConverter.convertDbMentor(dbMentor);
 
-        this.returnSuccessResponse({ res, data: intern });
+        this.returnSuccessResponse({ res, data: mentor });
     }
 
     protected async handleDelete(req: Request, res: Response, next: NextFunction) {
         const mentorId = this.handleId(req.params.id);
 
         if (!mentorId) {
-            return this.sendClientError({ 
-                res,
-                errorCode: 404,
-                errorMessage: 'Mentor Not Found'
-             });
+            return this.handleIdError(mentorId, res);
         } 
         
         try {
@@ -61,10 +53,7 @@ export default class MentorApiController extends ApiController implements IContr
 
         } catch(error) {
             console.log(error);
-            this.sendServerError({ 
-                res, 
-                errorCode: 500
-             });
+            this.returnFailedResponse({ res });
         }
     }
 
@@ -72,11 +61,7 @@ export default class MentorApiController extends ApiController implements IContr
         const mentorId = this.handleId(req.params.id);
 
         if (!mentorId) {
-            return this.sendClientError({ 
-                res,
-                errorCode: 404,
-                errorMessage: 'Mentor Not Found'
-             });
+            return this.handleIdError(mentorId, res);
         } 
         
         try {
@@ -88,10 +73,7 @@ export default class MentorApiController extends ApiController implements IContr
 
         } catch(error) {
             console.log(error);
-            this.sendServerError({ 
-                res, 
-                errorCode: 500, 
-             });
+            this.returnFailedResponse({ res });
         }
     }
 }

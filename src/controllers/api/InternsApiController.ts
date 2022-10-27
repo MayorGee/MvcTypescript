@@ -33,10 +33,7 @@ export default class InternsApiController  extends ApiController implements ICon
 
         } catch(error) {
             console.log(error);
-            this.sendServerError({ 
-                res,
-                errorCode: 500
-            });
+            this.returnFailedResponse({ res });
         }
     }
 }

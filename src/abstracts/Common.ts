@@ -39,7 +39,7 @@ export type ResponseData = Record<ResponsePropertyType,ResponseDataType>
 
 export interface ErrorResponse {
     res: Response,
-    errorCode: number,
+    errorCode?: number,
     errorMessage?: string
 }
 

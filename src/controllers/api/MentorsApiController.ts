@@ -32,10 +32,7 @@ export default class MentorsApiController  extends ApiController implements ICon
             this.returnSuccessResponse({ res, message: 'Mentor succesfully added to Database'});
         } catch(error) {
             console.log(error);
-            this.sendServerError({ 
-                res,
-                errorCode: 500
-             });
+            this.returnFailedResponse({ res });
         }
     }
 }
