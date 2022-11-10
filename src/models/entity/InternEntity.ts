@@ -36,6 +36,21 @@ export default class InternEntity {
         this.gender = gender;
     }
 
+    public getIntern(): Intern {
+        return {
+            id: this.id,
+            firstName: this.firstName,
+            lastName: this.lastName,
+            internshipId: this.internshipId,
+            age: this.age,
+            specialtyAreaId: this.specialtyAreaId,
+            email: this.email,
+            phone: this.phone,
+            password: this.password,
+            gender: this.gender
+        }
+    }
+
     public getId(): number {
         return this.id;
     }

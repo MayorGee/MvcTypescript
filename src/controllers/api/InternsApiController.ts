@@ -1,33 +1,37 @@
 import ApiController from './ApiController.js';
 import { IController } from '../../abstracts/Common.js';
 
+import InternProvider from '../../models/provider/InternProvider.js';
 import InternResource from '../../models/resource/InternResource.js';
-import InternConverter from '../../converters/InternConverter.js';
-import { DbIntern, IInternResource, Intern } from '../../abstracts/entities/Intern.js';
+import { IInternProvider, IInternResource, Intern } from '../../abstracts/entities/Intern.js';
 
 import { NextFunction, Request, Response } from 'express';
 
 export default class InternsApiController  extends ApiController implements IController {
-    private resource: IInternResource;
-
-    constructor() {
-        super();
-
-        this.resource = new InternResource();
-    }
+    private internResource: IInternResource | undefined;
+    private internProvider: IInternProvider | undefined;
 
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
-        const dbInterns: DbIntern[] = await this.resource.getInterns();
-        const interns = InternConverter.convertDbInterns(dbInterns);
-
-        this.returnSuccessResponse({ res, data: interns });
+        try {
+            this.internProvider = new InternProvider();
+            const interns: Intern[] = await this.internProvider.getInterns();
+        
+            this.returnSuccessResponse({ res, data: interns });
+        } catch(error: any) {
+            return this.returnFailedResponse({
+                res,
+                errorCode: 404,
+                errorMessage: error.message
+            });
+        }
     }
 
     protected async handlePost(req: Request, res: Response, next: NextFunction) {
         try {
             const newIntern: Intern = req.body;
 
-            await this.resource.addIntern(newIntern);
+            this.internResource = new InternResource();
+            await this.internResource.addIntern(newIntern);
 
             return this.returnSuccessResponse({ res, message: 'Mentor succesfully added to Database'});
 

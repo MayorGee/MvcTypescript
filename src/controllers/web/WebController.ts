@@ -5,6 +5,7 @@ import { IController, WebErrorResponse, Role, RequestMethod } from '../../abstra
 
 import alert from 'alert';
 import { randomBytes } from 'crypto';
+
 import { NextFunction, Request, Response } from 'express';
 
 export default abstract class WebController extends Controller implements IController {

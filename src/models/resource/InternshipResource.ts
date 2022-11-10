@@ -4,7 +4,7 @@ import AbstractResource from './AbstractResource.js';
 import { DbInternship } from '../../abstracts/entities/Internship.js';
 import { IInternshipResource } from '../../abstracts/entities/Internship.js';
 
-export default class InternshipResource extends AbstractResource implements IInternshipResource{
+export default class InternshipResource extends AbstractResource implements IInternshipResource {
     public async getInternships(): Promise<DbInternship[]> {
         const internships = await Database.runQuery<DbInternship[]>(`SELECT * FROM Internship`);
         return this.escapeHtmlFromDataSet<DbInternship>(internships);

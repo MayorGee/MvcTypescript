@@ -2,18 +2,19 @@ import ApiController from './ApiController.js';
 import { IController } from '../../abstracts/Common.js';
 
 import ModuleResource from '../../models/resource/ModuleResource.js';
-import ModuleConverter from '../../converters/ModuleConverter.js';
-import { DbModule, IModuleResource } from '../../abstracts/entities/Module.js';
+import ModuleProvider from '../../models/provider/ModuleProvider.js';
+import { Module, IModuleResource, IModuleProvider } from '../../abstracts/entities/Module.js';
 
 import { NextFunction, Request, Response } from 'express';
 
 export default class ModuleController extends ApiController implements IController {
-    private resource: IModuleResource;
+    private moduleResource: IModuleResource;
+    private moduleProvider: IModuleProvider | undefined;
 
     constructor() {
         super();
 
-        this.resource = new ModuleResource();
+        this.moduleResource = new ModuleResource();
     }
     
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
@@ -23,19 +24,18 @@ export default class ModuleController extends ApiController implements IControll
             return this.handleIdError(moduleId, res);
         }            
         
-        const dbModule: DbModule = await this.resource.getModuleById(moduleId);
-
-        if (!dbModule) {
+        try {
+            this.moduleProvider = new ModuleProvider();
+            const module: Module = await this.moduleProvider.getModuleById(moduleId);
+        
+            this.returnSuccessResponse({ res, data: module});
+        } catch(error: any) {
             return this.returnFailedResponse({
-                res, 
+                res,
                 errorCode: 404,
-                errorMessage: 'Module Not Found in Database'
+                errorMessage: error.message
             });
         }
-
-        const module = ModuleConverter.convertDbModule(dbModule);
-
-        this.returnSuccessResponse({ res, data: module });
     }
 
     protected async handleDelete(req: Request, res: Response, next: NextFunction) {      
@@ -46,7 +46,7 @@ export default class ModuleController extends ApiController implements IControll
         }  
         
         try {
-            await this.resource.deleteModuleById(moduleId);
+            await this.moduleResource.deleteModuleById(moduleId);
 
             this.returnSuccessResponse({ res, message: 'Module succesfully deleted'});
 
@@ -66,7 +66,7 @@ export default class ModuleController extends ApiController implements IControll
         try {
             req.body.id = moduleId;
 
-            await this.resource.updateModuleById(req.body);
+            await this.moduleResource.updateModuleById(req.body);
 
             this.returnSuccessResponse({ res, message: 'Module succesfully updated'});
 

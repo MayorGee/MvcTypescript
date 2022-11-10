@@ -1,11 +1,11 @@
 import WebController from '../WebController.js';
+import { IController } from '../../../abstracts/Common.js';
 
 import TaskResource from '../../../models/resource/TaskResource.js';
 import TaskConverter from '../../../converters/TaskConverter.js';
 import TaskView from '../../../views/task/TaskView.js';
-
-import { IController } from '../../../abstracts/Common.js';
 import { DbTask, ITaskResource } from '../../../abstracts/entities/Task.js';
+
 import { NextFunction, Request, Response } from 'express';
 
 export default class TaskController extends WebController implements IController {

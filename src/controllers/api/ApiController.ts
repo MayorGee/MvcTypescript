@@ -1,5 +1,5 @@
 import Controller from '../Controller.js';
-import { ApiErrorResponse, IController, RequestMethod, SuccessResponse } from '../../abstracts/Common.js';
+import { IController, RequestMethod, SuccessResponse } from '../../abstracts/Common.js';
 
 import { NextFunction, Request, Response } from 'express';
 

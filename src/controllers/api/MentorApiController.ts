@@ -1,20 +1,20 @@
 import ApiController from './ApiController.js';
-
 import { IController } from '../../abstracts/Common.js';
 
 import MentorResource from '../../models/resource/MentorResource.js';
-import MentorConverter from '../../converters/MentorConverter.js';
-import { DbMentor, IMentorResource } from '../../abstracts/entities/Mentor.js';
+import MentorProvider from '../../models/provider/MentorProvider.js';
+import { Mentor, IMentorProvider, IMentorResource } from '../../abstracts/entities/Mentor.js';
 
 import { Request, Response, NextFunction } from 'express';
 
 export default class MentorApiController extends ApiController implements IController {
-    private resource: IMentorResource;
+    private mentorResource: IMentorResource;
+    private mentorProvider: IMentorProvider | undefined;
 
     constructor() {
         super();
 
-        this.resource = new MentorResource();
+        this.mentorResource = new MentorResource();
     }
 
     protected async handleGet(req: Request, res: Response, next: NextFunction) {     
@@ -24,19 +24,18 @@ export default class MentorApiController extends ApiController implements IContr
             return this.handleIdError(mentorId, res);
         } 
 
-        const dbMentor: DbMentor = await this.resource.getMentorById(mentorId);
+        try {
+            this.mentorProvider = new MentorProvider();
+            const mentor: Mentor = await this.mentorProvider.getMentorById(mentorId);
 
-        if (!dbMentor) {
+            this.returnSuccessResponse({ res, data: mentor });
+        } catch(error: any) {
             return this.returnFailedResponse({
                 res, 
                 errorCode: 404,
-                errorMessage: 'Mentor Not Found in Database'
+                errorMessage: error.message
             });
         }
-
-        const mentor = MentorConverter.convertDbMentor(dbMentor);
-
-        this.returnSuccessResponse({ res, data: mentor });
     }
 
     protected async handleDelete(req: Request, res: Response, next: NextFunction) {
@@ -47,7 +46,7 @@ export default class MentorApiController extends ApiController implements IContr
         } 
         
         try {
-            await this.resource.deleteMentorById(mentorId);
+            await this.mentorResource.deleteMentorById(mentorId);
 
             this.returnSuccessResponse({ res, message: 'Mentor succesfully deleted'});
 
@@ -67,7 +66,7 @@ export default class MentorApiController extends ApiController implements IContr
         try {
             req.body.id = mentorId;
 
-            await this.resource.updateMentorById(req.body);
+            await this.mentorResource.updateMentorById(req.body);
 
             this.returnSuccessResponse({ res, message: 'Mentor succesfully updated'});
 

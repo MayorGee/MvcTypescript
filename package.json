@@ -24,7 +24,8 @@
         "gulp-typescript": "^6.0.0-alpha.1",
         "http-proxy-middleware": "^2.0.6",
         "mixin-deep": "^2.0.1",
-        "negotiator": "^0.6.3"
+        "negotiator": "^0.6.3",
+        "redis": "^4.3.1"
     },
     "devDependencies": {
         "@types/bcrypt": "^5.0.0",

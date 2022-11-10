@@ -8,9 +8,7 @@ import { DbInternProgress } from '../../../abstracts/entities/Intern.js';
 import InternConverter from '../../../converters/InternConverter.js';
 import { NextFunction, Request, Response } from 'express';
 
-export default class InternProgressController extends WebController implements IController {
-    private resource = new InternResource();
-    
+export default class InternProgressController extends WebController implements IController {  
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
         const internLoggedIn = this.isInternLoggedIn(req);
 
@@ -24,7 +22,8 @@ export default class InternProgressController extends WebController implements I
 
         const internId = req.session.internId as number;
         
-        const internProgress: DbInternProgress =  await this.resource.getInternProgressById(internId);
+        const internResource = new InternResource();
+        const internProgress: DbInternProgress =  await internResource.getInternProgressById(internId);
 
         const internView = new InternView();
         internView

@@ -1,15 +1,22 @@
 import WebController from '../WebController.js';
+import { IController } from '../../../abstracts/Common.js';
 
 import MentorView from '../../../views/mentor/MentorView.js';
 import MentorResource from '../../../models/resource/MentorResource.js';
 import MentorConverter from '../../../converters/MentorConverter.js';
-
-import { IController } from '../../../abstracts/Common.js';
 import { DbMentor, IMentorResource } from '../../../abstracts/entities/Mentor.js';
+
 import { NextFunction, Request, Response } from 'express';
 
 export default class UpdateMentorController extends WebController implements IController {
-    private resource : IMentorResource = new MentorResource();
+    private mentorResource : IMentorResource;
+
+    constructor() {
+        super();
+
+        this.mentorResource = new MentorResource();
+    }
+
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
@@ -21,7 +28,7 @@ export default class UpdateMentorController extends WebController implements ICo
             return this.handleIdError(mentorId, res);
         }
 
-        const mentor: DbMentor =  await this.resource.getMentorById(mentorId);
+        const mentor: DbMentor =  await this.mentorResource.getMentorById(mentorId);
         
         const mentorView = new MentorView();
         mentorView
@@ -34,7 +41,7 @@ export default class UpdateMentorController extends WebController implements ICo
     }
 
     protected async handlePost(req: Request, res: Response, next: NextFunction) {
-        await this.resource.updateMentorById(req.body);
+        await this.mentorResource.updateMentorById(req.body);
         
         res.redirect('/mentors');
     }

@@ -1,20 +1,20 @@
 import ApiController from './ApiController.js';
 import { IController } from '../../abstracts/Common.js';
 
+import InternProvider from '../../models/provider/InternProvider.js'; 
+import InternResource from '../../models/resource/InternResource.js';
+import { Intern, IInternProvider, IInternResource } from '../../abstracts/entities/Intern.js';
+
 import { NextFunction, Request, Response } from 'express';
 
-import InternResource from '../../models/resource/InternResource.js';
-import InternConverter from '../../converters/InternConverter.js';
-import { DbIntern, IInternResource } from '../../abstracts/entities/Intern.js';
-
-
 export default class InternApiController extends ApiController implements IController {
-    private resource: IInternResource;
+    private internResource: IInternResource;
+    private internProvider: IInternProvider | undefined;
 
     constructor() {
         super();
 
-        this.resource = new InternResource();
+        this.internResource = new InternResource();
     }
 
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
@@ -23,21 +23,19 @@ export default class InternApiController extends ApiController implements IContr
         if (!internId) {
             return this.handleIdError(internId, res);
         }   
-                      
-        const dbIntern: DbIntern = await this.resource.getInternById(internId);
-
-        if (!dbIntern) {
+             
+        try {
+            this.internProvider = new InternProvider();
+            const intern: Intern = await this.internProvider.getInternById(internId);
+        
+            this.returnSuccessResponse({ res, data: intern});
+        } catch(err: any) {
             return this.returnFailedResponse({
-                res, 
+                res,
                 errorCode: 404,
-                errorMessage: 'Intern Not Found in Database'
+                errorMessage: err.message
             });
         }
-
-        const intern = InternConverter.convertDbIntern(dbIntern);
-
-        this.returnSuccessResponse({ res, data: intern});
-
     }
 
     protected async handleDelete(req: Request, res: Response, next: NextFunction) {
@@ -48,13 +46,16 @@ export default class InternApiController extends ApiController implements IContr
         }
         
         try {
-            await this.resource.deleteInternById(internId);
+            await this.internResource.deleteInternById(internId);
 
-            this.returnSuccessResponse({ res, message: 'Intern succesfully delete'});
+            this.returnSuccessResponse({ res, message: 'Intern succesfully deleted'});
 
-        } catch(error) {
+        } catch(error: any) {
             console.log(error);
-            this.returnFailedResponse({ res });
+            this.returnFailedResponse({ 
+                res, 
+                errorMessage: error.message 
+            });
         }
     }
 
@@ -68,13 +69,16 @@ export default class InternApiController extends ApiController implements IContr
         try {
             req.body.id = internId;
 
-            await this.resource.updateInternById(req.body);
+            await this.internResource.updateInternById(req.body);
 
             this.returnSuccessResponse({ res, message: 'Intern succesfully updated'});
             
-        } catch(error) {
+        } catch(error: any) {
             console.log(error);
-            this.returnFailedResponse({ res });
+            this.returnFailedResponse({ 
+                res, 
+                errorMessage: error.message 
+            });
         }
     }
 }

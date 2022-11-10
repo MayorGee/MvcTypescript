@@ -39,3 +39,8 @@ export interface IMentorResource {
     getMentorStudents: (id: number) => Promise<DbIntern[]>,
     getMentorSpecialty: (id: number) => Promise<DbMentorSpecialty>
 }
+
+export interface IMentorProvider {
+    getMentors: () => Promise<Mentor[]>,
+    getMentorById: (id: number) => Promise<Mentor>
+}

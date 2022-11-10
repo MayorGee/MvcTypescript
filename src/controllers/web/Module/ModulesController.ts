@@ -1,11 +1,11 @@
 import WebController from '../WebController.js';
+import { IController } from '../../../abstracts/Common.js';
 
 import ModuleResource from '../../../models/resource/ModuleResource.js';
 import ModulesView from '../../../views/module/ModulesView.js';
 import ModuleConverter from '../../../converters/ModuleConverter.js';
-
-import { IController } from '../../../abstracts/Common.js';
 import { DbModule, IModuleResource } from '../../../abstracts/entities/Module.js';
+
 import { NextFunction, Request, Response } from 'express';
 
 export default class ModulesController extends WebController implements IController {

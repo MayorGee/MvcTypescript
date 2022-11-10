@@ -3,7 +3,7 @@ import AbstractResource from './AbstractResource.js';
 
 import { DbIntern, DbInternProgress, IInternResource, Intern } from '../../abstracts/entities/Intern.js';
 
-export default class InternResource extends AbstractResource implements IInternResource{
+export default class InternResource extends AbstractResource implements IInternResource {
     public async getInterns(): Promise<DbIntern[]> {
         const interns = await Database.runQuery<DbIntern[]>(`
             SELECT * FROM Intern

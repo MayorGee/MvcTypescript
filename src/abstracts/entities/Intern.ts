@@ -53,3 +53,8 @@ export interface IInternResource {
     getInternByEmail: (email: string) => Promise<DbIntern>,
     getInternProgressById: (id: number) => Promise<DbInternProgress>
 }
+
+export interface IInternProvider {
+    getInterns: () => Promise<Intern[]>,
+    getInternById: (id: number) => Promise<Intern>
+}

@@ -9,7 +9,13 @@ import { DbIntern, IInternResource } from '../../../abstracts/entities/Intern.js
 import { NextFunction, Request, Response } from 'express';
 
 export default class InternInfoController extends WebController implements IController {
-    private resource: IInternResource = new InternResource();
+    private internResource: IInternResource;
+
+    constructor() {
+        super();
+
+        this.internResource = new InternResource();
+    }
 
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
         const internLoggedIn: boolean = this.isInternLoggedIn(req);
@@ -20,7 +26,7 @@ export default class InternInfoController extends WebController implements ICont
 
         const internId: number  = req.session.internId as number;
                  
-        const intern: DbIntern =  await this.resource.getInternById(internId);
+        const intern: DbIntern =  await this.internResource.getInternById(internId);
 
         const internView = new InternView();
         internView
@@ -33,7 +39,7 @@ export default class InternInfoController extends WebController implements ICont
     }
 
     protected async handlePost(req: Request, res: Response, next: NextFunction): Promise<void> {
-        await this.resource.updateInternById(req.body);
+        await this.internResource.updateInternById(req.body);
      
         res.redirect('/interns');
     }

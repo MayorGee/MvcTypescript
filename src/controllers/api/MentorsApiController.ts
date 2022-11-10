@@ -2,32 +2,36 @@ import ApiController from './ApiController.js';
 import { IController } from '../../abstracts/Common.js';
 
 import MentorResource from '../../models/resource/MentorResource.js';
-import MentorConverter from '../../converters/MentorConverter.js';
-import { DbMentor, IMentorResource, Mentor } from '../../abstracts/entities/Mentor.js';
+import MentorProvider from '../../models/provider/MentorProvider.js';
+import { IMentorResource, Mentor, IMentorProvider } from '../../abstracts/entities/Mentor.js';
 
 import { NextFunction, Request, Response } from 'express';
 
 export default class MentorsApiController  extends ApiController implements IController {
-    private resource: IMentorResource;
-
-    constructor() {
-        super();
-
-        this.resource = new MentorResource();
-    }
+    private mentorResource: IMentorResource | undefined;
+    private mentorProvider: IMentorProvider | undefined;
     
     protected async handleGet(req: Request, res: Response, next: NextFunction) {      
-        const dbMentors: DbMentor[] = await this.resource.getMentors();
-        const mentors = MentorConverter.convertDbMentors(dbMentors);
-
-        this.returnSuccessResponse({ res, data: mentors });
+        try {
+            this.mentorProvider = new MentorProvider();
+            const mentors: Mentor[] = await this.mentorProvider.getMentors();
+        
+            this.returnSuccessResponse({ res, data: mentors });
+        } catch(error: any) {
+            return this.returnFailedResponse({
+                res,
+                errorCode: 404,
+                errorMessage: error.message
+            });
+        }
     }
 
     protected async handlePost(req: Request, res: Response, next: NextFunction) {       
         try {
             const newMentor: Mentor = req.body;
 
-            await this.resource.addMentor(newMentor);
+            this.mentorResource = new MentorResource();
+            await this.mentorResource.addMentor(newMentor);
 
             this.returnSuccessResponse({ res, message: 'Mentor succesfully added to Database'});
         } catch(error) {

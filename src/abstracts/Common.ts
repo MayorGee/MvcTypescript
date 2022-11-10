@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response, Router } from "express";
+import { QueryData, ResponseData } from "./Records";
 
 export enum RequestMethod {
     get = 'get',
@@ -27,16 +28,6 @@ export interface Route {
     requestMethod: RequestMethod
 }
 
-export type QueryDataType = string | number | Date;
-export type QueryPropertyType = any;
-
-export type QueryData = Record<QueryPropertyType,QueryDataType>
-
-export type ResponseDataType = any;
-export type ResponsePropertyType = string;
-
-export type ResponseData = Record<ResponsePropertyType,ResponseDataType>
-
 export interface ErrorResponse {
     res: Response,
     errorCode?: number,
@@ -50,7 +41,7 @@ export interface SuccessResponse {
     data?: ResponseData
 }
 
-export interface ApiErrorResponse extends ErrorResponse {}
+// export interface ApiErrorResponse extends ErrorResponse {}
 
 export interface WebErrorResponse extends ErrorResponse {
     page: string

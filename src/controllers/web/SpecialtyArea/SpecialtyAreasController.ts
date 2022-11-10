@@ -1,11 +1,11 @@
 import WebController from '../WebController.js';
+import { IController } from '../../../abstracts/Common.js';
 
 import SpecialtyAreaResource from '../../../models/resource/SpecialtyAreaResource.js';
 import SpecialtyAreaConverter from '../../../converters/SpecialtyAreaConverter.js';
 import SpecialtyAreasView from '../../../views/specialty-area/SpecialtyAreasView.js';
-
-import { IController } from '../../../abstracts/Common.js';
 import { DbSpecialtyArea, ISpecialtyAreaResource } from '../../../abstracts/entities/SpecialtyArea.js';
+
 import { NextFunction, Request, Response } from 'express';
 
 export default class SpecialtyAreasController extends WebController implements IController {

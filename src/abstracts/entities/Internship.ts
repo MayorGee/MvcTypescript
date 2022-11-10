@@ -18,3 +18,8 @@ export interface IInternshipResource {
     getInternships: () => Promise<DbInternship[]>,
     getInternshipById: (id: number) => Promise<DbInternship>
 }
+
+export interface IInternshipProvider {
+    getInternships: () => Promise<Internship[]>,
+    getInternshipById: (id: number) => Promise<Internship>
+}

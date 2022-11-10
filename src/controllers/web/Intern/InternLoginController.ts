@@ -8,8 +8,6 @@ import { IController, Role } from '../../../abstracts/Common.js';
 import { NextFunction, Request, Response } from 'express';
 
 export default class InternLoginController extends WebController implements IController {
-    private resource = new InternResource();
-
     protected handleGet(req: Request, res: Response, next: NextFunction) {
         const internView = new InternView();
         internView.setTemplate('./intern/intern-login');
@@ -20,7 +18,8 @@ export default class InternLoginController extends WebController implements ICon
     protected async handlePost(req: Request, res: Response, next: NextFunction) {
         const { internEmail, internPassword } = req.body;
         
-        const registeredIntern = await this.resource.getInternByEmail(internEmail);
+        const internResource = new InternResource();
+        const registeredIntern = await internResource.getInternByEmail(internEmail);
         
         if (!registeredIntern) {
             return this.redirect({ 

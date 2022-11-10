@@ -1,6 +1,6 @@
 import WebController from '../WebController.js';
-
 import { IController } from '../../../abstracts/Common.js';
+
 import { NextFunction, Request, Response } from 'express';
 
 export default class MentorLogoutController extends WebController implements IController {

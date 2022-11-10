@@ -1,11 +1,11 @@
 import WebController from '../WebController.js';
+import { IController } from '../../../abstracts/Common.js';
 
 import InternshipResource from '../../../models/resource/InternshipResource.js';
 import InternshipsView from '../../../views/internship/InternshipsView.js';
-
-import { IController } from '../../../abstracts/Common.js';
-import { DbInternship, IInternshipResource } from '../../../abstracts/entities/Internship.js';
 import InternshipConverter from '../../../converters/InternshipConverter.js';
+import { DbInternship, IInternshipResource } from '../../../abstracts/entities/Internship.js';
+
 import { NextFunction, Request, Response } from 'express';
 
 export default class InternshipsController extends WebController implements IController {    

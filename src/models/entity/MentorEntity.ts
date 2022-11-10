@@ -5,7 +5,9 @@ export default class MentorEntity {
     private firstName: string;
     private lastName: string;
     private specialtyAreaId: number;
+    private password: string;
     private email: string;
+
     private phone: number;
 
     constructor({
@@ -14,6 +16,7 @@ export default class MentorEntity {
         lastName,
         specialtyAreaId,
         email,
+        password,
         phone
     }: Mentor) {
         this.id = id;
@@ -21,7 +24,20 @@ export default class MentorEntity {
         this.lastName = lastName;
         this.specialtyAreaId = specialtyAreaId;
         this.email = email;
+        this.password = password;
         this.phone = phone;
+    }
+
+    public getMentor(): Mentor {
+        return {
+            id: this.id,
+            firstName: this.firstName,
+            lastName: this.lastName,
+            specialtyAreaId: this.specialtyAreaId,
+            email: this.email,
+            password: this.password,
+            phone: this.phone
+        }
     }
 
     public getId(): number {
