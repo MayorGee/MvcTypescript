@@ -2,8 +2,8 @@ import AbstractRouter from '../AbstractRouter.js';
 
 import ModuleApiController from '../../controllers/api/ModuleApiController.js';
 import ModulesApiController from '../../controllers/api/ModulesApiController.js';
-
-import { IRouter, RequestMethod } from '../../abstracts/Common.js';
+import { IRouter } from '../../abstracts/Contract.js';
+import { RequestMethod } from '../../abstracts/Enum.js';
 
 const moduleApiController = new ModuleApiController();
 const modulesApiController = new ModulesApiController();

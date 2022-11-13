@@ -1,11 +1,13 @@
-import WebController from '../WebController.js';
 import bcrypt from 'bcrypt';
 
-import InternView from '../../../views/intern/InternView.js';
-import InternResource from '../../../models/resource/InternResource.js';
+import WebController from '../WebController.js';
 
-import { IController, Role } from '../../../abstracts/Common.js';
+import InternView from '../../../views/intern/InternView.js';
+import InternService from '../../../models/service/InternService.js';
+
 import { NextFunction, Request, Response } from 'express';
+import { IController } from '../../../abstracts/Contract.js';
+import { Role } from '../../../abstracts/Enum.js';
 
 export default class InternLoginController extends WebController implements IController {
     protected handleGet(req: Request, res: Response, next: NextFunction) {
@@ -18,8 +20,8 @@ export default class InternLoginController extends WebController implements ICon
     protected async handlePost(req: Request, res: Response, next: NextFunction) {
         const { internEmail, internPassword } = req.body;
         
-        const internResource = new InternResource();
-        const registeredIntern = await internResource.getInternByEmail(internEmail);
+        const internService = new InternService();
+        const registeredIntern = await internService.getInternByEmail(internEmail);
         
         if (!registeredIntern) {
             return this.redirect({ 
@@ -30,7 +32,7 @@ export default class InternLoginController extends WebController implements ICon
             });
         }
 
-        const passwordIsCorrect = await bcrypt.compare(internPassword, registeredIntern.Password);
+        const passwordIsCorrect = await bcrypt.compare(internPassword, registeredIntern.password);
         
         if (!passwordIsCorrect) {
             return this.redirect({ 
@@ -40,7 +42,7 @@ export default class InternLoginController extends WebController implements ICon
             });
         }
         
-        req.session.internId = registeredIntern.Id;
+        req.session.internId = registeredIntern.id;
         req.session.role = Role.intern;
 
         res.redirect('/intern-account');

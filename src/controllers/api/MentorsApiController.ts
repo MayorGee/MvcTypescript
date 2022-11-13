@@ -1,20 +1,23 @@
 import ApiController from './ApiController.js';
-import { IController } from '../../abstracts/Common.js';
+import { IController } from '../../abstracts/Contract.js';
 
-import MentorResource from '../../models/resource/MentorResource.js';
-import MentorProvider from '../../models/provider/MentorProvider.js';
-import { IMentorResource, Mentor, IMentorProvider } from '../../abstracts/entities/Mentor.js';
+import MentorService from '../../models/service/MentorService.js';
+import { Mentor, IMentorService } from '../../abstracts/entities/Mentor.js';
 
 import { NextFunction, Request, Response } from 'express';
 
 export default class MentorsApiController  extends ApiController implements IController {
-    private mentorResource: IMentorResource | undefined;
-    private mentorProvider: IMentorProvider | undefined;
-    
+    private mentorService: IMentorService;
+
+    constructor() {
+        super();
+
+        this.mentorService = new MentorService();
+    }
+
     protected async handleGet(req: Request, res: Response, next: NextFunction) {      
         try {
-            this.mentorProvider = new MentorProvider();
-            const mentors: Mentor[] = await this.mentorProvider.getMentors();
+            const mentors: Mentor[] = await this.mentorService.getMentors();
         
             this.returnSuccessResponse({ res, data: mentors });
         } catch(error: any) {
@@ -30,8 +33,7 @@ export default class MentorsApiController  extends ApiController implements ICon
         try {
             const newMentor: Mentor = req.body;
 
-            this.mentorResource = new MentorResource();
-            await this.mentorResource.addMentor(newMentor);
+            await this.mentorService.addMentor(newMentor);
 
             this.returnSuccessResponse({ res, message: 'Mentor succesfully added to Database'});
         } catch(error) {

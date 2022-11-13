@@ -1,12 +1,12 @@
-import WebController from '../WebController.js';
-
 import bcrypt from 'bcrypt';
 
-import InternView from '../../../views/intern/InternView.js';
-import InternResource from '../../../models/resource/InternResource.js';
+import WebController from '../WebController.js';
+import { IController } from '../../../abstracts/Contract.js';
 
-import { IController } from '../../../abstracts/Common.js';
-import { IInternResource } from '../../../abstracts/entities/Intern.js';
+import InternView from '../../../views/intern/InternView.js';
+import InternService from '../../../models/service/InternService.js';
+import { IInternService } from '../../../abstracts/entities/Intern.js';
+
 import { NextFunction, Request, Response } from 'express';
 
 export default class InternSignUpController extends WebController implements IController {
@@ -18,11 +18,11 @@ export default class InternSignUpController extends WebController implements ICo
     }
 
     protected async handlePost(req: Request, res: Response, next: NextFunction) {
-        const internResource: IInternResource = new InternResource();
+        const internService: IInternService = new InternService();
 
         const internDetails = req.body;
 
-        const internAlreadyExist = await internResource.getInternByEmail(internDetails.email);
+        const internAlreadyExist = await internService.getInternByEmail(internDetails.email);
         
         if (internAlreadyExist) {
             return this.returnFailedResponse({
@@ -33,8 +33,8 @@ export default class InternSignUpController extends WebController implements ICo
         }
 
         internDetails.password  = await bcrypt.hash(internDetails.password, 12);
-            
-        internResource.addIntern(internDetails);
+
+        internService.addIntern(internDetails);
         
         res.redirect('/intern-login');
     }

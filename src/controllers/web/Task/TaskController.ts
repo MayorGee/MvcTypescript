@@ -1,10 +1,9 @@
 import WebController from '../WebController.js';
-import { IController } from '../../../abstracts/Common.js';
+import { IController } from '../../../abstracts/Contract.js';
 
-import TaskResource from '../../../models/resource/TaskResource.js';
-import TaskConverter from '../../../converters/TaskConverter.js';
+import TaskService from '../../../models/service/TaskService.js';
 import TaskView from '../../../views/task/TaskView.js';
-import { DbTask, ITaskResource } from '../../../abstracts/entities/Task.js';
+import { Task, ITaskService } from '../../../abstracts/entities/Task.js';
 
 import { NextFunction, Request, Response } from 'express';
 
@@ -20,14 +19,12 @@ export default class TaskController extends WebController implements IController
             return this.handleIdError(taskId, res);
         }
 
-        const taskResource: ITaskResource = new TaskResource();
-        const task: DbTask = await taskResource.getTaskById(taskId);
+        const taskService: ITaskService = new TaskService();
+        const task: Task = await taskService.getTaskById(taskId);
 
         const taskView = new TaskView();
         taskView
-            .setTask(
-                TaskConverter.convertDbTask(task)
-            )
+            .setTask(task)
             .setTemplate('./task/task');
 
         this.renderPage(req, res, taskView);

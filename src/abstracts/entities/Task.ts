@@ -17,7 +17,7 @@ export interface ITaskResource {
     getTaskById: (id: number) => Promise<DbTask>
 }
 
-export interface ITaskProvider {
+export interface ITaskService {
     getTasks: () => Promise<Task[]>,
     getTaskById: (id: number) => Promise<Task>
 }

@@ -5,7 +5,7 @@ import { Liquid } from 'liquidjs';
 import bodyParser from 'body-parser';
 import path from 'path';
 
-import { IRouter } from './abstracts/Common';
+import { IRouter } from './abstracts/Contract';
 
 export default class  App {
     private app: Express;

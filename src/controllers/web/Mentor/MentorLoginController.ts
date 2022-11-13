@@ -1,11 +1,14 @@
 import WebController from '../WebController.js';
-import { IController, Role } from '../../../abstracts/Common.js';
 
 import MentorView from '../../../views/mentor/MentorView.js';
+import MentorService from '../../../models/service/MentorService.js'; 
 import MentorResource from '../../../models/resource/MentorResource.js'; 
-import { IMentorResource } from '../../../abstracts/entities/Mentor.js';
+
+import { IMentorResource, IMentorService } from '../../../abstracts/entities/Mentor.js';
 
 import { NextFunction, Request, Response } from 'express';
+import { IController } from '../../../abstracts/Contract.js';
+import { Role } from '../../../abstracts/Enum.js';
 
 export default class MentorLoginController extends WebController implements IController {
     protected handleGet(req: Request, res: Response, next: NextFunction) {
@@ -17,9 +20,9 @@ export default class MentorLoginController extends WebController implements ICon
 
     protected async handlePost(req: Request, res: Response, next: NextFunction) {
         const { mentorEmail, mentorPassword } = req.body;
-        const mentorResource: IMentorResource = new MentorResource();
+        const mentorService: IMentorService = new MentorService();
 
-        const registeredMentor = await mentorResource.getMentorByEmail(mentorEmail);
+        const registeredMentor = await mentorService.getMentorByEmail(mentorEmail);
         
         if (!registeredMentor) {
             return this.returnFailedResponse({
@@ -29,6 +32,7 @@ export default class MentorLoginController extends WebController implements ICon
             });
         }
 
+        const mentorResource: IMentorResource = new MentorResource(); 
         const passwordIsCorrect = await mentorResource.isMentorPasswordCorrect(mentorEmail, mentorPassword);
         
         if (!passwordIsCorrect) {
@@ -40,7 +44,7 @@ export default class MentorLoginController extends WebController implements ICon
             });
         }
         
-        req.session.mentorId = registeredMentor.Id;
+        req.session.mentorId = registeredMentor.id;
         req.session.role = Role.mentor;
 
         res.redirect('/mentor-account');

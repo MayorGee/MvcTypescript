@@ -1,26 +1,23 @@
 import ApiController from './ApiController.js';
-import { IController } from '../../abstracts/Common.js';
 
-import ModuleResource from '../../models/resource/ModuleResource.js';
-import ModuleProvider from '../../models/provider/ModuleProvider.js';
-import { IModuleResource, Module, IModuleProvider } from '../../abstracts/entities/Module.js';
+import ModuleService from '../../models/service/ModuleService.js';
+import { Module, IModuleService } from '../../abstracts/entities/Module.js';
 
 import { NextFunction, Request, Response } from 'express';
+import { IController } from '../../abstracts/Contract.js';
 
 export default class ModulesApiController  extends ApiController implements IController {
-    private moduleResource: IModuleResource;
-    private moduleProvider: IModuleProvider | undefined;
+    private moduleService: IModuleService;
 
     constructor() {
         super();
 
-        this.moduleResource = new ModuleResource();
+        this.moduleService = new ModuleService();
     }
     
     protected async handleGet(req: Request, res: Response, next: NextFunction) {     
         try {
-            this.moduleProvider = new ModuleProvider();
-            const modules: Module[] = await this.moduleProvider.getModules();
+            const modules: Module[] = await this.moduleService.getModules();
         
             this.returnSuccessResponse({ res, data: modules });
         } catch(error: any) {
@@ -35,8 +32,8 @@ export default class ModulesApiController  extends ApiController implements ICon
     protected async handlePost(req: Request, res: Response, next: NextFunction) {        
         try {
             const newModule: Module = req.body;
-
-            await this.moduleResource.addModule(newModule);
+            
+            await this.moduleService.addModule(newModule);
 
             this.returnSuccessResponse({ res, message: 'Module succesfully added to Database'});
             

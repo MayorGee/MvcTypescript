@@ -3,11 +3,11 @@ import AbstractRouter from '../AbstractRouter.js';
 import InternApiController from '../../controllers/api/InternApiController.js';
 import InternsApiController from '../../controllers/api/InternsApiController.js';
 
-import { IRouter, RequestMethod } from '../../abstracts/Common.js';
+import { RequestMethod } from '../../abstracts/Enum.js';
+import { IRouter } from '../../abstracts/Contract.js';
 
 const internApiController = new InternApiController();
 const internsApiController = new InternsApiController();
-
 
 export default class InternApiRouter  extends AbstractRouter implements IRouter {
     constructor() {

@@ -2,8 +2,8 @@ import AbstractRouter from '../AbstractRouter.js';
 
 import ModuleController from '../../controllers/web/Module/ModuleController.js';
 import ModulesController from '../../controllers/web/Module/ModulesController.js';
-
-import { IRouter, RequestMethod } from '../../abstracts/Common.js';
+import { IRouter } from '../../abstracts/Contract.js';
+import { RequestMethod } from '../../abstracts/Enum.js';
 
 const moduleController = new ModuleController();
 const modulesController = new ModulesController();

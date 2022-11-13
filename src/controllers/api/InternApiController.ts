@@ -1,20 +1,18 @@
 import ApiController from './ApiController.js';
-import { IController } from '../../abstracts/Common.js';
+import { IController } from '../../abstracts/Contract.js';
 
-import InternProvider from '../../models/provider/InternProvider.js'; 
-import InternResource from '../../models/resource/InternResource.js';
-import { Intern, IInternProvider, IInternResource } from '../../abstracts/entities/Intern.js';
+import InternService from '../../models/service/InternService.js'; 
+import { Intern, IInternService } from '../../abstracts/entities/Intern.js';
 
 import { NextFunction, Request, Response } from 'express';
 
 export default class InternApiController extends ApiController implements IController {
-    private internResource: IInternResource;
-    private internProvider: IInternProvider | undefined;
+    private internService: IInternService;
 
     constructor() {
         super();
 
-        this.internResource = new InternResource();
+        this.internService = new InternService();
     }
 
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
@@ -25,8 +23,8 @@ export default class InternApiController extends ApiController implements IContr
         }   
              
         try {
-            this.internProvider = new InternProvider();
-            const intern: Intern = await this.internProvider.getInternById(internId);
+            this.internService = new InternService();
+            const intern: Intern = await this.internService.getInternById(internId);
         
             this.returnSuccessResponse({ res, data: intern});
         } catch(err: any) {
@@ -44,9 +42,9 @@ export default class InternApiController extends ApiController implements IContr
         if (!internId) {
             return this.handleIdError(internId, res);
         }
-        
+
         try {
-            await this.internResource.deleteInternById(internId);
+            await this.internService.deleteInternById(internId);
 
             this.returnSuccessResponse({ res, message: 'Intern succesfully deleted'});
 
@@ -65,11 +63,11 @@ export default class InternApiController extends ApiController implements IContr
         if (!internId) {
             return this.handleIdError(internId, res);
         } 
-        
+
         try {
             req.body.id = internId;
 
-            await this.internResource.updateInternById(req.body);
+            await this.internService.updateInternById(req.body);
 
             this.returnSuccessResponse({ res, message: 'Intern succesfully updated'});
             

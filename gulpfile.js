@@ -65,7 +65,7 @@ function serve() {
     watch('./src/**/**.ts', series(typescript)).on('change', sync.reload);
 }
 
-function startBRowserSync() {
+async function startBRowserSync() {
     sync.init({
         proxy: {
             target: 'localhost:3333',
@@ -74,7 +74,7 @@ function startBRowserSync() {
     });
 }
 
-function startNodemon() {
+async function startNodemon() {
     nodemon({
         ext: 'js',
         script: './dist/index.js',

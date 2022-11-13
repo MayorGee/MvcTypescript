@@ -1,5 +1,7 @@
 import express, { Router } from 'express';
-import { Route, IRouter, RequestMethod } from '../abstracts/Common.js';
+import { Route } from '../abstracts/Common.js';
+import { IRouter } from '../abstracts/Contract.js';
+import { RequestMethod } from '../abstracts/Enum.js';
 
 export default class AbstractRouter implements IRouter {
     protected routes: Route[] = [];

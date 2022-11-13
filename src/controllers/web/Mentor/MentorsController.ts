@@ -1,10 +1,9 @@
 import WebController from '../WebController.js';
-import { IController } from '../../../abstracts/Common.js';
+import { IController } from '../../../abstracts/Contract.js';
 
-import MentorResource from '../../../models/resource/MentorResource.js';
+import MentorService from '../../../models/service/MentorService.js';
 import MentorsView from '../../../views/mentor/MentorsView.js';
-import MentorConverter from '../../../converters/MentorConverter.js';
-import { DbMentor, IMentorResource } from '../../../abstracts/entities/Mentor.js';
+import { Mentor, IMentorService } from '../../../abstracts/entities/Mentor.js';
 
 import { NextFunction, Request, Response } from 'express';
 
@@ -14,14 +13,12 @@ export default class MentorsController extends WebController implements IControl
             return this.redirectToHome(res);
         }
         
-        const mentorResource: IMentorResource = new MentorResource();
-        const mentors: DbMentor[] = await mentorResource.getMentors();      
+        const mentorService: IMentorService = new MentorService();
+        const mentors: Mentor[] = await mentorService.getMentors();      
 
         const mentorsView = new MentorsView();
         mentorsView
-            .setMentors(
-                MentorConverter.convertDbMentors(mentors)
-            )
+            .setMentors(mentors)
             .setTemplate('./mentor/mentors');
 
         this.renderPage(req, res, mentorsView);

@@ -2,8 +2,8 @@ import AbstractRouter from '../AbstractRouter.js';
 
 import InternshipController from '../../controllers/web/Internship/InternshipController.js';
 import InternshipsController from '../../controllers/web/Internship/InternshipsController.js';
-
-import { IRouter, RequestMethod } from '../../abstracts/Common.js';
+import { IRouter } from '../../abstracts/Contract.js';
+import { RequestMethod } from '../../abstracts/Enum.js';
 
 const internshipController = new InternshipController();
 const internshipsController = new InternshipsController();

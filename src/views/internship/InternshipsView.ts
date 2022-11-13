@@ -1,7 +1,7 @@
 import AbstractView from '../AbstractView.js';
 
 import { Internship } from '../../abstracts/entities/Internship.js';
-import { IView } from '../../abstracts/Common.js';
+import { IView } from '../../abstracts/Contract.js';
 
 export default class InternshipsView extends AbstractView implements IView {
     private internships: Internship[]  = [];

@@ -1,20 +1,19 @@
 import WebController from '../WebController.js';
+import { IController } from '../../../abstracts/Contract.js';
 
 import InternView from '../../../views/intern/InternView.js';
-import InternResource from '../../../models/resource/InternResource.js';
-import InternConverter from '../../../converters/InternConverter.js';
+import InternService from '../../../models/service/InternService.js';
+import { IInternService } from '../../../abstracts/entities/Intern.js';
 
-import { IController } from '../../../abstracts/Common.js';
-import { IInternResource } from '../../../abstracts/entities/Intern.js';
 import { NextFunction, Request, Response } from 'express';
 
 export default class DeleteInternController extends WebController implements IController {
-    private resource: IInternResource;
+    private service: IInternService;
 
     constructor() {
         super();
 
-        this.resource = new InternResource();
+        this.service = new InternService();
     }
 
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
@@ -28,20 +27,18 @@ export default class DeleteInternController extends WebController implements ICo
             return this.handleIdError(internId, res);
         }
         
-        const intern =  await this.resource.getInternById(internId);
+        const intern =  await this.service.getInternById(internId);
 
         const internView = new InternView();
         internView
-            .setIntern(
-                InternConverter.convertDbIntern(intern)
-            )
+            .setIntern(intern)
             .setTemplate('./intern/delete-intern');
 
         this.renderPage(req, res, internView);
     }
 
     protected async handlePost(req: Request, res: Response) {
-        await this.resource.deleteInternById(parseInt(req.body.id));
+        await this.service.deleteInternById(parseInt(req.body.id));
      
         res.redirect('/interns');
     }

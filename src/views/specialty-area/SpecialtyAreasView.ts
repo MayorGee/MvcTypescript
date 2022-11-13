@@ -1,7 +1,7 @@
 import AbstractView from '../AbstractView.js';
 
 import { SpecialtyArea } from '../../abstracts/entities/SpecialtyArea.js';
-import { IView } from '../../abstracts/Common.js';
+import { IView } from '../../abstracts/Contract.js';
 
 export default class SpecialtyAreasView extends AbstractView implements IView {
     private specialtyAreas: SpecialtyArea[] = [];

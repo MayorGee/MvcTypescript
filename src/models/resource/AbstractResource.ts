@@ -1,4 +1,4 @@
-import { IResource } from "../../abstracts/Common";
+import { IResource } from "../../abstracts/Contract";
 
 export default class AbstractResource implements IResource{
     public escapeHtml(unsafe: string): string {

@@ -1,7 +1,7 @@
 import AbstractView from '../AbstractView.js';
 
 import { Mentor } from '../../abstracts/entities/Mentor.js';
-import { IView } from '../../abstracts/Common.js';
+import { IView } from '../../abstracts/Contract.js';
 
 export default class MentorsView extends AbstractView implements IView {
     private mentors: Mentor[] = [];

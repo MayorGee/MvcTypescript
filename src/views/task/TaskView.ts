@@ -1,7 +1,7 @@
 import AbstractView from '../AbstractView.js';
 
 import { Task } from '../../abstracts/entities/Task.js';
-import { IView } from '../../abstracts/Common.js';
+import { IView } from '../../abstracts/Contract.js';
 
 export default class TaskView extends AbstractView implements IView {
     private task: Task | null = null;

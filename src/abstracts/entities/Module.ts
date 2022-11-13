@@ -16,7 +16,10 @@ export interface IModuleResource {
     updateModuleById: (module: Module) => Promise<void>
 }
 
-export interface IModuleProvider {
+export interface IModuleService {
     getModules: () => Promise<Module[]>,
     getModuleById: (id: number) => Promise<Module>,
+    addModule: (module: Module) => Promise<void>,
+    deleteModuleById: (id: number) => Promise<void>,
+    updateModuleById: (module: Module) => Promise<void>
 }

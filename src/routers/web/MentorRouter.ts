@@ -9,8 +9,8 @@ import MentorLoginController from '../../controllers/web/Mentor/MentorLoginContr
 import MentorAccountController from '../../controllers/web/Mentor/MentorAccountController.js';
 import MentorLogoutController from '../../controllers/web/Mentor/MentorLogoutController.js';
 import MentorStudentsController from '../../controllers/web/Mentor/MentorStudentsController.js';
-
-import { IRouter, RequestMethod } from '../../abstracts/Common.js';
+import { IRouter } from '../../abstracts/Contract.js';
+import { RequestMethod } from '../../abstracts/Enum.js';
 
 const mentorController = new MentorController();
 const mentorsController = new MentorsController();

@@ -10,12 +10,12 @@ export interface SpecialtyArea {
     classSize: number
 }
 
+export interface ISpecialtyAreaService {
+    getSpecialtyAreas: () => Promise<SpecialtyArea[]>,
+    getSpecialtyAreaById: (id: number) => Promise<SpecialtyArea>
+}
+
 export interface ISpecialtyAreaResource {
     getSpecialtyAreas: () => Promise<DbSpecialtyArea[]>,
     getSpecialtyAreaById: (id: number) => Promise<DbSpecialtyArea>
-}
-
-export interface ISpecailtyAreaProvider {
-    getSpecialtyAreas: () => Promise<SpecialtyArea[]>,
-    getSpecialtyAreaById: (id: number) => Promise<SpecialtyArea>
 }

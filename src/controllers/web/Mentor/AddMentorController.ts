@@ -1,9 +1,9 @@
 import WebController from '../WebController.js';
-import { IController } from '../../../abstracts/Common.js';
+import { IController } from '../../../abstracts/Contract.js';
 
 import MentorView from '../../../views/mentor/MentorView.js';
-import MentorResource from '../../../models/resource/MentorResource.js';
-import { IMentorResource } from '../../../abstracts/entities/Mentor.js';
+import MentorService from '../../../models/service/MentorService.js';
+import { IMentorService } from '../../../abstracts/entities/Mentor.js';
 
 import { NextFunction, Request, Response } from 'express';
 
@@ -20,8 +20,8 @@ export default class AddMentorController extends WebController implements IContr
     }
 
    protected async handlePost(req: Request, res: Response, next: NextFunction) {
-        const mentorResource: IMentorResource = new MentorResource();
-        await mentorResource.addMentor(req.body);
+        const mentorService: IMentorService = new MentorService();
+        await mentorService.addMentor(req.body);
 
         res.redirect('/mentors');
     }

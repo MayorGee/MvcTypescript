@@ -1,4 +1,4 @@
-import { IView } from "../abstracts/Common";
+import { IView } from "../abstracts/Contract.js";
 
 export default class AbstractView implements IView {
     protected template = '';

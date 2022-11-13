@@ -1,20 +1,18 @@
 import ApiController from './ApiController.js';
-import { IController } from '../../abstracts/Common.js';
 
-import MentorResource from '../../models/resource/MentorResource.js';
-import MentorProvider from '../../models/provider/MentorProvider.js';
-import { Mentor, IMentorProvider, IMentorResource } from '../../abstracts/entities/Mentor.js';
+import MentorService from '../../models/service/MentorService.js';
+import { Mentor, IMentorService } from '../../abstracts/entities/Mentor.js';
 
+import { IController } from '../../abstracts/Contract.js';
 import { Request, Response, NextFunction } from 'express';
 
 export default class MentorApiController extends ApiController implements IController {
-    private mentorResource: IMentorResource;
-    private mentorProvider: IMentorProvider | undefined;
+    private mentorService: IMentorService;
 
     constructor() {
         super();
 
-        this.mentorResource = new MentorResource();
+        this.mentorService = new MentorService();
     }
 
     protected async handleGet(req: Request, res: Response, next: NextFunction) {     
@@ -25,8 +23,7 @@ export default class MentorApiController extends ApiController implements IContr
         } 
 
         try {
-            this.mentorProvider = new MentorProvider();
-            const mentor: Mentor = await this.mentorProvider.getMentorById(mentorId);
+            const mentor: Mentor = await this.mentorService.getMentorById(mentorId);
 
             this.returnSuccessResponse({ res, data: mentor });
         } catch(error: any) {
@@ -46,7 +43,7 @@ export default class MentorApiController extends ApiController implements IContr
         } 
         
         try {
-            await this.mentorResource.deleteMentorById(mentorId);
+            await this.mentorService.deleteMentorById(mentorId);
 
             this.returnSuccessResponse({ res, message: 'Mentor succesfully deleted'});
 
@@ -62,11 +59,11 @@ export default class MentorApiController extends ApiController implements IContr
         if (!mentorId) {
             return this.handleIdError(mentorId, res);
         } 
-        
+
         try {
             req.body.id = mentorId;
 
-            await this.mentorResource.updateMentorById(req.body);
+            await this.mentorService.updateMentorById(req.body);
 
             this.returnSuccessResponse({ res, message: 'Mentor succesfully updated'});
 

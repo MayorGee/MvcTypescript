@@ -1,10 +1,9 @@
 import WebController from '../WebController.js';;
-import { IController } from '../../../abstracts/Common.js';
+import { IController } from '../../../abstracts/Contract.js';
 
 import MentorView from '../../../views/mentor/MentorView.js';
-import MentorResource from '../../../models/resource/MentorResource.js';
-import MentorConverter from '../../../converters/MentorConverter.js';
-import { DbMentor, DbMentorSpecialty, IMentorResource } from '../../../abstracts/entities/Mentor.js';
+import MentorService from '../../../models/service/MentorService.js';
+import { Mentor, MentorSpecialty, IMentorService } from '../../../abstracts/entities/Mentor.js';
 
 import { NextFunction, Request, Response } from 'express';
 
@@ -23,20 +22,16 @@ export default class MentorAccountController extends WebController implements IC
 
         const mentorId: number  = req.session.mentorId as number;
 
-        const mentorResource: IMentorResource = new MentorResource();
+        const mentorService: IMentorService = new MentorService();
         
-        const dbMentor: DbMentor = await mentorResource.getMentorById(mentorId);
-        const dbMentorSpecialty: DbMentorSpecialty = await mentorResource.getMentorSpecialty(mentorId);
+        const mentor: Mentor = await mentorService.getMentorById(mentorId);
+        const mentorSpecialty: MentorSpecialty = await mentorService.getMentorSpecialty(mentorId);
 
         const mentorView = new MentorView();
         mentorView
             .setTemplate('./mentor/mentor-account')
-            .setMentorSpecialty(
-                MentorConverter.convertDbMentorSpecialty(dbMentorSpecialty)
-            )
-            .setMentor(
-                MentorConverter.convertDbMentor(dbMentor)
-            );
+            .setMentorSpecialty(mentorSpecialty)
+            .setMentor(mentor);
 
         this.renderPage(req, res, mentorView);
     }

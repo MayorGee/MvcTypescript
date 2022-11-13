@@ -2,8 +2,8 @@ import AbstractRouter from '../AbstractRouter.js';
 
 import TaskController from '../../controllers/web/Task/TaskController.js';
 import TasksController from '../../controllers/web/Task/TasksController.js';
-
-import { IRouter, RequestMethod } from '../../abstracts/Common.js';
+import { IRouter } from '../../abstracts/Contract.js';
+import { RequestMethod } from '../../abstracts/Enum.js';
 
 const taskController = new TaskController();
 const tasksController = new TasksController();

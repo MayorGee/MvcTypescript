@@ -1,10 +1,9 @@
 import WebController from '../WebController.js';
-import { IController } from '../../../abstracts/Common.js';
+import { IController } from '../../../abstracts/Contract.js';
 
 import ModuleView from '../../../views/module/ModuleView.js';
-import ModuleResource from '../../../models/resource/ModuleResource.js';
-import ModuleConverter from '../../../converters/ModuleConverter.js';
-import { DbModule, IModuleResource } from '../../../abstracts/entities/Module.js';
+import ModuleService from '../../../models/service/ModuleService.js';
+import { Module, IModuleService } from '../../../abstracts/entities/Module.js';
 
 import { NextFunction, Request, Response } from 'express';
 
@@ -20,14 +19,12 @@ export default class ModuleController extends WebController implements IControll
             return this.handleIdError(moduleId, res);
         }
 
-        const moduleResource: IModuleResource = new ModuleResource();
-        const module: DbModule = await moduleResource.getModuleById(moduleId);
+        const moduleService: IModuleService = new ModuleService();
+        const module: Module = await moduleService.getModuleById(moduleId);
 
         const moduleView = new ModuleView();
         moduleView
-            .setModule(
-                ModuleConverter.convertDbModule(module)
-            )
+            .setModule(module)
             .setTemplate('./module/module');
 
         this.renderPage(req, res, moduleView);

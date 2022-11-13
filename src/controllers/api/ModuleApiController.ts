@@ -1,20 +1,18 @@
 import ApiController from './ApiController.js';
-import { IController } from '../../abstracts/Common.js';
 
-import ModuleResource from '../../models/resource/ModuleResource.js';
-import ModuleProvider from '../../models/provider/ModuleProvider.js';
-import { Module, IModuleResource, IModuleProvider } from '../../abstracts/entities/Module.js';
+import ModuleService from '../../models/service/ModuleService.js';
+import { Module, IModuleService } from '../../abstracts/entities/Module.js';
 
 import { NextFunction, Request, Response } from 'express';
+import { IController } from '../../abstracts/Contract.js';
 
 export default class ModuleController extends ApiController implements IController {
-    private moduleResource: IModuleResource;
-    private moduleProvider: IModuleProvider | undefined;
+    private moduleService: IModuleService;
 
     constructor() {
         super();
 
-        this.moduleResource = new ModuleResource();
+        this.moduleService = new ModuleService();
     }
     
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
@@ -25,8 +23,8 @@ export default class ModuleController extends ApiController implements IControll
         }            
         
         try {
-            this.moduleProvider = new ModuleProvider();
-            const module: Module = await this.moduleProvider.getModuleById(moduleId);
+            this.moduleService = new ModuleService();
+            const module: Module = await this.moduleService.getModuleById(moduleId);
         
             this.returnSuccessResponse({ res, data: module});
         } catch(error: any) {
@@ -44,9 +42,9 @@ export default class ModuleController extends ApiController implements IControll
         if (!moduleId) {
             return this.handleIdError(moduleId, res);
         }  
-        
+
         try {
-            await this.moduleResource.deleteModuleById(moduleId);
+            await this.moduleService.deleteModuleById(moduleId);
 
             this.returnSuccessResponse({ res, message: 'Module succesfully deleted'});
 
@@ -62,11 +60,11 @@ export default class ModuleController extends ApiController implements IControll
         if (!moduleId) {
             return this.handleIdError(moduleId, res);
         }
-        
+
         try {
             req.body.id = moduleId;
 
-            await this.moduleResource.updateModuleById(req.body);
+            await this.moduleService.updateModuleById(req.body);
 
             this.returnSuccessResponse({ res, message: 'Module succesfully updated'});
 

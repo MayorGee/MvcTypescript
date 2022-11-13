@@ -1,7 +1,10 @@
 import AbstractView from '../../views/AbstractView.js';
 
 import Controller from '../Controller.js';
-import { IController, WebErrorResponse, Role, RequestMethod } from '../../abstracts/Common.js';
+
+import { IController } from '../../abstracts/Contract.js';
+import { WebErrorResponse } from '../../abstracts/Common.js';
+import { RequestMethod, Role } from '../../abstracts/Enum.js';
 
 import alert from 'alert';
 import { randomBytes } from 'crypto';
@@ -54,7 +57,7 @@ export default abstract class WebController extends Controller implements IContr
         this.sendStatusAndRedirect(res, errorCode, page);
     }
 
-    protected sendStatusAndRedirect(res: Response, errorCode: number, page: string) {  // Response didn't work here too
+    protected sendStatusAndRedirect(res: Response, errorCode: number, page: string) {
         res.status(errorCode).redirect(page);
     }
 
@@ -77,7 +80,6 @@ export default abstract class WebController extends Controller implements IContr
     protected isNumber(variable: any): variable is number {
         return typeof variable !== 'string' && variable > 0;
     }
-
 
     protected setCsrfToken(req: Request) {
         if(!(req.session.csrfToken)) {

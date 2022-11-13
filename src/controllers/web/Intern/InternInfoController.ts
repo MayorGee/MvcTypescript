@@ -1,20 +1,19 @@
 import WebController from '../WebController.js';
-import { IController } from '../../../abstracts/Common.js';
+import { IController } from '../../../abstracts/Contract.js';
 
 import InternView from '../../../views/intern/InternView.js';
-import InternResource from '../../../models/resource/InternResource.js';
-import InternConverter from '../../../converters/InternConverter.js';
+import InternService from '../../../models/service/InternService.js';
+import { Intern, IInternService } from '../../../abstracts/entities/Intern.js';
 
-import { DbIntern, IInternResource } from '../../../abstracts/entities/Intern.js';
 import { NextFunction, Request, Response } from 'express';
 
 export default class InternInfoController extends WebController implements IController {
-    private internResource: IInternResource;
+    private internService: IInternService;
 
     constructor() {
         super();
 
-        this.internResource = new InternResource();
+        this.internService = new InternService();
     }
 
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
@@ -26,20 +25,18 @@ export default class InternInfoController extends WebController implements ICont
 
         const internId: number  = req.session.internId as number;
                  
-        const intern: DbIntern =  await this.internResource.getInternById(internId);
+        const intern: Intern =  await this.internService.getInternById(internId);
 
         const internView = new InternView();
         internView
-            .setIntern(
-                InternConverter.convertDbIntern(intern)
-            )
+            .setIntern(intern)
             .setTemplate('./intern/intern-info');
 
         this.renderPage(req, res, internView);
     }
 
     protected async handlePost(req: Request, res: Response, next: NextFunction): Promise<void> {
-        await this.internResource.updateInternById(req.body);
+        await this.internService.updateInternById(req.body);
      
         res.redirect('/interns');
     }

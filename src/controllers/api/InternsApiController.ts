@@ -1,20 +1,24 @@
 import ApiController from './ApiController.js';
-import { IController } from '../../abstracts/Common.js';
+import { IController } from '../../abstracts/Contract.js';
 
-import InternProvider from '../../models/provider/InternProvider.js';
-import InternResource from '../../models/resource/InternResource.js';
-import { IInternProvider, IInternResource, Intern } from '../../abstracts/entities/Intern.js';
+import InternService from '../../models/service/InternService.js';
+import { IInternService, Intern } from '../../abstracts/entities/Intern.js';
 
 import { NextFunction, Request, Response } from 'express';
 
 export default class InternsApiController  extends ApiController implements IController {
-    private internResource: IInternResource | undefined;
-    private internProvider: IInternProvider | undefined;
+    private internService: IInternService;
+
+    constructor() {
+        super();
+
+        this.internService = new InternService();
+    }
 
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
         try {
-            this.internProvider = new InternProvider();
-            const interns: Intern[] = await this.internProvider.getInterns();
+            this.internService = new InternService();
+            const interns: Intern[] = await this.internService.getInterns();
         
             this.returnSuccessResponse({ res, data: interns });
         } catch(error: any) {
@@ -30,8 +34,7 @@ export default class InternsApiController  extends ApiController implements ICon
         try {
             const newIntern: Intern = req.body;
 
-            this.internResource = new InternResource();
-            await this.internResource.addIntern(newIntern);
+            await this.internService.addIntern(newIntern);
 
             return this.returnSuccessResponse({ res, message: 'Mentor succesfully added to Database'});
 

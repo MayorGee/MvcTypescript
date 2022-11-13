@@ -1,11 +1,10 @@
 import WebController from '../WebController.js';
+import { IController } from '../../../abstracts/Contract.js';
 
 import InternsView from '../../../views/intern/InternsView.js';
-import InternResource from '../../../models/resource/InternResource.js';
-import InternConverter from '../../../converters/InternConverter.js';
+import InternService from '../../../models/service/InternService.js';
+import { IInternService, Intern } from '../../../abstracts/entities/Intern.js';
 
-import { IController } from '../../../abstracts/Common.js';
-import { IInternResource, DbIntern } from '../../../abstracts/entities/Intern.js';
 import { NextFunction, Request, Response } from 'express';
 
 export default class FemaleInternsController extends WebController implements IController {
@@ -14,14 +13,11 @@ export default class FemaleInternsController extends WebController implements IC
             return this.redirectToHome(res);
         }
 
-        const internResource: IInternResource = new InternResource();
-        const femaleInterns: DbIntern[] = await internResource.getFemaleInterns();
+        const internService: IInternService = new InternService();
+        const femaleInterns: Intern[] = await internService.getFemaleInterns();
 
         const internsView = new InternsView();
-        internsView.setInterns(
-            InternConverter.convertDbInterns(femaleInterns)
-        );
-
+        internsView.setInterns(femaleInterns);
         this.renderPage(req, res, internsView);
     }
 }

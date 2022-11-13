@@ -1,10 +1,10 @@
 import WebController from '../WebController.js';
-import { IController } from '../../../abstracts/Common.js';
+import { IController } from '../../../abstracts/Contract.js';
 
-import SpecialtyAreaResource from '../../../models/resource/SpecialtyAreaResource.js';
+import SpecialtyAreaService from '../../../models/service/SpecialtyAreaService.js';
 import SpecialtyAreaView from '../../../views/specialty-area/SpecialtyAreaView.js';
-import SpecialtyAreaConverter from '../../../converters/SpecialtyAreaConverter.js';
-import { DbSpecialtyArea, ISpecialtyAreaResource } from '../../../abstracts/entities/SpecialtyArea.js';
+
+import { ISpecialtyAreaService, SpecialtyArea } from '../../../abstracts/entities/SpecialtyArea.js';
 
 import { NextFunction, Request, Response } from 'express';
 
@@ -20,14 +20,12 @@ export default class SpecialtyAreaController extends WebController implements IC
             return this.handleIdError(specialtyAreaId, res);
         }
 
-        const specialtyAreaResource: ISpecialtyAreaResource = new SpecialtyAreaResource();
-        const specialtyArea: DbSpecialtyArea = await specialtyAreaResource.getSpecialtyAreaById(specialtyAreaId);
+        const specialtyAreaService: ISpecialtyAreaService = new SpecialtyAreaService();
+        const specialtyArea: SpecialtyArea = await specialtyAreaService.getSpecialtyAreaById(specialtyAreaId);
 
         const specialtyAreaView = new SpecialtyAreaView();
         specialtyAreaView
-            .setSpecialtyArea(
-                SpecialtyAreaConverter.convertDbSpecialtyArea(specialtyArea)
-            )
+            .setSpecialtyArea(specialtyArea)
             .setTemplate('./specialty-area/specialty-area');
 
         this.renderPage(req, res, specialtyAreaView);

@@ -2,8 +2,8 @@ import AbstractRouter from '../AbstractRouter.js';
 
 import SpecialtyAreaController from '../../controllers/web/SpecialtyArea/SpecialtyAreaController.js';
 import SpecialtyAreasController from '../../controllers/web/SpecialtyArea/SpecialtyAreasController.js';
-
-import { IRouter, RequestMethod } from '../../abstracts/Common.js';
+import { IRouter } from '../../abstracts/Contract.js';
+import { RequestMethod } from '../../abstracts/Enum.js';
 
 const specialtyAreaController = new SpecialtyAreaController();
 const specialtyAreasController = new SpecialtyAreasController();

@@ -1,11 +1,10 @@
 import WebController from '../WebController.js';
+import { IController } from '../../../abstracts/Contract.js';
 
 import InternView from '../../../views/intern/InternView.js';
-import InternResource from '../../../models/resource/InternResource.js';
-import InternConverter from '../../../converters/InternConverter.js';
+import InternService from '../../../models/service/InternService.js';
+import { Intern, IInternService } from '../../../abstracts/entities/Intern.js';
 
-import { IController } from '../../../abstracts/Common.js';
-import { DbIntern, IInternResource } from '../../../abstracts/entities/Intern.js';
 import { NextFunction, Request, Response } from 'express';
 
 export default class InternController extends WebController implements IController {
@@ -20,14 +19,12 @@ export default class InternController extends WebController implements IControll
             return this.handleIdError(internId, res);
         }
 
-        const internResource: IInternResource = new InternResource();
-        const intern: DbIntern = await internResource.getInternById(internId);
+        const internService: IInternService = new InternService();
+        const intern: Intern = await internService.getInternById(internId);
 
         const internView = new InternView();
         internView
-            .setIntern(
-                InternConverter.convertDbIntern(intern)
-            )
+            .setIntern(intern)
             .setTemplate('./intern/intern');
 
         this.renderPage(req, res, internView);

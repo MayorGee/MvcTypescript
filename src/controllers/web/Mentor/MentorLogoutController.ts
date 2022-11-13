@@ -1,5 +1,5 @@
 import WebController from '../WebController.js';
-import { IController } from '../../../abstracts/Common.js';
+import { IController } from '../../../abstracts/Contract.js';
 
 import { NextFunction, Request, Response } from 'express';
 

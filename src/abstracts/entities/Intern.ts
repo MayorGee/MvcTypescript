@@ -54,7 +54,14 @@ export interface IInternResource {
     getInternProgressById: (id: number) => Promise<DbInternProgress>
 }
 
-export interface IInternProvider {
+export interface IInternService {
     getInterns: () => Promise<Intern[]>,
-    getInternById: (id: number) => Promise<Intern>
+    getInternById: (id: number) => Promise<Intern>,
+    getFemaleInterns: () => Promise<Intern[]>,
+    getMaleInterns: () => Promise<Intern[]>,
+    getInternByEmail: (email: string) => Promise<Intern>,
+    getInternProgressById: (id: number) => Promise<InternProgress>,
+    addIntern: (intern: Intern) => Promise<void>, 
+    updateInternById: (intern: Intern) => Promise<void>, 
+    deleteInternById: (id: number) => Promise<void>
 }

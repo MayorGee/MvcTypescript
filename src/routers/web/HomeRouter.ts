@@ -1,7 +1,7 @@
 import AbstractRouter from '../AbstractRouter.js';
 import HomeController from '../../controllers/web/HomeController.js';
-
-import { IRouter, RequestMethod } from '../../abstracts/Common.js';
+import { IRouter } from '../../abstracts/Contract.js';
+import { RequestMethod } from '../../abstracts/Enum.js';
 
 const homeController = new HomeController();
 

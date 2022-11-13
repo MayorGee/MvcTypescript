@@ -11,8 +11,10 @@ import InternLoginController from '../../controllers/web/Intern/InternLoginContr
 import InternLogoutController from '../../controllers/web/Intern/InternLogoutController.js';
 import InternProgressController from '../../controllers/web/Intern/InternProgressController.js';
 import InternAccountController from '../../controllers/web/Intern/InternAccountController.js';
+import { IRouter } from '../../abstracts/Contract.js';
+import { RequestMethod } from '../../abstracts/Enum.js';
 
-import { IRouter, RequestMethod } from '../../abstracts/Common.js';
+
 
 const internController = new InternController();
 const internsController = new InternsController();

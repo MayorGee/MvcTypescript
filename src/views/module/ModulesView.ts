@@ -1,7 +1,7 @@
 import AbstractView from '../AbstractView.js';
 
 import { Module } from '../../abstracts/entities/Module.js';
-import { IView } from '../../abstracts/Common.js';
+import { IView } from '../../abstracts/Contract.js';
 
 export default class ModulesView extends AbstractView implements IView {
     private modules: Module[] = [];
