@@ -1,10 +1,10 @@
 import Cache from '../cache/Cache.js';
 import { ICache } from '../../abstracts/Contract.js';
 
-export default class Service {
+export default abstract class Service {
     protected cache: ICache;
 
     constructor() {
-        this.cache = Cache.getCacheMode();
+        this.cache = Cache.getCacheClient();
     }
 }

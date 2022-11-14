@@ -7,7 +7,7 @@ import { CacheMode } from '../../abstracts/Enum.js';
 import Environment from '../Environment.js';
 
 export default class Cache {
-    public static getCacheMode(): ICache {
+    public static getCacheClient(): ICache {
         const cacheMode = Environment.getCacheMode();
 
         if (cacheMode === CacheMode.redis) {

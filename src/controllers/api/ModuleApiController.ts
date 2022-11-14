@@ -23,7 +23,6 @@ export default class ModuleController extends ApiController implements IControll
         }            
         
         try {
-            this.moduleService = new ModuleService();
             const module: Module = await this.moduleService.getModuleById(moduleId);
         
             this.returnSuccessResponse({ res, data: module});

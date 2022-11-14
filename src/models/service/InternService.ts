@@ -22,7 +22,7 @@ export default class InternService extends Service implements IInternService {
         this.internResource = new InternResource();
     }
 
-    async getInternById(id: number): Promise<Intern> {
+    public async getInternById(id: number): Promise<Intern> {
         const internCacheKey = this.cache.getEntityCacheKey(`${this.internCacheKey}${id}`);
         const cachedIntern = await this.cache.readCache<Intern>(internCacheKey);
 
@@ -44,7 +44,7 @@ export default class InternService extends Service implements IInternService {
         return intern;
     }
 
-    async getInterns(): Promise<Intern[]> {
+    public async getInterns(): Promise<Intern[]> {
         const internsCacheKey = this.cache.getEntityCacheKey(this.internsCacheKey);
     
         const cachedInterns = await this.cache.readCache<Intern[]>(internsCacheKey);
@@ -62,7 +62,7 @@ export default class InternService extends Service implements IInternService {
         return interns;
     }
 
-    async getFemaleInterns(): Promise<Intern[]> {
+    public async getFemaleInterns(): Promise<Intern[]> {
         const femaleInternsCacheKey = this.cache.getEntityCacheKey(`female ${this.internsCacheKey}`);
     
         try {
@@ -82,7 +82,7 @@ export default class InternService extends Service implements IInternService {
         return femaleInterns;
     }
 
-    async getMaleInterns(): Promise<Intern[]> {
+    public async getMaleInterns(): Promise<Intern[]> {
         const maleInternsCacheKey = this.cache.getEntityCacheKey(`male ${this.internsCacheKey}`);
     
         try {
@@ -102,7 +102,7 @@ export default class InternService extends Service implements IInternService {
         return maleInterns;
     }
 
-    async getInternByEmail(email: string): Promise<Intern> {
+    public async getInternByEmail(email: string): Promise<Intern> {
         const internCacheKey = this.cache.getEntityCacheKey(`${this.internCacheKey}(email): ${email}`);
         const cachedIntern = await this.cache.readCache<Intern>(internCacheKey);
 
@@ -124,7 +124,7 @@ export default class InternService extends Service implements IInternService {
         return intern;
     }
 
-    async getInternProgressById(id: number): Promise<InternProgress> {
+    public async getInternProgressById(id: number): Promise<InternProgress> {
         const internProgressCacheKey = this.cache.getEntityCacheKey(`${this.internCacheKey}${id} Progress`);
         const cachedInternProgress = await this.cache.readCache<InternProgress>(internProgressCacheKey);
 
@@ -146,20 +146,23 @@ export default class InternService extends Service implements IInternService {
         return internProgress;
     }
 
-    async addIntern(intern: Intern) { 
-        await this.cache.deleteEntityFromCache(`intern${intern.id}`);
+    public async addIntern(intern: Intern) { 
+        await this.cache.deleteEntityFromCache(`${this.internCacheKey}${intern.id}`);
+        await this.cache.deleteEntityFromCache(`${this.internsCacheKey}`);
 
         this.internResource.addIntern(intern);
     }
 
-    async updateInternById(intern: Intern) {
-        await this.cache.deleteEntityFromCache(`intern${intern.id}`);
+    public async updateInternById(intern: Intern) {
+        await this.cache.deleteEntityFromCache(`${this.internCacheKey}${intern.id}`);
+        await this.cache.deleteEntityFromCache(`${this.internsCacheKey}`);
 
         this.internResource.updateInternById(intern);
     }
 
-    async deleteInternById(id: number) {
-        await this.cache.deleteEntityFromCache(`intern${id}`);
+    public async deleteInternById(id: number) {
+        await this.cache.deleteEntityFromCache(`${this.internCacheKey}${id}`);
+        await this.cache.deleteEntityFromCache(`${this.internsCacheKey}`);
         
         this.internResource.deleteInternById(id);
     }

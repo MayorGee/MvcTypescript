@@ -4,6 +4,7 @@ import Environment from '../Environment.js';
 
 export default class RedisCache implements ICache {
     private redisClient;
+    private redisIsConnected: boolean = false;
 
     constructor() {
         this.redisClient = createClient({
@@ -13,6 +14,9 @@ export default class RedisCache implements ICache {
             },
             password: Environment.getRedisPassword()
         });
+        
+        this.redisClient.on('ready', () => this.redisIsConnected = true);
+        this.redisClient.on('error', (err: any) => console.error(`REDIS CLIENT ERROR: ${err.message}`));
     }
 
     public async readCache<T>(entityName: string): Promise<T | undefined> {
@@ -23,8 +27,6 @@ export default class RedisCache implements ICache {
 
             if (cachedEntity) {
                 return JSON.parse(cachedEntity);
-            } else {
-                return;
             }
             
         } catch(err: any) {
@@ -67,7 +69,8 @@ export default class RedisCache implements ICache {
     }
 
     protected async connectClient() {
-        await this.redisClient.connect();
+        if (!this.redisIsConnected) {
+            await this.redisClient.connect();
+        }
     }
-
 }

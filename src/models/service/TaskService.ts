@@ -16,7 +16,7 @@ export default class TaskService extends Service {
         this.taskResource = new TaskResource();
     }
 
-    async getTaskById(id: number): Promise<Task> {
+    public async getTaskById(id: number): Promise<Task> {
         const taskCacheKey = this.cache.getEntityCacheKey(`${this.taskCacheKey}${id}`);
         const cachedTask = await this.cache.readCache<Task>(taskCacheKey);
 
@@ -38,7 +38,7 @@ export default class TaskService extends Service {
         return task;
     }
 
-    async getTasks(): Promise<Task[]> {
+    public async getTasks(): Promise<Task[]> {
         const tasksCacheKey = this.cache.getEntityCacheKey(this.tasksCacheKey);
     
         const cachedTasks = await this.cache.readCache<Task[]>(tasksCacheKey);

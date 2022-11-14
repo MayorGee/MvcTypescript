@@ -5,7 +5,6 @@ import SpecialtyAreaConverter from '../../converters/SpecialtyAreaConverter.js';
 
 import { DbSpecialtyArea, ISpecialtyAreaResource, SpecialtyArea } from '../../abstracts/entities/SpecialtyArea.js';
 
-
 export default class SpecialtyAreaService extends Service {
     private specialtyAreaResource: ISpecialtyAreaResource;
     private specialtyAreaCacheKey = 'specialtyArea';
@@ -17,7 +16,7 @@ export default class SpecialtyAreaService extends Service {
         this.specialtyAreaResource = new SpecialtyAreaResource();
     }
 
-    async getSpecialtyAreaById(id: number): Promise<SpecialtyArea> {
+    public async getSpecialtyAreaById(id: number): Promise<SpecialtyArea> {
         const specialtyAreaCacheKey = this.cache.getEntityCacheKey(`${this.specialtyAreaCacheKey}${id}`);
         const cachedSpecialtyArea = await this.cache.readCache<SpecialtyArea>(specialtyAreaCacheKey);
 
@@ -39,7 +38,7 @@ export default class SpecialtyAreaService extends Service {
         return specialtyArea;
     }
 
-    async getSpecialtyAreas(): Promise<SpecialtyArea[]> {
+    public async getSpecialtyAreas(): Promise<SpecialtyArea[]> {
         const specialtyAreasCacheKey = this.cache.getEntityCacheKey(this.specialtyAreasCacheKey);
     
         const cachedSpecialtyAreas = await this.cache.readCache<SpecialtyArea[]>(specialtyAreasCacheKey);

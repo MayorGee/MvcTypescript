@@ -14,7 +14,7 @@ export default class InternshipService extends Service implements IInternshipSer
         this.internshipResource = new InternshipResource();
     }
 
-    async getInternshipById(id: number): Promise<Internship> {
+    public async getInternshipById(id: number): Promise<Internship> {
         const internshipCacheKey = this.cache.getEntityCacheKey(`${this.internshipCacheKey}${id}`);
         const cachedInternship = await this.cache.readCache<Internship>(internshipCacheKey);
 
@@ -36,7 +36,7 @@ export default class InternshipService extends Service implements IInternshipSer
         return internship;
     }
 
-    async getInternships(): Promise<Internship[]> {
+    public async getInternships(): Promise<Internship[]> {
         const internshipsCacheKey = this.cache.getEntityCacheKey(this.internshipsCacheKey);
     
         const cachedInternships = await this.cache.readCache<Internship[]>(internshipsCacheKey);

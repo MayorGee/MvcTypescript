@@ -28,7 +28,7 @@ export default class MentorService extends Service implements IMentorService {
         this.mentorResource = new MentorResource();
     }
 
-    async getMentorById(id: number): Promise<Mentor> {
+    public async getMentorById(id: number): Promise<Mentor> {
         const mentorCacheKey = this.cache.getEntityCacheKey(`${this.mentorCacheKey}${id}`);
         const cachedMentor = await this.cache.readCache<Mentor>(mentorCacheKey);
 
@@ -50,7 +50,7 @@ export default class MentorService extends Service implements IMentorService {
         return mentor;
     }
 
-    async getMentors(): Promise<Mentor[]> {
+    public async getMentors(): Promise<Mentor[]> {
         const mentorsCacheKey = this.cache.getEntityCacheKey(this.mentorsCacheKey);
     
         const cachedMentors = await this.cache.readCache<Mentor[]>(mentorsCacheKey);
@@ -68,7 +68,7 @@ export default class MentorService extends Service implements IMentorService {
         return mentors;
     }
 
-    async getMentorByEmail(email: string): Promise<Mentor> {
+    public async getMentorByEmail(email: string): Promise<Mentor> {
         const mentorCacheKey = this.cache.getEntityCacheKey(`${this.mentorCacheKey}(email): ${email}`);
         const cachedMentor = await this.cache.readCache<Mentor>(mentorCacheKey);
 
@@ -90,7 +90,7 @@ export default class MentorService extends Service implements IMentorService {
         return mentor;
     }
 
-    async getMentorStudents(id: number): Promise<Intern[]> {
+    public async getMentorStudents(id: number): Promise<Intern[]> {
         const mentorCacheKey = this.cache.getEntityCacheKey(`${this.mentorCacheKey}/'s (students)`);
         const cachedMentor = await this.cache.readCache<Intern[]>(mentorCacheKey);
 
@@ -112,7 +112,7 @@ export default class MentorService extends Service implements IMentorService {
         return mentorInterns;
     }
 
-    async getMentorSpecialty(id: number): Promise<MentorSpecialty> {
+    public async getMentorSpecialty(id: number): Promise<MentorSpecialty> {
         const mentorCacheKey = this.cache.getEntityCacheKey(`${this.mentorCacheKey}(specialty)`);
         const cachedMentor = await this.cache.readCache<MentorSpecialty>(mentorCacheKey);
 
@@ -134,20 +134,23 @@ export default class MentorService extends Service implements IMentorService {
         return mentorSpecialty;
     }
 
-    async addMentor(mentor: Mentor) {
-        await this.cache.deleteEntityFromCache(`mentor${mentor.id}`);
+    public async addMentor(mentor: Mentor) {
+        await this.cache.deleteEntityFromCache(`${this.mentorCacheKey}${mentor.id}`);
+        await this.cache.deleteEntityFromCache(`${this.mentorsCacheKey}`);
 
         this.mentorResource.addMentor(mentor);
     }
 
-    async updateMentorById(mentor: Mentor) {
-        await this.cache.deleteEntityFromCache(`mentor${mentor.id}`);
+    public async updateMentorById(mentor: Mentor) {
+        await this.cache.deleteEntityFromCache(`${this.mentorCacheKey}${mentor.id}`);
+        await this.cache.deleteEntityFromCache(`${this.mentorsCacheKey}`);
 
         this.mentorResource.updateMentorById(mentor);
     }
 
     public async deleteMentorById(id: number) {
-        await this.cache.deleteEntityFromCache(`mentor${id}`);
+        await this.cache.deleteEntityFromCache(`${this.mentorCacheKey}${id}`);
+        await this.cache.deleteEntityFromCache(`${this.mentorsCacheKey}`);
 
         this.mentorResource.deleteMentorById(id);
     }

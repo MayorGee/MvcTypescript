@@ -16,7 +16,7 @@ export default class ModuleService extends Service implements IModuleService {
         this.moduleResource = new ModuleResource();
     }
 
-    async getModuleById(id: number): Promise<Module> {
+    public async getModuleById(id: number): Promise<Module> {
         const moduleCacheKey = this.cache.getEntityCacheKey(`${this.moduleCacheKey}${id}`);
         const cachedModule = await this.cache.readCache<Module>(moduleCacheKey);
 
@@ -38,7 +38,7 @@ export default class ModuleService extends Service implements IModuleService {
         return module;
     }
 
-    async getModules(): Promise<Module[]> {
+    public async getModules(): Promise<Module[]> {
         const modulesCacheKey = this.cache.getEntityCacheKey(this.modulesCacheKey);
     
         const cachedModules = await this.cache.readCache<Module[]>(modulesCacheKey);
@@ -56,20 +56,23 @@ export default class ModuleService extends Service implements IModuleService {
         return modules;
     }
 
-    async addModule(module: Module) {
-        await this.cache.deleteEntityFromCache(`module${module.id}`);
-
+    public async addModule(module: Module) {
+        await this.cache.deleteEntityFromCache(`${this.moduleCacheKey}${module.id}`);
+        await this.cache.deleteEntityFromCache(`${this.modulesCacheKey}`);
+        
         this.moduleResource.addModule(module);
     }
 
-    async deleteModuleById(id: number) {
-        await this.cache.deleteEntityFromCache(`module${id}`);
+    public async deleteModuleById(id: number) {
+        await this.cache.deleteEntityFromCache(`${this.moduleCacheKey}${id}`);
+        await this.cache.deleteEntityFromCache(`${this.modulesCacheKey}`);
 
         this.moduleResource.deleteModuleById(id);
     }
 
-    async updateModuleById(module: Module) {
-        await this.cache.deleteEntityFromCache(`module${module.id}`);
+    public async updateModuleById(module: Module) {
+        await this.cache.deleteEntityFromCache(`${this.moduleCacheKey}${module.id}`);
+        await this.cache.deleteEntityFromCache(`${this.modulesCacheKey}`);
         
         this.moduleResource.updateModuleById(module);
     }

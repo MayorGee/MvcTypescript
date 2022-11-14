@@ -3,7 +3,7 @@ import { deleteAsync } from 'del';
 import { ICache } from '../../abstracts/Contract';
 
 export default class FileCache implements ICache {
-    private cacheDir = './cache';
+    private cacheDir = 'cache';
 
     public async readCache<T>(entityName: string): Promise<T | undefined> {
         try {
@@ -11,8 +11,6 @@ export default class FileCache implements ICache {
     
             if (cachedEntity) {
                 return JSON.parse(cachedEntity);
-            } else {
-                return;
             }
             
         } catch(err: any) {
@@ -33,11 +31,11 @@ export default class FileCache implements ICache {
     }
 
     public getEntityCacheKey(entityName: string): string {
-        return `${this.cacheDir}/${entityName}.json`;
+        return `./${this.cacheDir}/${entityName}.json`;
     }
 
     public async clearCache(): Promise<void> {
-        const deletedFilePaths = await deleteAsync(['cache/*.json']);
+        const deletedFilePaths = await deleteAsync([`${this.cacheDir}/*.json`]);
 
         console.log('Files deleted from cache:\n', deletedFilePaths.join('\n'));
     }
