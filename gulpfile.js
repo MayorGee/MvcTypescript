@@ -59,8 +59,6 @@ function clear() {
 function serve() {
     watch('./src/views/**/**.liquid', series(liquid)).on('change', sync.reload);
     watch('./src/scss/**.scss', series(scss)).on('change', sync.reload);
-    watch('src/icons/*.+(png|svg|jpg|webp)', series(icons)).on('change', sync.reload);
-    watch('src/images/*.+(png|svg|jpg|webp)', series(images)).on('change', sync.reload);
     watch('./src/**/**.js', series(script)).on('change', sync.reload);
     watch('./src/**/**.ts', series(typescript)).on('change', sync.reload);
 }
@@ -83,18 +81,22 @@ async function startNodemon() {
     });
 }
 
-const watchNode = parallel(
+export const watchNode = parallel(
     startBRowserSync,
     series(
-        clear,
-        liquid,    
+        clear,   
         scss,
-        images,
-        icons,
         script,
         typescript,
+        parallel(images, icons, liquid),
         startNodemon
     )
 )
 
-export default watchNode;
+export const build = series(
+    clear,
+    scss,
+    script,
+    typescript,
+    parallel(images, icons, liquid)
+)
