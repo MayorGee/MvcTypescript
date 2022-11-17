@@ -5,7 +5,12 @@ import { NextFunction, Request, Response } from 'express';
 
 export default class MentorLogoutController extends WebController implements IController {
     protected handleGet(req: Request, res: Response, next: NextFunction) {
-        req.session.destroy();
-        res.redirect('/mentor-login');
+        req.session.destroy((err: any) => {
+            if (err) {
+               console.error(err.message);
+            } else {
+                res.redirect('/mentor-login');
+            }
+        });
     }
 }

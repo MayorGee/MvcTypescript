@@ -7,7 +7,7 @@ import { WebErrorResponse } from '../../abstracts/Common.js';
 import { RequestMethod, Role } from '../../abstracts/Enum.js';
 
 import alert from 'alert';
-import { randomBytes } from 'crypto';
+import Tokens from 'csrf';
 
 import { NextFunction, Request, Response } from 'express';
 
@@ -81,9 +81,12 @@ export default abstract class WebController extends Controller implements IContr
         return typeof variable !== 'string' && variable > 0;
     }
 
-    protected setCsrfToken(req: Request) {
+    protected async setCsrfToken(req: Request) {
         if(!(req.session.csrfToken)) {
-            req.session.csrfToken = randomBytes(50).toString('hex');
+            const tokens = new Tokens({ secretLength: 50 });
+            const secret =  await tokens.secret();
+
+            req.session.csrfToken = tokens.create(secret);
         }
     }
 

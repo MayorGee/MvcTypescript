@@ -5,7 +5,12 @@ import { Request, Response } from 'express';
 
 export default class InternLogoutController extends WebController implements IController {
     protected handleGet(req: Request, res: Response) {
-        req.session.destroy();
-        res.redirect('/intern-login');
+        req.session.destroy((err: any) => {
+            if (err) {
+               console.error(err.message);
+            } else {
+                res.redirect('/intern-login');
+            }
+         });
     }
 }
