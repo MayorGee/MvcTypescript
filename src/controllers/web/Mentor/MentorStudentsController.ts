@@ -3,7 +3,7 @@ import { IController } from '../../../abstracts/Contract.js';
 
 import MentorView from '../../../views/mentor/MentorView.js';
 import MentorService from '../../../models/service/MentorService.js';
-import { IMentorService } from '../../../abstracts/entities/Mentor.js';
+import { IMentorService, Mentor } from '../../../abstracts/entities/Mentor.js';
 
 import { NextFunction, Request, Response } from 'express';
 
@@ -15,7 +15,7 @@ export default class MentorStudentsController extends WebController implements I
             return this.redirect({ 
                 res, 
                 page: '/mentor-login', 
-                errorMessage: 'You are not logged in (as mentor)',
+                errorMessage: 'You are not logged in as mentor',
                 errorCode: 401
             });
         }      
@@ -24,9 +24,11 @@ export default class MentorStudentsController extends WebController implements I
 
         const mentorService: IMentorService = new MentorService();
         const mentorInterns = await mentorService.getMentorStudents(mentorId);
+        const mentor: Mentor = await mentorService.getMentorById(mentorId);
 
         const mentorView = new MentorView();
         mentorView
+            .setMentor(mentor)
             .setMentorStudents(mentorInterns)
             .setTemplate('./mentor/mentor-students');
 

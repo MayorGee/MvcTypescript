@@ -4,7 +4,7 @@
         <form
             action="/intern-login"
             method="post"
-            class="login-form"
+            class="form"
         >
             <input
                 type="hidden"
@@ -12,27 +12,43 @@
                 value={{ csrfToken }}
             />
 
-            <div class="login-form__item">
+            <div class="form__item">
+                <label 
+                    for="internEmail"
+                    class="form__label"
+                >
+                    Email:
+                </label>
+                <br />
                 <input
+                    id="internEmail"
                     type="email"
                     name="internEmail"
-                    class="login-form__input"
+                    class="form__input"
                     placeholder="Email"
                 />
             </div>
 
-            <div class="login-form__item">
+            <div class="form__item">
+                <label 
+                    for="internEmail"
+                    class="form__label"
+                >
+                    Password:
+                </label>
+                <br />
                 <input
+                    id="internPassword"
                     type="password"
                     name="internPassword"
-                    class="login-form__input"
+                    class="form__input"
                     placeholder="Password"
                 />
             </div>
 
             <button 
                 type="submit"
-                class="login-form__btn"
+                class="form__btn"
             >
                 Login
             </button>

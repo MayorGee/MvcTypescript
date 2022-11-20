@@ -10,11 +10,18 @@ import { IController } from '../../../abstracts/Contract.js';
 import { Role } from '../../../abstracts/Enum.js';
 
 export default class InternLoginController extends WebController implements IController {
-    protected handleGet(req: Request, res: Response, next: NextFunction) {
-        const internView = new InternView();
-        internView.setTemplate('./intern/intern-login');
+    private internView;
 
-        this.renderPage(req, res, internView);
+    constructor () {
+        super();
+
+        this.internView = new InternView();
+    }
+
+    protected handleGet(req: Request, res: Response, next: NextFunction) {
+        this.internView.setTemplate('./intern/intern-login');
+
+        this.renderPage(req, res, this.internView);
     }
 
     protected async handlePost(req: Request, res: Response, next: NextFunction) {

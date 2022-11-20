@@ -24,8 +24,8 @@ export default class MentorView extends AbstractView implements IView  {
         return this;
     }
 
-    public getMentorSpecialty(): MentorSpecialty | null {
-        return this.specialty;
+    public getMentorSpecialty(): string | undefined {
+        return this.specialty?.title;
     }
 
     public setMentorStudents(interns: Intern[]): this {

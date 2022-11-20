@@ -3,38 +3,55 @@
     {% assign areaOfSpecialty = this.getMentorSpecialty %}
 
     {% block content %}
-        <div class="mentor-home">
+        <div class="user">
+            <div class="user__profile-pic">
+                <img 
+                    src="/images/mentor.jpeg" 
+                    alt="mentor"
+                    class="user__img"
+                />
+            </div>
 
-            <p class="mentor-home__row">
-                First Name: {{ mentor.firstName }}
-            </p>
+            <div class="user__detail-row">
+                <label class="user__detail-label">First Name:</label> 
+                <br />
+                <span class="user__detail">{{ mentor.firstName }}</span>
+            </div>
 
-            <p class="mentor-home__row">
-                Last Name: {{ mentor.lastName }}
-            </p>
+            <div class="user__detail-row">
+                <label class="user__detail-label">Last Name:</label> 
+                <br />
+                <span class="user__detail">{{ mentor.lastName }}</span>
+            </div>
 
-            <p class="mentor-home__row">
-                Area of Specialty: {{ areaOfSpecialty }}
-            </p>
+            <div class="user__detail-row">
+                <label class="user__detail-label">Area of Specialty:</label> 
+                <br />
+                <span class="user__detail">{{ areaOfSpecialty }}</span>
+            </div>
 
-            <p class="mentor-home__row">
-                <a 
-                    href="/mentor-students?id={{ mentor.id }}"
-                    class="mentor-home__link"
-                >
-                    My Students
-                </a>
-            </p>
-            
-            <p class="mentor-home__row">
-                <button>
-                    <a
-                        href="/mentor-logout"
-                        class="mentor-home__logout"
+            <div class="user__detail-row">
+                <label class="user__detail-label">Email:</label> 
+                <br />
+                <span class="user__detail">{{ mentor.email }}</span>
+            </div>
+
+            <div class="user__detail-row">
+                <label class="user__detail-label">Phone:</label> 
+                <br />
+                <span class="user__detail">{{ mentor.phone }}</span>
+            </div>
+
+            <div class="user__buttons">
+                <button class="user__button">
+                    <a 
+                        href="/mentor-students?id={{ mentor.id }}"
+                        class="user__link"
                     >
-                        Logout   
-                    </a>   
-                </button> 
-            </p>     
+                        Students
+                    </a>
+                </button>
+            </div>
+            
         </div>
     {% endblock %}

@@ -1,3 +1,16 @@
-.mentor {
-    padding: 3rem;
+.mentors-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    width: 90%;
+    margin: 2rem auto;
+
+    box-shadow: $inset-shadow;
+
+    border-radius: 1rem;
+
+    &__item {
+        list-style-type: none;
+    }
 }

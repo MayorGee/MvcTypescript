@@ -6,8 +6,8 @@ export enum RequestMethod {
 }
 
 export enum Role {
-    intern = 'Intern',
-    mentor = 'Mentor'
+    intern = 'intern',
+    mentor = 'mentor'
 }
 
 export enum CacheMode {

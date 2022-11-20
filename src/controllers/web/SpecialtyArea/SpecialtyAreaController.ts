@@ -13,13 +13,13 @@ export default class SpecialtyAreaController extends WebController implements IC
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
-        
-        const specialtyAreaId = req.query.id;
 
-        if (!this.isNumber(specialtyAreaId)) {
+        const specialtyAreaId = this.handleId(req.query.id);
+ 
+        if (!specialtyAreaId) {
             return this.handleIdError(specialtyAreaId, res);
         }
-
+        
         const specialtyAreaService: ISpecialtyAreaService = new SpecialtyAreaService();
         const specialtyArea: SpecialtyArea = await specialtyAreaService.getSpecialtyAreaById(specialtyAreaId);
 

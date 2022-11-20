@@ -20,11 +20,11 @@ export default class DeleteMentorController extends WebController implements ICo
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
-        }
+        }     
 
-        const mentorId = req.query.id;
+        const mentorId = this.handleId(req.query.id);
 
-        if (!this.isNumber(mentorId)) {
+        if (!mentorId) {
             return this.handleIdError(mentorId, res);
         }
 

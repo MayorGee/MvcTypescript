@@ -1,32 +1,51 @@
 .form {
-    width: 70%;
-    margin: 2rem auto;
-    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    border: 1px solid black;
-    border-radius: 2rem;
+    width: 50rem;
+    height: auto;
+    margin: 4rem auto;
+    padding: 2rem 0;
+
+    background-color: $almost-white;
+
+    border-radius: 1rem;
+
+    box-shadow: $inset-shadow;
 
     &__info {
-        margin-bottom: 2rem;
+        margin: 1rem;
 
-        font-weight: 600;
         font-size: 2rem;
-        text-align: center;
+        font-weight: 600;
     }
 
     &__label {
-        font-weight: 600;
-        font-size: 1.7rem;
+        font-weight: 800;
     }
 
     &__input {
-        margin-left: 1rem;
-        margin-bottom: 1.5rem;
-        padding-left: 1.6rem;
         width: 35rem;
-        height: 4rem;
+        height: 4.5rem;
+        margin-bottom: 2rem;
+        padding-left: 1rem;
 
+        border: 1px solid rgba($black, 0.4);
         border-radius: 1rem;
-        border: 1px solid rgba(0,0,0,0.4);
+    }
+
+    &__btn {
+        width: 17rem;
+        padding: 1rem 2rem;
+
+        color: $white;
+        font-weight: 700;
+
+        background-color: $yellow-green;
+
+        border: none;
+        border-radius: 1rem;
     }
 }

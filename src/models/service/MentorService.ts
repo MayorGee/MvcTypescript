@@ -91,7 +91,7 @@ export default class MentorService extends Service implements IMentorService {
     }
 
     public async getMentorStudents(id: number): Promise<Intern[]> {
-        const mentorCacheKey = this.cache.getEntityCacheKey(`${this.mentorCacheKey}/'s (students)`);
+        const mentorCacheKey = this.cache.getEntityCacheKey(`${this.mentorCacheKey}(students)`);
         const cachedMentor = await this.cache.readCache<Intern[]>(mentorCacheKey);
 
         if (cachedMentor) {
@@ -131,6 +131,7 @@ export default class MentorService extends Service implements IMentorService {
 
         this.cache.writeCache<MentorSpecialty>(mentorCacheKey, mentorSpecialty);
 
+        console.log("mentor specialty --> ", mentorSpecialty);
         return mentorSpecialty;
     }
 

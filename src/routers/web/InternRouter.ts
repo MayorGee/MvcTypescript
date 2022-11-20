@@ -11,6 +11,7 @@ import InternLoginController from '../../controllers/web/Intern/InternLoginContr
 import InternLogoutController from '../../controllers/web/Intern/InternLogoutController.js';
 import InternProgressController from '../../controllers/web/Intern/InternProgressController.js';
 import InternAccountController from '../../controllers/web/Intern/InternAccountController.js';
+import UpdateInternController from '../../controllers/web/Intern/UpdateInternController.js';
 import { IRouter } from '../../abstracts/Contract.js';
 import { RequestMethod } from '../../abstracts/Enum.js';
 
@@ -27,6 +28,7 @@ const internLoginController = new InternLoginController();
 const internLogoutController = new InternLogoutController();
 const internProgressController = new InternProgressController();
 const internAccountController = new InternAccountController();
+const updateInternController = new UpdateInternController();
 
 export default class InternRouter  extends AbstractRouter implements IRouter {
     constructor() {
@@ -92,6 +94,16 @@ export default class InternRouter  extends AbstractRouter implements IRouter {
                 route: '/intern-info',
                 controller: internInfoController,
                 requestMethod: RequestMethod.get
+            },
+            {
+                route: '/update-intern',
+                controller: updateInternController,
+                requestMethod: RequestMethod.get
+            },
+            {
+                route: '/update-intern',
+                controller: updateInternController,
+                requestMethod: RequestMethod.post
             },
             {
                 route: '/intern-info',

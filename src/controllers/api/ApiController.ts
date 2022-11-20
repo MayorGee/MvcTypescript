@@ -36,19 +36,6 @@ export default class ApiController extends Controller implements IController {
 
     protected handleDelete(req: Request, res: Response, next: NextFunction): void {}
 
-    protected handleId(id: any): number | null {
-        let preparedId: number | null = null;
-
-        if (this.isNumber(id)) {
-            preparedId = id;
-        }
-
-        if (typeof id === 'string') {
-            preparedId = Number.isInteger(parseInt(id)) ? parseInt(id) : null;
-        }
-
-        return preparedId;
-    }
 
     protected returnSuccessResponse({
         res, 

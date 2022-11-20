@@ -1,3 +1,10 @@
 .specialty-area {
-    margin-left: 5rem;
+    width: 40%;
+    margin: 3rem auto;
+
+    &__info {
+        font-weight: 600;
+        font-size: 2rem;
+        text-align: center;
+    }
 }

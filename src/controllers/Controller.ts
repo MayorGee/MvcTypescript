@@ -13,7 +13,7 @@ export default class Controller {
     }
 
     protected handleIdError(id: any, res: Response) {
-        let errorText = id ? 'Error! Id must be an integer or string' : 'No Id entered';
+        let errorText = id ? `Error! Id must be an integer or string. Got type: ${typeof id}` : 'No Id entered';
 
         this.returnFailedResponse({ 
             res, 
@@ -24,5 +24,23 @@ export default class Controller {
 
     protected isNumber(variable: any): variable is number {
         return  typeof variable === 'number' && Number.isInteger(variable)
+    }
+
+    protected isString(variable: any): variable is string {
+        return typeof variable === 'string';
+    }
+
+    protected handleId(id: any): number | null {
+        let preparedId: number | null = null;
+
+        if (this.isNumber(id)) {
+            preparedId = id;
+        }
+
+        if (this.isString(id)) {
+            preparedId = Number.isInteger(parseInt(id)) ? parseInt(id) : null;
+        }
+
+        return preparedId;
     }
 }

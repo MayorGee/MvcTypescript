@@ -4,7 +4,7 @@
         <form
             action="/mentor-login"
             method="post"
-            class="login-form"
+            class="form"
         >
 
             <p class="attention">ONLY FOR AUTHORIZED MENTORS!</p>
@@ -15,27 +15,27 @@
                 value={{ csrfToken }}
             />
 
-            <div class="login-form__item">
+            <div class="form__item">
                 <input
                     type="email"
                     name="mentorEmail"
-                    class="login-form__input"
+                    class="form__input"
                     placeholder="Email"
                 />
             </div>
 
-            <div class="login-form__item">
+            <div class="form__item">
                 <input
                     type="password"
                     name="mentorPassword"
-                    class="login-form__input"
+                    class="form__input"
                     placeholder="Password"
                 />
             </div>
 
             <button 
                 type="submit"
-                class="login-form__btn"
+                class="form__btn"
             >
                 Login
             </button>

@@ -19,6 +19,6 @@ export default class SpecialtyAreaConverter {
     }
 
     public static convertDbMentorSpecialty({ Title }: DbMentorSpecialty): MentorSpecialty {
-        return { title: Title}
+        return { title: Title }
     }
 }

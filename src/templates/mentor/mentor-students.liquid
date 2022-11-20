@@ -1,14 +1,20 @@
 {% layout '../index-layout.liquid', title: 'Mentor Students' %}
-    {% assign students = this.getMentorStudents %}
+{% assign students = this.getMentorStudents %}
+{% assign mentor = this.getMentor %}
+
 
     {% block content %}
-        <div class="mentor-students">               
-            <ul class="mentors-students__list">
-                {% for student in students %}
-                    <li class="mentors-students__student">
-                        {{ student.firstName }} {{ student.lastName }} 
-                    </li>
-                {% endfor %}
-            </ul>
+        <div class="mentor-students">  
+            {% if students.length > 0 %}             
+                <ul class="mentor-students__list">
+                    {% for student in students %}
+                        <li class="mentor-students__student">
+                            {{ student.firstName }} {{ student.lastName }} 
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="mentor-students__null">It seems no student(s) have signed up for {{ mentor.firstName | capitalize }}'s course yet</p>
+            {% endif %}
         </div>
     {% endblock %}

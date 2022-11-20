@@ -1,19 +1,34 @@
 {% layout '../index-layout.liquid', title: 'Mentors Page' %}
-    {% assign mentors = this.getMentors %}
+
+{% assign mentors = this.getMentors %}
 
     {% block content %}
         <div class="mentors">
             <ul class="mentors-list">
                 {% for mentor in mentors %}
                     <li class="mentors-list__item">
-                        {{ mentor.firstName }} {{ mentor.lastName }} 
-                        <span class="delete-mentor">
-                            <a 
-                                href="/delete-mentor?id={{ mentor.id }}"
-                                class="delete-mentor__link">
-                                <button class="delete-mentor__btn">Delete</button>
-                            </a>
-                        </span>
+                        <div class="user">
+                            <div class="user__detail-row">
+                                <label class="user__detail-label">Name:</label> 
+                                <span class="user__detail">{{ mentor.firstName | capitalize }} {{ mentor.lastName | capitalize }}</span>
+                            </div>
+
+                            <div class="user__detail-row">
+                                <label class="user__detail-label">Email:</label>
+                                <span class="user__detail">{{ mentor.email }}</span>
+                            </div>
+                            
+                            <div class="user__buttons">
+                                <button class="user__button">
+                                    <a 
+                                        href="/mentor?id={{ mentor.id }}"
+                                        class="user__link"
+                                    >
+                                        View
+                                    </a>
+                                </button>
+                            </div>
+                        </div>
                     </li>
                 {% endfor %}
             </ul>

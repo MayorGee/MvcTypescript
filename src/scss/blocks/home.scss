@@ -1,17 +1,29 @@
 .home {
-    &__header {
-        color: white;
-        text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
 
-        background-color: black;
+    width: 70%;
+    margin: 2rem auto;
+    padding: 1rem 1.5rem;
+
+    background-color: $almost-white;
+
+    &__header {
+        width: 100%;
+
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.8rem;
     }
 
-    &__button {
-        color: white;
+    &__paragraph {
+        display: inline-block;
 
-        background-color: black;
-
-        border: none;
-        border-radius: 1.3rem;
+        width: 30%;
+        
+        text-align: left;
+        color: $dark-grey;
+        font-size: 1.3rem;
     }
 }

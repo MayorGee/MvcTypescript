@@ -1,8 +1,7 @@
 .internships-list {
+    width: 40%;
+    margin: 0 auto;
     padding: 3rem;
-    background-color: black;
-
-    &__item {
-        color: goldenrod;
-    }
+    
+    background-color: $almost-white;
 }

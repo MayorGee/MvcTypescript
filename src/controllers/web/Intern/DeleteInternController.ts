@@ -21,9 +21,9 @@ export default class DeleteInternController extends WebController implements ICo
             return this.redirectToHome(res);
         }
         
-        const internId = req.query.id;
-
-        if (!this.isNumber(internId)) {
+        const internId = this.handleId(req.query.id);
+ 
+        if (!internId) {
             return this.handleIdError(internId, res);
         }
         

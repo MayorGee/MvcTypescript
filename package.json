@@ -8,7 +8,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "watch": "gulp watchNode",
         "start": "gulp watchNode && node dist/index.js",
-        "pm2": "pm2 start npm --name '7. MVC - Mayowa' -- start"
+        "pm2": "pm2 start npm --name 'MvcBasics' -- start"
     },
     "keywords": [
         "mvc"

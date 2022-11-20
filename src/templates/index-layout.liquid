@@ -8,16 +8,197 @@
     <link href="../css/styles.css" type="text/css" rel="stylesheet" />
     
     <title>{{ title }}</title>
+
 </head>
 <body>
-    <div class="page-container"> 
-        <header class="header">Header</header>
+    <div class="page-container">
+        <header class="header">
+            <div class="main-header">
+                <h1 class="main-header__logo">
+                    <a href='' class="main-header__title">
+                        BubbleTech
+                    </a>
+                    <span class="main-header__title_green">.com</span>
+                </h1>
+                
+                <p class="main-header__text">The World's Largest Internship Program!</p>
+
+                <div class="main-header__buttons">
+                    {% if role %}
+                        <button class="main-header__button">
+                            <a 
+                                href="/{{ role }}-logout"
+                                class="main-header__link"
+                            >
+                                Logout
+                            </a>
+                        </button>
+
+                        <button class="main-header__button">
+                            <a 
+                                href="/{{ role }}-clear-cache"
+                                class="main-header__link"
+                            >
+                                Clear Cache
+                            </a>
+                        </button>
+                    {% else %}
+                    <div class="dropdown">
+                        <button class="dropdown__button main-header__button">Login</button>
+                        <div class="dropdown__list">
+                            <a 
+                                href="/intern-login"
+                                class="main-header__link dropdown__link"
+                            >
+                                Intern
+                            </a>
+                            <a 
+                                href="/mentor-login"
+                                class="main-header__link dropdown__link"
+                            >
+                                Mentor
+                            </a>
+                        </div>
+                    </div>
+                      
+                    <button class="main-header__button">
+                        <a 
+                            href="/intern-sign-up"
+                            class="main-header__link"
+                        >
+                        Sign Up
+                        </a>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="sub-header">
+                <ul class="sub-header__list">
+                    <li class="sub-header__list-item">
+                        <a 
+                            href="/mentors" 
+                            class="sub-header__link"
+                        >
+                            Mentors
+                        </a>
+                    </li>
+
+                    <li class="sub-header__list-item">
+                        <a 
+                            href="/interns" 
+                            class="sub-header__link"
+                        >
+                            Interns
+                        </a>
+                    </li>
+
+                    <li class="sub-header__list-item">
+                        <a 
+                            href="/internships" 
+                            class="sub-header__link"
+                        >
+                            Internships
+                        </a>
+                    </li>
+
+                    <li class="sub-header__list-item">
+                        <a 
+                            href="/modules" 
+                            class="sub-header__link"
+                        >
+                            Modules
+                        </a>
+                    </li>
+
+                    <li class="sub-header__list-item">
+                        <a 
+                            href="/specialty-areas" 
+                            class="sub-header__link"
+                        >
+                            Areas of Specialization
+                        </a>
+                    </li>
+                </ul>
+            </div>
+          
+
+        </header>
+
         <main class="main">
             {% block content %}
             
             {% endblock %}
         </main>
-        <footer class="footer">Footer</footer>
+
+        <footer class='footer'>
+            <div class='footer__top'>
+                <div class='footer-logo'>
+                    <a href='' class='footer-logo__link'>
+                        <h3 class='footer-logo__title'>BubbleTech</h3>
+                        <span class='footer-logo__description'>It's Fast, It's Furious, It's Bubble!</span>
+                    </a>
+                </div>
+
+                <ul class='footer__list'> 
+                    <li class='footer__item'>
+                        <a 
+                            href='https://www.privacypolicygenerator.info/' 
+                            class='footer__link'
+                            target='_blank'
+                        >
+                            FORUM
+                        </a>
+                    </li>
+
+                    <li class='footer__item'>
+                        <a 
+                            href='https://lachestry.com/' 
+                            class='footer__link'
+                            target='_blank'
+                        >
+                            CONTACT US
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class='footer__middle'>
+                <a href='' class='social-icon'>
+                    <img 
+                        src='images/gmail-logo.png' 
+                        alt='gmail logo' 
+                        class='footer__icon'
+                    />
+                </a>
+
+                <a href='' class='social-icon'>
+                    <img 
+                        src='images/vk-logo.png' 
+                        alt='vk logo' 
+                        class='footer__icon'
+                    />
+                </a>
+
+                <a href='' class='social-icon'>
+                    <img 
+                        src='images/insta-logo.png' 
+                        alt='instagram logo' 
+                        class='footer__icon'
+                    />
+                </a>
+
+                <a href='' class='social-icon'>
+                    <img 
+                        src='images/fb-logo.png' 
+                        alt='facebook logo' 
+                        class='footer__icon'
+                    />
+                </a>
+            </div>
+      
+             <p class='footer__copyright'>2022 &copy; BubbleTech. All Rights Reserved</p>
+        </footer>
     <div>
 </body>
 </html>

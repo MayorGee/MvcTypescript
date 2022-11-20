@@ -11,11 +11,19 @@ import { IController } from '../../../abstracts/Contract.js';
 import { Role } from '../../../abstracts/Enum.js';
 
 export default class MentorLoginController extends WebController implements IController {
-    protected handleGet(req: Request, res: Response, next: NextFunction) {
-        const mentorView = new MentorView();
-        mentorView.setTemplate('./mentor/mentor-login');
+    private mentorView;
 
-        this.renderPage(req, res, mentorView);
+    constructor () {
+        super();
+
+        this.mentorView = new MentorView();
+
+    }
+
+    protected handleGet(req: Request, res: Response, next: NextFunction) {
+        this.mentorView.setTemplate('./mentor/mentor-login');
+
+        this.renderPage(req, res, this.mentorView);
     }
 
     protected async handlePost(req: Request, res: Response, next: NextFunction) {
@@ -46,7 +54,7 @@ export default class MentorLoginController extends WebController implements ICon
         
         req.session.mentorId = registeredMentor.id;
         req.session.role = Role.mentor;
-
+        
         res.redirect('/mentor-account');
     }
 }

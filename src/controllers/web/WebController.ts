@@ -12,16 +12,15 @@ import Tokens from 'csrf';
 import { NextFunction, Request, Response } from 'express';
 
 export default abstract class WebController extends Controller implements IController {
-    public execute(req: Request, res: Response, next: NextFunction) {
+    public async execute(req: Request, res: Response, next: NextFunction) {
         const requestMethod = req.method.toLowerCase();
 
         if (requestMethod === RequestMethod.get) {
-            this.setCsrfToken(req);
+            await this.setCsrfToken(req);
             return this.handleGet(req, res, next);
         }
         
-        if (requestMethod === RequestMethod.post) {
-           
+        if (requestMethod === RequestMethod.post) {    
             if(!this.isCsrfTokenValid(req)) {
                 return this.redirectToHome(res, 500, 'There was a problem getting your Csrf Token');
             }
@@ -50,7 +49,7 @@ export default abstract class WebController extends Controller implements IContr
         res,
         page, 
         errorCode = 401,
-        errorMessage = 'You are not logged in (as intern)' 
+        errorMessage = 'You are not logged in as intern' 
     }: WebErrorResponse) {
         alert(errorMessage);
         
@@ -61,7 +60,7 @@ export default abstract class WebController extends Controller implements IContr
         res.status(errorCode).redirect(page);
     }
 
-    protected redirectToHome(res: Response, errorCode: number = 501, errorMessage: string = 'You are not a mentor') {
+    protected redirectToHome(res: Response, errorCode: number = 501, errorMessage: string = 'You need to login as mentor') {
         alert(errorMessage);
 
         this.sendStatusAndRedirect(res, errorCode, '/');
@@ -72,15 +71,12 @@ export default abstract class WebController extends Controller implements IContr
             viewClass.getTemplate(), 
             { 
                 'this': viewClass,
-                csrfToken: req.session.csrfToken 
+                csrfToken: req.session.csrfToken,
+                role: req.session.role
             }
         );
     }
     
-    protected isNumber(variable: any): variable is number {
-        return typeof variable !== 'string' && variable > 0;
-    }
-
     protected async setCsrfToken(req: Request) {
         if(!(req.session.csrfToken)) {
             const tokens = new Tokens({ secretLength: 50 });

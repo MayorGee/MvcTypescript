@@ -3,22 +3,34 @@
 
     {% block content %}
         <div class="interns">
-            <ol class="interns-list">
+            <ul class="interns-list">
                 {% for intern in interns %}
                     <li class="interns-list__item">
-                        <p  
-                            class="interns-list__description"
-                        >
-                            {{ intern.lastName | capitalize }} {{ intern.firstName | capitalize }}, {{ intern.Age }} years old
-                        </p>
-                        <a 
-                            href="/delete-intern?id={{ intern.id }}"
-                            class="delete-intern"
-                        >
-                            <button class="delete-intern__btn">Delete</button>
-                        </a>
+                        <div class="user">
+                            <div class="mentor__detail-row">
+                                <label class="mentor__detail-label">Name:</label> 
+                                <span class="mentor__detail">{{ intern.firstName | capitalize }} {{ intern.lastName | capitalize }}</span>
+                            </div>
+
+                            <div class="mentor__detail-row">
+                                <label class="mentor__detail-label">Email:</label>
+                                <span class="mentor__detail">{{ intern.email }}</span>
+                            </div>
+
+                            <div class="user__buttons">
+                                <button class="user__button">
+                                    <a 
+                                        href="/intern?id={{ intern.id }}"
+                                        class="user__link"
+                                    >
+                                        View
+                                    </a>
+                                </button>
+                            </div>
+                        </div>
+
                     </li>
                 {% endfor %}
-            </ol>
+                </ul>
         </div>
     {% endblock %}

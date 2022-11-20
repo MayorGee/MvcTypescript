@@ -1,0 +1,21 @@
+.footer-logo {
+    &__link {
+        text-decoration: none;
+    }
+    
+    &__title {
+        color: $yellow-green;
+        font-size: 3rem;
+    }
+    
+    &__description {   
+        color: $cream;
+        font-size: 1.4rem;
+        font-style: italic;
+    }
+    
+    &__logo-pic {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}

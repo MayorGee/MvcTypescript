@@ -2,34 +2,54 @@
     {% assign intern = this.getIntern %}
 
     {% block content %}
-        <div class="intern-home">
-            <p class="intern-home__row">
-                <a 
-                    href="/intern-info?id={{ intern.id }}"
-                    class="intern-home__link"
-                >
-                    My Info
-                </a>
-            </p>
-            
-            <p class="intern-home__row">
-                <a 
-                    href="/intern-progress?id={{ intern.id }}"  
-                    class="intern-home__link"
-                >
-                    My progress   
-                </a> 
-            </p>
+        <div class="intern user">
+            <div class="user__detail-row">
+                <label class="user__detail-label">First Name:</label> 
+                <br />
+                <span class="user__detail">{{ intern.firstName | capitalize  }}</span>
+            </div>
 
-            <p class="intern-home__row">
-                <button class="intern-home__btn">
-                    <a
-                        class="intern-home__logout"
-                        href="/intern-logout"
+            <div class="user__detail-row">
+                <label class="user__detail-label">Last Name:</label> 
+                <br />
+                <span class="user__detail">{{ intern.lastName | capitalize  }}</span>
+            </div>
+
+            <div class="user__detail-row">
+                <label class="user__detail-label">Email:</label> 
+                <br />
+                <span class="user__detail">{{ intern.email }}</span>
+            </div>
+
+            <div class="user__detail-row">
+                <label class="user__detail-label">Contact:</label> 
+                <br />
+                <span class="user__detail">{{ intern.phone }}</span>
+            </div>
+
+            <div class="user__detail-row">
+                <label class="user__detail-label">Age:</label> 
+                <br />
+                <span class="user__detail">{{ intern.age }}</span>
+            </div>
+
+            <div class="user__buttons">
+                <button class="user__button">
+                    <a 
+                        href="/intern-info?id={{ intern.id }}"
+                        class="user__link"
                     >
-                        Logout   
+                        Info
                     </a>
-                </button> 
-            </p>     
+                </button>
+                <button class="user__button">
+                    <a 
+                        href="/intern-progress?id={{ intern.id }}"
+                        class="user__link"
+                    >
+                        Progress
+                    </a>
+                </button>
+            </div> 
         </div>
     {% endblock %}

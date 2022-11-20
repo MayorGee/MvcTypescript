@@ -25,15 +25,9 @@
                 value={{ csrfToken }}
             />
 
-            <input
-                type="hidden"
-                name="csrfToken"
-                value={{ csrfToken }}
-            />
-
             <div class="form__item">
                 <label 
-                    for="mentor_first_name" 
+                    for="firstName" 
                     class="form__label"
                 >
                     First Name:
@@ -41,7 +35,7 @@
                 <br />
                 <input 
                     type="text" 
-                    id="mentor_first_name" 
+                    id="firstName" 
                     name="firstName"
                     class="form__input"
                     value = {{ mentor.firstName }}
@@ -50,7 +44,7 @@
         
             <div class="form__item">
                 <label 
-                    for="mentor_last_name" 
+                    for="lastName" 
                     class="form__label"
                 >
                     Last Name:
@@ -58,7 +52,7 @@
                 <br />
                 <input 
                     type="text" 
-                    id="mentor_last_name" 
+                    id="lastName" 
                     name="lastName"
                     class="form__input"
                     value= {{ mentor.lastName }}
@@ -67,7 +61,7 @@
 
             <div class="form__item">
                 <label 
-                    for="mentor_specialty-area-id" 
+                    for="specialtyAreaId" 
                     class="form__label"
                 >
                     Specialty Area ID:
@@ -75,7 +69,7 @@
                 <br />
                 <input 
                     type="number" 
-                    id="mentor_specialty-area-id" 
+                    id="specialtyAreaId" 
                     name="specialtyAreaId"
                     class="form__input" 
                     value= {{ mentor.specialtyAreaId }}
@@ -84,7 +78,7 @@
         
             <div class="form__item">
                 <label 
-                    for="mentor_email" 
+                    for="email" 
                     class="form__label"
                 >
                     Email:
@@ -92,7 +86,7 @@
                 <br />
                 <input 
                     type="email" 
-                    id="mentor_email" 
+                    id="email" 
                     name="email"
                     class="form__input" 
                     value = {{ mentor.email }}
@@ -101,7 +95,7 @@
 
             <div class="form__item">
                 <label 
-                    for="mentor_phone" 
+                    for="phone" 
                     class="form__label"
                 >
                     Phone No:
@@ -109,7 +103,7 @@
                 <br />
                 <input 
                     type="tel" 
-                    id="mentor_phone" 
+                    id="phone" 
                     name="phone" 
                     class="form__input"
                     value= {{ mentor.phone }}
@@ -119,7 +113,7 @@
             <div class="form__item">
                 <button 
                     type="submit" 
-                    class="form__button"
+                    class="form__btn"
                 >
                     Update Mentor
                 </button>

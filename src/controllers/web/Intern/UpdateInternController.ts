@@ -7,26 +7,39 @@ import { Intern, IInternService } from '../../../abstracts/entities/Intern.js';
 
 import { NextFunction, Request, Response } from 'express';
 
-export default class InternController extends WebController implements IController {
+export default class UpdateInternController extends WebController implements IController {
+    private internService : IInternService;
+
+    constructor() {
+        super();
+
+        this.internService = new InternService();
+    }
+
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
-
+        
         const internId = this.handleId(req.query.id);
  
         if (!internId) {
             return this.handleIdError(internId, res);
         }
-        
-        const internService: IInternService = new InternService();
-        const intern: Intern = await internService.getInternById(internId);
 
+        const intern: Intern =  await this.internService.getInternById(internId);
+        
         const internView = new InternView();
         internView
             .setIntern(intern)
-            .setTemplate('./intern/intern');
+            .setTemplate('./intern/update-intern');
 
         this.renderPage(req, res, internView);
+    }
+    
+    protected async handlePost(req: Request, res: Response, next: NextFunction) {
+        await this.internService.updateInternById(req.body);
+        
+        res.redirect('/interns');
     }
 }

@@ -13,9 +13,9 @@ export default class TaskController extends WebController implements IController
             return this.redirectToHome(res);
         }
         
-        const taskId = req.query.id;
+        const taskId = this.handleId(req.query.id);
 
-        if (!this.isNumber(taskId)) {
+        if (!taskId) {
             return this.handleIdError(taskId, res);
         }
 

@@ -3,12 +3,14 @@
 
     {% block content %}
         <div class="internships">
-            <ul class="internships-list">
+            <ol class="internships-list">
                 {% for internship in internships %}
                     <li class="internships-list__item">
-                        The Internship Program for  the year {{ internship.Internship_year }} started at {{ internship.Start_Date }} and ended at {{ internship.End_Date }}
+                        <p>{{ internship.title }}, {{ internship.internshipYear }}</p>
+                        <p>Start Date: {{ internship.startDate }}</p>
+                        <p>End Date: {{ internship.endDate }}</p>
                     </li>
                 {% endfor %}
-            </ul>
+            </ol>
         </div>
     {% endblock %}

@@ -10,6 +10,11 @@ import { NextFunction, Request, Response } from 'express';
 export default class InternAccountController extends WebController implements IController {
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
         const internLoggedIn = this.isInternLoggedIn(req);
+        // const mentorLoggedIn = this.isMentorLoggedIn(req);
+
+        // if(!mentorLoggedIn) {
+        //     return this.redirect({ res, page: '/mentor-login', errorCode: 401, errorMessage: 'You are not logged in as mentor' });
+        // }
 
         if(!internLoggedIn) {
             return this.redirect({ res, page: '/intern-login', errorCode: 401 });

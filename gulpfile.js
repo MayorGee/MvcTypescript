@@ -32,7 +32,7 @@ function liquid() {
 }
 
 function images() {
-    return src('./src/images/*.+(png|svg|jpg|webp)')
+    return src('./src/images/*.+(png|svg|jpg|webp|jpeg)')
         .pipe(dest('dist/images'))
 }
 
@@ -72,7 +72,7 @@ async function startBRowserSync() {
     });
 }
 
-async function startNodemon() {
+export const startNodemon = async () => {
     nodemon({
         ext: 'js',
         script: './dist/index.js',
