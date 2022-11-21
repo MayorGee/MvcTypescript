@@ -13,7 +13,7 @@ export default class MentorController extends WebController implements IControll
             return this.redirectToHome(res);
         }
 
-        const mentorId = this.handleId(req.query.id);
+        const mentorId = this.validateId(req.query.id);
  
         if (!mentorId) {
             return this.handleIdError(mentorId, res);

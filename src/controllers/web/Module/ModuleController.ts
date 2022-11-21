@@ -13,7 +13,7 @@ export default class ModuleController extends WebController implements IControll
             return this.redirectToHome(res);
         }
 
-        const moduleId = this.handleId(req.query.id);
+        const moduleId = this.validateId(req.query.id);
  
         if (!moduleId) {
             return this.handleIdError(moduleId, res);

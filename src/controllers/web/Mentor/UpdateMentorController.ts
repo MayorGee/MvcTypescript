@@ -21,7 +21,7 @@ export default class UpdateMentorController extends WebController implements ICo
             return this.redirectToHome(res);
         }
         
-        const mentorId = this.handleId(req.query.id);
+        const mentorId = this.validateId(req.query.id);
  
         if (!mentorId) {
             return this.handleIdError(mentorId, res);

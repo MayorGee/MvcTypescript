@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import { ErrorResponse } from '../abstracts/Common.js';
+import { SuperValidateId, ValidId } from '../decorators/SuperValidateId.js';
 
 export default class Controller {
     protected returnFailedResponse({
@@ -13,7 +14,9 @@ export default class Controller {
     }
 
     protected handleIdError(id: any, res: Response) {
-        let errorText = id ? `Error! Id must be an integer or string. Got type: ${typeof id}` : 'No Id entered';
+        let errorText = id ? 
+                    `Error! Id must be an integer or string. Got type: ${typeof id}` : 
+                    'No Id entered';
 
         this.returnFailedResponse({ 
             res, 
@@ -30,17 +33,18 @@ export default class Controller {
         return typeof variable === 'string';
     }
 
-    protected handleId(id: any): number | null {
-        let preparedId: number | null = null;
+    @SuperValidateId()
+    protected validateId(@ValidId() id: any): number | null {
+        let validatedId: number | null = null;
 
         if (this.isNumber(id)) {
-            preparedId = id;
+            validatedId = id;
         }
 
         if (this.isString(id)) {
-            preparedId = Number.isInteger(parseInt(id)) ? parseInt(id) : null;
+            validatedId = Number.isInteger(parseInt(id)) ? parseInt(id) : null;
         }
 
-        return preparedId;
+        return validatedId;
     }
 }

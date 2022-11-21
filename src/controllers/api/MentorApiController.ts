@@ -16,7 +16,7 @@ export default class MentorApiController extends ApiController implements IContr
     }
 
     protected async handleGet(req: Request, res: Response, next: NextFunction) {     
-        const mentorId = this.handleId(req.params.id);
+        const mentorId = this.validateId(req.params.id);
 
         if (!mentorId) {
             return this.handleIdError(mentorId, res);
@@ -36,7 +36,7 @@ export default class MentorApiController extends ApiController implements IContr
     }
 
     protected async handleDelete(req: Request, res: Response, next: NextFunction) {
-        const mentorId = this.handleId(req.params.id);
+        const mentorId = this.validateId(req.params.id);
 
         if (!mentorId) {
             return this.handleIdError(mentorId, res);
@@ -54,7 +54,7 @@ export default class MentorApiController extends ApiController implements IContr
     }
 
     protected async handlePut(req: Request, res: Response, next: NextFunction) {
-        const mentorId = this.handleId(req.params.id);
+        const mentorId = this.validateId(req.params.id);
 
         if (!mentorId) {
             return this.handleIdError(mentorId, res);

@@ -14,7 +14,7 @@ export default class SpecialtyAreaController extends WebController implements IC
             return this.redirectToHome(res);
         }
 
-        const specialtyAreaId = this.handleId(req.query.id);
+        const specialtyAreaId = this.validateId(req.query.id);
  
         if (!specialtyAreaId) {
             return this.handleIdError(specialtyAreaId, res);

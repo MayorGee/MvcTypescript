@@ -13,7 +13,7 @@ export default class InternshipController extends WebController implements ICont
             return this.redirectToHome(res);
         }
 
-        const internshipId = this.handleId(req.query.id);
+        const internshipId = this.validateId(req.query.id);
  
         if (!internshipId) {
             return this.handleIdError(internshipId, res);

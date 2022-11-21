@@ -5,6 +5,7 @@ import InternService from '../../models/service/InternService.js';
 import { IInternService, Intern } from '../../abstracts/entities/Intern.js';
 
 import { NextFunction, Request, Response } from 'express';
+import CalculateExecutionTime from '../../decorators/CalculateExecusionTime.js';
 
 export default class InternsApiController  extends ApiController implements IController {
     private internService: IInternService;
@@ -15,6 +16,7 @@ export default class InternsApiController  extends ApiController implements ICon
         this.internService = new InternService();
     }
 
+    @CalculateExecutionTime()
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
         try {
             this.internService = new InternService();

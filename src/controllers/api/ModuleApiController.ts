@@ -16,7 +16,7 @@ export default class ModuleController extends ApiController implements IControll
     }
     
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
-        const moduleId = this.handleId(req.params.id);
+        const moduleId = this.validateId(req.params.id);
 
         if (!moduleId) {
             return this.handleIdError(moduleId, res);
@@ -36,7 +36,7 @@ export default class ModuleController extends ApiController implements IControll
     }
 
     protected async handleDelete(req: Request, res: Response, next: NextFunction) {      
-        const moduleId = this.handleId(req.params.id);
+        const moduleId = this.validateId(req.params.id);
 
         if (!moduleId) {
             return this.handleIdError(moduleId, res);
@@ -54,7 +54,7 @@ export default class ModuleController extends ApiController implements IControll
     }
 
     protected async handlePut(req: Request, res: Response, next: NextFunction) {       
-        const moduleId = this.handleId(req.params.id);
+        const moduleId = this.validateId(req.params.id);
 
         if (!moduleId) {
             return this.handleIdError(moduleId, res);

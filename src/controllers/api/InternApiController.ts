@@ -5,6 +5,7 @@ import InternService from '../../models/service/InternService.js';
 import { Intern, IInternService } from '../../abstracts/entities/Intern.js';
 
 import { NextFunction, Request, Response } from 'express';
+import OverseeApiMethod from '../../decorators/OverseeApIMethod.js';
 
 export default class InternApiController extends ApiController implements IController {
     private internService: IInternService;
@@ -15,8 +16,9 @@ export default class InternApiController extends ApiController implements IContr
         this.internService = new InternService();
     }
 
+    @OverseeApiMethod()
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
-        const internId = this.handleId(req.params.id);
+        const internId = this.validateId(req.params.id);
 
         if (!internId) {
             return this.handleIdError(internId, res);
@@ -36,8 +38,9 @@ export default class InternApiController extends ApiController implements IContr
         }
     }
 
+    @OverseeApiMethod()
     protected async handleDelete(req: Request, res: Response, next: NextFunction) {
-        const internId = this.handleId(req.params.id);
+        const internId = this.validateId(req.params.id);
 
         if (!internId) {
             return this.handleIdError(internId, res);
@@ -57,8 +60,9 @@ export default class InternApiController extends ApiController implements IContr
         }
     }
 
+    @OverseeApiMethod()
     protected async handlePut(req: Request, res: Response, next: NextFunction) {
-        const internId = this.handleId(req.params.id);
+        const internId = this.validateId(req.params.id);
 
         if (!internId) {
             return this.handleIdError(internId, res);
