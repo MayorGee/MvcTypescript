@@ -5,7 +5,7 @@ import InternService from '../../models/service/InternService.js';
 import { Intern, IInternService } from '../../abstracts/entities/Intern.js';
 
 import { NextFunction, Request, Response } from 'express';
-import OverseeApiMethod from '../../decorators/OverseeApIMethod.js';
+import ReturnJsonResponse from '../../decorators/ReturnJsonResponse.js';
 
 export default class InternApiController extends ApiController implements IController {
     private internService: IInternService;
@@ -16,7 +16,7 @@ export default class InternApiController extends ApiController implements IContr
         this.internService = new InternService();
     }
 
-    @OverseeApiMethod()
+    @ReturnJsonResponse()
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
         const internId = this.validateId(req.params.id);
 
@@ -38,7 +38,7 @@ export default class InternApiController extends ApiController implements IContr
         }
     }
 
-    @OverseeApiMethod()
+    @ReturnJsonResponse()
     protected async handleDelete(req: Request, res: Response, next: NextFunction) {
         const internId = this.validateId(req.params.id);
 
@@ -60,7 +60,7 @@ export default class InternApiController extends ApiController implements IContr
         }
     }
 
-    @OverseeApiMethod()
+    @ReturnJsonResponse()
     protected async handlePut(req: Request, res: Response, next: NextFunction) {
         const internId = this.validateId(req.params.id);
 

@@ -45,15 +45,15 @@
     &__button {
         padding: 1rem;
         margin-right: 1rem;
+
+        color: $white;
+        font-weight: 600;
     
         background-color: $yellow-green;
 
         border: none;
         border-radius: 1rem;
     
-        color: $white;
-        font-weight: 600;
-
         &:hover {
             background-color: $deem-yellow-green;
             cursor: pointer;

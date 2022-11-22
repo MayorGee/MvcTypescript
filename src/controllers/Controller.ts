@@ -1,6 +1,5 @@
 import { Response } from 'express';
 import { ErrorResponse } from '../abstracts/Common.js';
-import { SuperValidateId, ValidId } from '../decorators/SuperValidateId.js';
 
 export default class Controller {
     protected returnFailedResponse({
@@ -33,8 +32,7 @@ export default class Controller {
         return typeof variable === 'string';
     }
 
-    @SuperValidateId()
-    protected validateId(@ValidId() id: any): number | null {
+    protected validateId(id: any): number | null {
         let validatedId: number | null = null;
 
         if (this.isNumber(id)) {

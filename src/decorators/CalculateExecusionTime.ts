@@ -5,16 +5,27 @@ const CalculateExecutionTime = () => {
         descriptor: PropertyDescriptor
     ) => {
         const originalMethod = descriptor.value.bind(target);
+        let originalResult;
 
-        descriptor.value = (...args: any[]) => {
-            console.time(propertyKey);
+        if (originalMethod.constructor.name === 'AsyncFunction') {
+            descriptor.value = async (...args: any[]) => {
+                console.time(propertyKey);
 
-            let decoratedMethod = originalMethod(...args);
+                originalResult = await originalMethod(...args);
 
-            console.timeEnd(propertyKey);
-
-            return decoratedMethod;
+                console.timeEnd(propertyKey);
+            };
+        } else {
+            descriptor.value = (...args: any[]) => {
+                console.time(propertyKey);
+    
+                originalResult = originalMethod(...args);
+    
+                console.timeEnd(propertyKey);
+            }
         }
+
+        return originalResult;
     }
 }
 
