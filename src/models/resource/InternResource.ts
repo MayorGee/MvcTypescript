@@ -2,6 +2,7 @@ import Database from '../../Database.js';
 import AbstractResource from './AbstractResource.js';
 
 import { DbIntern, DbInternProgress, IInternResource, Intern } from '../../abstracts/entities/Intern.js';
+import ValidateId from '../../decorators/ValidateId.js';
 
 export default class InternResource extends AbstractResource implements IInternResource {
     public async getInterns(): Promise<DbIntern[]> {
@@ -12,6 +13,7 @@ export default class InternResource extends AbstractResource implements IInternR
         return this.escapeHtmlFromDataSet<DbIntern>(interns);
     }
 
+    @ValidateId()
     public async getInternById(id: number): Promise<DbIntern> {
         const intern = await Database.runQuery<DbIntern[]>(`
             SELECT * FROM Intern

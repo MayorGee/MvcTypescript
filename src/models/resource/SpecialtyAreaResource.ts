@@ -2,6 +2,7 @@ import Database from '../../Database.js';
 import AbstractResource from './AbstractResource.js';
 
 import { DbSpecialtyArea, ISpecialtyAreaResource } from '../../abstracts/entities/SpecialtyArea.js';
+import ValidateId from '../../decorators/ValidateId.js';
 
 
 export default class SpecialtyAreaResource extends AbstractResource implements ISpecialtyAreaResource {
@@ -11,6 +12,7 @@ export default class SpecialtyAreaResource extends AbstractResource implements I
         return this.escapeHtmlFromDataSet<DbSpecialtyArea>(specialtyAreas);
     }
 
+    @ValidateId()
     public async getSpecialtyAreaById(id: number): Promise<DbSpecialtyArea> {
         const specialtyArea = await Database.runQuery<DbSpecialtyArea[]>(`
             SELECT * FROM Specialty_Area

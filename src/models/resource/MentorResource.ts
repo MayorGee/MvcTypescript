@@ -3,6 +3,7 @@ import AbstractResource from './AbstractResource.js';
 
 import { DbMentor, Mentor, DbMentorSpecialty, IMentorResource } from '../../abstracts/entities/Mentor.js';
 import { DbIntern } from '../../abstracts/entities/Intern.js';
+import ValidateId from '../../decorators/ValidateId.js';
 
 export default class MentorResource extends AbstractResource implements IMentorResource {
     public async getMentors(): Promise<DbMentor[]> {
@@ -10,6 +11,7 @@ export default class MentorResource extends AbstractResource implements IMentorR
         return this.escapeHtmlFromDataSet<DbMentor>(mentors);
     }
 
+    @ValidateId()
     public async getMentorById(id: number): Promise<DbMentor> {
         const mentor = await Database.runQuery<DbMentor[]>(`
             SELECT * FROM Mentor

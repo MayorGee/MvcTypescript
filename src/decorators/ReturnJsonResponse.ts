@@ -8,7 +8,7 @@ const ReturnJsonResponse = () => {
     ) => {
         const originalMethod = descriptor.value.bind(target);
 
-        descriptor.value = async ({ req, res, next }: { req: Request, res: Response, next: NextFunction }): Promise<Response> => {
+        descriptor.value = async (req: Request, res: Response, next: NextFunction ): Promise<Response> => {
             try {
                 const data = await originalMethod(req, res, next);
     

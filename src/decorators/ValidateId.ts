@@ -6,14 +6,17 @@ const ValidateId = () => {
 	) => {
 		const originalMethod = descriptor.value;
 
-		descriptor.value = (id: any): number | string | undefined => {
-			if (typeof id === 'number' && Number.isInteger(id)) {
-				return originalMethod(id);
+		descriptor.value = async (id: any) => {
+			const isValidNumber = typeof id === 'number' && Number.isInteger(id);
+			const isValidString = typeof id === 'string' && Number.isInteger(parseInt(id));
+
+			const isValidId = id || isValidNumber || isValidString
+
+			if (!isValidId) {
+				throw new Error('Invalid Id Entered');
 			}
-			
-			if (typeof id === 'string' && Number.isInteger(parseInt(id))) {
-				return originalMethod(id);
-			}
+		    
+			return originalMethod(id);
 		}
 	}
 }

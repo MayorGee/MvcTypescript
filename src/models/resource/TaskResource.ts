@@ -2,6 +2,7 @@ import Database from '../../Database.js';
 import AbstractResource from './AbstractResource.js';
 
 import { DbTask, ITaskResource } from '../../abstracts/entities/Task.js';
+import ValidateId from '../../decorators/ValidateId.js';
 
 export default class TaskResource extends AbstractResource implements ITaskResource {
     public async getTasks(): Promise<DbTask[]> {
@@ -16,6 +17,7 @@ export default class TaskResource extends AbstractResource implements ITaskResou
         return this.escapeHtmlFromDataSet<DbTask>(tasks);
     }
 
+    @ValidateId()
     public async getTaskById(id: number): Promise<DbTask> {
         const task = await Database.runQuery<DbTask[]>(`
             SELECT * FROM Tasks

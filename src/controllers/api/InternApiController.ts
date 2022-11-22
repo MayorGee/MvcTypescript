@@ -24,21 +24,12 @@ export default class InternApiController extends ApiController implements IContr
             return this.handleIdError(internId, res);
         }   
              
-        try {
-            this.internService = new InternService();
-            const intern: Intern = await this.internService.getInternById(internId);
+        this.internService = new InternService();
+        const intern: Intern = await this.internService.getInternById(internId);
         
-            this.returnSuccessResponse({ res, data: intern});
-        } catch(err: any) {
-            return this.returnFailedResponse({
-                res,
-                errorCode: 404,
-                errorMessage: err.message
-            });
-        }
+        return intern;
     }
 
-    @ReturnJsonResponse()
     protected async handleDelete(req: Request, res: Response, next: NextFunction) {
         const internId = this.validateId(req.params.id);
 
@@ -60,7 +51,6 @@ export default class InternApiController extends ApiController implements IContr
         }
     }
 
-    @ReturnJsonResponse()
     protected async handlePut(req: Request, res: Response, next: NextFunction) {
         const internId = this.validateId(req.params.id);
 
