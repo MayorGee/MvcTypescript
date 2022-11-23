@@ -1,13 +1,13 @@
 .dropdown {
-	position: relative;
+    position: relative;
 
-	display: inline-block;
+    display: inline-block;
     
-	&:hover {
-		.dropdown__list {
-			display: block;
-		}
-	}
+    &:hover {
+        .dropdown__list {
+            display: block;
+        }
+    }
 
     &__list {
         position: absolute;
