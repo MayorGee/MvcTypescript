@@ -1,32 +1,16 @@
-{% layout '../index-layout.liquid', title: 'Intern Info' %}
-    {% assign intern = this.getIntern %}
+{% layout '../index-layout.liquid', title: 'Intern Insert Form' %}
 
     {% block content %}
         <form 
-            action="/update-intern"
+            action="/add-intern"
             method="post"
             class="form"
         >
-        <p class="form__info">
-            It is possible to edit details on this form
-        </p>
+            <p class="form__info">
+                Fill in  the following to add Intern to Table
+            </p>
 
-            <input 
-                type="hidden" 
-                id="intern_id" 
-                name="id"
-                class="form__input"
-                value={{ intern.id }}
-            />
-            <input
-                type="hidden"
-                name="csrfToken"
-                value={{ csrfToken }}
-            />
-
-
-
-            <div class="form__entity">
+            <div class="form__item">
                 <label 
                     for="intern_first_name" 
                     class="form__label"
@@ -39,11 +23,10 @@
                     id="intern_first_name" 
                     name="firstName"
                     class="form__input"
-                    value={{ intern.firstName | capitalize }}
                 />
             </div>
         
-            <div class="form__entity">
+            <div class="form__item">
                 <label 
                     for="intern_last_name" 
                     class="form__label"
@@ -56,11 +39,10 @@
                     id="intern_last_name" 
                     name="lastName"
                     class="form__input"
-                    value = {{ intern.lastName | capitalize }}
                 />
             </div>
 
-            <div class="form__entity">
+            <div class="form__item">
                 <label 
                     for="intern_internship-id" 
                     class="form__label"
@@ -72,12 +54,11 @@
                     type="number" 
                     id="intern_internship-id" 
                     name="internshipId"
-                    class="form__input"
-                    value= {{ intern.internshipId }}
+                    class="form__input" 
                 />
             </div>
 
-            <div class="form__entity">
+            <div class="form__item">
                 <label 
                     for="intern_age" 
                     class="form__label"
@@ -90,11 +71,10 @@
                     id="intern_age" 
                     name="age"
                     class="form__input" 
-                    value= {{ intern.age }}
                 />
              </div>
 
-             <div class="form__entity">
+             <div class="form__item">
                 <label 
                     for="intern_specialty-area-id" 
                     class="form__label"
@@ -106,12 +86,11 @@
                     type="number" 
                     id="intern_specialty-area-id" 
                     name="specialtyAreaId"
-                    class="form__input"
-                    value= {{ intern.specialtyAreaId }}
+                    class="form__input" 
                 />
             </div>
         
-            <div class="form__entity">
+            <div class="form__item">
                 <label 
                     for="intern_email" 
                     class="form__label"
@@ -124,11 +103,10 @@
                     id="intern_email" 
                     name="email"
                     class="form__input" 
-                    value= {{ intern.email }}
                 />
             </div>
 
-            <div class="form__entity">
+            <div class="form__item">
                 <label 
                     for="intern_phone" 
                     class="form__label"
@@ -141,16 +119,15 @@
                     id="intern_phone" 
                     name="phone" 
                     class="form__input"
-                    value = {{ intern.phone }}
                 />
             </div>
 
-            <div class="form__entity">
+            <div class="form__item">
                 <button 
                     type="submit" 
                     class="form__btn"
                 >
-                    Update Intern
+                    Add Intern
                 </button>
             </div>
         </form>

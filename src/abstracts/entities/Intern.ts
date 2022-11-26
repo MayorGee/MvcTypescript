@@ -59,7 +59,7 @@ export interface IInternService {
     getInternById: (id: number) => Promise<Intern>,
     getFemaleInterns: () => Promise<Intern[]>,
     getMaleInterns: () => Promise<Intern[]>,
-    getInternByEmail: (email: string) => Promise<Intern>,
+    getInternByEmail: (email: string) => Promise<Intern | undefined>,
     getInternProgressById: (id: number) => Promise<InternProgress>,
     addIntern: (intern: Intern) => Promise<void>, 
     updateInternById: (intern: Intern) => Promise<void>, 

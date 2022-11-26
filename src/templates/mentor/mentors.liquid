@@ -31,6 +31,17 @@
                         </div>
                     </li>
                 {% endfor %}
+
+                <li class="mentors-list__item">
+                    <form action="/add-mentor">
+                        <button 
+                            type="submit"
+                            class="mentors-list__add-button"
+                        >
+                            Add New Mentor
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
     {% endblock %}

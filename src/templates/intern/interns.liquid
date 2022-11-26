@@ -7,14 +7,14 @@
                 {% for intern in interns %}
                     <li class="interns-list__item">
                         <div class="user">
-                            <div class="mentor__detail-row">
-                                <label class="mentor__detail-label">Name:</label> 
-                                <span class="mentor__detail">{{ intern.firstName | capitalize }} {{ intern.lastName | capitalize }}</span>
+                            <div class="user__detail-row">
+                                <label class="user__detail-label">Name:</label> 
+                                <span class="user__detail">{{ intern.firstName | capitalize }} {{ intern.lastName | capitalize }}</span>
                             </div>
 
-                            <div class="mentor__detail-row">
-                                <label class="mentor__detail-label">Email:</label>
-                                <span class="mentor__detail">{{ intern.email }}</span>
+                            <div class="user__detail-row">
+                                <label class="user__detail-label">Email:</label>
+                                <span class="user__detail">{{ intern.email }}</span>
                             </div>
 
                             <div class="user__buttons">
@@ -31,6 +31,16 @@
 
                     </li>
                 {% endfor %}
-                </ul>
+                <li class="interns-list__item">
+                    <form action="/add-intern">
+                        <button 
+                            type="submit"
+                            class="interns-list__add-button"
+                        >
+                            Add New Intern
+                        </button>
+                    </form>
+                </li>
+            </ul>
         </div>
     {% endblock %}

@@ -13,4 +13,17 @@
     &__item {
         list-style-type: none;
     }
+
+    &__add-button {
+        width: 16rem;
+        padding:1rem 1.5rem;
+        margin: 8rem auto;
+        
+        background-color: $yellow-green; 
+        
+        color: $white;
+
+        border: none;
+        border-radius: 1rem;
+    }
 }

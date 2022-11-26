@@ -102,7 +102,7 @@ export default class InternService extends Service implements IInternService {
         return maleInterns;
     }
 
-    public async getInternByEmail(email: string): Promise<Intern> {
+    public async getInternByEmail(email: string): Promise<Intern | undefined> {
         const internCacheKey = this.cache.getEntityCacheKey(`${this.internCacheKey}(email): ${email}`);
         const cachedIntern = await this.cache.readCache<Intern>(internCacheKey);
 
@@ -114,7 +114,8 @@ export default class InternService extends Service implements IInternService {
         const dbIntern: DbIntern = await this.internResource.getInternByEmail(email);
 
         if(!dbIntern) {
-            throw new Error('Intern Not found in database');
+            console.log('Intern Not found in database');
+            return;
         }
 
         const intern: Intern = InternConverter.convertDbIntern(dbIntern);
