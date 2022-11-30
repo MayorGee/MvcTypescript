@@ -4,9 +4,9 @@
 
     {% block content %}
         <div class="mentors">
-            <ul class="mentors-list">
+            <ul class="users-list">
                 {% for mentor in mentors %}
-                    <li class="mentors-list__item">
+                    <li class="users-list__item">
                         <div class="user">
                             <div class="user__detail-row">
                                 <label class="user__detail-label">Name:</label> 
@@ -32,11 +32,11 @@
                     </li>
                 {% endfor %}
 
-                <li class="mentors-list__item">
+                <li class="users-list__item">
                     <form action="/add-mentor">
                         <button 
                             type="submit"
-                            class="mentors-list__add-button"
+                            class="users-list__add-button"
                         >
                             Add New Mentor
                         </button>

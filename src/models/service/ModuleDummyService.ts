@@ -3,10 +3,10 @@ import { IModuleService, Module } from '../../abstracts/entities/Module';
 
 @injectable()
 export default class ModuleDummyService implements IModuleService {
-    private DUMMY_MODULES: Module[];
+    private dummyModules: Module[];
 
     constructor() {
-        this.DUMMY_MODULES = [
+        this.dummyModules = [
             {
                 id: 1,
                 task: 'Dummy Module 1'
@@ -27,24 +27,24 @@ export default class ModuleDummyService implements IModuleService {
     }
 
     public async getModuleById(id: number): Promise<Module> {
-        const dummyModules = this.DUMMY_MODULES.filter(dummyModule => dummyModule.id === id );
-        return dummyModules[0];
+        const dummyModuleById = this.dummyModules.find(dummyModule => dummyModule.id === id );
+        return dummyModuleById as Module;
     }
 
     public async getModules(): Promise<Module[]> {
-        return this.DUMMY_MODULES;
+        return this.dummyModules;
     }
 
     public async addModule(module: Module) {
-        this.DUMMY_MODULES.push(module);
+        this.dummyModules.push(module);
     }
 
     public async deleteModuleById(id: number) {
-        this.DUMMY_MODULES = this.DUMMY_MODULES.filter(dummyModule => dummyModule.id !== id );
+        this.dummyModules = this.dummyModules.filter(dummyModule => dummyModule.id !== id );
     }
 
     public async updateModuleById(module: Module) {
-        this.DUMMY_MODULES = this.DUMMY_MODULES.map(dummyModule => {
+        this.dummyModules = this.dummyModules.map(dummyModule => {
             if (dummyModule.id === module.id) {
                 return module;
             }

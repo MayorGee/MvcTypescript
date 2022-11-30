@@ -33,13 +33,20 @@ export default class InternSignUpController extends WebController implements ICo
                 });
             }
     
-            internDetails.password  = await bcrypt.hash(internDetails.password, 12);
+            internDetails.password = await bcrypt.hash(internDetails.password, 12);
     
             internService.addIntern(internDetails);
             
             res.redirect('/intern-login');
         } catch(error: any) {
             console.log(error.message);
+
+            this.redirect({ 
+                res,
+                page: '/intern-sign-up', 
+                errorCode: 500,
+                errorMessage: 'A server error occurred while Signing you up' 
+            });
         }
     }
 }

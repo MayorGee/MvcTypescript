@@ -3,9 +3,9 @@
 
     {% block content %}
         <div class="interns">
-            <ul class="interns-list">
+            <ul class="users-list">
                 {% for intern in interns %}
-                    <li class="interns-list__item">
+                    <li class="users-list__item">
                         <div class="user">
                             <div class="user__detail-row">
                                 <label class="user__detail-label">Name:</label> 
@@ -31,11 +31,11 @@
 
                     </li>
                 {% endfor %}
-                <li class="interns-list__item">
+                <li class="users-list__item">
                     <form action="/add-intern">
                         <button 
                             type="submit"
-                            class="interns-list__add-button"
+                            class="users-list__add-button"
                         >
                             Add New Intern
                         </button>

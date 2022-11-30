@@ -25,7 +25,7 @@ export default class DiContainer {
     }
 
     public static bindAll() {
-        const diContainer = DiContainer.getContainer();
+        const diContainer = this.getContainer();
 
         diContainer.bind<IModuleService>(DiType.moduleService).to(isDatabaseSet ? ModuleService : ModuleDummyService);
         diContainer.bind<IModuleResource>(DiType.moduleResource).to(ModuleResource);
