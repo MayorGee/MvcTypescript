@@ -1,18 +1,20 @@
 import ApiController from './ApiController.js';
 
-import ModuleService from '../../models/service/ModuleService.js';
 import { Module, IModuleService } from '../../abstracts/entities/Module.js';
 
 import { NextFunction, Request, Response } from 'express';
 import { IController } from '../../abstracts/Contract.js';
+import { inject, injectable } from 'inversify';
+import { DiType } from '../../abstracts/Di.js';
 
+@injectable()
 export default class ModuleController extends ApiController implements IController {
     private moduleService: IModuleService;
 
-    constructor() {
+    constructor(@inject(DiType.moduleService) moduleService: IModuleService) {
         super();
 
-        this.moduleService = new ModuleService();
+        this.moduleService = moduleService;
     }
     
     protected async handleGet(req: Request, res: Response, next: NextFunction) {

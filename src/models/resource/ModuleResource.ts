@@ -3,7 +3,9 @@ import AbstractResource from './AbstractResource.js';
 
 import { DbModule, IModuleResource, Module } from '../../abstracts/entities/Module.js';
 import ValidateId from '../../decorators/ValidateId.js';
+import { injectable } from 'inversify';
 
+@injectable()
 export default class ModuleResource extends AbstractResource implements IModuleResource {
     public async getModules(): Promise<DbModule[]> {
         const modules = await Database.runQuery<DbModule[]>(`SELECT * FROM Module`);

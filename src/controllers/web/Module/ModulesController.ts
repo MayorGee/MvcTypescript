@@ -1,20 +1,29 @@
 import WebController from '../WebController.js';
 import { IController } from '../../../abstracts/Contract.js';
 
-import ModuleService from '../../../models/service/ModuleService.js';
 import ModulesView from '../../../views/module/ModulesView.js';
 import { Module, IModuleService } from '../../../abstracts/entities/Module.js';
 
 import { NextFunction, Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
+import { DiType } from '../../../abstracts/Di.js';
 
+@injectable()
 export default class ModulesController extends WebController implements IController {
+    private moduleService: IModuleService;
+
+    constructor(@inject(DiType.moduleService) moduleService: IModuleService ) {
+        super();
+
+        this.moduleService =  moduleService;
+    }
+    
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
         }
         
-        const moduleService: IModuleService = new ModuleService();
-        const modules: Module[] = await moduleService.getModules();
+        const modules: Module[] = await this.moduleService.getModules();
 
         const modulesView = new ModulesView();
         modulesView

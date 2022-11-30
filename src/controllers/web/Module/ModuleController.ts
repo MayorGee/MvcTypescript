@@ -2,12 +2,22 @@ import WebController from '../WebController.js';
 import { IController } from '../../../abstracts/Contract.js';
 
 import ModuleView from '../../../views/module/ModuleView.js';
-import ModuleService from '../../../models/service/ModuleService.js';
 import { Module, IModuleService } from '../../../abstracts/entities/Module.js';
 
 import { NextFunction, Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
+import { DiType } from '../../../abstracts/Di.js';
 
+@injectable()
 export default class ModuleController extends WebController implements IController {
+    private moduleService: IModuleService;
+
+    constructor(@inject(DiType.moduleService) moduleService: IModuleService ) {
+        super();
+
+        this.moduleService =  moduleService;
+    }
+    
     protected async handleGet(req: Request, res: Response, next: NextFunction) {
         if(!this.isRoleMentor(req)) {
             return this.redirectToHome(res);
@@ -19,8 +29,7 @@ export default class ModuleController extends WebController implements IControll
             return this.handleIdError(moduleId, res);
         }
 
-        const moduleService: IModuleService = new ModuleService();
-        const module: Module = await moduleService.getModuleById(moduleId);
+        const module: Module = await this.moduleService.getModuleById(moduleId);
 
         const moduleView = new ModuleView();
         moduleView

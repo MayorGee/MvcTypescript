@@ -1,5 +1,7 @@
+import { injectable } from "inversify";
 import { IResource } from "../../abstracts/Contract";
 
+@injectable()
 export default class AbstractResource implements IResource{
     public escapeHtml(unsafe: string): string {
         return unsafe.replace(/[&<>'"]/g, char => ({

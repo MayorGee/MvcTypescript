@@ -1,4 +1,5 @@
 import App from './App.js';
+import 'reflect-metadata';
 
 import HomeRouter from './routers/web/HomeRouter.js';
 import InternRouter from './routers/web/InternRouter.js';
@@ -15,11 +16,15 @@ import ModuleApiRouter from './routers/api/ModuleApiRouter.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+import DiContainer from './models/DiContainer.js';
+
 const __filename = fileURLToPath(import.meta.url);
 global.__dirname = dirname(__filename);
 
 const app = new App('dist');
 const PORT = 3333;
+
+DiContainer.bindAll();
 
 const Routers = [
     new HomeRouter(),

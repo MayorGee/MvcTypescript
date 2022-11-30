@@ -5,7 +5,9 @@ import { SuccessResponse } from '../../abstracts/Common.js';
 
 import { NextFunction, Request, Response } from 'express';
 import { RequestMethod } from '../../abstracts/Enum.js';
+import { injectable } from 'inversify';
 
+@injectable()
 export default class ApiController extends Controller implements IController {
     public execute(req: Request, res: Response, next: NextFunction) {
         const requestMethod = req.method.toLowerCase();

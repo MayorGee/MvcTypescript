@@ -10,7 +10,9 @@ import alert from 'alert';
 import Tokens from 'csrf';
 
 import { NextFunction, Request, Response } from 'express';
+import { injectable } from 'inversify';
 
+@injectable()
 export default abstract class WebController extends Controller implements IController {
     public async execute(req: Request, res: Response, next: NextFunction) {
         const requestMethod = req.method.toLowerCase();

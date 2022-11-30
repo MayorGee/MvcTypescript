@@ -33,4 +33,8 @@ export default class Environment {
     public static getRedisPassword(): string | undefined {
         return process.env.REDIS_PASSWORD;
     }
+
+    public static isDatabaseSet(): string | undefined {
+        return process.env.DB_HOST && process.env.DB_USER && process.env.DB_PASSWORD && process.env.DB_NAME;
+    }
 }

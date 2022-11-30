@@ -1,19 +1,19 @@
-
-import ModuleResource from '../resource/ModuleResource.js';
 import ModuleConverter from '../../converters/ModuleConverter.js';
 import { DbModule, IModuleResource, IModuleService, Module } from '../../abstracts/entities/Module.js';
 import Service from './Service.js';
+import { inject, injectable } from 'inversify';
+import { DiType } from '../../abstracts/Di.js';
 
-
+@injectable()
 export default class ModuleService extends Service implements IModuleService {
     private moduleResource: IModuleResource;
     private moduleCacheKey = 'module';
     private modulesCacheKey = 'modules';
 
-    constructor() {
+    constructor(@inject(DiType.moduleResource) moduleResource : IModuleResource) {
         super();
 
-        this.moduleResource = new ModuleResource();
+        this.moduleResource = moduleResource;
     }
 
     public async getModuleById(id: number): Promise<Module> {

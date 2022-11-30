@@ -1,6 +1,8 @@
 import { Response } from 'express';
+import { injectable } from 'inversify';
 import { ErrorResponse } from '../abstracts/Common.js';
 
+@injectable()
 export default class Controller {
     protected returnFailedResponse({
         res, 

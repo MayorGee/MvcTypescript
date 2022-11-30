@@ -13,5 +13,6 @@ export default class InternsView extends AbstractView implements IView {
 
     public setInterns(interns: Intern[]) {
         this.interns = interns;
+        return this;
     }
 }
